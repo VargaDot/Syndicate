@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://csa17s4awpr8e"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_e8dpg"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e8dpg")
+
+[node name="Game Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 816.0
+offset_top = 55.0
+offset_right = 1136.0
+offset_bottom = 134.0
+theme_override_font_sizes/font_size = 55
+text = "MONOPOLY"
+
+[node name="PlaySingle" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 821.0
+offset_top = 466.0
+offset_right = 1141.0
+offset_bottom = 506.0
+
+[node name="PlayCoop" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 834.0
+offset_top = 640.0
+offset_right = 1174.0
+offset_bottom = 680.0
+
+[connection signal="pressed" from="PlaySingle" to="." method="OnSinglePlayerPressed"]
+[connection signal="pressed" from="PlayCoop" to="." method="OnMultiPressed"]
