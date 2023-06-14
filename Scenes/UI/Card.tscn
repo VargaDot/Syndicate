@@ -1,9 +1,210 @@
-[gd_scene format=3 uid="uid://bs0vfv6wf6d32"]
+[gd_scene load_steps=15 format=3 uid="uid://bs0vfv6wf6d32"]
 
-[node name="Card" type="Control"]
+[ext_resource type="Script" path="res://Scripts/UI/Card.cs" id="1_hp21u"]
+[ext_resource type="Texture2D" uid="uid://biuyfh0b6268p" path="res://Assets/Sprites/Cards/BlueCard.png" id="2_f1mh3"]
+[ext_resource type="Texture2D" uid="uid://cewygmhixgyyy" path="res://Assets/Sprites/Cards/BrownCard.png" id="3_gdmk4"]
+[ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://Assets/Fonts/Themes/Card.tres" id="4_5x8h4"]
+[ext_resource type="Texture2D" uid="uid://cpf33li3h64ut" path="res://Assets/Sprites/Cards/ColdBlueCard.png" id="4_a4ayf"]
+[ext_resource type="FontFile" uid="uid://cw3bbxedp41ds" path="res://Assets/Fonts/Tangerine-Regular.ttf" id="4_fvb35"]
+[ext_resource type="Texture2D" uid="uid://dpfmps58qwxbs" path="res://Assets/Sprites/Cards/ElectricCard.png" id="5_bhna4"]
+[ext_resource type="Texture2D" uid="uid://uq2kvfglblf7" path="res://Assets/Sprites/Cards/GreenCard.png" id="6_qu86h"]
+[ext_resource type="Texture2D" uid="uid://becgmjai8bpie" path="res://Assets/Sprites/Cards/OrangeCard.png" id="7_l06nq"]
+[ext_resource type="Texture2D" uid="uid://b3tcl6xa2qq3" path="res://Assets/Sprites/Cards/PinkCard.png" id="8_uk6sa"]
+[ext_resource type="Texture2D" uid="uid://c4tnqou3jud1" path="res://Assets/Sprites/Cards/RedCard.png" id="9_rfd5n"]
+[ext_resource type="Texture2D" uid="uid://dbifek0yohuqg" path="res://Assets/Sprites/Cards/TrainCard.png" id="12_stog3"]
+[ext_resource type="Texture2D" uid="uid://d2aen8dpio8mi" path="res://Assets/Sprites/Cards/WaterCard.png" id="13_s042p"]
+[ext_resource type="Texture2D" uid="uid://d2jktclacyqnx" path="res://Assets/Sprites/Cards/YellowCard.png" id="14_uihm1"]
+
+[node name="Card" type="Control" node_paths=PackedStringArray("CardSprite")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_hp21u")
+CardSprite = NodePath("CardSprite")
+Cards = [ExtResource("3_gdmk4"), ExtResource("4_a4ayf"), ExtResource("8_uk6sa"), ExtResource("14_uihm1"), ExtResource("9_rfd5n"), ExtResource("7_l06nq"), ExtResource("6_qu86h"), ExtResource("2_f1mh3"), ExtResource("12_stog3"), ExtResource("5_bhna4"), ExtResource("13_s042p")]
+
+[node name="CardSprite" type="Sprite2D" parent="."]
+position = Vector2(1611, 445)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_f1mh3")
+
+[node name="Copyright" type="Label" parent="CardSprite"]
+offset_left = -48.0001
+offset_top = 224.0
+offset_right = 47.9999
+offset_bottom = 253.0
+theme = ExtResource("4_5x8h4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_fvb35")
+theme_override_font_sizes/font_size = 26
+text = "SparroWorks"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="CardSprite"]
+offset_left = -132.0
+offset_top = -219.0
+offset_right = 133.0
+offset_bottom = -125.0
+theme = ExtResource("4_5x8h4")
+theme_override_font_sizes/font_size = 20
+text = "DISTRICT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="CardSprite"]
+offset_left = -137.6
+offset_top = -68.0
+offset_right = 5.3999
+offset_bottom = 122.0
+theme = ExtResource("4_5x8h4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "With 1 House
+
+With 2 Houses
+
+With 3 Houses
+
+With 4 Houses
+
+With HOTEL"
+
+[node name="RentDesc" type="Label" parent="CardSprite/Description"]
+layout_mode = 0
+offset_left = 76.8
+offset_top = -47.2
+offset_right = 141.8
+offset_bottom = -18.2
+theme = ExtResource("4_5x8h4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 23
+text = "Rent"
+
+[node name="MortgageDesc" type="Label" parent="CardSprite/Description"]
+layout_mode = 0
+offset_left = 10.4
+offset_top = 204.8
+offset_right = 196.4
+offset_bottom = 242.8
+theme = ExtResource("4_5x8h4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Mortgage Value"
+
+[node name="HouseDesc" type="Label" parent="CardSprite/Description"]
+layout_mode = 0
+offset_left = 53.6
+offset_top = 257.6
+offset_right = 165.6
+offset_bottom = 292.8
+theme = ExtResource("4_5x8h4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 13
+text = "Houses Cost"
+
+[node name="Values" type="Label" parent="CardSprite"]
+offset_left = 4.80005
+offset_top = -112.8
+offset_right = 94.8
+offset_bottom = -89.8
+theme = ExtResource("4_5x8h4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "99999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="House" type="Label" parent="CardSprite/Values"]
+layout_mode = 0
+offset_left = 28.8
+offset_top = 41.6
+offset_right = 118.8
+offset_bottom = 64.6
+theme = ExtResource("4_5x8h4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "99999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="House2" type="Label" parent="CardSprite/Values"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 82.4
+offset_right = 118.0
+offset_bottom = 105.4
+theme = ExtResource("4_5x8h4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "99999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="House3" type="Label" parent="CardSprite/Values"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 125.6
+offset_right = 118.0
+offset_bottom = 148.6
+theme = ExtResource("4_5x8h4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "99999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="House4" type="Label" parent="CardSprite/Values"]
+layout_mode = 0
+offset_left = 28.8
+offset_top = 167.2
+offset_right = 118.8
+offset_bottom = 190.2
+theme = ExtResource("4_5x8h4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "99999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hotel" type="Label" parent="CardSprite/Values"]
+layout_mode = 0
+offset_left = 28.8
+offset_top = 206.4
+offset_right = 118.8
+offset_bottom = 229.4
+theme = ExtResource("4_5x8h4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "99999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mortgage" type="Label" parent="CardSprite/Values"]
+layout_mode = 0
+offset_left = 56.0001
+offset_top = 249.6
+offset_right = 132.0
+offset_bottom = 272.6
+theme = ExtResource("4_5x8h4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "99999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Build" type="Label" parent="CardSprite/Values"]
+layout_mode = 0
+offset_left = 6.40002
+offset_top = 300.0
+offset_right = 96.4
+offset_bottom = 323.0
+theme = ExtResource("4_5x8h4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "99999"
+horizontal_alignment = 1
+vertical_alignment = 1

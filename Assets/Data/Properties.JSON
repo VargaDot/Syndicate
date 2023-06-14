@@ -1,0 +1,27 @@
+{
+    "template":
+    {
+        "ID":
+        {
+            "Name":"",
+            "CardID":""
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"",
+            "BuildCost":""
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"",
+            "House":"",
+            "House2":"",
+            "House3":"",
+            "House4":"",
+            "Hotel":"",
+            "Mortgage":""
+        }
+    }
+}

@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6t5q3jctrpr2"]
+[gd_scene load_steps=5 format=3 uid="uid://c6t5q3jctrpr2"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_b5gqs"]
+[ext_resource type="PackedScene" uid="uid://hp36i61m07xi" path="res://Scenes/Editor/Main.tscn" id="2_5sujm"]
+[ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://Scenes/Editor/MusicPlayer.tscn" id="3_hwjwm"]
 
-[node name="Game" type="Node2D"]
+[sub_resource type="TileSet" id="TileSet_im02r"]
+
+[node name="Game" type="TileMap"]
+tile_set = SubResource("TileSet_im02r")
+format = 2
 script = ExtResource("1_b5gqs")
+
+[node name="Main" parent="." instance=ExtResource("2_5sujm")]
+
+[node name="MusicPlayer" parent="." instance=ExtResource("3_hwjwm")]

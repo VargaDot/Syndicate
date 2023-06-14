@@ -1,20 +1,25 @@
 using Godot;
 using System;
 
+///<Summary>
+///The script that's responsible for running the main menu button functions.
+///</Summary>
 public partial class MainMenu : Control
 {
-	// Called when the node enters the scene tree for the first time.
 	public override void _Process(double delta)
 	{
+		//Quitting always works
 		if(Input.IsActionPressed("Quit"))
 			GetTree().Quit();
 	}
 
+	//When the play button (singleplayer) gets pressed
 	void OnSinglePlayerPressed()
 	{
 
 	}
 
+	//When the multiplayer (coop) button gets pressed
 	void OnMultiPressed()
 	{
 		
