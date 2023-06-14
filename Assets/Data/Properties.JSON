@@ -1,27 +1,709 @@
 {
-    "template":
+    "Brown1":
     {
         "ID":
         {
-            "Name":"",
-            "CardID":""
+            "Name":"Mediterranean Avenue",
+            "CardID":"0"
         },
         
         "Costs":
         {
-            "PurchasePrice":"",
-            "BuildCost":""
+            "PurchasePrice":"60",
+            "BuildCost":"50"
+			"Mortgage":"30"
         },
 
         "RentValues":
         {
-            "NoBuildings":"",
-            "House":"",
-            "House2":"",
-            "House3":"",
-            "House4":"",
-            "Hotel":"",
-            "Mortgage":""
+            "NoBuildings":"2",
+            "House":"10",
+            "House2":"30",
+            "House3":"90",
+            "House4":"160",
+            "Hotel":"250",
         }
+    },
+	
+	"Brown2":
+    {
+        "ID":
+        {
+            "Name":"Baltic Avenue",
+            "CardID":"0"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"60",
+            "BuildCost":"50"
+			"Mortgage":"30"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"4",
+            "House":"20",
+            "House2":"60",
+            "House3":"180",
+            "House4":"320",
+            "Hotel":"450",
+        }
+    },
+	
+	"Cyan1":
+    {
+        "ID":
+        {
+            "Name":"Oriental Avenue",
+            "CardID":"1"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"100",
+            "BuildCost":"50"
+			"Mortgage":"50"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"6",
+            "House":"30",
+            "House2":"90",
+            "House3":"270",
+            "House4":"400",
+            "Hotel":"550",
+        }
+    },
+	
+	"Cyan2":
+    {
+        "ID":
+        {
+            "Name":"Vermont Avenue",
+            "CardID":"1"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"100",
+            "BuildCost":"50"
+			"Mortgage":"50"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"6",
+            "House":"30",
+            "House2":"90",
+            "House3":"270",
+            "House4":"400",
+            "Hotel":"550",
+        }
+    },
+	
+	"Cyan3":
+    {
+        "ID":
+        {
+            "Name":"Oriental Avenue",
+            "CardID":"1"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"100",
+            "BuildCost":"50"
+			"Mortgage":"50"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"8",
+            "House":"40",
+            "House2":"100",
+            "House3":"300",
+            "House4":"450",
+            "Hotel":"600",
+        }
+    },
+	
+	"Pink1":
+    {
+        "ID":
+        {
+            "Name":"St. Charles Place",
+            "CardID":"2"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"140",
+            "BuildCost":"100"
+			"Mortgage":"70"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"10",
+            "House":"50",
+            "House2":"150",
+            "House3":"450",
+            "House4":"625",
+            "Hotel":"750",
+        }
+    },
+	
+	"Pink2":
+    {
+        "ID":
+        {
+            "Name":"States Avenue",
+            "CardID":"2"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"140",
+            "BuildCost":"100"
+			"Mortgage":"70"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"10",
+            "House":"50",
+            "House2":"150",
+            "House3":"450",
+            "House4":"625",
+            "Hotel":"750",
+        }
+    },
+	
+	"Pink3":
+    {
+        "ID":
+        {
+            "Name":"Virginia Avenue",
+            "CardID":"2"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"160",
+            "BuildCost":"100"
+			"Mortgage":"80"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"12",
+            "House":"60",
+            "House2":"180",
+            "House3":"500",
+            "House4":"700",
+            "Hotel":"900",
+        }
+    },
+	
+	"Orange1":
+    {
+        "ID":
+        {
+            "Name":"St. James Place",
+            "CardID":"3"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"180",
+            "BuildCost":"100"
+			"Mortgage":"90"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"14",
+            "House":"70",
+            "House2":"200",
+            "House3":"550",
+            "House4":"750",
+            "Hotel":"950",
+        }
+    },
+	
+	"Orange2":
+    {
+        "ID":
+        {
+            "Name":"Tennessee Avenue",
+            "CardID":"3"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"180",
+            "BuildCost":"100"
+			"Mortgage":"90"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"14",
+            "House":"70",
+            "House2":"200",
+            "House3":"550",
+            "House4":"750",
+            "Hotel":"950",
+        }
+    },
+	
+	"Orange3":
+    {
+        "ID":
+        {
+            "Name":"New York Avenue",
+            "CardID":"3"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"200",
+            "BuildCost":"100"
+			"Mortgage":"100"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"16",
+            "House":"80",
+            "House2":"220",
+            "House3":"600",
+            "House4":"800",
+            "Hotel":"1000",
+        }
+    },
+	
+	"Red1":
+    {
+        "ID":
+        {
+            "Name":"Kentucky Avenue",
+            "CardID":"4"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"220",
+            "BuildCost":"150"
+			"Mortgage":"110"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"18",
+            "House":"90",
+            "House2":"250",
+            "House3":"700",
+            "House4":"875",
+            "Hotel":"1050",
+        }
+    },
+	
+	"Red2":
+    {
+        "ID":
+        {
+            "Name":"Indiana Avenue",
+            "CardID":"4"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"220",
+            "BuildCost":"150"
+			"Mortgage":"110"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"18",
+            "House":"90",
+            "House2":"250",
+            "House3":"700",
+            "House4":"875",
+            "Hotel":"1050",
+        }
+    },
+	
+	"Red3":
+    {
+        "ID":
+        {
+            "Name":"Illinois Avenue",
+            "CardID":"4"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"240",
+            "BuildCost":"150"
+			"Mortgage":"120"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"20",
+            "House":"100",
+            "House2":"300",
+            "House3":"750",
+            "House4":"925",
+            "Hotel":"1100",
+        }
+    },
+	
+	"Yellow1":
+    {
+        "ID":
+        {
+            "Name":"Atlantic Avenue",
+            "CardID":"5"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"260",
+            "BuildCost":"150"
+			"Mortgage":"130"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"22",
+            "House":"110",
+            "House2":"330",
+            "House3":"800",
+            "House4":"975",
+            "Hotel":"1150",
+        }
+    },
+	
+	"Yellow2":
+    {
+        "ID":
+        {
+            "Name":"Ventnor Avenue",
+            "CardID":"5"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"260",
+            "BuildCost":"150"
+			"Mortgage":"130"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"22",
+            "House":"110",
+            "House2":"330",
+            "House3":"800",
+            "House4":"975",
+            "Hotel":"1150",
+        }
+    },
+	
+	"Yellow3":
+    {
+        "ID":
+        {
+            "Name":"Marvin Gardens",
+            "CardID":"5"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"260",
+            "BuildCost":"150"
+			"Mortgage":"130"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"24",
+            "House":"120",
+            "House2":"360",
+            "House3":"850",
+            "House4":"1025",
+            "Hotel":"1200",
+        }
+    },
+	
+	"Green1":
+    {
+        "ID":
+        {
+            "Name":"Pacific Avenue",
+            "CardID":"6"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"300",
+            "BuildCost":"200"
+			"Mortgage":"150"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"26",
+            "House":"130",
+            "House2":"390",
+            "House3":"900",
+            "House4":"1100",
+            "Hotel":"1275",
+        }
+    },
+	
+	"Green2":
+    {
+        "ID":
+        {
+            "Name":"North Carolina Avenue",
+            "CardID":"6"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"300",
+            "BuildCost":"200"
+			"Mortgage":"150"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"26",
+            "House":"130",
+            "House2":"390",
+            "House3":"900",
+            "House4":"1100",
+            "Hotel":"1275",
+        }
+    },
+	
+	"Green3":
+    {
+        "ID":
+        {
+            "Name":"Pennsylvania Avenue",
+            "CardID":"6"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"320",
+            "BuildCost":"200"
+			"Mortgage":"160"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"28",
+            "House":"150",
+            "House2":"450",
+            "House3":"1000",
+            "House4":"1200",
+            "Hotel":"1400",
+        }
+    },
+	
+	"Green3":
+    {
+        "ID":
+        {
+            "Name":"Pennsylvania Avenue",
+            "CardID":"6"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"320",
+            "BuildCost":"200"
+			"Mortgage":"160"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"28",
+            "House":"150",
+            "House2":"450",
+            "House3":"1000",
+            "House4":"1200",
+            "Hotel":"1400",
+        }
+    },
+	
+	"Blue1":
+    {
+        "ID":
+        {
+            "Name":"Park Place",
+            "CardID":"7"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"350",
+            "BuildCost":"200"
+			"Mortgage":"175"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"35",
+            "House":"175",
+            "House2":"500",
+            "House3":"1100",
+            "House4":"1300",
+            "Hotel":"1500",
+        }
+    },
+	
+	"Blue2":
+    {
+        "ID":
+        {
+            "Name":"Boardwalk",
+            "CardID":"7"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"400",
+            "BuildCost":"200"
+			"Mortgage":"200"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"50",
+            "House":"200",
+            "House2":"600",
+            "House3":"1400",
+            "House4":"1700",
+            "Hotel":"2000",
+        }
+    },
+	
+	"Station1":
+    {
+        "ID":
+        {
+            "Name":"Reading Railroad",
+            "CardID":"8"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"200",
+			"Mortgage":"100"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"25",
+        }
+    },
+	
+	"Station2":
+    {
+        "ID":
+        {
+            "Name":"Pennsylvania Railroad",
+            "CardID":"8"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"200",
+			"Mortgage":"100"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"25",
+        }
+    },
+	
+	"Station3":
+    {
+        "ID":
+        {
+            "Name":"B. & O. Railroad",
+            "CardID":"8"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"200",
+			"Mortgage":"100"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"25",
+        }
+    },
+	
+	"Station4":
+    {
+        "ID":
+        {
+            "Name":"Short Line",
+            "CardID":"8"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"200",
+			"Mortgage":"100"
+        },
+
+        "RentValues":
+        {
+            "NoBuildings":"25",
+        }
+    },
+	
+	"Utility1":
+    {
+        "ID":
+        {
+            "Name":"Electric Company",
+            "CardID":"9"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"150",
+			"Mortgage":"75"
+        },
+    },
+	
+	"Utility2":
+    {
+        "ID":
+        {
+            "Name":"Water Works",
+            "CardID":"10"
+        },
+        
+        "Costs":
+        {
+            "PurchasePrice":"150",
+			"Mortgage":"75"
+        },
     }
 }
