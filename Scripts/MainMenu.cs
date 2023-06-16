@@ -14,14 +14,18 @@ public partial class MainMenu : Control
 	}
 
 	//When the play button (singleplayer) gets pressed
-	void OnSinglePlayerPressed()
+	public void OnSinglePlayerPressed()
 	{
-
+		Globals.composer.GotoScene("Game", new Godot.Collections.Dictionary<string, Variant>()
+		{
+			{"IsAnimated",true},
+			{"Animation",1}
+		});
 	}
 
 	//When the multiplayer (coop) button gets pressed
-	void OnMultiPressed()
+	public void OnMultiPressed()
 	{
-		
+		GD.PushError("No multiplayer available... Yet!");
 	}
 }

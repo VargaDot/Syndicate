@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dorgrkpd7tg2x"
-path="res://.godot/imported/SpecialCard2.png-427592db57432a897c1a37cda9e9f7bd.ctex"
+uid="uid://dqh7we3hgbuux"
+path="res://.godot/imported/ElectricCard.png-cf16041a5278aaa68d54d9ddff87a68f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Cards/SpecialCard2.png"
-dest_files=["res://.godot/imported/SpecialCard2.png-427592db57432a897c1a37cda9e9f7bd.ctex"]
+source_file="res://Assets/Sprites/PropertyCards/ElectricCard.png"
+dest_files=["res://.godot/imported/ElectricCard.png-cf16041a5278aaa68d54d9ddff87a68f.ctex"]
 
 [params]
 

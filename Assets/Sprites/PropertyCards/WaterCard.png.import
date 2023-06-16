@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpf33li3h64ut"
-path="res://.godot/imported/ColdBlueCard.png-0c65afe78902dc2dd5a7b3a76e6bd175.ctex"
+uid="uid://dy36ok35x3xmw"
+path="res://.godot/imported/WaterCard.png-06855446e3d8af39fb2d1aec8dffd831.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Cards/ColdBlueCard.png"
-dest_files=["res://.godot/imported/ColdBlueCard.png-0c65afe78902dc2dd5a7b3a76e6bd175.ctex"]
+source_file="res://Assets/Sprites/PropertyCards/WaterCard.png"
+dest_files=["res://.godot/imported/WaterCard.png-06855446e3d8af39fb2d1aec8dffd831.ctex"]
 
 [params]
 

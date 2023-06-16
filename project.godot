@@ -14,6 +14,10 @@ config/name="Monopoly"
 config/features=PackedStringArray("4.0", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Globals="*res://Scripts/Editor/Globals.cs"
+
 [display]
 
 window/size/viewport_width=1920

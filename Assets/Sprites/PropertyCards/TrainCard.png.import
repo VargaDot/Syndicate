@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uq2kvfglblf7"
-path="res://.godot/imported/GreenCard.png-fbeb8bde3eafea24c62ae734bc4e783f.ctex"
+uid="uid://cgbao54yn877l"
+path="res://.godot/imported/TrainCard.png-59dc8de7aa11e3baf51b17273d5bcf28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Cards/GreenCard.png"
-dest_files=["res://.godot/imported/GreenCard.png-fbeb8bde3eafea24c62ae734bc4e783f.ctex"]
+source_file="res://Assets/Sprites/PropertyCards/TrainCard.png"
+dest_files=["res://.godot/imported/TrainCard.png-59dc8de7aa11e3baf51b17273d5bcf28.ctex"]
 
 [params]
 

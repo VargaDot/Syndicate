@@ -3,4 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Editor/MusicPlayer.cs" id="1_altma"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer"]
+autoplay = true
 script = ExtResource("1_altma")
+
+[connection signal="finished" from="." to="." method="WhenFinished"]
