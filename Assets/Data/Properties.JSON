@@ -58,7 +58,8 @@
         "ID":
         {
             "Name":"Baltic Avenue",
-            "CardID":"0"
+            "CardID":"0",
+            "BoardID":"2"
         },
         
         "Costs":
@@ -84,7 +85,8 @@
         "ID":
         {
             "Name":"Oriental Avenue",
-            "CardID":"1"
+            "CardID":"1",
+            "BoardID":"3"
         },
         
         "Costs":
@@ -110,7 +112,8 @@
         "ID":
         {
             "Name":"Vermont Avenue",
-            "CardID":"1"
+            "CardID":"1",
+            "BoardID":"4"
         },
         
         "Costs":
@@ -136,7 +139,8 @@
         "ID":
         {
             "Name":"Oriental Avenue",
-            "CardID":"1"
+            "CardID":"1",
+            "BoardID":"5"
         },
         
         "Costs":
@@ -162,7 +166,8 @@
         "ID":
         {
             "Name":"St. Charles Place",
-            "CardID":"2"
+            "CardID":"2",
+            "BoardID":"6"
         },
         
         "Costs":
@@ -188,7 +193,8 @@
         "ID":
         {
             "Name":"States Avenue",
-            "CardID":"2"
+            "CardID":"2",
+            "BoardID":"7"
         },
         
         "Costs":
@@ -214,7 +220,8 @@
         "ID":
         {
             "Name":"Virginia Avenue",
-            "CardID":"2"
+            "CardID":"2",
+            "BoardID":"8"
         },
         
         "Costs":
@@ -240,7 +247,8 @@
         "ID":
         {
             "Name":"St. James Place",
-            "CardID":"3"
+            "CardID":"3",
+            "BoardID":"9"
         },
         
         "Costs":
@@ -266,7 +274,8 @@
         "ID":
         {
             "Name":"Tennessee Avenue",
-            "CardID":"3"
+            "CardID":"3",
+            "BoardID":"10"
         },
         
         "Costs":
@@ -292,7 +301,8 @@
         "ID":
         {
             "Name":"New York Avenue",
-            "CardID":"3"
+            "CardID":"3",
+            "BoardID":"11"
         },
         
         "Costs":
@@ -318,7 +328,8 @@
         "ID":
         {
             "Name":"Kentucky Avenue",
-            "CardID":"4"
+            "CardID":"4",
+            "BoardID":"12"
         },
         
         "Costs":
@@ -344,7 +355,8 @@
         "ID":
         {
             "Name":"Indiana Avenue",
-            "CardID":"4"
+            "CardID":"4",
+            "BoardID":"13"
         },
         
         "Costs":
@@ -370,7 +382,8 @@
         "ID":
         {
             "Name":"Illinois Avenue",
-            "CardID":"4"
+            "CardID":"4",
+            "BoardID":"14"
         },
         
         "Costs":
@@ -396,7 +409,8 @@
         "ID":
         {
             "Name":"Atlantic Avenue",
-            "CardID":"5"
+            "CardID":"5",
+            "BoardID":"15"
         },
         
         "Costs":
@@ -422,7 +436,8 @@
         "ID":
         {
             "Name":"Ventnor Avenue",
-            "CardID":"5"
+            "CardID":"5",
+            "BoardID":"16"
         },
         
         "Costs":
@@ -448,7 +463,8 @@
         "ID":
         {
             "Name":"Marvin Gardens",
-            "CardID":"5"
+            "CardID":"5",
+            "BoardID":"17"
         },
         
         "Costs":
@@ -474,7 +490,8 @@
         "ID":
         {
             "Name":"Pacific Avenue",
-            "CardID":"6"
+            "CardID":"6",
+            "BoardID":"18"
         },
         
         "Costs":
@@ -500,7 +517,8 @@
         "ID":
         {
             "Name":"North Carolina Avenue",
-            "CardID":"6"
+            "CardID":"6",
+            "BoardID":"19"
         },
         
         "Costs":
@@ -526,7 +544,8 @@
         "ID":
         {
             "Name":"Pennsylvania Avenue",
-            "CardID":"6"
+            "CardID":"6",
+            "BoardID":"20"
         },
         
         "Costs":
@@ -552,7 +571,8 @@
         "ID":
         {
             "Name":"Park Place",
-            "CardID":"7"
+            "CardID":"7",
+            "BoardID":"21"
         },
         
         "Costs":
@@ -578,7 +598,8 @@
         "ID":
         {
             "Name":"Boardwalk",
-            "CardID":"7"
+            "CardID":"7",
+            "BoardID":"22"
         },
         
         "Costs":
@@ -604,7 +625,8 @@
         "ID":
         {
             "Name":"Reading Railroad",
-            "CardID":"8"
+            "CardID":"8",
+            "BoardID":"23"
         },
         
         "Costs":
@@ -624,7 +646,8 @@
         "ID":
         {
             "Name":"Pennsylvania Railroad",
-            "CardID":"8"
+            "CardID":"8",
+            "BoardID":"24"
         },
         
         "Costs":
@@ -644,7 +667,8 @@
         "ID":
         {
             "Name":"B. & O. Railroad",
-            "CardID":"8"
+            "CardID":"8",
+            "BoardID":"25"
         },
         
         "Costs":
@@ -664,7 +688,8 @@
         "ID":
         {
             "Name":"Short Line",
-            "CardID":"8"
+            "CardID":"8",
+            "BoardID":"26"
         },
         
         "Costs":
@@ -684,7 +709,8 @@
         "ID":
         {
             "Name":"Electric Company",
-            "CardID":"9"
+            "CardID":"9",
+            "BoardID":"27"
         },
         
         "Costs":
@@ -699,7 +725,8 @@
         "ID":
         {
             "Name":"Water Works",
-            "CardID":"10"
+            "CardID":"10",
+            "BoardID":"28"
         },
         
         "Costs":

@@ -6,6 +6,8 @@ public partial class Globals : Node
 {
 	public static ComposerLib composer;
 
+	public static Array<string> PlayerUsernames = new Array<string>();
+
 	///<summary>
 	///Dictionary containing propertyIDs and their assigned color
 	///</summary>

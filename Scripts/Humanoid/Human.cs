@@ -1,18 +1,16 @@
 using Godot;
 using System;
 
-public partial class Player : Node2D
+public partial class Human : Node2D
 {
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
+		LoadValues();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	void LoadValues()
 	{
-
+		
 	}
 
 	int previousDice;
@@ -20,18 +18,14 @@ public partial class Player : Node2D
 	public void RollDice()
 	{
 		int x = GD.RandRange(2,12);
-		if (x == previousDice && x == previousDice % 2 )
+		if (x == previousDice % 2 )
 		{
 			DoublesCheck();
 		}
-		else
+		else if(Fine)
 		{
 			DoubleTimes = 0;
-		}
-
-		if(Fine)
-		{
-			EmitSignal("RolledDice", x);
+			EmitSignal("MovePiece", x);
 		}
 			
 		previousDice = x;
@@ -54,4 +48,6 @@ public partial class Player : Node2D
 			Fine = true;
 		}
 	}
+
+	[Signal] public delegate void MovePieceEventHandler(int Dice);
 }
