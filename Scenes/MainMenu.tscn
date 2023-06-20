@@ -20,28 +20,10 @@ SingleplayerPanel = NodePath("SingleplayerMenu")
 
 [node name="Container" type="Container" parent="."]
 layout_mode = 0
-offset_left = 1456.0
-offset_top = 168.0
-offset_right = 1890.0
-offset_bottom = 832.0
-metadata/_edit_group_ = true
-
-[node name="Game Title" type="Label" parent="Container"]
-layout_mode = 2
-theme = ExtResource("2_63w4d")
-theme_override_font_sizes/font_size = 55
-text = "MONOPOLY"
-
-[node name="SingleButton" type="Button" parent="Container"]
-layout_mode = 2
-theme = ExtResource("2_63w4d")
-theme_override_font_sizes/font_size = 29
-text = "LOCAL GAME"
-
-[node name="MultiButton" type="Button" parent="Container"]
-layout_mode = 2
-theme = ExtResource("2_63w4d")
-text = "MULTIPLAYER"
+offset_left = 1476.0
+offset_top = 142.0
+offset_right = 1910.0
+offset_bottom = 806.0
 
 [node name="SingleplayerMenu" type="Panel" parent="."]
 layout_mode = 0
@@ -77,11 +59,9 @@ position = Vector2(160, 64)
 position = Vector2(416, 64)
 
 [node name="3rd" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
-visible = false
 position = Vector2(672, 64)
 
 [node name="4th" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
-visible = false
 position = Vector2(928, 64)
 
 [node name="Usernames" type="HFlowContainer" parent="SingleplayerMenu" node_paths=PackedStringArray("PopUp", "textTimer")]
@@ -112,13 +92,13 @@ caret_blink = true
 [node name="PlayerName3" type="LineEdit" parent="SingleplayerMenu/Usernames"]
 layout_mode = 2
 theme = ExtResource("3_roui2")
-placeholder_text = "AGF"
+placeholder_text = "Joe"
 caret_blink = true
 
 [node name="PlayerName4" type="LineEdit" parent="SingleplayerMenu/Usernames"]
 layout_mode = 2
 theme = ExtResource("3_roui2")
-placeholder_text = "Whatever"
+placeholder_text = "Mama"
 caret_blink = true
 
 [node name="message" type="Label" parent="SingleplayerMenu/Usernames"]
@@ -144,8 +124,35 @@ text = "GO!"
 
 [node name="MusicPlayer" parent="." instance=ExtResource("5_rd1by")]
 
-[connection signal="pressed" from="Container/SingleButton" to="." method="OnSinglePlayerPressed"]
-[connection signal="pressed" from="Container/MultiButton" to="." method="OnMultiPressed"]
+[node name="Game Title" type="Label" parent="."]
+layout_mode = 2
+offset_left = 1476.0
+offset_top = 142.0
+offset_right = 1858.0
+offset_bottom = 205.0
+theme = ExtResource("2_63w4d")
+theme_override_font_sizes/font_size = 55
+text = "MONOPOLY"
+
+[node name="SingleButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = 1544.0
+offset_top = 510.0
+offset_right = 1777.0
+offset_bottom = 550.0
+theme = ExtResource("2_63w4d")
+theme_override_font_sizes/font_size = 29
+text = "LOCAL GAME"
+
+[node name="MultiButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = 1530.0
+offset_top = 598.0
+offset_right = 1797.0
+offset_bottom = 642.0
+theme = ExtResource("2_63w4d")
+text = "MULTIPLAYER"
+
 [connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/PlayerName" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
 [connection signal="text_submitted" from="SingleplayerMenu/Usernames/PlayerName" to="SingleplayerMenu/Usernames" method="OnName1Registered"]
 [connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/PlayerName2" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
@@ -156,3 +163,5 @@ text = "GO!"
 [connection signal="text_submitted" from="SingleplayerMenu/Usernames/PlayerName4" to="SingleplayerMenu/Usernames" method="OnName4Registered"]
 [connection signal="timeout" from="SingleplayerMenu/Usernames/message/Timer" to="SingleplayerMenu/Usernames" method="OnTimeout"]
 [connection signal="pressed" from="SingleplayerMenu/PlayButton" to="." method="OnPlayPressed"]
+[connection signal="pressed" from="SingleButton" to="." method="OnSinglePlayerPressed"]
+[connection signal="pressed" from="MultiButton" to="." method="OnMultiPressed"]
