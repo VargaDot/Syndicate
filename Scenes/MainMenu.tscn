@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_e8dpg"]
 [ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://Assets/Fonts/Themes/Card.tres" id="2_63w4d"]
-[ext_resource type="Script" path="res://Scripts/UI/Usernames.cs" id="3_3fhe1"]
+[ext_resource type="Script" path="res://Scripts/UI/MainMenu/SpriteChanger.cs" id="3_ju8de"]
 [ext_resource type="Theme" uid="uid://7is2xs320v4c" path="res://Assets/Fonts/Themes/Fields.tres" id="3_roui2"]
-[ext_resource type="Script" path="res://Scripts/UI/SpriteChanger.cs" id="3_sgewr"]
+[ext_resource type="Script" path="res://Scripts/UI/MainMenu/Usernames.cs" id="4_eod01"]
 [ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://Scenes/Editor/MusicPlayer.tscn" id="5_rd1by"]
 [ext_resource type="FontFile" uid="uid://c46oubnvhj7jf" path="res://Assets/Fonts/Koblenz-Serial-Regular.ttf" id="6_d3jj1"]
 
@@ -17,13 +17,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_e8dpg")
 SingleplayerPanel = NodePath("SingleplayerMenu")
-
-[node name="Container" type="Container" parent="."]
-layout_mode = 0
-offset_left = 1476.0
-offset_top = 142.0
-offset_right = 1910.0
-offset_bottom = 806.0
 
 [node name="SingleplayerMenu" type="Panel" parent="."]
 layout_mode = 0
@@ -46,11 +39,11 @@ metadata/_edit_lock_ = true
 
 [node name="SpriteContainer" type="Container" parent="SingleplayerMenu"]
 layout_mode = 0
-offset_left = 177.0
+offset_left = 159.0
 offset_top = 238.0
-offset_right = 1265.0
+offset_right = 1247.0
 offset_bottom = 366.0
-script = ExtResource("3_sgewr")
+script = ExtResource("3_ju8de")
 
 [node name="Main" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
 position = Vector2(160, 64)
@@ -66,16 +59,17 @@ position = Vector2(928, 64)
 
 [node name="Usernames" type="HFlowContainer" parent="SingleplayerMenu" node_paths=PackedStringArray("PopUp", "textTimer")]
 layout_mode = 0
-offset_left = 129.0
-offset_top = 360.0
-offset_right = 1278.0
-offset_bottom = 465.0
+offset_left = 147.0
+offset_top = 540.0
+offset_right = 1296.0
+offset_bottom = 650.0
 theme_override_constants/h_separation = 160
 theme_override_constants/v_separation = 19
 alignment = 1
-script = ExtResource("3_3fhe1")
+script = ExtResource("4_eod01")
 PopUp = NodePath("message")
 textTimer = NodePath("message/Timer")
+metadata/_edit_group_ = true
 
 [node name="PlayerName" type="LineEdit" parent="SingleplayerMenu/Usernames"]
 layout_mode = 2
@@ -102,6 +96,7 @@ placeholder_text = "Mama"
 caret_blink = true
 
 [node name="message" type="Label" parent="SingleplayerMenu/Usernames"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_d3jj1")
 theme_override_font_sizes/font_size = 32
@@ -153,6 +148,7 @@ offset_bottom = 642.0
 theme = ExtResource("2_63w4d")
 text = "MULTIPLAYER"
 
+[connection signal="GoPressed" from="SingleplayerMenu/Usernames" to="." method="OnPlayPressed"]
 [connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/PlayerName" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
 [connection signal="text_submitted" from="SingleplayerMenu/Usernames/PlayerName" to="SingleplayerMenu/Usernames" method="OnName1Registered"]
 [connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/PlayerName2" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]

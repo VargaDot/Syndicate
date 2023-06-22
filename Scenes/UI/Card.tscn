@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://Assets/Fonts/Themes/Card.tres" id="4_5x8h4"]
 [ext_resource type="FontFile" uid="uid://cw3bbxedp41ds" path="res://Assets/Fonts/Tangerine-Regular.ttf" id="4_fvb35"]
 
-[node name="Card" type="Control" node_paths=PackedStringArray("_colorRect", "_cardSprite", "_cardTitle", "AllValues")]
+[node name="Card" type="Control" node_paths=PackedStringArray("_colorRect", "_cardSprite", "_cardTitle", "rent", "house", "house2", "house3", "house4", "hotel", "mortgage", "buildcost")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,11 +16,19 @@ script = ExtResource("1_hp21u")
 _colorRect = NodePath("CardSprite/CardColor")
 _cardSprite = NodePath("CardSprite")
 _cardTitle = NodePath("CardSprite/Title")
-AllValues = NodePath("CardSprite/AllVals")
+rent = NodePath("CardSprite/AllVals/Rent")
+house = NodePath("CardSprite/AllVals/House")
+house2 = NodePath("CardSprite/AllVals/House2")
+house3 = NodePath("CardSprite/AllVals/House3")
+house4 = NodePath("CardSprite/AllVals/House4")
+hotel = NodePath("CardSprite/AllVals/Hotel")
+mortgage = NodePath("CardSprite/AllVals/Mortgage")
+buildcost = NodePath("CardSprite/AllVals/Build")
 
 [node name="CardSprite" type="Sprite2D" parent="."]
-position = Vector2(1576, 448)
+position = Vector2(1616, 386)
 texture = ExtResource("2_xgf4d")
+metadata/_edit_group_ = true
 
 [node name="CardColor" type="ColorRect" parent="CardSprite"]
 offset_left = -132.0

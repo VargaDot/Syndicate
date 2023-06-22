@@ -7,8 +7,8 @@ public partial class ComposerLib : Node
 
     public Dictionary<string,string> ScenePaths = new Dictionary<string, string>()
     {
-        {"MainMenu","res://CSharp Version/MainMenu.tscn"},
-        {"Game","res://CSharp Version/Game.tscn"},
+        {"MainMenu","res://Scenes/MainMenu.tscn"},
+        {"Game","res://Scenes/Game.tscn"},
     };
 
     public Node2D CurrentScene {get; private set;} = null;

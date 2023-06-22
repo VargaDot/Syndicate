@@ -32,11 +32,12 @@ public partial class Globals : Node
 	///<returns>
 	///Integers and strings
 	///</returns>
-	public static Dictionary<int,String> PropertySprites = new Dictionary<int, string>()
+	public static Dictionary<int,Texture2D> PropertySprites = new Dictionary<int, Texture2D>()
 	{
-		{8,"res://Assets/Sprites/PropertyCards/TrainCard.png"},
-		{9,"res://Assets/Sprites/PropertyCards/ElectricCard.png"},
-		{10,"res://Assets/Sprites/PropertyCards/WaterCard.png"},
+		/*
+		{8, },
+		{9, },
+		{10, },
+		*/
 	};
-
 }

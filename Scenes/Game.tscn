@@ -1,17 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6t5q3jctrpr2"]
+[gd_scene load_steps=4 format=3 uid="uid://c6t5q3jctrpr2"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_b5gqs"]
 [ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://Scenes/Editor/MusicPlayer.tscn" id="3_hwjwm"]
-[ext_resource type="PackedScene" uid="uid://bs0vfv6wf6d32" path="res://Scenes/UI/Card.tscn" id="4_yljkw"]
 
 [sub_resource type="TileSet" id="TileSet_im02r"]
 
-[node name="Game" type="TileMap"]
+[node name="Game" type="TileMap" node_paths=PackedStringArray("cam")]
 tile_set = SubResource("TileSet_im02r")
 format = 2
 script = ExtResource("1_b5gqs")
+cam = NodePath("Cam")
 
-[node name="Card" parent="." instance=ExtResource("4_yljkw")]
+[node name="Cam" type="Camera2D" parent="."]
+
+[node name="Card" parent="." instance_placeholder="res://Scenes/UI/Card.tscn"]
 visible = false
+
+[node name="Trade" parent="." instance_placeholder="res://Scenes/UI/Trade.tscn"]
+visible = false
+offset_left = 944.0
+offset_top = 533.0
+offset_right = 944.0
+offset_bottom = 533.0
 
 [node name="MusicPlayer" parent="." instance=ExtResource("3_hwjwm")]

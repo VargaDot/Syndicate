@@ -13,41 +13,68 @@ public partial class Human : Node2D
 		
 	}
 
-	int previousDice;
-	bool Fine;
+	public void BuyProperty()
+	{
+
+	}
+
+	public void SellProperty()
+	{
+
+	}
+
+	int previousDice, DoubleTimes;
+	bool inPrison;
 	public void RollDice()
 	{
 		int x = GD.RandRange(2,12);
-		if (x == previousDice % 2 )
+		
+		if(!inPrison)
 		{
-			DoublesCheck();
-		}
-		else if(Fine)
-		{
-			DoubleTimes = 0;
-			EmitSignal("MovePiece", x);
-		}
-			
-		previousDice = x;
-	}
+			if (x == previousDice % 2 )
+			{
+				DoubleTimes++;
 
-	int DoubleTimes;
-	void DoublesCheck()
-	{
-		DoubleTimes++;
-
-		if(DoubleTimes == 3)
-		{
-			Fine = false;
-			EmitSignal("BrokeTheLaw");
-			previousDice = 0;
-			DoubleTimes = 0;
+				if(DoubleTimes == 3)
+				{
+					EmitSignal("BrokeTheLaw");
+					x = 0;
+					previousDice = 0;
+					DoubleTimes = 0;
+				}
+			}
 		}
+		
+		else if(inPrison)
+		{
+			if(x == x % 2)
+			{
+				Bail(false, 0);
+			}
+		}
+		
 		else
 		{
-			Fine = true;
+			EmitSignal("MovePiece", x);	
+			previousDice = x;
 		}
 	}
 
+	public void Bail(bool boughtBail, int bail)
+	{
+		if(boughtBail)
+		{
+			Cash =- bail;
+		}
+
+		EmitSignal("Released");
+		inPrison = false;
+	}
+
+	int Cash;
+
 	[Signal] public delegate void MovePieceEventHandler(int Dice);
+	[Signal] public delegate void BrokeTheLawEventHandler();
+	[Signal] public delegate void ReleasedEventHandler();
+
 }

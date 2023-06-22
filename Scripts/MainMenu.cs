@@ -13,7 +13,7 @@ public partial class MainMenu : Control
 
 	void LoadValues()
 	{
-		//LoadUsernames();
+		
 	}
 
 	public override void _Process(double delta)
@@ -51,16 +51,6 @@ public partial class MainMenu : Control
 			{"Animation",1}
 		});
 	}
-
-	/*
-	void LoadUsernames()
-	{
-		for (int i = 0; i < Globals.PlayerUsernames.Count; i++)
-		{
-			
-		}
-	}
-	*/
 
 	[Export] public Panel SingleplayerPanel;
 }

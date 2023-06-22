@@ -11,14 +11,29 @@ public partial class Game : Node2D
 		LoadBoard();
 	}
 
+	int TotalPlayers;
+	string Player1, Player2, Player3, Player4;
 	void LoadValues()
 	{
-		
+		Globals.PlayerUsernames[0] = Player1;
+		Globals.PlayerUsernames[1] = Player2;
+		TotalPlayers = 2;
+
+		if(Globals.PlayerUsernames[2] != null)
+		{
+			Globals.PlayerUsernames[2] = Player3;
+			TotalPlayers++;
+		}
+		else if(Globals.PlayerUsernames[3] != null)
+		{
+			Globals.PlayerUsernames[3] = Player4;
+			TotalPlayers++;
+		}
 	}
 
 	void LoadBoard()
 	{
-		
+		EmitSignal("BoardLaunched", TotalPlayers);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,11 +44,6 @@ public partial class Game : Node2D
 			GD.PushError("No Pause Menu has been made yet.");
 			GetTree().Quit();
 		}
-	}
-
-	public void TurnManager()
-	{
-		
 	}
 
 	public void MovePiece(int Dice)
@@ -47,4 +57,8 @@ public partial class Game : Node2D
 	}
 
 	public Node2D H1, H2, H3, H4;
+
+	[Export] Camera2D cam;
+
+	[Signal] public delegate void BoardLaunchedEventHandler(int n);
 }
