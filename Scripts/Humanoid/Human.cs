@@ -3,6 +3,7 @@ using System;
 
 public partial class Human : Node2D
 {
+	public string myName;
 	public override void _Ready()
 	{
 		LoadValues();
@@ -71,7 +72,12 @@ public partial class Human : Node2D
 		inPrison = false;
 	}
 
-	int Cash;
+	public int Cash;
+
+	public void GameOver()
+	{
+		QueueFree();
+	}
 
 	[Signal] public delegate void MovePieceEventHandler(int Dice);
 	[Signal] public delegate void BrokeTheLawEventHandler();

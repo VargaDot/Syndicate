@@ -11,29 +11,44 @@ public partial class Game : Node2D
 		LoadBoard();
 	}
 
-	int TotalPlayers;
-	string Player1, Player2, Player3, Player4;
+	Node2D Player1 = new Player(), Player2 = new Player(), Player3 = new Player(), Player4 = new Player();
+	Array<Node2D> PlayerList = new Array<Node2D>();
 	void LoadValues()
 	{
-		Globals.PlayerUsernames[0] = Player1;
-		Globals.PlayerUsernames[1] = Player2;
-		TotalPlayers = 2;
+		PlayerList.Add(Player1);
+		PlayerList.Add(Player2);
+
+		AddChild(PlayerList[0]);
+		AddChild(PlayerList[1]);
+
+		PlayerList[0].GetNode<Player>("Player");
+		PlayerList[1].GetNode<Player>("Player1");
 
 		if(Globals.PlayerUsernames[2] != null)
 		{
-			Globals.PlayerUsernames[2] = Player3;
-			TotalPlayers++;
+			PlayerList.Add(Player3);
+			AddChild(PlayerList[2]);
+			PlayerList[2].GetNode<Player>("Player2");
 		}
 		else if(Globals.PlayerUsernames[3] != null)
 		{
-			Globals.PlayerUsernames[3] = Player4;
-			TotalPlayers++;
+			PlayerList.Add(Player4);
+			AddChild(PlayerList[3]);
+			PlayerList[3].GetNode<Player>("Player3");
+		}
+
+		for (int i = 0; i < PlayerList.Count; i++)
+		{
+			PlayerList[i].Name = Globals.PlayerUsernames[i];
 		}
 	}
 
 	void LoadBoard()
 	{
-		EmitSignal("BoardLaunched", TotalPlayers);
+		EmitSignal("BoardLaunched");
+
+		int x = GD.RandRange(0, PlayerList.Count - 1);
+		//PlayerList[x];
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
