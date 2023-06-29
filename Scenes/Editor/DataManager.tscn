@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwobhvkrvijq1"]
+
+[ext_resource type="Script" path="res://Scripts/Editor/Properties.cs" id="1_txpd8"]
+
+[node name="DataManager" type="Node"]
+script = ExtResource("1_txpd8")

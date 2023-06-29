@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globals="*res://Scripts/Editor/Globals.cs"
+DataManager="*res://Scripts/Editor/DataManager.cs"
 
 [display]
 
