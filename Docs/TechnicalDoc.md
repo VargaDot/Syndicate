@@ -32,6 +32,8 @@ Booleans obviously.
 
 THERE ARE 40 TILES IN A MONOPOLY BOARD!!!!
 
+# Game.cs 
+i mean there's probably a better way to do it but according to the godot docs, the best way to go about storing nodes in an array is by making individual Node2D's first and then storing them in an array, however i opted to assign individually first and then assigning them to an array so idk and idc 
 
 ## The cards
 I made a JSON file with every single bit of info thats needed for the properties, only thing needed is parsing

@@ -11,13 +11,20 @@ public partial class Game : Node2D
 		LoadBoard();
 	}
 
-	Node2D Player1 = new Player(), Player2 = new Player(), Player3 = new Player(), Player4 = new Player();
+	Node2D Player1, Player2, Player3, Player4;
 	Array<Node2D> PlayerList = new Array<Node2D>();
+
+	//Loads and instantiates players into the game scene.
 	void LoadValues()
 	{
+		var human = GD.Load<PackedScene>("res://Scenes/Humanoid/Player.tscn");
+
+		Player1 = (Node2D)human.Instantiate();
+		Player2 = (Node2D)human.Instantiate();
+
 		PlayerList.Add(Player1);
 		PlayerList.Add(Player2);
-
+		
 		AddChild(PlayerList[0]);
 		AddChild(PlayerList[1]);
 
@@ -26,12 +33,14 @@ public partial class Game : Node2D
 
 		if(Globals.PlayerUsernames[2] != null)
 		{
+			Player3 = (Node2D)human.Instantiate();
 			PlayerList.Add(Player3);
 			AddChild(PlayerList[2]);
 			PlayerList[2].GetNode<Player>("Player2");
 		}
 		else if(Globals.PlayerUsernames[3] != null)
 		{
+			Player4 = (Node2D)human.Instantiate();
 			PlayerList.Add(Player4);
 			AddChild(PlayerList[3]);
 			PlayerList[3].GetNode<Player>("Player3");
@@ -43,6 +52,7 @@ public partial class Game : Node2D
 		}
 	}
 
+	//Starts the turn-based game
 	void LoadBoard()
 	{
 		EmitSignal("BoardLaunched");
@@ -54,6 +64,7 @@ public partial class Game : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		//Quits the game
 		if(Input.IsActionPressed("Quit"))
 		{
 			GD.PushError("No Pause Menu has been made yet.");
@@ -63,7 +74,7 @@ public partial class Game : Node2D
 
 	public void MovePiece(int Dice)
 	{
-
+		
 	}
 
 	public void BrokeTheLaw()

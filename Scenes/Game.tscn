@@ -5,11 +5,10 @@
 
 [sub_resource type="TileSet" id="TileSet_im02r"]
 
-[node name="Game" type="TileMap" node_paths=PackedStringArray("cam")]
+[node name="Game" type="TileMap"]
 tile_set = SubResource("TileSet_im02r")
 format = 2
 script = ExtResource("1_b5gqs")
-cam = NodePath("Cam")
 
 [node name="Cam" type="Camera2D" parent="."]
 
