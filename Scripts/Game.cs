@@ -11,6 +11,7 @@ public partial class Game : Node2D
 		LoadValues();
 		LoadBoard();
 	}
+	Registry registry;
 
 	Node2D Player1, Player2, Player3, Player4;
 	Array<Node2D> PlayerList = new Array<Node2D>();
@@ -19,6 +20,7 @@ public partial class Game : Node2D
 	void LoadValues()
 	{
 		var human = GD.Load<PackedScene>("res://Scenes/Humanoid/Player.tscn");
+		var AI = GD.Load<PackedScene>("res://Scenes/Humanoid/AI.tscn");
 
 		Player1 = (Node2D)human.Instantiate();
 		Player2 = (Node2D)human.Instantiate();
@@ -29,22 +31,17 @@ public partial class Game : Node2D
 		AddChild(PlayerList[0]);
 		AddChild(PlayerList[1]);
 
-		PlayerList[0].GetNode<Player>("Player");
-		PlayerList[1].GetNode<Player>("Player1");
-
 		if(Globals.PlayerUsernames[2] != null)
 		{
 			Player3 = (Node2D)human.Instantiate();
 			PlayerList.Add(Player3);
 			AddChild(PlayerList[2]);
-			PlayerList[2].GetNode<Player>("Player2");
 		}
 		else if(Globals.PlayerUsernames[3] != null)
 		{
 			Player4 = (Node2D)human.Instantiate();
 			PlayerList.Add(Player4);
 			AddChild(PlayerList[3]);
-			PlayerList[3].GetNode<Player>("Player3");
 		}
 
 		for (int i = 0; i < PlayerList.Count; i++)
@@ -56,10 +53,11 @@ public partial class Game : Node2D
 	//Starts the turn-based game
 	void LoadBoard()
 	{
-		EmitSignal("BoardLaunched");
+		registry = GetNode<Registry>("Registry");
+		EmitSignal("BoardLaunched", PlayerList.Count);
 
 		int x = GD.RandRange(0, PlayerList.Count - 1);
-		//PlayerList[x];
+		PlayerList[x].GetNode<Player>("").RollDice();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

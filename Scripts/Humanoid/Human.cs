@@ -1,9 +1,9 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Human : Node2D
 {
-	public string myName;
 	public override void _Ready()
 	{
 		LoadValues();
@@ -14,14 +14,11 @@ public partial class Human : Node2D
 		
 	}
 
-	public void BuyProperty()
+	protected enum STATES
 	{
-
-	}
-
-	public void SellProperty()
-	{
-
+		ROLLING,
+		TRADING,
+		BANKRUPT,
 	}
 
 	int previousDice, DoubleTimes;
@@ -50,7 +47,7 @@ public partial class Human : Node2D
 		{
 			if(x == x % 2)
 			{
-				Bail(false, 0);
+				//Bail(false, 0);
 			}
 		}
 		
@@ -60,19 +57,6 @@ public partial class Human : Node2D
 			previousDice = x;
 		}
 	}
-
-	public void Bail(bool boughtBail, int bail)
-	{
-		if(boughtBail)
-		{
-			Cash =- bail;
-		}
-
-		EmitSignal("Released");
-		inPrison = false;
-	}
-
-	public int Cash;
 
 	public void GameOver()
 	{
