@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 
+//This is strictly for UI, player turns and visual stuff.
 public partial class Game : Node2D
 {
 	// Called when the node enters the scene tree for the first time.
