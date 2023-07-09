@@ -1,10 +1,10 @@
 using Godot;
 using Godot.Collections;
-using System;
 
 public partial class Globals : Node
 {
 	public static ComposerLib composer;
+	public static DataManager dataManager;
 
 	public static Array<string> PlayerUsernames = new Array<string>();
 

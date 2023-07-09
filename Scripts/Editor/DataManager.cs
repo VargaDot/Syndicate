@@ -18,10 +18,8 @@ public partial class DataManager : Node
     /// <returns>
     /// A variant, to be converted manually through additional arguments.
     /// </returns>
-    public Variant DataRequester(string TileName, int functionID, int upgradeArg = 0)
+    public void DataRequester(Variant request, string TileName, int functionID, int upgradeArg = 0)
     {
-        Variant request = "";
-
         switch (functionID)
         {
             case(1):
@@ -44,8 +42,6 @@ public partial class DataManager : Node
                 GD.Print("Tilename: ", TileName, " FunctionID: ", functionID, " UpgradeLevel:", upgradeArg, " Requested element: ", request);
                 break;
         }
-
-        return request;
     }
 
     //Properties.JSON path
