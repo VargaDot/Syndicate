@@ -12,11 +12,19 @@ public partial class Registry : Node2D
         MORTGAGED,
     }
 
+    enum KIND
+    {
+        NORMAL,
+        STATION,
+        UTILITY,
+    }
+
     public override void _Ready()
     {
         base._Ready();
     }
 
+    /*
     public static Dictionary<int,Dictionary<int,int>> TheRegistry = new Dictionary<int, Dictionary<int,int>>()
     {
         {00, new Dictionary<int, int> {{0,0}} },
@@ -25,4 +33,7 @@ public partial class Registry : Node2D
         {00, new Dictionary<int, int> {{0,0}} },
         {00, new Dictionary<int, int> {{0,0}} },
     };
+    */
+
+    
 }

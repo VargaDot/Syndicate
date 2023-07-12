@@ -37,6 +37,9 @@ public partial class DataManager : Node
             case(5):
                 request = GetPropertyRent(TileName, upgradeArg);
                 break;
+            case(6):
+                //request = ;
+                break;
             default:
                 GD.PushError("Something happened with the data requester, here are the input values");
                 GD.Print("Tilename: ", TileName, " FunctionID: ", functionID, " UpgradeLevel:", upgradeArg, " Requested element: ", request);
@@ -170,6 +173,16 @@ public partial class DataManager : Node
             GD.PushError("Invalid Upgrade Level/PropertyName");
             GD.Print("Value:", value, " Upgrade Level: ", upgradeLevel, " PropertyName: ", internalPropName);
         }
+
+        return value;
+    }
+
+    static string GetCardText(string internalPropName)
+    {
+        var data = OpenPropertyFile();
+        string value = null;
+
+
 
         return value;
     }
