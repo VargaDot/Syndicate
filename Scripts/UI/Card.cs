@@ -4,38 +4,69 @@ using System;
 
 public partial class Card : Control
 {
-	void CardManager(int cardUI)
+    public override void _Ready()
+    {
+        LoadValues();
+    }
+    
+	void LoadValues()
 	{
-		if(cardUI <= 7)
-			_colorRect.Color = Globals.PropertyColors[cardUI];
-		else if(cardUI > 7 && cardUI <= 10)
+		
+	}
+
+	public void CardManager(bool isCardNeeded)
+	{
+		if(isCardNeeded)
 		{
-			//_cardSprite.Texture = Globals.PropertySprites[cardUI];
+			TextRelated();
+			CosmeticsRelated();
+
+			Show();
 		}
 		else
 		{
-			
+			Hide();
 		}
 	}
 
-	void DisplayTitle(string newTitle)
+	void TextRelated()
 	{
-		_cardTitle.Text = newTitle;
+		//Gets the property name
+		Globals.dataManager.DataRequester(_cardTitle, InternalCardName, 1);
+
+		//To change the text as we speak
+		for (byte i = 0; i < 5; i++)
+		{
+			Globals.dataManager.DataRequester(AllLabels[i].Text, InternalCardName, 6, i);
+		}
 	}
 
-	void DisplayValues()
+	void CosmeticsRelated()
 	{
-		rent.Text = _rent.ToString();
-		house.Text = _house.ToString();
-		house2.Text = _house2.ToString();
-		house3.Text = _house3.ToString();
-		house4.Text = _house4.ToString();
-		hotel.Text = _hotel.ToString();
-		mortgage.Text = _mortgage.ToString();
-		buildcost.Text = _buildcost.ToString();
+
 	}
 
-	public int _rent, _house, _house2, _house3, _house4, _hotel, _mortgage, _buildcost;
+	/// <summary>
+	/// Demands information for Card.cs
+	/// <list type = "number">
+    /// <item><description><para><em> Normal </em></para></description></item>
+	///	<item><description><para><em> Train </em></para></description></item>
+	/// <item><description><para><em> Utility </em></para></description></item>
+	/// <item><description><para><em> Chance </em></para></description></item>
+	/// <item><description><para><em> Community Chest </em></para></description></item>
+	/// <item><description><para><em> Police* </em></para></description></item>
+	/// <item><description><para><em> Parking* </em></para></description></item>
+	/// <item><description><para><em> Tax* </em></para></description></item>
+	/// </list>
+	/// * Not used currently
+	/// </summary>
+	/// <returns>
+	///	Card text? what else?
+	/// </returns>
+	public void GetPropertyInformation(string _internalcardName, int CardSpriteID)
+	{
+		InternalCardName = _internalcardName;
+	}
 
 	//Exportables
 	[ExportGroup("Card Asthetics")]
@@ -44,6 +75,19 @@ public partial class Card : Control
 	[Export] Label _cardTitle;
 
 	[ExportGroup("Card Labels")]
-	[Export] Label rent, house, house2, house3, house4, hotel, mortgage, buildcost;
+	[Export] static Label rent, house, house2, house3, house4, hotel, mortgage, buildcost;
+	Array<Label> AllLabels = new Array<Label>()
+	{
+		rent,
+		house,
+		house2,
+		house3,
+		house4,
+		hotel,
+		mortgage,
+		buildcost,
+	};
+	public string InternalCardName;
 	
+	[Signal] public delegate void GetInternalNameEventHandler();
 }

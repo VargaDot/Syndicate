@@ -1,6 +1,5 @@
 using Godot;
 using Godot.Collections;
-using System;
 
 //This is strictly for UI, player turns and visual stuff.
 public partial class Game : Node2D
@@ -11,10 +10,6 @@ public partial class Game : Node2D
 		LoadValues();
 		LoadBoard();
 	}
-	Registry registry;
-
-	Node2D Player1, Player2, Player3, Player4;
-	Array<Node2D> PlayerList = new Array<Node2D>();
 
 	//Loads and instantiates players into the game scene.
 	void LoadValues()
@@ -44,7 +39,7 @@ public partial class Game : Node2D
 			AddChild(PlayerList[3]);
 		}
 
-		for (int i = 0; i < PlayerList.Count; i++)
+		for (byte i = 0; i < PlayerList.Count; i++)
 		{
 			PlayerList[i].Name = Globals.PlayerUsernames[i];
 		}
@@ -53,10 +48,9 @@ public partial class Game : Node2D
 	//Starts the turn-based game
 	void LoadBoard()
 	{
-		registry = GetNode<Registry>("Registry");
 		EmitSignal("BoardLaunched", PlayerList.Count);
 
-		int x = GD.RandRange(0, PlayerList.Count - 1);
+		byte x = (byte)GD.RandRange(0, PlayerList.Count - 1);
 		PlayerList[x].GetNode<Player>("").RollDice();
 	}
 
@@ -66,7 +60,7 @@ public partial class Game : Node2D
 		//Quits the game
 		if(Input.IsActionPressed("Quit"))
 		{
-			GD.PushError("No Pause Menu has been made yet.");
+			GD.PushWarning("No Pause Menu has been made yet.");
 			GetTree().Quit();
 		}
 	}
@@ -82,8 +76,10 @@ public partial class Game : Node2D
 	}
 
 	public Node2D H1, H2, H3, H4;
+	Node2D Player1, Player2, Player3, Player4;
+	Array<Node2D> PlayerList = new Array<Node2D>();
 
 	[Export] Camera2D cam;
-
+	[Export] Registry registry;
 	[Signal] public delegate void BoardLaunchedEventHandler(int n);
 }

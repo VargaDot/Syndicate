@@ -52,6 +52,8 @@ I made a JSON file with every single bit of info thats needed for the properties
 i made the parser with datamanager.cs and even made specific options for each type of variable u can use, only thing im worrying about now is the optimisation
 since everytime i'm gonna have to open the JSON file and read this data, again i stress the question, what about the performance?
 
+- Just found out you can use bytes for checking stuff, less memory usage since you're using 8 bits instead of 32 bits to store data so uses less ram (atleast i think so)
+
 ## The tilemap
 I just thought of an amazing idea, instead of making the tilemap the actual "game scene" aka. when you step on tile it executes code, it should be just there for visuals sake
 nothing matters in the tilemap, its just there for convenience
