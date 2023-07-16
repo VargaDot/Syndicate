@@ -5,46 +5,50 @@ using System;
 public partial class DataManager : Node
 {
     /// <summary>
-    /// Utilises the internal name for a board tile and a designated ID for a function and another possible id for a specific function
+    /// Utilises the internal name for a property and a designated functionID and an optional ID for access to other functions
     /// <list type = "number">
-    /// <item><description><para><em> Name </em></para></description></item>
-    /// <item><description><para><em> Purchasing Price </em></para></description></item>
-    /// <item><description><para><em> Build Cost </em></para></description></item>
-    /// <item><description><para><em> Mortgage </em></para></description></item>
-    /// <item><description><para><em> Rent Values* </em></para></description></item>
-    /// <item><description><para><em> Card Text* </em></para></description></item>
+    /// <item><description><para><em> Purchasing Price* </em></para></description></item>
+    /// <item><description><para><em> Property Costs (Build costs & Mortgage) </em></para></description></item>
+    /// <item><description><para><em> Property Rent Values </em></para></description></item>
+    /// <item><description><para><em> Card Text </em></para></description></item>
+    /// <item><description><para><em> Property IDs </em></para></description></item>
     /// </list>
-    /// <strong>* Anything related to RentValues (in this case, functions 5 and 6) require an additional ID for their upgrade level (No house = 0, Hotel = 5), the default value is 0</strong>
+    /// <strong>Functions with a * do not require additional arguments, default is always 0</strong>
     /// </summary>
     /// <returns>
     /// A variant, to be converted manually through additional arguments.
     /// </returns>
     public void DataRequester(Variant request, string TileName, byte functionID, byte Arg = 0)
     {
-        switch (functionID)
+        if(data.ContainsKey(TileName))
         {
-            case(1):
-                request = GetPropertyName(TileName);
+            switch (functionID)
+            {
+                case(1):
+                    request = GetPropertyPrice(TileName);
+                    break;
+                case(2):
+                    request = GetPropertyCosts(TileName, Arg);
+                    break;
+                case(3):
+                    request = GetPropertyRent(TileName, Arg);
+                    break;
+                case(4):
+                    request = GetTextForCard(TileName, Arg);
+                    break;
+                case(5):
+                    request = GetAnyID(TileName, Arg);
+                    break;
+                default:
+                    GD.PushError("Something happened with the data requester, here are the input values");
+                    GD.Print("Tilename: ", TileName, " FunctionID: ", functionID, " Optional Argument: ", Arg, " Requested element: ", request);
                 break;
-            case(2):
-                request = GetPropertyPrice(TileName);
-                break;
-            case(3):
-                request = GetPropertyBuildcost(TileName);
-                break;
-            case(4):
-                request = GetPropertyMortgage(TileName);
-                break;
-            case(5):
-                request = GetPropertyRent(TileName, Arg);
-                break;
-            case(6):
-                request = GetTextForCard(TileName, Arg);
-                break;
-            default:
-                GD.PushError("Something happened with the data requester, here are the input values");
-                GD.Print("Tilename: ", TileName, " FunctionID: ", functionID, " Optional Argument: ", Arg, " Requested element: ", request);
-                break;
+            }
+        }
+        else
+        {
+            GD.PushError("Invalid Propname");
+            GD.Print("Property Name: ", TileName);
         }
     }
 
@@ -63,164 +67,160 @@ public partial class DataManager : Node
         //self explanatory no?
         return data;
     }
-
-    //Gets the property name string from the parsed .json
-    static string GetPropertyName(string internalPropName)
-    {
-        var data = OpenPropertyFile();
-        string propertyName = null;
-
-        if (data.ContainsKey(internalPropName))
-            return propertyName = (string)data[internalPropName]["ID"]["Name"];
-        else
-        {
-            GD.PushError("Invalid Propname");
-            GD.Print("Property Name: ", internalPropName, " Name: ", propertyName);
-        }
-
-        return propertyName;
-    }
+    static Dictionary<string, Dictionary<string, Dictionary<string, Variant>>> data = OpenPropertyFile();
 
     //Gets the property price from the parsed .json
-    static int GetPropertyPrice(string internalPropName)
+    static ushort GetPropertyPrice(string internalPropName)
     {
-        var data = OpenPropertyFile();
-        int value = 0;
-
-        if (data.ContainsKey(internalPropName))
-        {
-            value = (int)data[internalPropName]["Costs"]["PurchasePrice"];
-        }
-        else
-        {
-            GD.PushError("Invalid Propname");
-            GD.Print("Property Name: ", internalPropName, " Value: ", value);
-        }
-
-        return value;
-    }
-
-    //Gets the property build cost from the parsed .json
-    static int GetPropertyBuildcost(string internalPropName)
-    {
-        var data = OpenPropertyFile();
-        int value = 0;
-
-        if (data.ContainsKey(internalPropName))
-        {
-            value = (int)data[internalPropName]["Costs"]["BuildCost"];
-        }
-        else
-        {
-            GD.PushError("Invalid Propname");
-            GD.Print("Property Name: ", internalPropName, " Value: ", value);
-        }
-
-        return value;
-    }
-
-    //Gets the property mortgage from the parsed .json
-    static int GetPropertyMortgage(string internalPropName)
-    {
-        var data = OpenPropertyFile();
-        int value = 0;
-
-        if (data.ContainsKey(internalPropName))
-        {
-            value = (int)data[internalPropName]["Costs"]["Mortgage"];
-        }
-        else
-        {
-            GD.PushError("Invalid Propname");
-            GD.Print("Property Name: ", internalPropName, " Value: ", value);
-        }
+        //The reason why its a ushort, is because bytes have a max size of 255 and the price can reach 400 on some circumstances.
+        ushort value = 0;
+        value = (ushort)data[internalPropName]["Costs"]["PurchasePrice"];
 
         return value;
     }
     
-    //Gets the property rent values from the parsed .json
-    static int GetPropertyRent(string internalPropName, byte upgradeLevel)
+    //Gets house building costs and mortgage
+    static byte GetPropertyCosts(string internalPropName, byte ID)
     {
-        var data = OpenPropertyFile();
-        int value = 0;
+        byte value = 0;
+        switch (ID)
+        {
+            case(0):
+                value = (byte)data[internalPropName]["Costs"]["BuildCost"];
+                break;
+            case(1):
+                value = (byte)data[internalPropName]["Costs"]["Mortgage"];
+                break;
+            default:
+                GD.PushError("GetPropertyCosts Invalid ID");
+                GD.Print("Value: ", value, " ID: ", ID);
+                break;
+        }
+        
+        return value;
+    }
 
-        //Checks the upgrade level for the property and displays its correct value!
-        if (data.ContainsKey(internalPropName) && upgradeLevel == 0)
+    //Gets the property rent values from the parsed .json
+    static ushort GetPropertyRent(string internalPropName, byte upgradeLevel)
+    {
+        ushort value = 0;
+        switch (upgradeLevel)
         {
-            value = (int)data[internalPropName]["RentValues"]["NoBuildings"];
-        }
-        else if (data.ContainsKey(internalPropName) && upgradeLevel == 1)
-        {
-            value = (int)data[internalPropName]["RentValues"]["House"];
-        }
-        else if (data.ContainsKey(internalPropName) && upgradeLevel == 2)
-        {
-            value = (int)data[internalPropName]["RentValues"]["House2"];
-        }
-        else if (data.ContainsKey(internalPropName) && upgradeLevel == 3)
-        {
-            value = (int)data[internalPropName]["RentValues"]["House3"];
-        }
-        else if (data.ContainsKey(internalPropName) && upgradeLevel == 4)
-        {
-            value = (int)data[internalPropName]["RentValues"]["House4"];
-        }
-        else if (data.ContainsKey(internalPropName) && upgradeLevel == 5)
-        {
-            value = (int)data[internalPropName]["RentValues"]["Hotel"];
-        }
-        else
-        {
-            GD.PushError("Invalid Upgrade Level/PropertyName");
-            GD.Print("Value:", value, " Upgrade Level: ", upgradeLevel, " PropertyName: ", internalPropName);
+            case(0):
+                value = (ushort)data[internalPropName]["RentValues"]["NoBuildings"];
+                break;
+            case(1):
+                value = (ushort)data[internalPropName]["RentValues"]["House"];
+                break;
+            case(2):
+                value = (ushort)data[internalPropName]["RentValues"]["House2"];
+                break;
+            case(3):
+                value = (ushort)data[internalPropName]["RentValues"]["House3"];
+                break;
+            case(4):
+                value = (ushort)data[internalPropName]["RentValues"]["House4"];
+                break;
+            case(5):
+                value = (ushort)data[internalPropName]["RentValues"]["Hotel"];
+                break;
+            default:
+                GD.PushError("GetPropertyRent Invalid ID");
+                GD.Print("Value:", value, " Upgrade Level: ", upgradeLevel);
+            break;
         }
 
         return value;
     }
 
+    ///<summary>
+    ///Gets the property rent values and purchasing info in the form of text from the parsed .json
+    ///<list type = "number">
+    ///<item><description><para><em> Name </em></para></description></item>
+    ///<item><description><para><em> NoBuildings </em></para></description></item>
+    ///<item><description><para><em> House </em></para></description></item>
+    ///<item><description><para><em> House2 </em></para></description></item>
+    ///<item><description><para><em> House3 </em></para></description></item>
+    ///<item><description><para><em> House4 </em></para></description></item>
+    ///<item><description><para><em> Hotel </em></para></description></item>
+    ///<item><description><para><em> Mortgage </em></para></description></item>
+    ///<item><description><para><em> BuildCost </em></para></description></item>
+    ///<item><description><para><em> PurchasePrice </em></para></description></item>
+    ///</list>
+    ///</summary>
+    ///<returns> String </returns>
     static string GetTextForCard(string internalPropName, byte ID)
     {
-        var data = OpenPropertyFile();
         string value = null;
-
-        if (data.ContainsKey(internalPropName) && ID == 0)
+        switch (ID)
         {
-            value = (string)data[internalPropName]["RentValues"]["NoBuildings"];
-        }
-        else if (data.ContainsKey(internalPropName) && ID == 1)
-        {
-            value = (string)data[internalPropName]["RentValues"]["House"];
-        }
-        else if (data.ContainsKey(internalPropName) && ID == 2)
-        {
-            value = (string)data[internalPropName]["RentValues"]["House2"];
-        }
-        else if (data.ContainsKey(internalPropName) && ID == 3)
-        {
-            value = (string)data[internalPropName]["RentValues"]["House3"];
-        }
-        else if (data.ContainsKey(internalPropName) && ID == 4)
-        {
-            value = (string)data[internalPropName]["RentValues"]["House4"];
-        }
-        else if (data.ContainsKey(internalPropName) && ID == 5)
-        {
-            value = (string)data[internalPropName]["RentValues"]["Hotel"];
-        }
-        else if (data.ContainsKey(internalPropName) && ID == 6)
-        {
-            value = (string)data[internalPropName]["RentValues"]["Mortgage"];
-        }
-        else if (data.ContainsKey(internalPropName) && ID == 7)
-        {
-            value = (string)data[internalPropName]["RentValues"]["BuildCost"];
-        }
-        else
-        {
-            GD.PushError("Invalid ID/PropertyName");
-            GD.Print("Value:", value, " ID: ", ID, " PropertyName: ", internalPropName);
+            case(1):
+                value = (string)data[internalPropName]["ID"]["Name"];
+                break;
+            case(2):
+                value = (string)data[internalPropName]["RentValues"]["NoBuildings"];
+                break;
+            case(3):
+                value = (string)data[internalPropName]["RentValues"]["House"];
+                break;
+            case(4):   
+                value = (string)data[internalPropName]["RentValues"]["House2"];
+                break;
+            case(5):
+                value = (string)data[internalPropName]["RentValues"]["House3"];
+                break;
+            case(6):
+                value = (string)data[internalPropName]["RentValues"]["House4"];
+                break;
+            case(7):
+                value = (string)data[internalPropName]["RentValues"]["Hotel"];
+                break;
+            case(8):
+                value = (string)data[internalPropName]["Costs"]["Mortgage"];
+                break;
+            case(9):
+                value = (string)data[internalPropName]["Costs"]["BuildCost"];
+                break;
+            case(10):
+                value = (string)data[internalPropName]["Costs"]["PurchasePrice"];
+                break;
+            default:
+                GD.PushError("GetTextForCard Invalid ID");
+                GD.Print("Value: ", value, " ID: ", ID);
+            break;
         }
 
         return value;
     }
+
+    ///<summary>
+    ///Gets CardID or BoardID from the parsed .JSON
+    ///<list type = "number">
+    ///<item><description><para><em> CardID </em></para></description></item>
+    ///<item><description><para><em> BoardID </em></para></description></item>
+    ///</list>
+    ///</summary>
+    ///<returns>
+    ///Byte
+    ///</returns>
+    static byte GetAnyID(string internalPropName, byte ID)
+    {
+        byte value = 0;
+        switch (ID)
+        {
+            case(1):
+                value = (byte)data[internalPropName]["ID"]["CardID"];
+                break;
+            case(2):
+                value = (byte)data[internalPropName]["ID"]["BoardID"];
+                break;
+            default:
+                GD.PushError("GetAnyID Invalid ID");
+                GD.Print("Value: ", value, " ID: ", ID);
+            break;
+        }
+
+        return value;
+    }
+
 }

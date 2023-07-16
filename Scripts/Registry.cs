@@ -21,7 +21,12 @@ public partial class Registry : Node2D
 
     public override void _Ready()
     {
-        base._Ready();
+        LoadValues();
+    }
+
+    void LoadValues()
+    {
+
     }
 
     /*
@@ -35,5 +40,4 @@ public partial class Registry : Node2D
     };
     */
 
-    
 }
