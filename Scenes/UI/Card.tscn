@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://Assets/Fonts/Themes/Card.tres" id="4_5x8h4"]
 [ext_resource type="FontFile" uid="uid://cw3bbxedp41ds" path="res://Assets/Fonts/Tangerine-Regular.ttf" id="4_fvb35"]
 
-[node name="Card" type="Control" node_paths=PackedStringArray("_colorRect", "_cardSprite", "_cardTitle", "rent", "house", "house2", "house3", "house4", "hotel", "mortgage", "buildcost")]
+[node name="Card" type="Control" node_paths=PackedStringArray("_colorRect", "_cardSprite", "AllLabels")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,15 +15,7 @@ grow_vertical = 2
 script = ExtResource("1_hp21u")
 _colorRect = NodePath("CardSprite/CardColor")
 _cardSprite = NodePath("CardSprite")
-_cardTitle = NodePath("CardSprite/Title")
-rent = NodePath("CardSprite/AllVals/Rent")
-house = NodePath("CardSprite/AllVals/House")
-house2 = NodePath("CardSprite/AllVals/House2")
-house3 = NodePath("CardSprite/AllVals/House3")
-house4 = NodePath("CardSprite/AllVals/House4")
-hotel = NodePath("CardSprite/AllVals/Hotel")
-mortgage = NodePath("CardSprite/AllVals/Mortgage")
-buildcost = NodePath("CardSprite/AllVals/Build")
+AllLabels = [NodePath("CardSprite/Title"), NodePath("CardSprite/AllVals/Rent"), NodePath("CardSprite/AllVals/House"), NodePath("CardSprite/AllVals/House2"), NodePath("CardSprite/AllVals/House3"), NodePath("CardSprite/AllVals/House4"), NodePath("CardSprite/AllVals/Hotel"), NodePath("CardSprite/AllVals/Mortgage"), NodePath("CardSprite/AllVals/Build"), NodePath("CardSprite/Price")]
 
 [node name="CardSprite" type="Sprite2D" parent="."]
 position = Vector2(1616, 386)
@@ -187,5 +179,24 @@ theme = ExtResource("4_5x8h4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "99999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PurchaseDesc" type="Label" parent="CardSprite"]
+offset_left = -113.0
+offset_top = 267.0
+offset_right = 4.0
+offset_bottom = 306.0
+theme = ExtResource("4_5x8h4")
+text = "Price: "
+
+[node name="Price" type="Label" parent="CardSprite"]
+offset_left = -3.0
+offset_top = 262.0
+offset_right = 154.0
+offset_bottom = 310.0
+theme = ExtResource("4_5x8h4")
+theme_override_font_sizes/font_size = 31
+text = "999"
 horizontal_alignment = 1
 vertical_alignment = 1

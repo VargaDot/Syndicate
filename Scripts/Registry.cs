@@ -26,7 +26,7 @@ public partial class Registry : Node2D
 
     void LoadValues()
     {
-
+        //Json.
     }
 
     /*

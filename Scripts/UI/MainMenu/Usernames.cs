@@ -9,7 +9,7 @@ public partial class Usernames : HFlowContainer
 		Enter1 = false;
 		Enter2 = false;
 
-		for (int i = 0; i < 4; i++)
+		for (byte i = 0; i < 4; i++)
 		{
 			InputFields [i] = (LineEdit)GetChild(i);
 		}
@@ -18,7 +18,7 @@ public partial class Usernames : HFlowContainer
 	///<Summary>
 	///Checks UI Panel interaction and confirms/denies/reacts to them.
 	///</Summary>
-	public void UsernameManager(int x)
+	public void UsernameManager(byte x)
 	{
 		switch (x)
 		{

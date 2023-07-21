@@ -174,7 +174,7 @@ public partial class ComposerLib : Node
     void DeferredGotoScene(string scene, Dictionary<string,Variant> args = null)
     {
         bool _isAnimated = args.ContainsKey("IsAnimated") ? (bool)args["IsAnimated"] : false;
-        ANIMATIONS _animation = args.ContainsKey("Animation") ? (ANIMATIONS)((int)args["Animation"]) : ANIMATIONS.NONE;
+        ANIMATIONS _animation = args.ContainsKey("Animation") ? (ANIMATIONS)((byte)args["Animation"]) : ANIMATIONS.NONE;
 
         if (_isAnimated && _animation != ANIMATIONS.NONE)
         {

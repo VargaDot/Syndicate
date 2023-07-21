@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using DataManager;
 using System;
 
 public partial class Card : Control
@@ -14,40 +15,8 @@ public partial class Card : Control
 		
 	}
 
-	public void CardManager(bool isCardNeeded)
-	{
-		if(isCardNeeded)
-		{
-			TextRelated();
-			CosmeticsRelated();
-
-			Show();
-		}
-		else
-		{
-			Hide();
-		}
-	}
-
-	void TextRelated()
-	{
-		//Gets the property name
-		Globals.dataManager.DataRequester(_cardTitle, InternalCardName, 1);
-
-		//To change the text as we speak
-		for (byte i = 0; i < 5; i++)
-		{
-			Globals.dataManager.DataRequester(AllLabels[i].Text, InternalCardName, 6, i);
-		}
-	}
-
-	void CosmeticsRelated()
-	{
-
-	}
-
 	/// <summary>
-	/// Demands information for Card.cs
+	/// Demands information for Card.cs, please count from 0 on this specific one
 	/// <list type = "number">
     /// <item><description><para><em> Normal </em></para></description></item>
 	///	<item><description><para><em> Train </em></para></description></item>
@@ -63,31 +32,52 @@ public partial class Card : Control
 	/// <returns>
 	///	Card text? what else?
 	/// </returns>
-	public void GetPropertyInformation(string _internalcardName, int CardSpriteID)
+	public void CardManager(bool isCardNeeded, string internalPropName, byte cardID)
 	{
-		InternalCardName = _internalcardName;
+		if(isCardNeeded)
+		{
+			TextRelated(internalPropName);
+			CosmeticsRelated(cardID);
+
+			Show();
+		}
+		else
+		{
+			Hide();
+		}
 	}
 
-	//Exportables
-	[ExportGroup("Card Asthetics")]
+	void TextRelated(string InternalCardName)
+	{
+		//Changes all of the text inside the card
+		for (byte i = 1; i < AllLabels.Count; i++)
+		{
+			AllLabels[i].Text = DataLoader.GetTextForCard(InternalCardName, i);
+		}
+	}
+
+	enum CardIDs
+	{
+		NORMAL,
+		TRAIN,
+		UTILITY,
+		CHANCE,
+		COMMUNITYCHEST,
+		POLICE,
+		PARKING,
+		TAX,
+	}
+
+	void CosmeticsRelated(byte internalCardID)
+	{
+		if(!Globals.PropertyColors.ContainsKey(internalCardID))
+			GD.PushError("Invalid CardColor ID");
+		
+		_colorRect.Color = Globals.PropertyColors[internalCardID];
+	}
+
 	[Export] ColorRect _colorRect;
 	[Export] Sprite2D _cardSprite;
-	[Export] Label _cardTitle;
 
-	[ExportGroup("Card Labels")]
-	[Export] static Label rent, house, house2, house3, house4, hotel, mortgage, buildcost;
-	Array<Label> AllLabels = new Array<Label>()
-	{
-		rent,
-		house,
-		house2,
-		house3,
-		house4,
-		hotel,
-		mortgage,
-		buildcost,
-	};
-	public string InternalCardName;
-	
-	[Signal] public delegate void GetInternalNameEventHandler();
+	[Export] Array<Label> AllLabels = new Array<Label>();
 }

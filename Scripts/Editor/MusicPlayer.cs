@@ -10,17 +10,15 @@ public partial class MusicPlayer : AudioStreamPlayer
 		MusicSelector();
 	}
 
-	int previousSong;
+	byte previousSong;
 	void MusicSelector()
 	{
-		int x = GD.RandRange(0, MusicList.Count);
+		byte x = (byte)GD.RandRange(0, MusicList.Count);
 		if(x == previousSong)
-		{
-			for (int i = 0; x != previousSong; i++)
+			for (byte i = 0; x != previousSong; i++)
 			{
-				x = GD.RandRange(0, MusicList.Count);
+				x = (byte)GD.RandRange(0, MusicList.Count);
 			}
-		}
 
 		Stream = MusicList[x];
 		previousSong = x;

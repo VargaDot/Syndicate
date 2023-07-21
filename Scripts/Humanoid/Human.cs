@@ -21,11 +21,11 @@ public partial class Human : Node2D
 		BANKRUPT,
 	}
 
-	int previousDice, DoubleTimes;
+	byte previousDice, DoubleTimes;
 	bool inPrison;
 	public void RollDice()
 	{
-		int x = GD.RandRange(2,12);
+		byte x = (byte)GD.RandRange(2,12);
 		
 		if(!inPrison)
 		{
