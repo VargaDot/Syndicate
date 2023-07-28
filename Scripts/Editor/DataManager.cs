@@ -217,17 +217,21 @@ namespace DataManager
     {
         //Registry.JSON's path
         const string REGISTRY_DATA = "Data/Registry.JSON";
-        static Dictionary<byte, Dictionary<byte,byte>> OpenRegistry()
+        ///<summary>
+        ///The main dictionary (openregistry) has two dictionaries stored, first value is playerID, and then an array with all the properties while the Tvalue dictionary, stores its upgrade level
+        /// 
+        static Dictionary<Dictionary<byte, Array<byte>>, Dictionary<Array<byte>,bool>> OpenRegistry()
         {
             using var file = FileAccess.OpenCompressed(REGISTRY_DATA, FileAccess.ModeFlags.Read, FileAccess.CompressionMode.Fastlz);
 
-            Dictionary<byte, Dictionary<byte,byte>> data = new Dictionary<byte, Dictionary<byte, byte>>();
-            data = (Dictionary<byte, Dictionary<byte,byte>>)Json.ParseString(file.GetAsText());
+            Dictionary<Dictionary<byte, Array<byte>>, Dictionary<Array<byte>,bool>> data = new ();
+            data = (Dictionary<Dictionary<byte, Array<byte>>, Dictionary<Array<byte>,bool>>)Json.ParseString(file.GetAsText());
 
             return data;
         }
-        static Dictionary<byte, Dictionary<byte,byte>> data = OpenRegistry();
-
+        static Dictionary<Dictionary<byte, Array<byte>>, Dictionary<Array<byte>,bool>> data = OpenRegistry();
+        
+        /*
         public static bool CheckOwnership(byte AgentID, byte BoardID)
         {
             bool status = false;
@@ -241,7 +245,142 @@ namespace DataManager
 
             return status; 
         }
-
+        */
         
+    }
+
+    //For the tree data structure!
+    public class TheRegistry
+    {
+        ///<summary> root is the player tree node, from here we can access the entire tree structure </summary>
+        Dictionary<byte, Player> root = new(); 
+
+        public void AddPlayers(byte numberOfPlayers)
+        {
+            for (byte i = 0; i < numberOfPlayers; i++)
+            {
+                root[i] = new Player(i);
+            }
+        }
+
+        public void RemovePlayer(byte playerID)
+        {
+            root.Remove(playerID);
+        }
+
+        public void AddProperty(byte PlayerID, byte PropertyID, byte upgradeLevel = 1, bool isMortgaged = false)
+        {
+            if(!root.ContainsKey(PlayerID))
+                GD.PushError("Player ID is not valid");
+
+            Player player = root[PlayerID];
+
+            player.OwnedProperties[PropertyID] = new Property(PropertyID, upgradeLevel, isMortgaged);
+        }
+
+        public void RemoveProperty(byte playerID, byte PropertyID)
+        {
+            Player player = root[playerID];
+
+            if(!root.ContainsKey(playerID))
+                GD.PushError("Invalid PlayerID");
+
+            if(!player.OwnedProperties.ContainsKey(PropertyID))
+                GD.PushError("Invalid PropertyID");
+
+            root[playerID].OwnedProperties.Remove(PropertyID);
+        }
+
+        public void UpdatePropertyLevel(byte playerID, byte PropertyID, byte newUpgradeLevel)
+        {
+            Player player = root[playerID];
+            Property property = player.OwnedProperties[PropertyID];
+
+            if(!root.ContainsKey(playerID))
+                GD.PushError("Invalid PlayerID");
+
+            if(!player.OwnedProperties.ContainsKey(PropertyID))
+                GD.PushError("Invalid PropertyID");
+
+            property.PropertyAttributes.Level = newUpgradeLevel;
+        }
+
+        public void UpdateMortgageStatus(byte playerID, byte PropertyID, bool newMortgageStatus)
+        {
+            Player player = root[playerID];
+            Property property = player.OwnedProperties[PropertyID];
+
+            if(!root.ContainsKey(playerID))
+                GD.PushError("Invalid PlayerID");
+
+            if(!player.OwnedProperties.ContainsKey(PropertyID))
+                GD.PushError("Invalid PropertyID");
+
+            property.PropertyAttributes.IsMortgaged = newMortgageStatus;
+        }
+
+        public Array<byte> GetPlayerOwnedProperties(byte playerID)
+        {
+            if(!root.ContainsKey(playerID))
+                GD.PushError("Invalid PlayerID");
+
+            Array<byte> data = (Array<byte>)root[playerID].OwnedProperties.Keys;
+            return data;
+        }
+
+        public byte GetPlayerRegistrySize(byte playerID)
+        {
+            byte data = 0;
+
+            if(!root.ContainsKey(playerID))
+                GD.PushError("Invalid PlayerID");
+
+            data = (byte)root[playerID].OwnedProperties.Keys.Count;
+
+            return data;
+        }
+
+        public byte SearchforOwner(byte PropertyID)
+        {
+            byte owner = 0;
+
+            return owner;
+        }
+    }
+
+    class Player
+    {
+        public byte ID {get; set;}
+        public Dictionary<byte, Property> OwnedProperties {get; set;}
+
+        public Player(byte id)
+        {
+            ID = id;
+            OwnedProperties = new ();
+        }
+    }
+
+    class Property
+    {
+        public byte ID {get; set;}
+        public Attributes PropertyAttributes {get; set;}
+
+        public Property(byte id, byte upgradeLevel, bool isMortgaged = false)
+        {
+            ID = id;
+            PropertyAttributes = new (upgradeLevel, isMortgaged);
+        }
+    }
+
+    class Attributes
+    {
+        public byte Level {get; set;}
+        public bool IsMortgaged {get; set;}
+
+        public Attributes(byte level, bool mortgageCondition)
+        {
+            Level = level;
+            IsMortgaged = mortgageCondition;
+        }
     }
 }
