@@ -212,44 +212,7 @@ namespace DataManager
         }
     }
 
-    //<summary> Class for saving data to Registry.JSON </summary>
-    public class DataSaver
-    {
-        //Registry.JSON's path
-        const string REGISTRY_DATA = "Data/Registry.JSON";
-        ///<summary>
-        ///The main dictionary (openregistry) has two dictionaries stored, first value is playerID, and then an array with all the properties while the Tvalue dictionary, stores its upgrade level
-        /// 
-        static Dictionary<Dictionary<byte, Array<byte>>, Dictionary<Array<byte>,bool>> OpenRegistry()
-        {
-            using var file = FileAccess.OpenCompressed(REGISTRY_DATA, FileAccess.ModeFlags.Read, FileAccess.CompressionMode.Fastlz);
-
-            Dictionary<Dictionary<byte, Array<byte>>, Dictionary<Array<byte>,bool>> data = new ();
-            data = (Dictionary<Dictionary<byte, Array<byte>>, Dictionary<Array<byte>,bool>>)Json.ParseString(file.GetAsText());
-
-            return data;
-        }
-        static Dictionary<Dictionary<byte, Array<byte>>, Dictionary<Array<byte>,bool>> data = OpenRegistry();
-        
-        /*
-        public static bool CheckOwnership(byte AgentID, byte BoardID)
-        {
-            bool status = false;
-            if(!data.ContainsKey(AgentID) || !data[AgentID].ContainsKey(BoardID))
-                GD.PushError("Invalid AgentID/BoardID");
-
-            if (true)
-            {
-                
-            }
-
-            return status; 
-        }
-        */
-        
-    }
-
-    //For the tree data structure!
+    ///<summary> The data saver, sorter and search engine for the board's registry </summary>
     public class TheRegistry
     {
         ///<summary> root is the player tree node, from here we can access the entire tree structure </summary>
@@ -257,7 +220,7 @@ namespace DataManager
 
         public void AddPlayers(byte numberOfPlayers)
         {
-            for (byte i = 0; i < numberOfPlayers; i++)
+            for (byte i = 1; i < numberOfPlayers; i++)
             {
                 root[i] = new Player(i);
             }
@@ -319,6 +282,8 @@ namespace DataManager
             property.PropertyAttributes.IsMortgaged = newMortgageStatus;
         }
 
+        ///<summary> Returns an array with a player's owned properties </summary>
+        ///<returns> Array<byte> </returns>
         public Array<byte> GetPlayerOwnedProperties(byte playerID)
         {
             if(!root.ContainsKey(playerID))
@@ -328,6 +293,26 @@ namespace DataManager
             return data;
         }
 
+        ///<summary> Returns the ID of the property owner </summary>
+        ///<returns> byte </returns>
+        public byte FindPropertyOwner(byte propertyID)
+        {
+            byte owner = 0;
+
+            foreach (byte playerID in root.Keys)
+            {
+                Player player = root[playerID];
+
+                if (player.OwnedProperties.ContainsKey(propertyID))
+                    owner = playerID;
+                else
+                    GD.Print("No owner found!");
+            }
+
+            return owner;
+        }
+
+        //Just for funsies
         public byte GetPlayerRegistrySize(byte playerID)
         {
             byte data = 0;
@@ -339,15 +324,11 @@ namespace DataManager
 
             return data;
         }
-
-        public byte SearchforOwner(byte PropertyID)
-        {
-            byte owner = 0;
-
-            return owner;
-        }
     }
 
+    // This entire part down here is for the tree data structure!
+
+    ///<summary> The player class stores an ID and the property class (OwnedProperties) </summary>
     class Player
     {
         public byte ID {get; set;}
@@ -360,6 +341,7 @@ namespace DataManager
         }
     }
 
+    ///<summary> The property class stores a BoardID and an attributes class (PropertyAttributes) </summary>
     class Property
     {
         public byte ID {get; set;}
@@ -372,6 +354,7 @@ namespace DataManager
         }
     }
 
+    ///<summary> The attributes class stores the level of a property (house, 2 houses ext) and a boolean that states whether its mortgaged or not </summary>
     class Attributes
     {
         public byte Level {get; set;}

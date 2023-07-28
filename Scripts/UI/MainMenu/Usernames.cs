@@ -1,14 +1,16 @@
 using Godot;
 using Godot.Collections;
-using System;
 
 public partial class Usernames : HFlowContainer
 {
+    public override void _EnterTree()
+    {
+        Enter1 = false;
+		Enter2 = false;
+    }
+	
 	public override void _Ready()
 	{
-		Enter1 = false;
-		Enter2 = false;
-
 		for (byte i = 0; i < 4; i++)
 		{
 			InputFields [i] = (LineEdit)GetChild(i);
