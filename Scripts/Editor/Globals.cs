@@ -4,7 +4,7 @@ using Godot.Collections;
 public partial class Globals : Node
 {
 	public static ComposerLib composer;
-	public static Array<string> PlayerUsernames = new Array<string>();
+	public static Array<string> PlayerUsernames = new();
 
 	///<summary>
 	///Dictionary containing propertyIDs and their assigned color
@@ -12,7 +12,7 @@ public partial class Globals : Node
 	///<returns>
 	///Integers and Colors
 	///</returns>
-	public static Dictionary<byte,Color> PropertyColors = new Dictionary<byte, Color>()
+	public static Dictionary<byte,Color> PropertyColors = new()
 	{
 		{0, Colors.Brown},
 		{1, Colors.Cyan},
@@ -30,7 +30,7 @@ public partial class Globals : Node
 	///<returns>
 	///Integers and strings
 	///</returns>
-	public static Dictionary<byte,Texture2D> PropertySprites = new Dictionary<byte, Texture2D>()
+	public static Dictionary<byte,Texture2D> PropertySprites = new()
 	{
 		/*
 		{8, },

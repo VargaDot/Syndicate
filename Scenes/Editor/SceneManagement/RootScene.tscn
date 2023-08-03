@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtngk8msr28f3"]
+
+[ext_resource type="Script" path="res://Scripts/Editor/Scene Management/RootScript.cs" id="1_vj53n"]
+
+[node name="RootScene" type="Node"]
+script = ExtResource("1_vj53n")

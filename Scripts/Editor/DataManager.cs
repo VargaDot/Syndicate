@@ -1,6 +1,6 @@
 using System;
 using Godot;
-using Godot.Collections;
+using System.Collections.Generic;
 
 ///Namespace for loading and saving data, if you're seeing this then intellisense wise, everything's fine
 namespace DataManager
@@ -11,31 +11,37 @@ namespace DataManager
         //Properties.JSON path
         const string PROPERTY_FILE = "Data/Properties.JSON";
         //Defining this function
-        static Dictionary<string,Dictionary<string,Dictionary<string, Variant>>> OpenPropertyFile()
+        static Dictionary<string, Dictionary<string, Dictionary<string, object>>> OpenPropertyFile()
         {
             //Opens the file
             using var file = FileAccess.Open(PROPERTY_FILE, FileAccess.ModeFlags.Read);
-            
+
             //Defines dictionary data and parses the json file
-            Dictionary<string,Dictionary<string,Dictionary<string, Variant>>> data = new Dictionary<string,Dictionary<string,Dictionary<string, Variant>>>();
-            data = (Dictionary<string,Dictionary<string,Dictionary<string, Variant>>>)Json.ParseString(file.GetAsText());
-            
+            object parsedData = Json.ParseString(file.GetAsText());
+            if (parsedData is not Dictionary<string, Dictionary<string, Dictionary<string, object>>> data)
+            {
+                GD.Print("Failed to parse JSON data.");
+                return new Dictionary<string, Dictionary<string, Dictionary<string, object>>>();
+            }
+
             //self explanatory no?
             return data;
-        } 
-        static Dictionary<string, Dictionary<string, Dictionary<string, Variant>>> data = OpenPropertyFile();
+        }
+        private static Dictionary<string, Dictionary<string, Dictionary<string, object>>> data = OpenPropertyFile();
 
         ///<summary> Gets the property's price </summary>
         ///<returns> ushort </returns>
         public static ushort GetPropertyPrice(string internalPropName)
         {
+            ushort value = 0;
             if(!data.ContainsKey(internalPropName))
+            {
                 GD.PushError("Invalid internal property name");
+                return value;
+            }
             
             //The reason why its a ushort, is because bytes have a max size of 255 and the price can reach 400 on some circumstances.
-            ushort value = 0;
             value = (ushort)data[internalPropName]["Costs"]["PurchasePrice"];
-
             return value;
         }
         
@@ -216,7 +222,7 @@ namespace DataManager
     public class TheRegistry
     {
         ///<summary> root is the player tree node, from here we can access the entire tree structure </summary>
-        Dictionary<byte, Player> root = new(); 
+        private Dictionary<byte, Player> root = new();
 
         public void AddPlayers(byte numberOfPlayers)
         {
@@ -284,12 +290,12 @@ namespace DataManager
 
         ///<summary> Returns an array with a player's owned properties </summary>
         ///<returns> Array<byte> </returns>
-        public Array<byte> GetPlayerOwnedProperties(byte playerID)
+        public byte[] GetPlayerOwnedProperties(byte playerID)
         {
             if(!root.ContainsKey(playerID))
                 GD.PushError("Invalid PlayerID");
 
-            Array<byte> data = (Array<byte>)root[playerID].OwnedProperties.Keys;
+            byte[] data = new byte[root[playerID].OwnedProperties.Count];
             return data;
         }
 
@@ -316,12 +322,13 @@ namespace DataManager
         public byte GetPlayerRegistrySize(byte playerID)
         {
             byte data = 0;
-
             if(!root.ContainsKey(playerID))
+            {
                 GD.PushError("Invalid PlayerID");
+                return data;
+            }
 
             data = (byte)root[playerID].OwnedProperties.Keys.Count;
-
             return data;
         }
     }

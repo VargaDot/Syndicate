@@ -6,14 +6,14 @@ using System;
 ///</Summary>
 public partial class MainMenu : Control
 {
-	public override void _Ready()
+	public override async void _Ready()
 	{
-		LoadValues();
+        LoadValues();
 	}
 
-	void LoadValues()
+    void LoadValues()
 	{
-		
+		Globals.composer = GetNode<ComposerLib>("Composer");
 	}
 
 	public override void _Process(double delta)
@@ -45,11 +45,8 @@ public partial class MainMenu : Control
 
 	public void OnPlayPressed()
 	{
-		Globals.composer.GotoScene("Game", new Godot.Collections.Dictionary<string, Variant>()
-		{
-			{"IsAnimated",true},
-			{"Animation",1}
-		});
+		GD.Print(Globals.composer);
+		Globals.composer.AddScene("Game", new Godot.Collections.Dictionary<string, Variant>());
 	}
 
 	[Export] public Panel SingleplayerPanel;
