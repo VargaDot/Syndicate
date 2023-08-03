@@ -87,7 +87,7 @@ private Dictionary<string,bool> currentScenes = new(){
     };
 
     private Dictionary<string,Dictionary<string,Variant>> settingsPresets = new(){
-        {"preset1",new(){{"loading_screen","Screen1"}}}
+
     };
 
     private string loadingScreensDefaultPath = "CanvasScene/";

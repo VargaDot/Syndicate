@@ -6,16 +6,6 @@ using System;
 ///</Summary>
 public partial class MainMenu : Control
 {
-	public override async void _Ready()
-	{
-        LoadValues();
-	}
-
-    void LoadValues()
-	{
-		Globals.composer = GetNode<ComposerLib>("Composer");
-	}
-
 	public override void _Process(double delta)
 	{
 		//Quitting always works
@@ -45,7 +35,6 @@ public partial class MainMenu : Control
 
 	public void OnPlayPressed()
 	{
-		GD.Print(Globals.composer);
 		Globals.composer.AddScene("Game", new Godot.Collections.Dictionary<string, Variant>());
 	}
 
