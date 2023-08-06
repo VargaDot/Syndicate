@@ -1,6 +1,7 @@
-using System;
-using Godot;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using Godot;
 
 ///Namespace for loading and saving data, if you're seeing this then intellisense wise, everything's fine
 namespace DataManager
@@ -9,39 +10,43 @@ namespace DataManager
     public class DataLoader
     {
         //Properties.JSON path
-        const string PROPERTY_FILE = "Data/Properties.JSON";
-        //Defining this function
-        static Dictionary<string, Dictionary<string, Dictionary<string, object>>> OpenPropertyFile()
+        readonly static string PROPERTY_FILE = File.ReadAllText("Data/Properties.JSON");
+
+        // This whole portion here is just defining what and how to read the JSON file's structures
+        private static readonly Dictionary<string, Dictionary<string, object>> IDdata = OpenPropertyID();
+        static Dictionary<string, Dictionary<string, object>> OpenPropertyID()
         {
-            //Opens the file
-            using var file = FileAccess.Open(PROPERTY_FILE, FileAccess.ModeFlags.Read);
-
-            //Defines dictionary data and parses the json file
-            object parsedData = Json.ParseString(file.GetAsText());
-            if (parsedData is not Dictionary<string, Dictionary<string, Dictionary<string, object>>> data)
-            {
-                GD.Print("Failed to parse JSON data.");
-                return new Dictionary<string, Dictionary<string, Dictionary<string, object>>>();
-            }
-
-            //self explanatory no?
+            Dictionary<string, Dictionary<string, object>> data = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, object>>>(PROPERTY_FILE);
             return data;
         }
-        private static Dictionary<string, Dictionary<string, Dictionary<string, object>>> data = OpenPropertyFile();
+
+        private static readonly Dictionary<string, Dictionary<string, Dictionary<string, byte>>> CostData = OpenPropertyCosts();
+        static Dictionary<string, Dictionary<string, Dictionary<string, byte>>> OpenPropertyCosts()
+        {
+            Dictionary<string, Dictionary<string, Dictionary<string, byte>>> data = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, byte>>>>(PROPERTY_FILE);
+            return data;
+        }
+
+        private static readonly Dictionary<string, byte[]> RentData = OpenPropertyRent();
+        static Dictionary<string, byte[]> OpenPropertyRent()
+        {
+            Dictionary<string, byte[]> data = JsonSerializer.Deserialize<Dictionary<string, byte[]>>(PROPERTY_FILE); 
+            return data;
+        }
 
         ///<summary> Gets the property's price </summary>
         ///<returns> ushort </returns>
         public static ushort GetPropertyPrice(string internalPropName)
         {
             ushort value = 0;
-            if(!data.ContainsKey(internalPropName))
+            if(!IDdata.ContainsKey(internalPropName))
             {
                 GD.PushError("Invalid internal property name");
                 return value;
             }
             
             //The reason why its a ushort, is because bytes have a max size of 255 and the price can reach 400 on some circumstances.
-            value = (ushort)data[internalPropName]["Costs"]["PurchasePrice"];
+            value = CostData[internalPropName]["Costs"]["PurchasePrice"];
             return value;
         }
         
@@ -56,16 +61,16 @@ namespace DataManager
         public static byte GetPropertyCosts(string internalPropName, byte ID)
         {
             byte value = 0;
-            if(!data.ContainsKey(internalPropName))
+            if(!CostData.ContainsKey(internalPropName))
                 GD.PushError("Invalid internal property name");
 
             switch (ID)
             {
                 case(1):
-                    value = (byte)data[internalPropName]["Costs"]["BuildCost"];
+                    value = CostData[internalPropName]["Costs"]["BuildCost"];
                     break;
                 case(2):
-                    value = (byte)data[internalPropName]["Costs"]["Mortgage"];
+                    value = CostData[internalPropName]["Costs"]["Mortgage"];
                     break;
                 default:
                     GD.PushError("GetPropertyCosts Invalid ID");
@@ -77,7 +82,7 @@ namespace DataManager
         }
 
         ///<summary>
-        ///Gets the property rent values and purchasing info in the form of a numerical value from the parsed .json
+        ///Gets the property rent values and purchasing info in the form of a numerical value from the parsed .json, Upgrade levels start from 0
         ///<list type = "number">
         ///<item><description><para><em> NoBuildings </em></para></description></item>
         ///<item><description><para><em> House </em></para></description></item>
@@ -91,35 +96,13 @@ namespace DataManager
         public static ushort GetPropertyRent(string internalPropName, byte upgradeLevel)
         {
             ushort value = 0;
-            if(!data.ContainsKey(internalPropName))
-                GD.PushError("Invalid internal property name");
-
-            switch (upgradeLevel)
+            if(!RentData.ContainsKey(internalPropName) || upgradeLevel > 5)
             {
-                case(1):
-                    value = (ushort)data[internalPropName]["RentValues"]["NoBuildings"];
-                    break;
-                case(2):
-                    value = (ushort)data[internalPropName]["RentValues"]["House"];
-                    break;
-                case(3):
-                    value = (ushort)data[internalPropName]["RentValues"]["House2"];
-                    break;
-                case(4):
-                    value = (ushort)data[internalPropName]["RentValues"]["House3"];
-                    break;
-                case(5):
-                    value = (ushort)data[internalPropName]["RentValues"]["House4"];
-                    break;
-                case(6):
-                    value = (ushort)data[internalPropName]["RentValues"]["Hotel"];
-                    break;
-                default:
-                    GD.PushError("GetPropertyRent Invalid ID");
-                    GD.Print("Value:", value, " Upgrade Level: ", upgradeLevel);
-                break;
+                GD.PushError("Invalid internal property name or upgradelevel", upgradeLevel);
+                return value;
             }
 
+            value = RentData[internalPropName][upgradeLevel];
             return value;
         }
 
@@ -142,40 +125,41 @@ namespace DataManager
         public static string GetTextForCard(string internalPropName, byte ID)
         {
             string value = null;
-            if(!data.ContainsKey(internalPropName))
+            byte byteValue = 0;
+            if(!IDdata.ContainsKey(internalPropName))
                 GD.PushError("Invalid internal property name");
             
             switch (ID)
             {
-                case(1):
-                    value = (string)data[internalPropName]["ID"]["Name"];
+                case 1:
+                    value = (string)IDdata[internalPropName]["Name"];
                     break;
-                case(2):
-                    value = (string)data[internalPropName]["RentValues"]["NoBuildings"];
+                case 2:
+                    byteValue = RentData[internalPropName][0];
                     break;
-                case(3):
-                    value = (string)data[internalPropName]["RentValues"]["House"];
+                case 3:
+                    byteValue = RentData[internalPropName][1];
                     break;
-                case(4):   
-                    value = (string)data[internalPropName]["RentValues"]["House2"];
+                case 4:   
+                    byteValue = RentData[internalPropName][2];
                     break;
-                case(5):
-                    value = (string)data[internalPropName]["RentValues"]["House3"];
+                case 5:
+                    byteValue = RentData[internalPropName][3];
                     break;
-                case(6):
-                    value = (string)data[internalPropName]["RentValues"]["House4"];
+                case 6:
+                    byteValue = RentData[internalPropName][4];
                     break;
-                case(7):
-                    value = (string)data[internalPropName]["RentValues"]["Hotel"];
+                case 7:
+                    byteValue = RentData[internalPropName][5];
                     break;
-                case(8):
-                    value = (string)data[internalPropName]["Costs"]["Mortgage"];
+                case 8:
+                    byteValue = CostData[internalPropName]["Costs"]["Mortgage"];
                     break;
-                case(9):
-                    value = (string)data[internalPropName]["Costs"]["BuildCost"];
+                case 9:
+                    byteValue = CostData[internalPropName]["Costs"]["BuildCost"];
                     break;
-                case(10):
-                    value = (string)data[internalPropName]["Costs"]["PurchasePrice"];
+                case 10:
+                    byteValue = CostData[internalPropName]["Costs"]["PurchasePrice"];
                     break;
                 default:
                     GD.PushError("GetTextForCard Invalid ID");
@@ -183,6 +167,9 @@ namespace DataManager
                 break;
             }
 
+            if(ID >= 2)
+                value = byteValue.ToString();
+            
             return value;
         }
 
@@ -196,17 +183,17 @@ namespace DataManager
         ///<returns> Byte </returns>
         public static byte GetAnyID(string internalPropName, byte ID)
         {
-            if(!data.ContainsKey(internalPropName))
+            if(!IDdata.ContainsKey(internalPropName))
                 GD.PushError("Invalid internal property name");
             
             byte value = 0;
             switch (ID)
             {
-                case(1):
-                    value = (byte)data[internalPropName]["ID"]["CardID"];
+                case 1:
+                    value = (byte)IDdata[internalPropName]["CardID"];
                     break;
-                case(2):
-                    value = (byte)data[internalPropName]["ID"]["BoardID"];
+                case 2:
+                    value = (byte)IDdata[internalPropName]["BoardID"];
                     break;
                 default:
                     GD.PushError("GetAnyID Invalid ID");
@@ -221,14 +208,51 @@ namespace DataManager
     ///<summary> The data saver, sorter and search engine for the board's registry </summary>
     public class TheRegistry
     {
-        ///<summary> root is the player tree node, from here we can access the entire tree structure </summary>
-        private Dictionary<byte, Player> root = new();
+        // This entire part down here is for the tree data structure!
+        ///<summary> The player class stores an ID and the property struct (OwnedProperties) </summary>
+        struct Player
+        {
+            public byte ID {get; set;}
+            public Dictionary<byte, Property> OwnedProperties {get; set;}
+            public int Cash {get; set;}
+            public bool inPrison = false;
 
-        public void AddPlayers(byte numberOfPlayers)
+            public Player(byte id, int cash)
+            {
+                ID = id;
+                Cash = cash;
+                OwnedProperties = new ();
+            }
+
+            
+
+        }
+
+        ///<summary> The property class stores a BoardID and a property's attributes (upgradeLevel and mortgage status) </summary>
+        struct Property
+        {
+            public byte ID {get; set;}
+            public byte UpgradeLevel {get; set;}
+            public bool IsMortgaged {get; set;}
+
+            public Property(byte id, byte upgradeLevel, bool isMortgaged = false)
+            {
+                ID = id;
+                UpgradeLevel = upgradeLevel;
+                IsMortgaged = isMortgaged;
+            }
+        }
+
+
+        // This is the functions part
+
+        ///<summary> root is the player tree node, from here we can access the entire tree structure </summary>
+        private readonly Dictionary<byte, Player> root = new();
+        public void AddPlayers(byte numberOfPlayers, ushort startingCash)
         {
             for (byte i = 1; i < numberOfPlayers; i++)
             {
-                root[i] = new Player(i);
+                root[i] = new Player(i, startingCash);
             }
         }
 
@@ -271,13 +295,13 @@ namespace DataManager
             if(!player.OwnedProperties.ContainsKey(PropertyID))
                 GD.PushError("Invalid PropertyID");
 
-            property.PropertyAttributes.Level = newUpgradeLevel;
+            property.UpgradeLevel = newUpgradeLevel;
         }
 
         public void UpdateMortgageStatus(byte playerID, byte PropertyID, bool newMortgageStatus)
         {
             Player player = root[playerID];
-            Property property = player.OwnedProperties[PropertyID];
+            Property property = root[playerID].OwnedProperties[PropertyID];
 
             if(!root.ContainsKey(playerID))
                 GD.PushError("Invalid PlayerID");
@@ -285,7 +309,7 @@ namespace DataManager
             if(!player.OwnedProperties.ContainsKey(PropertyID))
                 GD.PushError("Invalid PropertyID");
 
-            property.PropertyAttributes.IsMortgaged = newMortgageStatus;
+            property.IsMortgaged = newMortgageStatus;
         }
 
         ///<summary> Returns an array with a player's owned properties </summary>
@@ -331,46 +355,41 @@ namespace DataManager
             data = (byte)root[playerID].OwnedProperties.Keys.Count;
             return data;
         }
+
     }
 
-    // This entire part down here is for the tree data structure!
-
-    ///<summary> The player class stores an ID and the property class (OwnedProperties) </summary>
-    class Player
+    public class UsernamesManager
     {
-        public byte ID {get; set;}
-        public Dictionary<byte, Property> OwnedProperties {get; set;}
-
-        public Player(byte id)
+        public static string[] StoreUsernames(string P1, string P2, string P3 = null, string P4 = null)
         {
-            ID = id;
-            OwnedProperties = new ();
+            string[] data = new string[4];
+
+            data.SetValue(P1, 0);
+            data.SetValue(P2, 1);
+
+            if(P3 != null)
+                data.SetValue(P3, 2);
+            
+            if(P4 != null)
+                data.SetValue(P4, 3);
+            
+            SaveUsernamesToLocal(data);
+            return data;
         }
-    }
 
-    ///<summary> The property class stores a BoardID and an attributes class (PropertyAttributes) </summary>
-    class Property
-    {
-        public byte ID {get; set;}
-        public Attributes PropertyAttributes {get; set;}
-
-        public Property(byte id, byte upgradeLevel, bool isMortgaged = false)
+        const string USERNAMES_FILE = "Data/Registry.JSON";
+        private static void SaveUsernamesToLocal(string[] usernameArray)
         {
-            ID = id;
-            PropertyAttributes = new (upgradeLevel, isMortgaged);
+            string data = JsonSerializer.Serialize(usernameArray);
+            File.WriteAllText(USERNAMES_FILE, data);
         }
-    }
 
-    ///<summary> The attributes class stores the level of a property (house, 2 houses ext) and a boolean that states whether its mortgaged or not </summary>
-    class Attributes
-    {
-        public byte Level {get; set;}
-        public bool IsMortgaged {get; set;}
-
-        public Attributes(byte level, bool mortgageCondition)
+        public static string LoadUsername(byte AgentID)
         {
-            Level = level;
-            IsMortgaged = mortgageCondition;
+            string[] Jsondata = JsonSerializer.Deserialize<string[]>(USERNAMES_FILE);
+
+            string data = Jsondata[AgentID];
+            return data;
         }
     }
 }

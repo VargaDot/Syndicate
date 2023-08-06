@@ -1,12 +1,9 @@
 {
     "default":
     {
-        "ID":
-        {
-            "Name":"Varga's Avenue",
-            "CardID":69,
-            "BoardID":69
-        },
+        "Name":"Varga's Avenue",
+        "CardID":69,
+        "BoardID":69,
         
         "Costs":
         {
@@ -15,25 +12,22 @@
 			"Mortgage":9999
         },
 
-        "RentValues":
-        {
-            "NoBuildings":9999,
-            "House":9999,
-            "House2":9999,
-            "House3":9999,
-            "House4":9999,
-            "Hotel":9999
-        }
+        "Rent":
+        [
+            9999,
+            9999,
+            9999,
+            9999,
+            9999,
+            9999
+        ]
     },
 
     "Brown1":
     {
-        "ID":
-        {
-            "Name":"Mediterranean Avenue",
-            "CardID":0,
-            "BoardID":1
-        },
+        "Name":"Mediterranean Avenue",
+        "CardID":0,
+        "BoardID":1,
         
         "Costs":
         {
@@ -43,24 +37,22 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":2,
-            "House":10,
-            "House2":30,
-            "House3":90,
-            "House4":160,
-            "Hotel":250
-        }
+        [
+            2,
+            10,
+            30,
+            90,
+            160,
+            250
+        ]
     },
 	
 	"Brown2":
     {
-        "ID":
-        {
-            "Name":"Baltic Avenue",
-            "CardID":0,
-            "BoardID":2
-        },
+        "Name":"Baltic Avenue",
+        "CardID":0,
+        "BoardID":2,
+        
         
         "Costs":
         {
@@ -70,24 +62,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":4,
-            "House":20,
-            "House2":60,
-            "House3":180,
-            "House4":320,
-            "Hotel":450
-        }
+        [
+            4,
+            20,
+            60,
+            180,
+            320,
+            450
+        ]
     },
 	
 	"Cyan1":
     {
-        "ID":
-        {
-            "Name":"Oriental Avenue",
-            "CardID":1,
-            "BoardID":3
-        },
+        "Name":"Oriental Avenue",
+        "CardID":1,
+        "BoardID":3,
         
         "Costs":
         {
@@ -97,24 +86,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":6,
-            "House":30,
-            "House2":90,
-            "House3":270,
-            "House4":400,
-            "Hotel":550
-        }
+        [
+            6,
+            30,
+            90,
+            270,
+            400,
+            550
+        ]
     },
 	
 	"Cyan2":
     {
-        "ID":
-        {
-            "Name":"Vermont Avenue",
-            "CardID":1,
-            "BoardID":4
-        },
+        "Name":"Vermont Avenue",
+        "CardID":1,
+        "BoardID":4,
         
         "Costs":
         {
@@ -124,24 +110,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":6,
-            "House":30,
-            "House2":90,
-            "House3":270,
-            "House4":400,
-            "Hotel":550
-        }
+        [
+            6,
+            30,
+            90,
+            270,
+            400,
+            550
+        ]
     },
 	
 	"Cyan3":
     {
-        "ID":
-        {
-            "Name":"Oriental Avenue",
-            "CardID":1,
-            "BoardID":5
-        },
+        "Name":"Oriental Avenue",
+        "CardID":1,
+        "BoardID":5,
         
         "Costs":
         {
@@ -151,24 +134,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":8,
-            "House":40,
-            "House2":100,
-            "House3":300,
-            "House4":450,
-            "Hotel":600
-        }
+        [
+            8,
+            40,
+            100,
+            300,
+            450,
+            600
+        ]
     },
 	
 	"Pink1":
     {
-        "ID":
-        {
-            "Name":"St. Charles Place",
-            "CardID":2,
-            "BoardID":6
-        },
+        "Name":"St. Charles Place",
+        "CardID":2,
+        "BoardID":6,
         
         "Costs":
         {
@@ -178,24 +158,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":10,
-            "House":50,
-            "House2":150,
-            "House3":450,
-            "House4":625,
-            "Hotel":750
-        }
+        [
+            10,
+            50,
+            150,
+            450,
+            625,
+            750
+        ]
     },
 	
 	"Pink2":
     {
-        "ID":
-        {
-            "Name":"States Avenue",
-            "CardID":2,
-            "BoardID":7
-        },
+        "Name":"States Avenue",
+        "CardID":2,
+        "BoardID":7,
         
         "Costs":
         {
@@ -205,24 +182,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":10,
-            "House":50,
-            "House2":150,
-            "House3":450,
-            "House4":625,
-            "Hotel":750
-        }
+        [
+            10,
+            50,
+            150,
+            450,
+            625,
+            750
+        ]
     },
 	
 	"Pink3":
     {
-        "ID":
-        {
-            "Name":"Virginia Avenue",
-            "CardID":2,
-            "BoardID":8
-        },
+        "Name":"Virginia Avenue",
+        "CardID":2,
+        "BoardID":8,
         
         "Costs":
         {
@@ -232,24 +206,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":12,
-            "House":60,
-            "House2":180,
-            "House3":500,
-            "House4":700,
-            "Hotel":900
-        }
+        [
+            12,
+            60,
+            180,
+            500,
+            700,
+            900
+        ]
     },
 	
 	"Orange1":
     {
-        "ID":
-        {
-            "Name":"St. James Place",
-            "CardID":3,
-            "BoardID":9
-        },
+        "Name":"St. James Place",
+        "CardID":3,
+        "BoardID":9,
         
         "Costs":
         {
@@ -259,24 +230,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":14,
-            "House":70,
-            "House2":200,
-            "House3":550,
-            "House4":750,
-            "Hotel":950
-        }
+        [
+            14,
+            70,
+            200,
+            550,
+            750,
+            950
+        ]
     },
 	
 	"Orange2":
     {
-        "ID":
-        {
-            "Name":"Tennessee Avenue",
-            "CardID":3,
-            "BoardID":10
-        },
+        "Name":"Tennessee Avenue",
+        "CardID":3,
+        "BoardID":10,
         
         "Costs":
         {
@@ -286,24 +254,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":14,
-            "House":70,
-            "House2":200,
-            "House3":550,
-            "House4":750,
-            "Hotel":950
-        }
+        [
+            14,
+            70,
+            200,
+            550,
+            750,
+            950
+        ]
     },
 	
 	"Orange3":
     {
-        "ID":
-        {
-            "Name":"New York Avenue",
-            "CardID":3,
-            "BoardID":11
-        },
+        "Name":"New York Avenue",
+        "CardID":3,
+        "BoardID":11,
         
         "Costs":
         {
@@ -313,24 +278,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":16,
-            "House":80,
-            "House2":220,
-            "House3":600,
-            "House4":800,
-            "Hotel":1000
-        }
+        [
+            16,
+            80,
+            220,
+            600,
+            800,
+            1000
+        ]
     },
 	
 	"Red1":
     {
-        "ID":
-        {
-            "Name":"Kentucky Avenue",
-            "CardID":4,
-            "BoardID":12
-        },
+        "Name":"Kentucky Avenue",
+        "CardID":4,
+        "BoardID":12,
         
         "Costs":
         {
@@ -340,24 +302,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":18,
-            "House":90,
-            "House2":250,
-            "House3":700,
-            "House4":875,
-            "Hotel":1050
-        }
+        [
+            18,
+            90,
+            250,
+            700,
+            875,
+            1050
+        ]
     },
 	
 	"Red2":
     {
-        "ID":
-        {
-            "Name":"Indiana Avenue",
-            "CardID":4,
-            "BoardID":13
-        },
+        "Name":"Indiana Avenue",
+        "CardID":4,
+        "BoardID":13,
         
         "Costs":
         {
@@ -367,24 +326,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":18,
-            "House":90,
-            "House2":250,
-            "House3":700,
-            "House4":875,
-            "Hotel":1050
-        }
+        [
+            18,
+            90,
+            250,
+            700,
+            875,
+            1050
+        ]
     },
 	
 	"Red3":
     {
-        "ID":
-        {
-            "Name":"Illinois Avenue",
-            "CardID":4,
-            "BoardID":14
-        },
+        "Name":"Illinois Avenue",
+        "CardID":4,
+        "BoardID":14,
         
         "Costs":
         {
@@ -394,24 +350,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":20,
-            "House":100,
-            "House2":300,
-            "House3":750,
-            "House4":925,
-            "Hotel":1100
-        }
+        [
+            20,
+            100,
+            300,
+            750,
+            925,
+            1100
+        ]
     },
 	
 	"Yellow1":
     {
-        "ID":
-        {
-            "Name":"Atlantic Avenue",
-            "CardID":5,
-            "BoardID":15
-        },
+        "Name":"Atlantic Avenue",
+        "CardID":5,
+        "BoardID":15,
         
         "Costs":
         {
@@ -421,24 +374,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":22,
-            "House":110,
-            "House2":330,
-            "House3":800,
-            "House4":975,
-            "Hotel":1150
-        }
+        [
+            22,
+            110,
+            330,
+            800,
+            975,
+            1150
+        ]
     },
 	
 	"Yellow2":
     {
-        "ID":
-        {
-            "Name":"Ventnor Avenue",
-            "CardID":5,
-            "BoardID":16
-        },
+        "Name":"Ventnor Avenue",
+        "CardID":5,
+        "BoardID":16,
         
         "Costs":
         {
@@ -448,24 +398,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":22,
-            "House":110,
-            "House2":330,
-            "House3":800,
-            "House4":975,
-            "Hotel":1150
-        }
+        [
+            22,
+            110,
+            330,
+            800,
+            975,
+            1150
+        ]
     },
 	
 	"Yellow3":
     {
-        "ID":
-        {
-            "Name":"Marvin Gardens",
-            "CardID":5,
-            "BoardID":17
-        },
+        "Name":"Marvin Gardens",
+        "CardID":5,
+        "BoardID":17,
         
         "Costs":
         {
@@ -475,24 +422,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":24,
-            "House":120,
-            "House2":360,
-            "House3":850,
-            "House4":1025,
-            "Hotel":1200
-        }
+        [
+            24,
+            120,
+            360,
+            850,
+            1025,
+            1200
+        ]
     },
 	
 	"Green1":
     {
-        "ID":
-        {
-            "Name":"Pacific Avenue",
-            "CardID":6,
-            "BoardID":18
-        },
+        "Name":"Pacific Avenue",
+        "CardID":6,
+        "BoardID":18,
         
         "Costs":
         {
@@ -502,24 +446,22 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":26,
-            "House":130,
-            "House2":390,
-            "House3":900,
-            "House4":1100,
-            "Hotel":1275
-        }
+        [
+            26,
+            130,
+            390,
+            900,
+            1100,
+            1275
+        ]
     },
 	
 	"Green2":
     {
-        "ID":
-        {
-            "Name":"North Carolina Avenue",
-            "CardID":6,
-            "BoardID":19
-        },
+
+        "Name":"North Carolina Avenue",
+        "CardID":6,
+        "BoardID":19,
         
         "Costs":
         {
@@ -529,24 +471,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":26,
-            "House":130,
-            "House2":390,
-            "House3":900,
-            "House4":1100,
-            "Hotel":1275
-        }
+        [
+            26,
+            130,
+            390,
+            900,
+            1100,
+            1275
+        ]
     },
 	
 	"Green3":
     {
-        "ID":
-        {
-            "Name":"Pennsylvania Avenue",
-            "CardID":6,
-            "BoardID":20
-        },
+        "Name":"Pennsylvania Avenue",
+        "CardID":6,
+        "BoardID":20,
         
         "Costs":
         {
@@ -556,24 +495,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":28,
-            "House":150,
-            "House2":450,
-            "House3":1000,
-            "House4":1200,
-            "Hotel":1400
-        }
+        [
+            28,
+            150,
+            450,
+            1000,
+            1200,
+            1400
+        ]
     },
 	
 	"Blue1":
     {
-        "ID":
-        {
-            "Name":"Park Place",
-            "CardID":7,
-            "BoardID":21
-        },
+        "Name":"Park Place",
+        "CardID":7,
+        "BoardID":21,
         
         "Costs":
         {
@@ -583,24 +519,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":35,
-            "House":175,
-            "House2":500,
-            "House3":1100,
-            "House4":1300,
-            "Hotel":1500
-        }
+        [
+            35,
+            175,
+            500,
+            1100,
+            1300,
+            1500
+        ]
     },
 	
 	"Blue2":
     {
-        "ID":
-        {
-            "Name":"Boardwalk",
-            "CardID":7,
-            "BoardID":22
-        },
+        "Name":"Boardwalk",
+        "CardID":7,
+        "BoardID":22,
         
         "Costs":
         {
@@ -610,24 +543,21 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":50,
-            "House":200,
-            "House2":600,
-            "House3":1400,
-            "House4":1700,
-            "Hotel":2000
-        }
+        [
+            50,
+            200,
+            600,
+            1400,
+            1700,
+            2000
+        ]
     },
 	
 	"Station1":
     {
-        "ID":
-        {
-            "Name":"Reading Railroad",
-            "CardID":8,
-            "BoardID":23
-        },
+        "Name":"Reading Railroad",
+        "CardID":8,
+        "BoardID":23,
         
         "Costs":
         {
@@ -636,19 +566,16 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":25
-        }
+        [
+            25
+        ]
     },
 	
 	"Station2":
     {
-        "ID":
-        {
-            "Name":"Pennsylvania Railroad",
-            "CardID":8,
-            "BoardID":24
-        },
+        "Name":"Pennsylvania Railroad",
+        "CardID":8,
+        "BoardID":24,
         
         "Costs":
         {
@@ -657,19 +584,16 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":25
-        }
+        [
+            25
+        ]
     },
 	
 	"Station3":
     {
-        "ID":
-        {
-            "Name":"B. & O. Railroad",
-            "CardID":8,
-            "BoardID":25
-        },
+        "Name":"B. & O. Railroad",
+        "CardID":8,
+        "BoardID":25,
         
         "Costs":
         {
@@ -678,19 +602,16 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":25
-        }
+        [
+            25
+        ]
     },
 	
 	"Station4":
     {
-        "ID":
-        {
-            "Name":"Short Line",
-            "CardID":8,
-            "BoardID":26
-        },
+        "Name":"Short Line",
+        "CardID":8,
+        "BoardID":26,
         
         "Costs":
         {
@@ -699,19 +620,16 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":25
-        }
+        [
+            25
+        ]
     },
 	
 	"Utility1":
     {
-        "ID":
-        {
-            "Name":"Electric Company",
-            "CardID":9,
-            "BoardID":27
-        },
+        "Name":"Electric Company",
+        "CardID":9,
+        "BoardID":27,
         
         "Costs":
         {
@@ -720,19 +638,16 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":6
-        }
+        [
+            6
+        ]
     },
 	
 	"Utility2":
     {
-        "ID":
-        {
-            "Name":"Water Works",
-            "CardID":10,
-            "BoardID":28
-        },
+        "Name":"Water Works",
+        "CardID":10,
+        "BoardID":28,
         
         "Costs":
         {
@@ -741,8 +656,8 @@
         },
 
         "RentValues":
-        {
-            "NoBuildings":6
-        }
+        [
+            6
+        ]
     }
 }

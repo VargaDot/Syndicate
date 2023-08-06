@@ -13,15 +13,21 @@ public partial class MusicPlayer : AudioStreamPlayer
 	byte previousSong;
 	void MusicSelector()
 	{
-		byte x = (byte)GD.RandRange(0, MusicList.Count);
-		if(x == previousSong)
-			for (byte i = 0; x != previousSong; i++)
-			{
-				x = (byte)GD.RandRange(0, MusicList.Count);
-			}
+		if(MusicList.Count > 0)
+		{
+			byte x = (byte)GD.RandRange(0, MusicList.Count);
+			if(x == previousSong)
+				for (byte i = 0; x != previousSong; i++)
+					x = (byte)GD.RandRange(0, MusicList.Count);
 
-		Stream = MusicList[x];
-		previousSong = x;
+			Stream = MusicList[x];
+			previousSong = x;
+		}
+		else
+		{
+			GD.PushWarning("No music exists");
+		}
+		
 	}
 
 	void WhenFinished()
@@ -30,8 +36,8 @@ public partial class MusicPlayer : AudioStreamPlayer
 	}
 
 	[ExportGroup("Music")]
-	[Export] Array<AudioStream> MusicList = new Array<AudioStream>();
+	[Export] Array<AudioStream> MusicList = new();
 
 	[ExportGroup("Sound effects")]
-	[Export] Array<AudioStream> SfxList = new Array<AudioStream>();
+	[Export] Array<AudioStream> SfxList = new();
 }
