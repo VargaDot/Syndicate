@@ -216,16 +216,15 @@ namespace DataManager
             public Dictionary<byte, Property> OwnedProperties {get; set;}
             public int Cash {get; set;}
             public bool inPrison = false;
+            public string Name {get; set;}
 
-            public Player(byte id, int cash)
+            public Player(byte id, int cash, string name)
             {
                 ID = id;
                 Cash = cash;
                 OwnedProperties = new ();
+                Name = name;
             }
-
-            
-
         }
 
         ///<summary> The property class stores a BoardID and a property's attributes (upgradeLevel and mortgage status) </summary>
@@ -248,12 +247,12 @@ namespace DataManager
 
         ///<summary> root is the player tree node, from here we can access the entire tree structure </summary>
         private readonly Dictionary<byte, Player> root = new();
-        public void AddPlayers(byte numberOfPlayers, ushort startingCash)
+        public void AddPlayers(byte ID, ushort startingCash, string username)
         {
-            for (byte i = 1; i < numberOfPlayers; i++)
-            {
-                root[i] = new Player(i, startingCash);
-            }
+            if(!root.ContainsKey(ID))
+                root[ID] = new Player(ID, startingCash, username);
+            else
+                GD.Print("There's already an ID of the same kind");
         }
 
         public void RemovePlayer(byte playerID)

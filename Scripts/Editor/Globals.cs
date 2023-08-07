@@ -4,7 +4,6 @@ using Godot.Collections;
 public partial class Globals : Node
 {
 	public static ComposerLib composer;
-	public static Array<string> PlayerUsernames = new();
 
 	///<summary>
 	///Dictionary containing propertyIDs and their assigned color

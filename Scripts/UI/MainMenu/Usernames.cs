@@ -1,5 +1,5 @@
 using Godot;
-using Godot.Collections;
+using DataManager;
 
 public partial class Usernames : HFlowContainer
 {
@@ -8,50 +8,74 @@ public partial class Usernames : HFlowContainer
         Enter1 = false;
 		Enter2 = false;
     }
-	
-	public override void _Ready()
+
+	public void OnGoPressed()
 	{
-		for (byte i = 0; i < 4; i++)
-		{
-			InputFields [i] = (LineEdit)GetChild(i);
-		}
+		if(Enter1 && Enter2)
+			EmitSignal("OnPlayPressed");
+		else
+			LaunchWarning(1);
 	}
 
+    private TheRegistry registry = new();
 	///<Summary>
 	///Checks UI Panel interaction and confirms/denies/reacts to them.
 	///</Summary>
-	public void UsernameManager(byte x)
+	public void UsernameManager(byte ID, string name = null)
+    {
+        registry.AddPlayers(ID, startingCash, name);
+	}
+
+	public void OnName1Registered()
 	{
-		switch (x)
+		string n = GetNode<LineEdit>("PlayerName").Text;
+		UsernameManager(0, n);
+		Enter1 = true;
+	}
+
+	public void OnName2Registered()
+	{
+		string n = GetNode<LineEdit>("PlayerName2").Text;
+		UsernameManager(1, n);
+		Enter2 = true;
+	}
+
+	public void OnName3Registered()
+	{
+		string n = GetNode<LineEdit>("PlayerName3").Text;
+		UsernameManager(2, n);
+	}
+
+	public void OnName4Registered()
+	{
+		string n = GetNode<LineEdit>("PlayerName4").Text;
+		UsernameManager(3, n);
+	}
+
+	static ushort startingCash = 2500;
+	public void OnCashChosen()
+	{
+		//int x = GetNode<>
+	}
+
+	public void OnInvalidUsername()
+	{
+		LaunchWarning(0);
+	}
+
+	void LaunchWarning(byte x)
+	{
+	 	switch (x)
 		{
-			case(0):
-				Globals.PlayerUsernames[0] = InputFields[0].Text;
-				PopUp.Text = "Username " + InputFields[0] + " Has been submitted";
-				Enter1 = true;
-				break;
-			case(1):
-				Globals.PlayerUsernames[1] = InputFields[1].Text;
-				PopUp.Text = "Username " + InputFields[1] + " Has been submitted";
-				Enter2 = true;
-				break;
-			case(2):
-				Globals.PlayerUsernames[2] = InputFields[2].Text;
-				PopUp.Text = "Username " + InputFields[2] + " Has been submitted";
-				break;
-			case(3):
-				Globals.PlayerUsernames[3] = InputFields[3].Text;
-				PopUp.Text = "Username " + InputFields[3] + " Has been submitted";
-				break;
-			case(4):
+			case 0:
 				PopUp.Text = "Invalid username";
 				break;
-			case(5):
+			case 1:
 				PopUp.Text = "Please enter usernames for Player 1 and Player 2";
 				break;
 			default:
 				PopUp.Text = "There seems to be a problem";
-				GD.PushError("UsernameManager.cs has fired a default error, here's all the information you need: "
-				, Globals.PlayerUsernames[0], Globals.PlayerUsernames[1], Globals.PlayerUsernames[2], Globals.PlayerUsernames[3]);
+				GD.PushError("UsernameManager.cs has fired a default error, here's all the information you need");
 				break;
 		}
 
@@ -59,44 +83,10 @@ public partial class Usernames : HFlowContainer
 		textTimer.Start();
 	}
 
-
-	public void OnName1Registered()
-	{
-		UsernameManager(0);
-	}
-
-	public void OnName2Registered()
-	{
-		UsernameManager(1);
-	}
-
-	public void OnName3Registered()
-	{
-		UsernameManager(2);
-	}
-
-	public void OnName4Registered()
-	{
-		UsernameManager(3);
-	}
-
-	public void OnInvalidUsername()
-	{
-		UsernameManager(4);
-	}
-
 	void OnTimeout()
 	{
 		PopUp.Hide();
 	}
-
-	public void OnGoPressed()
-	{
-		if(Enter1 && Enter2)
-			EmitSignal("OnPlayPressed");
-	}
-
-	Array<LineEdit> InputFields = new Array<LineEdit>();
 
 	bool Enter1, Enter2;
 

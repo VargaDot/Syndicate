@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using DataManager;
 
 //This is strictly for UI, player turns and visual stuff.
 public partial class Game : Node2D
@@ -14,35 +15,10 @@ public partial class Game : Node2D
 	//Loads and instantiates players into the game scene.
 	void LoadValues()
 	{
-		var human = GD.Load<PackedScene>("res://Scenes/Humanoid/Player.tscn");
-		var AI = GD.Load<PackedScene>("res://Scenes/Humanoid/AI.tscn");
-
-		Player1 = (Node2D)human.Instantiate();
-		Player2 = (Node2D)human.Instantiate();
-
-		PlayerList.Add(Player1);
-		PlayerList.Add(Player2);
-		
-		AddChild(PlayerList[0]);
-		AddChild(PlayerList[1]);
-
-		if(Globals.PlayerUsernames[2] != null)
-		{
-			Player3 = (Node2D)human.Instantiate();
-			PlayerList.Add(Player3);
-			AddChild(PlayerList[2]);
-		}
-		else if(Globals.PlayerUsernames[3] != null)
-		{
-			Player4 = (Node2D)human.Instantiate();
-			PlayerList.Add(Player4);
-			AddChild(PlayerList[3]);
-		}
-
-		for (byte i = 0; i < PlayerList.Count; i++)
-		{
-			PlayerList[i].Name = Globals.PlayerUsernames[i];
-		}
+		/*
+		UsernamesManager.LoadUsername();
+		TheRegistry.AddPlayers();
+		*/
 	}
 
 	//Starts the turn-based game
@@ -77,7 +53,6 @@ public partial class Game : Node2D
 
 	public Node2D H1, H2, H3, H4;
 	Node2D Player1, Player2, Player3, Player4;
-	Array<Node2D> PlayerList = new Array<Node2D>();
 
 	[Export] Camera2D cam;
 	[Export] Registry registry;
