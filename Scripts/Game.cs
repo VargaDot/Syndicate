@@ -8,26 +8,16 @@ public partial class Game : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		LoadValues();
-		LoadBoard();
+		LoadGame();
 	}
 
 	//Loads and instantiates players into the game scene.
-	void LoadValues()
+	void LoadGame()
 	{
 		/*
 		UsernamesManager.LoadUsername();
 		TheRegistry.AddPlayers();
 		*/
-	}
-
-	//Starts the turn-based game
-	void LoadBoard()
-	{
-		EmitSignal("BoardLaunched", PlayerList.Count);
-
-		byte x = (byte)GD.RandRange(0, PlayerList.Count - 1);
-		PlayerList[x].GetNode<Player>("").RollDice();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,10 +41,6 @@ public partial class Game : Node2D
 		EmitSignal("");
 	}
 
-	public Node2D H1, H2, H3, H4;
-	Node2D Player1, Player2, Player3, Player4;
-
 	[Export] Camera2D cam;
 	[Export] Registry registry;
-	[Signal] public delegate void BoardLaunchedEventHandler(int n);
 }

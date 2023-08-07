@@ -117,6 +117,41 @@ offset_bottom = 902.0
 theme = ExtResource("2_63w4d")
 text = "GO!"
 
+[node name="AgentType" type="HBoxContainer" parent="SingleplayerMenu"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 547.0
+offset_right = 1375.0
+offset_bottom = 685.0
+theme_override_constants/separation = 250
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="SingleplayerMenu/AgentType"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox2" type="CheckBox" parent="SingleplayerMenu/AgentType"]
+layout_mode = 2
+
+[node name="CheckBox3" type="CheckBox" parent="SingleplayerMenu/AgentType"]
+layout_mode = 2
+
+[node name="CheckBox4" type="CheckBox" parent="SingleplayerMenu/AgentType"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SingleplayerMenu"]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 646.0
+offset_right = 1054.0
+offset_bottom = 750.0
+text = "Typing a name in one of fields above then pressing \"GO!\", will spawn an economic agent.
+
+Checking the box will change the type from AI to Player.
+(Note: The check boxes don't work... yet)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MusicPlayer" parent="." instance=ExtResource("5_rd1by")]
 
 [node name="Game Title" type="Label" parent="."]

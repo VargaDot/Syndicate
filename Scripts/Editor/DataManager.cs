@@ -7,7 +7,7 @@ using Godot;
 namespace DataManager
 {
     ///<summary> Class for requesting data from Properties.JSON </summary>
-    public class DataLoader
+    public class PropertyLoader
     {
         //Properties.JSON path
         readonly static string PROPERTY_FILE = File.ReadAllText("Data/Properties.JSON");
@@ -209,8 +209,8 @@ namespace DataManager
     public class TheRegistry
     {
         // This entire part down here is for the tree data structure!
-        ///<summary> The player class stores an ID and the property struct (OwnedProperties) </summary>
-        struct Player
+        ///<summary> The Agent class stores an ID and the property struct (OwnedProperties) </summary>
+        struct Agent
         {
             public byte ID {get; set;}
             public Dictionary<byte, Property> OwnedProperties {get; set;}
@@ -218,7 +218,7 @@ namespace DataManager
             public bool inPrison = false;
             public string Name {get; set;}
 
-            public Player(byte id, int cash, string name)
+            public Agent(byte id, int cash, string name)
             {
                 ID = id;
                 Cash = cash;
@@ -245,80 +245,80 @@ namespace DataManager
 
         // This is the functions part
 
-        ///<summary> root is the player tree node, from here we can access the entire tree structure </summary>
-        private readonly Dictionary<byte, Player> root = new();
-        public void AddPlayers(byte ID, ushort startingCash, string username)
+        ///<summary> root is the Agent tree node, from here we can access the entire tree structure </summary>
+        private readonly Dictionary<byte, Agent> root = new();
+        public void AddAgents(byte ID, ushort startingCash, string username)
         {
             if(!root.ContainsKey(ID))
-                root[ID] = new Player(ID, startingCash, username);
+                root[ID] = new Agent(ID, startingCash, username);
             else
                 GD.Print("There's already an ID of the same kind");
         }
 
-        public void RemovePlayer(byte playerID)
+        public void RemoveAgent(byte AgentID)
         {
-            root.Remove(playerID);
+            root.Remove(AgentID);
         }
 
-        public void AddProperty(byte PlayerID, byte PropertyID, byte upgradeLevel = 1, bool isMortgaged = false)
+        public void AddProperty(byte AgentID, byte PropertyID, byte upgradeLevel = 1, bool isMortgaged = false)
         {
-            if(!root.ContainsKey(PlayerID))
-                GD.PushError("Player ID is not valid");
+            if(!root.ContainsKey(AgentID))
+                GD.PushError("Agent ID is not valid");
 
-            Player player = root[PlayerID];
+            Agent agent = root[AgentID];
 
-            player.OwnedProperties[PropertyID] = new Property(PropertyID, upgradeLevel, isMortgaged);
+            agent.OwnedProperties[PropertyID] = new Property(PropertyID, upgradeLevel, isMortgaged);
         }
 
-        public void RemoveProperty(byte playerID, byte PropertyID)
+        public void RemoveProperty(byte agentID, byte PropertyID)
         {
-            Player player = root[playerID];
+            Agent agent = root[agentID];
 
-            if(!root.ContainsKey(playerID))
-                GD.PushError("Invalid PlayerID");
+            if(!root.ContainsKey(agentID))
+                GD.PushError("Invalid agentID");
 
-            if(!player.OwnedProperties.ContainsKey(PropertyID))
+            if(!agent.OwnedProperties.ContainsKey(PropertyID))
                 GD.PushError("Invalid PropertyID");
 
-            root[playerID].OwnedProperties.Remove(PropertyID);
+            root[agentID].OwnedProperties.Remove(PropertyID);
         }
 
-        public void UpdatePropertyLevel(byte playerID, byte PropertyID, byte newUpgradeLevel)
+        public void UpdatePropertyLevel(byte AgentID, byte PropertyID, byte newUpgradeLevel)
         {
-            Player player = root[playerID];
-            Property property = player.OwnedProperties[PropertyID];
+            Agent agent = root[AgentID];
+            Property property = agent.OwnedProperties[PropertyID];
 
-            if(!root.ContainsKey(playerID))
-                GD.PushError("Invalid PlayerID");
+            if(!root.ContainsKey(AgentID))
+                GD.PushError("Invalid AgentID");
 
-            if(!player.OwnedProperties.ContainsKey(PropertyID))
+            if(!agent.OwnedProperties.ContainsKey(PropertyID))
                 GD.PushError("Invalid PropertyID");
 
             property.UpgradeLevel = newUpgradeLevel;
         }
 
-        public void UpdateMortgageStatus(byte playerID, byte PropertyID, bool newMortgageStatus)
+        public void UpdateMortgageStatus(byte AgentID, byte PropertyID, bool newMortgageStatus)
         {
-            Player player = root[playerID];
-            Property property = root[playerID].OwnedProperties[PropertyID];
+            Agent agent = root[AgentID];
+            Property property = root[AgentID].OwnedProperties[PropertyID];
 
-            if(!root.ContainsKey(playerID))
-                GD.PushError("Invalid PlayerID");
+            if(!root.ContainsKey(AgentID))
+                GD.PushError("Invalid AgentID");
 
-            if(!player.OwnedProperties.ContainsKey(PropertyID))
+            if(!agent.OwnedProperties.ContainsKey(PropertyID))
                 GD.PushError("Invalid PropertyID");
 
             property.IsMortgaged = newMortgageStatus;
         }
 
-        ///<summary> Returns an array with a player's owned properties </summary>
+        ///<summary> Returns an array with a agent's owned properties </summary>
         ///<returns> Array<byte> </returns>
-        public byte[] GetPlayerOwnedProperties(byte playerID)
+        public byte[] GetAgentOwnedProperties(byte AgentID)
         {
-            if(!root.ContainsKey(playerID))
-                GD.PushError("Invalid PlayerID");
+            if(!root.ContainsKey(AgentID))
+                GD.PushError("Invalid AgentID");
 
-            byte[] data = new byte[root[playerID].OwnedProperties.Count];
+            byte[] data = new byte[root[AgentID].OwnedProperties.Count];
             return data;
         }
 
@@ -328,12 +328,12 @@ namespace DataManager
         {
             byte owner = 0;
 
-            foreach (byte playerID in root.Keys)
+            foreach (byte agentID in root.Keys)
             {
-                Player player = root[playerID];
+                Agent agent = root[agentID];
 
-                if (player.OwnedProperties.ContainsKey(propertyID))
-                    owner = playerID;
+                if (agent.OwnedProperties.ContainsKey(propertyID))
+                    owner = agentID;
                 else
                     GD.Print("No owner found!");
             }
@@ -342,16 +342,16 @@ namespace DataManager
         }
 
         //Just for funsies
-        public byte GetPlayerRegistrySize(byte playerID)
+        public byte GetAgentRegistrySize(byte AgentID)
         {
             byte data = 0;
-            if(!root.ContainsKey(playerID))
+            if(!root.ContainsKey(AgentID))
             {
-                GD.PushError("Invalid PlayerID");
+                GD.PushError("Invalid AgentID");
                 return data;
             }
 
-            data = (byte)root[playerID].OwnedProperties.Keys.Count;
+            data = (byte)root[AgentID].OwnedProperties.Keys.Count;
             return data;
         }
 
@@ -359,24 +359,24 @@ namespace DataManager
 
     public class UsernamesManager
     {
-        public static string[] StoreUsernames(string P1, string P2, string P3 = null, string P4 = null)
+        public static string[] StoreUsernames(string A1, string A2, string A3 = null, string A4 = null)
         {
             string[] data = new string[4];
 
-            data.SetValue(P1, 0);
-            data.SetValue(P2, 1);
+            data.SetValue(A1, 0);
+            data.SetValue(A2, 1);
 
-            if(P3 != null)
-                data.SetValue(P3, 2);
+            if(A3 != null)
+                data.SetValue(A3, 2);
             
-            if(P4 != null)
-                data.SetValue(P4, 3);
+            if(A4 != null)
+                data.SetValue(A4, 3);
             
             SaveUsernamesToLocal(data);
             return data;
         }
 
-        const string USERNAMES_FILE = "Data/Registry.JSON";
+        const string USERNAMES_FILE = "Data/Usernames.JSON";
         private static void SaveUsernamesToLocal(string[] usernameArray)
         {
             string data = JsonSerializer.Serialize(usernameArray);
@@ -390,5 +390,11 @@ namespace DataManager
             string data = Jsondata[AgentID];
             return data;
         }
+    }
+
+    public class BoardLoader
+    {
+        const string BOARD_FILE = "Data/Board.JSON";
+        //public static void 
     }
 }

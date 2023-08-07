@@ -1,17 +1,10 @@
 using Godot;
-using Godot.Collections;
+using DataManager;
 using System;
 
 //This is responsible for the ownership system
 public partial class Registry : Node2D
 {
-    enum STATUS
-    {
-        UNOWNED,
-        OWNED,
-        MORTGAGED,
-    }
-
     enum KIND
     {
         NORMAL,
@@ -26,18 +19,9 @@ public partial class Registry : Node2D
 
     void LoadValues()
     {
-        //Json.
+        
     }
 
-    /*
-    public static Dictionary<int,Dictionary<int,int>> TheRegistry = new Dictionary<int, Dictionary<int,int>>()
-    {
-        {00, new Dictionary<int, int> {{0,0}} },
-        {00, new Dictionary<int, int> {{0,0}} },
-        {00, new Dictionary<int, int> {{0,0}} },
-        {00, new Dictionary<int, int> {{0,0}} },
-        {00, new Dictionary<int, int> {{0,0}} },
-    };
-    */
+
 
 }
