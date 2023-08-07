@@ -217,6 +217,7 @@ namespace DataManager
             public int Cash {get; set;}
             public bool inPrison = false;
             public string Name {get; set;}
+            public byte position = 0;
 
             public Agent(byte id, int cash, string name)
             {
@@ -394,7 +395,18 @@ namespace DataManager
 
     public class BoardLoader
     {
-        const string BOARD_FILE = "Data/Board.JSON";
-        //public static void 
+        static readonly string BOARD_FILE = File.ReadAllText("Data/Board.JSON");
+
+        static readonly Dictionary<string,string>[] BoardData = OpenBoardData();
+        static Dictionary<string,string>[] OpenBoardData()
+        {
+            Dictionary<string,string>[] data = JsonSerializer.Deserialize<Dictionary<string,string>[]>(BOARD_FILE);
+            return data;
+        }
+
+        public static void CheckTileType()
+        {
+
+        }
     }
 }
