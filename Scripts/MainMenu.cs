@@ -6,25 +6,27 @@ using System;
 ///</Summary>
 public partial class MainMenu : Control
 {
+
+	AnimationPlayer player;
+
+	public override void _Ready()
+	{
+		player = GetNode<AnimationPlayer>("AnimationPlayer");
+	}
+
 	public override void _Process(double delta)
 	{
 		//Quitting always works
-		if(Input.IsActionPressed("Quit"))
-			GetTree().Quit();
+		// if(Input.IsActionPressed("Quit"))
+		// 	GetTree().Quit();
+		if (Input.IsActionJustPressed("SkipAnimation") && player.IsPlaying())
+			player.Seek(1,true);
 	}
 
 	bool Shown = false;
 	public void OnSinglePlayerPressed()
 	{
-		if (Shown == false)
-		{
-			SingleplayerPanel.Show();
-			Shown = true;
-		}
-		else
-		{
-			SingleplayerPanel.Hide();
-		}
+		player.Play("ShowSingleplayer");
 	}
 
 	//When the multiplayer (coop) button gets pressed
@@ -35,7 +37,12 @@ public partial class MainMenu : Control
 
 	public void OnPlayPressed()
 	{
-		Globals.composer.AddScene("Game", new Godot.Collections.Dictionary<string, Variant>());
+		Globals.composer.AddScene("Game","preset1");
+	}
+
+	public void OnClosePressed()
+	{
+		player.Play("HideSingleplayer");
 	}
 
 	[Export] public Panel SingleplayerPanel;

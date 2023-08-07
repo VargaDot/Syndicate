@@ -9,10 +9,10 @@ public partial class Card : Control
     {
         LoadValues();
     }
-    
+
 	void LoadValues()
 	{
-		
+
 	}
 
 	/// <summary>
@@ -52,7 +52,7 @@ public partial class Card : Control
 		//Changes all of the text inside the card
 		for (byte i = 1; i < AllLabels.Count; i++)
 		{
-			AllLabels[i].Text = DataLoader.GetTextForCard(InternalCardName, i);
+			AllLabels[i].Text = PropertyLoader.GetTextForCard(InternalCardName, i);
 		}
 	}
 
@@ -72,7 +72,7 @@ public partial class Card : Control
 	{
 		if(!Globals.PropertyColors.ContainsKey(internalCardID))
 			GD.PushError("Invalid CardColor ID");
-		
+
 		_colorRect.Color = Globals.PropertyColors[internalCardID];
 	}
 

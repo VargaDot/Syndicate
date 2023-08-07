@@ -38,6 +38,18 @@ public partial class ComposerLib : Node
     [Signal]
     public delegate void SceneDisabledEventHandler(string sceneName);
 
+    /// <summary>
+    /// Fires whenever Composer wants to activate a Loading Screen.
+    /// </summary>
+    [Signal]
+    public delegate void LoadingScreenActivatedEventHandler(string screenName);
+
+    /// <summary>
+    /// Fires whenever Composer wants to disable a Loading Screen.
+    /// </summary>
+    [Signal]
+    public delegate void LoadingScreenDisabledEventHandler(string screenName);
+
 
     private Dictionary<string,Variant> _internalScenePaths = new(){
 
@@ -49,24 +61,24 @@ public partial class ComposerLib : Node
     private static bool _subthreadsEnabled = false;
     private static ResourceLoader.CacheMode _cacheMode = ResourceLoader.CacheMode.Replace;
 
-    private bool _isLoading = false;
-    private string _loadingPath = "";
-    private PackedScene _loadingScene = null;
-    private LoadingScreen _defaultLoadingScreen = null;
+    private static bool _isLoading = false;
+    private static string _loadingPath = "";
+    private static PackedScene _loadingScene = null;
+    private static Control _defaultLoadingScreen = null;
 
-    private Dictionary<string,Variant> _lastSettings = new(){
-
-    };
-
-    private Dictionary<string,Variant> _variables = new(){
+    private static readonly Dictionary<string,Variant> _lastSettings = new(){
 
     };
 
-    private Dictionary<string,Variant> _loadingScreenVariables = new(){
+    private static readonly Dictionary<string,Variant> _variables = new(){
 
     };
 
-    private Dictionary<string,Variant> _lastVariables = new(){
+    private static Dictionary<string,Variant> _loadingScreenVariables = new(){
+
+    };
+
+    private static readonly Dictionary<string,Variant> _lastVariables = new(){
 
     };
 
@@ -75,23 +87,29 @@ public partial class ComposerLib : Node
         Success = 1,
     };
 
-    private InternalLoadStatus _internalLoadingVal = InternalLoadStatus.Success;
-    public Dictionary<string,string> scenePaths = new ()
-    {
+    private static InternalLoadStatus _internalLoadingVal = InternalLoadStatus.Success;
+
+    private static readonly Dictionary<string,string> scenePaths = new(){
         {"MainMenu","res://Scenes/MainMenu.tscn"},
         {"Game","res://Scenes/Game.tscn"},
     };
 
-private Dictionary<string,bool> currentScenes = new(){
+    private static readonly Dictionary<string,bool> currentScenes = new(){
 
     };
 
-    private Dictionary<string,Dictionary<string,Variant>> settingsPresets = new(){
-
+    private static readonly Dictionary<string,Dictionary<string,Variant>> settingsPresets = new(){
+        {"preset1",new(){
+            {"loading_screen","LoadingScreen"},
+            {"clear_all_previous",true},
+        }}
     };
 
-    private string loadingScreensDefaultPath = "CanvasScene/";
-    private bool isDebugEnabled = false;
+    private static string loadingScreensDefaultPath = "CanvasLayer/";
+    private static bool isDebugEnabled = false;
+
+    public bool IsSafeToContinueLoading {get; set;} = false ;
+    public bool IsSafeToFinishLoading {get; set;} = false;
 
     public override void _Ready()
     {
@@ -270,9 +288,10 @@ private Dictionary<string,bool> currentScenes = new(){
             _lastSettings.Remove(scene);
             _lastVariables.Remove(scene);
             currentScenes.Remove(scene);
-
             using var _scene = _root.GetNode<Node>(scene);
             _scene.QueueFree();
+
+            GD.Print(_lastSettings);
         }
         else
             GD.PushError($"{scene} could not be found!");
@@ -389,7 +408,7 @@ private Dictionary<string,bool> currentScenes = new(){
             await ToSignal(this,"ready");
 
         string path = pathOverride != "" ? pathOverride : loadingScreensDefaultPath;
-        LoadingScreen _screen = _root.GetNodeOrNull<LoadingScreen>($"{path}{name}");
+        Control _screen = _root.GetNodeOrNull<Control>($"{path}{name}");
 
         if (_screen != null)
             _defaultLoadingScreen = _screen;
@@ -620,6 +639,9 @@ private Dictionary<string,bool> currentScenes = new(){
             return;
         }
 
+        IsSafeToContinueLoading = false;
+        IsSafeToFinishLoading = false;
+
         _isLoading = true;
         _loadingPath = path;
 
@@ -647,6 +669,9 @@ private Dictionary<string,bool> currentScenes = new(){
             GD.PushWarning("A scene is already being loaded. Aborting...");
             return;
         }
+
+        IsSafeToContinueLoading = false;
+        IsSafeToFinishLoading = false;
 
         _isLoading = true;
         _loadingPath = path;
@@ -691,6 +716,9 @@ private Dictionary<string,bool> currentScenes = new(){
             return;
         }
 
+        IsSafeToContinueLoading = false;
+        IsSafeToFinishLoading = false;
+
         _isLoading = true;
         _loadingScene = scene;
 
@@ -712,6 +740,9 @@ private Dictionary<string,bool> currentScenes = new(){
             GD.PushWarning("A scene is already being loaded. Aborting...");
             return;
         }
+
+        IsSafeToContinueLoading = false;
+        IsSafeToFinishLoading = false;
 
         _isLoading = true;
         _loadingScene = scene;
@@ -735,7 +766,7 @@ private Dictionary<string,bool> currentScenes = new(){
 
         EmitSignal("LoadingBegan", path);
 
-        LoadingScreen _loadingScreen = null;
+        Control _loadingScreen = null;
         if (args["loading_screen"].ToString() != "")
         {
             _loadingScreen = GetLoadingScreen(args["loading_screen"].ToString(),args["loading_screen_path"].ToString());
@@ -745,8 +776,9 @@ private Dictionary<string,bool> currentScenes = new(){
                 return;
             }
 
-            _loadingScreen.Activate();
-            if (!_loadingScreen.hasInitialized)
+            EmitSignal("LoadingScreenActivated",_loadingScreen.Name);
+
+            if (!IsSafeToContinueLoading)
                 await ToSignal(_loadingScreen,"ContinueLoading");
         }
 
@@ -790,7 +822,7 @@ private Dictionary<string,bool> currentScenes = new(){
         if (isDebugEnabled)
             GD.Print($"DEBUG: Finished to load scene {path}");
 
-        Node _parent = null;
+        Node _parent;
         if ((string)args["parent_node"] != "")
             _parent = GetParentNode((string)args["parent_node"]);
         else
@@ -801,7 +833,8 @@ private Dictionary<string,bool> currentScenes = new(){
         Node _scene = _parent.GetChild(_parent.GetChildCount() - 1);
         _scene.ProcessMode = ProcessModeEnum.Disabled;
         currentScenes.Add(_scene.Name,false);
-        _internalScenePaths.Add(_scene.Name,path);
+        if (!_internalScenePaths.ContainsKey(_scene.Name))
+            _internalScenePaths.Add(_scene.Name,path);
         _lastSettings.Add(_scene.Name,args);
         _lastVariables.Add(_scene.Name,sceneVars);
         _isLoading = false;
@@ -810,7 +843,8 @@ private Dictionary<string,bool> currentScenes = new(){
 
         if (_loadingScreen != null)
         {
-            if (!_loadingScreen.hasFinished)
+            EmitSignal("LoadingScreenDisabled",_loadingScreen.Name);
+            if (!IsSafeToFinishLoading)
                 await ToSignal(_loadingScreen,"FinishedLoading");
         }
 
@@ -824,7 +858,7 @@ private Dictionary<string,bool> currentScenes = new(){
 
         EmitSignal("LoadingBegan",scene.ResourceName);
 
-        LoadingScreen _loadingScreen = null;
+        Control _loadingScreen = null;
         if (args["loading_screen"].ToString() != "")
         {
             _loadingScreen = GetLoadingScreen(args["loading_screen"].ToString(),args["loading_screen_path"].ToString());
@@ -834,8 +868,8 @@ private Dictionary<string,bool> currentScenes = new(){
                 return;
             }
 
-            _loadingScreen.Activate();
-            if (!_loadingScreen.hasInitialized)
+            EmitSignal("LoadingScreenActivated",_loadingScreen.Name);
+            if (!IsSafeToContinueLoading)
                 await ToSignal(_loadingScreen,"ContinueLoading");
         }
 
@@ -844,7 +878,7 @@ private Dictionary<string,bool> currentScenes = new(){
         if (isDebugEnabled)
             GD.Print($"DEBUG: Finished adding scene {scene}");
 
-        Node _parent = null;
+        Node _parent;
         if ((string)args["parent_node"] != "")
             _parent = GetParentNode((string)args["parent_node"]);
         else
@@ -855,29 +889,33 @@ private Dictionary<string,bool> currentScenes = new(){
         Node _scene = _parent.GetChild(_parent.GetChildCount() - 1);
         _scene.ProcessMode = ProcessModeEnum.Disabled;
         currentScenes.Add(_scene.Name,false);
-        _internalScenePaths.Add(_scene.Name,scene);
         _lastSettings.Add(_scene.Name,args);
         _lastVariables.Add(_scene.Name,sceneVars);
+
+        if (!_internalScenePaths.ContainsKey(_scene.Name))
+            _internalScenePaths.Add(_scene.Name,scene);
+
         _isLoading = false;
 
         EmitSignal("LoadingDone",_scene.Name,0);
 
         if (_loadingScreen != null)
         {
-            if (!_loadingScreen.hasFinished)
+            EmitSignal("LoadingScreenDisabled",_loadingScreen.Name);
+            if (!IsSafeToFinishLoading)
                 await ToSignal(_loadingScreen,"FinishedLoading");
         }
 
         SetAfterLoadingArgs(_scene.Name,args,sceneVars);
     }
 
-    private LoadingScreen GetLoadingScreen(string screen, string pathOverride="")
+    private Control GetLoadingScreen(string screen, string pathOverride="")
     {
         if (screen == "")
             return null;
 
         string finalPath = (pathOverride != "" ? pathOverride : loadingScreensDefaultPath) + screen;
-        LoadingScreen _screen = _root.GetNodeOrNull<LoadingScreen>("CanvasLayer/Screen1");
+        Control _screen = _root.GetNodeOrNull<Control>(finalPath);
 
         if (_screen == null)
             GD.PushError($"Could not find loading screen {screen} at path {finalPath}");
