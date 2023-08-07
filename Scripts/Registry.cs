@@ -5,11 +5,17 @@ using System;
 //This is responsible for the ownership system
 public partial class Registry : Node2D
 {
-    enum KIND
+    enum TileType
     {
-        NORMAL,
-        STATION,
-        UTILITY,
+        GO,
+        PROPERTY,
+        ITAX,
+        CHANCE,
+        CHEST,
+        JAIL,
+        GOJAIL,
+        PARKING,
+        LTAX,
     }
 
     public override void _Ready()

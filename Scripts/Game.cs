@@ -30,10 +30,13 @@ public partial class Game : Node2D
 			Globals.composer.AddScene("MainMenu","preset1");
 		}
 	}
-
-	public void MovePiece(int Dice)
+	
+	public void MovePiece(byte diceRoll, byte agentPos)
 	{
+		if(diceRoll + agentPos > 40)
+			agentPos = 0;
 
+		agentPos += diceRoll;
 	}
 
 	public void BrokeTheLaw()
@@ -43,4 +46,6 @@ public partial class Game : Node2D
 
 	[Export] Camera2D cam;
 	[Export] Registry registry;
+
+	byte agentPos1, agentPos2, agentPos3, agentPos4;
 }

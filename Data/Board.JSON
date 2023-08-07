@@ -1,6 +1,189 @@
-{
-    "0":
+[
     {
-        "TileID":0
+        "Type":"GO"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Brown1"
+    },
+
+    {
+        "Type":"CHEST"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Brown2"
+    },
+
+    {
+        "Type":"ITAX"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Station1"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Cyan1"
+    },
+
+    {
+        "Type":"CHANCE"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Cyan2"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Cyan3"
+    },
+
+    {
+        "Type":"JAIL"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Pink1"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Utility1"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Pink2"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Pink3"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Station2"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Orange1"
+    },
+
+    {
+        "Type":"CHEST"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Orange2"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Orange3"
+    },
+
+    {
+        "Type":"PARKING"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Red1"
+    },
+
+    {
+        "Type":"CHANCE"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Red2"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Red3"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Station3"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Yellow1"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Yellow2"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Utility2"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Yellow3"
+    },
+
+    {
+        "Type":"GOJAIL"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Green1"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Green2"
+    },
+
+    {
+        "Type":"CHEST"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Green3"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Station4"
+    },
+
+    {
+        "Type":"CHANCE"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Blue1"
+    },
+
+    {
+        "Type":"LTAX"
+    },
+
+    {
+        "Type":"PROPERTY",
+        "ID":"Blue2"
     }
-}
+]
