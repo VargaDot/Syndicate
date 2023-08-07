@@ -10,17 +10,12 @@ public partial class LoadingScreen : Control
     [Signal]
     public delegate void FinishedLoadingEventHandler();
 
-    public bool isActive = false;
-
-    public bool hasInitialized = false;
-    public bool hasFinished = false;
-
     public override async void _Ready()
     {
         base._Ready();
 
         if (Globals.composer == null)
-            await ToSignal(GetTree(),"process_frame");
+            await ToSignal(GetTree().CurrentScene,"ComposerLoaded");
 
         Globals.composer.LoadingBegan += OnLoadingBegan;
         Globals.composer.LoadingValueUpdated += OnLoadingValueUpdated;
@@ -30,49 +25,42 @@ public partial class LoadingScreen : Control
         ProcessMode = ProcessModeEnum.Disabled;
     }
 
-    public virtual void Activate()
+    public void Activate(string sceneName)
     {
-        hasInitialized = false;
-        hasFinished = false;
-        isActive = true;
+        if (sceneName != Name)
+            return;
 
-        Show();
         ProcessMode = ProcessModeEnum.Inherit;
-        hasInitialized = true;
+        Show();
+        Globals.composer.IsSafeToContinueLoading = true;
+        EmitSignal("ContinueLoading");
     }
 
-    public virtual void Disable()
+    public void Disable(string sceneName)
     {
-        isActive = false;
-        hasFinished = true;
+        if (sceneName != Name)
+            return;
 
         Hide();
+        Globals.composer.IsSafeToFinishLoading = true;
+        EmitSignal("FinishedLoading");
         ProcessMode = ProcessModeEnum.Disabled;
     }
 
     public virtual void OnLoadingBegan(string sceneName)
     {
-        if (!isActive)
-            return;
-
-        Activate();
+        Activate(Name);
     }
 
     public virtual void OnLoadingValueUpdated(float value)
     {
-        if (!isActive)
-            return;
-
         GD.Print($"{value*100}%");
     }
 
     public virtual void OnLoadingDone(string sceneName,int errorCode)
     {
-        if (!isActive)
-            return;
-
         if (errorCode == 0)
-            Disable();
+            Disable(Name);
         else
             GD.Print($"Error when loading scene {sceneName} with error {errorCode}");
     }

@@ -3,10 +3,14 @@
 [ext_resource type="Script" path="res://Scripts/Editor/Scene Management/LoadingScreen.cs" id="1_mhd8v"]
 [ext_resource type="Texture2D" uid="uid://crt4onjvvokqg" path="res://Assets/Sprites/LoadingScreen/amazon.jpg" id="2_kle6f"]
 
-[node name="LoadingScreen" type="Node2D"]
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_mhd8v")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(956.5, 540)
+[node name="Sprite2D" type="TextureRect" parent="."]
+layout_mode = 1
+offset_right = 1280.0
+offset_bottom = 720.0
 scale = Vector2(1.49766, 1.50278)
 texture = ExtResource("2_kle6f")

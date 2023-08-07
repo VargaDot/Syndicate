@@ -27,13 +27,13 @@ public partial class Game : Node2D
 		if(Input.IsActionPressed("Quit"))
 		{
 			GD.PushWarning("No Pause Menu has been made yet.");
-			GetTree().Quit();
+			Globals.composer.AddScene("MainMenu","preset1");
 		}
 	}
 
 	public void MovePiece(int Dice)
 	{
-		
+
 	}
 
 	public void BrokeTheLaw()

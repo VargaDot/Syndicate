@@ -23,7 +23,7 @@ public partial class Usernames : HFlowContainer
 	///</Summary>
 	public void UsernameManager(byte ID, string name = null)
     {
-        registry.AddPlayers(ID, startingCash, name);
+        // registry.AddPlayers(ID, startingCash, name);
 	}
 
 	public void OnName1Registered()

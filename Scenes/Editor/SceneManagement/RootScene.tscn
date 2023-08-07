@@ -1,9 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dtngk8msr28f3"]
 
 [ext_resource type="Script" path="res://Scripts/Editor/Scene Management/RootScript.cs" id="1_vj53n"]
-[ext_resource type="PackedScene" uid="uid://dm7fr0myawm5s" path="res://Scenes/Editor/SceneManagement/Composer.tscn" id="2_hvunm"]
+[ext_resource type="PackedScene" uid="uid://ctjciv0x83ybx" path="res://Scenes/Editor/SceneManagement/LoadingScreen.tscn" id="2_c2r8t"]
 
 [node name="RootScene" type="Node"]
 script = ExtResource("1_vj53n")
 
-[node name="Composer" parent="." instance=ExtResource("2_hvunm")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LoadingScreen" parent="CanvasLayer" instance=ExtResource("2_c2r8t")]

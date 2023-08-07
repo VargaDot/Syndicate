@@ -3,11 +3,16 @@ using System;
 
 public partial class RootScript : Node
 {
-    public override async void _Ready()
+    [Signal]
+    public delegate void ComposerLoadedEventHandler();
+
+    public override void _Ready()
     {
         base._Ready();
 
-        Globals.composer = GetNode<ComposerLib>("Composer");
-        Globals.composer.AddScene("MainMenu",new Godot.Collections.Dictionary<string, Variant>());
+        Globals.composer = GetNode<ComposerLib>("/root/Composer");
+        EmitSignal("ComposerLoaded");
+
+        Globals.composer.AddScene("MainMenu","preset1");
     }
 }
