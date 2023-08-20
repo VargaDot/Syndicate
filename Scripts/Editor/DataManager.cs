@@ -4,14 +4,13 @@ using System.Text.Json;
 using Godot;
 
 ///Namespace for loading and saving data, if you're seeing this then intellisense wise, everything's fine
-[GlobalClass]
-public partial class DataManager : Node
+namespace DataManager
 {
     ///<summary> Class for requesting data from Properties.JSON </summary>
-    public class PropertyLoader
+    public static class PropertyLoader
     {
         //Properties.JSON path
-        readonly static string PROPERTY_FILE = File.ReadAllText("Data/Properties.JSON");
+        readonly static string PROPERTY_FILE = File.ReadAllText(@"Data/Properties.JSON");
 
         // This whole portion here is just defining what and how to read the JSON file's structures
         private static readonly Dictionary<string, Dictionary<string, object>> IDdata = OpenPropertyID();
@@ -31,7 +30,7 @@ public partial class DataManager : Node
         private static readonly Dictionary<string, byte[]> RentData = OpenPropertyRent();
         static Dictionary<string, byte[]> OpenPropertyRent()
         {
-            Dictionary<string, byte[]> data = JsonSerializer.Deserialize<Dictionary<string, byte[]>>(PROPERTY_FILE); 
+            Dictionary<string, byte[]> data = JsonSerializer.Deserialize<Dictionary<string, byte[]>>(PROPERTY_FILE);
             return data;
         }
 
@@ -45,12 +44,12 @@ public partial class DataManager : Node
                 GD.PushError("Invalid internal property name");
                 return value;
             }
-            
+
             //The reason why its a ushort, is because bytes have a max size of 255 and the price can reach 400 on some circumstances.
             value = CostData[internalPropName]["Costs"]["PurchasePrice"];
             return value;
         }
-        
+
         ///<summary>
         ///Gets the property costs from the parsed .json
         ///<list type = "number">
@@ -78,7 +77,7 @@ public partial class DataManager : Node
                     GD.Print("Value: ", value, " ID: ", ID);
                     break;
             }
-            
+
             return value;
         }
 
@@ -129,7 +128,7 @@ public partial class DataManager : Node
             byte byteValue = 0;
             if(!IDdata.ContainsKey(internalPropName))
                 GD.PushError("Invalid internal property name");
-            
+
             switch (ID)
             {
                 case 1:
@@ -141,7 +140,7 @@ public partial class DataManager : Node
                 case 3:
                     byteValue = RentData[internalPropName][1];
                     break;
-                case 4:   
+                case 4:
                     byteValue = RentData[internalPropName][2];
                     break;
                 case 5:
@@ -170,7 +169,7 @@ public partial class DataManager : Node
 
             if(ID >= 2)
                 value = byteValue.ToString();
-            
+
             return value;
         }
 
@@ -186,7 +185,7 @@ public partial class DataManager : Node
         {
             if(!IDdata.ContainsKey(internalPropName))
                 GD.PushError("Invalid internal property name");
-            
+
             byte value = 0;
             switch (ID)
             {
@@ -207,7 +206,7 @@ public partial class DataManager : Node
     }
 
     ///<summary> The data saver, sorter and search engine for the board's registry </summary>
-    public partial class TheRegistry
+    public static class TheRegistry
     {
         // This entire part down here is for the tree data structure!
         ///<summary> The Agent class stores an ID and the property struct (OwnedProperties) </summary>
@@ -323,7 +322,7 @@ public partial class DataManager : Node
 
         ///<summary> Returns an array with a agent's owned properties </summary>
         ///<returns> Array<byte> </returns>
-        public byte[] GetAgentOwnedProperties(byte AgentID)
+        public static byte[] GetAgentOwnedProperties(byte AgentID)
         {
             if(!root.ContainsKey(AgentID))
                 GD.PushError("Invalid AgentID");
@@ -334,7 +333,7 @@ public partial class DataManager : Node
 
         ///<summary> Returns the ID of the property owner </summary>
         ///<returns> byte </returns>
-        public byte FindPropertyOwner(byte propertyID)
+        public static byte FindPropertyOwner(byte propertyID)
         {
             byte owner = 0;
 
@@ -352,7 +351,7 @@ public partial class DataManager : Node
         }
 
         //Just for funsies
-        public byte GetAgentRegistrySize(byte AgentID)
+        public static byte GetAgentRegistrySize(byte AgentID)
         {
             byte data = 0;
             if(!root.ContainsKey(AgentID))
@@ -366,8 +365,8 @@ public partial class DataManager : Node
         }
 
     }
-    
-    public class UsernamesManager
+
+    public static class UsernamesManager
     {
         public static string[] StoreUsernames(string A1, string A2, string A3 = null, string A4 = null)
         {
@@ -378,10 +377,10 @@ public partial class DataManager : Node
 
             if(A3 != null)
                 data.SetValue(A3, 2);
-            
+
             if(A4 != null)
                 data.SetValue(A4, 3);
-            
+
             SaveUsernamesToLocal(data);
             return data;
         }
@@ -402,9 +401,9 @@ public partial class DataManager : Node
         }
     }
 
-    public class BoardLoader
+    public static class BoardLoader
     {
-        static readonly string BOARD_FILE = File.ReadAllText("Data/Board.JSON");
+        static readonly string BOARD_FILE = File.ReadAllText(@"Data/Board.JSON");
 
         static readonly Dictionary<string,string>[] BoardData = OpenBoardData();
         static Dictionary<string,string>[] OpenBoardData()
@@ -415,7 +414,7 @@ public partial class DataManager : Node
 
         public static void CheckTileType()
         {
-
+            GD.Print("Test");
         }
     }
 }
