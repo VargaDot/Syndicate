@@ -4,11 +4,11 @@ using System.Text.Json;
 using Godot;
 
 ///Namespace for loading and saving data, if you're seeing this then intellisense wise, everything's fine
-namespace DataManager
+[GlobalClass]
+public partial class DataManager : Node
 {
     ///<summary> Class for requesting data from Properties.JSON </summary>
-    [GlobalClass]
-    public partial class PropertyLoader : Node
+    public class PropertyLoader
     {
         //Properties.JSON path
         readonly static string PROPERTY_FILE = File.ReadAllText("Data/Properties.JSON");
@@ -207,7 +207,7 @@ namespace DataManager
     }
 
     ///<summary> The data saver, sorter and search engine for the board's registry </summary>
-    public partial class TheRegistry : Node
+    public partial class TheRegistry
     {
         // This entire part down here is for the tree data structure!
         ///<summary> The Agent class stores an ID and the property struct (OwnedProperties) </summary>
@@ -248,8 +248,8 @@ namespace DataManager
         // This is the functions part
 
         ///<summary> root is the Agent tree node, from here we can access the entire tree structure </summary>
-        private readonly Dictionary<byte, Agent> root = new();
-        public void AddAgents(byte ID, ushort startingCash, string username)
+        private static readonly Dictionary<byte, Agent> root = new();
+        public static void AddAgents(byte ID, ushort startingCash, string username)
         {
             if(!root.ContainsKey(ID))
                 root[ID] = new Agent(ID, startingCash, username);
@@ -257,12 +257,20 @@ namespace DataManager
                 GD.Print("There's already an ID of the same kind");
         }
 
-        public void RemoveAgent(byte AgentID)
+        public static void RemoveAgent(byte AgentID)
         {
             root.Remove(AgentID);
         }
 
-        public void AddProperty(byte AgentID, byte PropertyID, byte upgradeLevel = 1, bool isMortgaged = false)
+        public static void ListAgents()
+        {
+            foreach(Agent Agent in root.Values)
+            {
+                GD.Print(Agent.ID, Agent.Name);
+            }
+        }
+
+        public static void AddProperty(byte AgentID, byte PropertyID, byte upgradeLevel = 1, bool isMortgaged = false)
         {
             if(!root.ContainsKey(AgentID))
                 GD.PushError("Agent ID is not valid");
@@ -272,7 +280,7 @@ namespace DataManager
             agent.OwnedProperties[PropertyID] = new Property(PropertyID, upgradeLevel, isMortgaged);
         }
 
-        public void RemoveProperty(byte agentID, byte PropertyID)
+        public static void RemoveProperty(byte agentID, byte PropertyID)
         {
             Agent agent = root[agentID];
 
@@ -285,7 +293,7 @@ namespace DataManager
             root[agentID].OwnedProperties.Remove(PropertyID);
         }
 
-        public void UpdatePropertyLevel(byte AgentID, byte PropertyID, byte newUpgradeLevel)
+        public static void UpdatePropertyLevel(byte AgentID, byte PropertyID, byte newUpgradeLevel)
         {
             Agent agent = root[AgentID];
             Property property = agent.OwnedProperties[PropertyID];
@@ -299,7 +307,7 @@ namespace DataManager
             property.UpgradeLevel = newUpgradeLevel;
         }
 
-        public void UpdateMortgageStatus(byte AgentID, byte PropertyID, bool newMortgageStatus)
+        public static void UpdateMortgageStatus(byte AgentID, byte PropertyID, bool newMortgageStatus)
         {
             Agent agent = root[AgentID];
             Property property = root[AgentID].OwnedProperties[PropertyID];
@@ -359,7 +367,7 @@ namespace DataManager
 
     }
     
-    public partial class UsernamesManager : Node
+    public class UsernamesManager
     {
         public static string[] StoreUsernames(string A1, string A2, string A3 = null, string A4 = null)
         {
@@ -394,7 +402,7 @@ namespace DataManager
         }
     }
 
-    public partial class BoardLoader : Node
+    public class BoardLoader
     {
         static readonly string BOARD_FILE = File.ReadAllText("Data/Board.JSON");
 

@@ -1,6 +1,5 @@
 using Godot;
 using Godot.Collections;
-using DataManager;
 
 //This is strictly for UI, player turns and visual stuff.
 public partial class Game : Node2D

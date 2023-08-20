@@ -6,9 +6,7 @@ using System;
 ///</Summary>
 public partial class MainMenu : Control
 {
-
 	AnimationPlayer player;
-
 	public override void _Ready()
 	{
 		player = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -17,8 +15,8 @@ public partial class MainMenu : Control
 	public override void _Process(double delta)
 	{
 		//Quitting always works
-		// if(Input.IsActionPressed("Quit"))
-		// 	GetTree().Quit();
+		if(Input.IsActionPressed("Quit"))
+		 	GetTree().Quit();
 		if (Input.IsActionJustPressed("SkipAnimation") && player.IsPlaying())
 			player.Seek(1,true);
 	}

@@ -1,6 +1,5 @@
 using Godot;
 using Godot.Collections;
-using DataManager;
 using System;
 
 public partial class Card : Control
@@ -46,13 +45,13 @@ public partial class Card : Control
 			Hide();
 		}
 	}
-
+	
 	void TextRelated(string InternalCardName)
 	{
 		//Changes all of the text inside the card
 		for (byte i = 1; i < AllLabels.Count; i++)
 		{
-			AllLabels[i].Text = PropertyLoader.GetTextForCard(InternalCardName, i);
+			AllLabels[i].Text = DataManager.PropertyLoader.GetTextForCard(InternalCardName, i);
 		}
 	}
 

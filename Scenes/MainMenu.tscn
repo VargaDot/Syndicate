@@ -230,10 +230,10 @@ one_shot = true
 
 [node name="AgentType" type="HBoxContainer" parent="SingleplayerMenu"]
 layout_mode = 0
-offset_left = 49.0
-offset_top = 547.0
-offset_right = 1375.0
-offset_bottom = 685.0
+offset_left = 127.0
+offset_top = 596.0
+offset_right = 1297.0
+offset_bottom = 620.0
 theme_override_constants/separation = 250
 alignment = 1
 

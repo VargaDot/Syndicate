@@ -1,5 +1,4 @@
 using Godot;
-using DataManager;
 
 public partial class Usernames : HFlowContainer
 {
@@ -15,15 +14,16 @@ public partial class Usernames : HFlowContainer
 			EmitSignal("OnPlayPressed");
 		else
 			LaunchWarning(1);
+		
+		DataManager.TheRegistry.ListAgents();
 	}
 
-    private TheRegistry registry = new();
 	///<Summary>
 	///Checks UI Panel interaction and confirms/denies/reacts to them.
 	///</Summary>
 	public void UsernameManager(byte ID, string name = null)
     {
-        // registry.AddPlayers(ID, startingCash, name);
+        DataManager.TheRegistry.AddAgents(ID, startingCash, name);
 	}
 
 	public void OnName1Registered()
