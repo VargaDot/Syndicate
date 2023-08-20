@@ -7,7 +7,8 @@ using Godot;
 namespace DataManager
 {
     ///<summary> Class for requesting data from Properties.JSON </summary>
-    public class PropertyLoader
+    [GlobalClass]
+    public partial class PropertyLoader : Node
     {
         //Properties.JSON path
         readonly static string PROPERTY_FILE = File.ReadAllText("Data/Properties.JSON");
@@ -206,7 +207,7 @@ namespace DataManager
     }
 
     ///<summary> The data saver, sorter and search engine for the board's registry </summary>
-    public class TheRegistry
+    public partial class TheRegistry : Node
     {
         // This entire part down here is for the tree data structure!
         ///<summary> The Agent class stores an ID and the property struct (OwnedProperties) </summary>
@@ -357,8 +358,8 @@ namespace DataManager
         }
 
     }
-
-    public class UsernamesManager
+    
+    public partial class UsernamesManager : Node
     {
         public static string[] StoreUsernames(string A1, string A2, string A3 = null, string A4 = null)
         {
@@ -393,7 +394,7 @@ namespace DataManager
         }
     }
 
-    public class BoardLoader
+    public partial class BoardLoader : Node
     {
         static readonly string BOARD_FILE = File.ReadAllText("Data/Board.JSON");
 

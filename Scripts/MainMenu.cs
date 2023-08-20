@@ -26,7 +26,12 @@ public partial class MainMenu : Control
 	bool Shown = false;
 	public void OnSinglePlayerPressed()
 	{
-		player.Play("ShowSingleplayer");
+	    if(Shown == true)
+			player.Play("HideSingleplayer");
+		else
+			player.Play("ShowSingleplayer");
+		
+		Shown = !Shown;
 	}
 
 	//When the multiplayer (coop) button gets pressed
@@ -43,6 +48,7 @@ public partial class MainMenu : Control
 	public void OnClosePressed()
 	{
 		player.Play("HideSingleplayer");
+		Shown = false;
 	}
 
 	[Export] public Panel SingleplayerPanel;

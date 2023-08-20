@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://Scenes/Editor/MusicPlayer.tscn" id="5_rd1by"]
 [ext_resource type="FontFile" uid="uid://c46oubnvhj7jf" path="res://Assets/Fonts/Koblenz-Serial-Regular.ttf" id="6_d3jj1"]
 
-[sub_resource type="Animation" id="Animation_lbg8y"]
-resource_name = "ShowSingleplayer"
-length = 0.8
+[sub_resource type="Animation" id="Animation_cmlab"]
+resource_name = "HideSingleplayer"
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -19,9 +19,9 @@ tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0.2, 0.5),
-"transitions": PackedFloat32Array(1.7411, 0.5),
+"transitions": PackedFloat32Array(0.5, 1.7411),
 "update": 0,
-"values": [Vector2(769, 341.5), Vector2(1500, 341.5)]
+"values": [Vector2(1500, 341.5), Vector2(769, 341.5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -30,22 +30,10 @@ tracks/1/path = NodePath("SingleplayerMenu:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 0.4, 0.8),
-"transitions": PackedFloat32Array(1, 3.605, 0.258816),
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(0.258816, 3.605, 1),
 "update": 0,
-"values": [Vector2(1e-05, 1e-05), Vector2(1e-05, 1e-05), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Menu/BtnHolder/SingleButton:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(2, 0.203063, 0.329877, 3.605, 0.277392),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(50, 0), Vector2(0, 0), Vector2(-50, 0), Vector2(0, 0)]
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05), Vector2(1e-05, 1e-05)]
 }
 
 [sub_resource type="Animation" id="Animation_1v0xq"]
@@ -87,9 +75,9 @@ tracks/2/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_cmlab"]
-resource_name = "HideSingleplayer"
-length = 0.6
+[sub_resource type="Animation" id="Animation_lbg8y"]
+resource_name = "ShowSingleplayer"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -98,9 +86,9 @@ tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0.2, 0.5),
-"transitions": PackedFloat32Array(0.5, 1.7411),
+"transitions": PackedFloat32Array(1.7411, 0.5),
 "update": 0,
-"values": [Vector2(1500, 341.5), Vector2(769, 341.5)]
+"values": [Vector2(769, 341.5), Vector2(1500, 341.5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -109,10 +97,22 @@ tracks/1/path = NodePath("SingleplayerMenu:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
-"transitions": PackedFloat32Array(0.258816, 3.605, 1),
+"times": PackedFloat32Array(0.2, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 3.605, 0.258816),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1e-05, 1e-05), Vector2(1e-05, 1e-05)]
+"values": [Vector2(1e-05, 1e-05), Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Menu/BtnHolder/SingleButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(2, 0.203063, 0.329877, 3.605, 0.277392),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(50, 0), Vector2(0, 0), Vector2(-50, 0), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x0kh3"]
