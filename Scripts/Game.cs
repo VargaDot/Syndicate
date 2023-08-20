@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using DataManager;
 
 //This is strictly for UI, player turns and visual stuff.
 public partial class Game : Node2D
@@ -29,7 +30,7 @@ public partial class Game : Node2D
 			Globals.composer.AddScene("MainMenu","preset1");
 		}
 	}
-	
+
 	public void MovePiece(byte diceRoll, byte agentPos)
 	{
 		if(diceRoll + agentPos > 40)
