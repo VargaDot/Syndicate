@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Text.Json;
 using Godot;
 
@@ -9,8 +10,8 @@ namespace DataManager
     ///<summary> Class for requesting data from Properties.JSON </summary>
     public static class PropertyLoader
     {
-        //Properties.JSON path
-        readonly static string PROPERTY_FILE = File.ReadAllText(@"Data/Properties.JSON");
+        const string PROPERTY_PATH = "Data/Properties.JSON";
+        readonly static string PROPERTY_FILE = File.ReadAllText(PROPERTY_PATH, Encoding.UTF8);
 
         // This whole portion here is just defining what and how to read the JSON file's structures
         private static readonly Dictionary<string, Dictionary<string, object>> IDdata = OpenPropertyID();
