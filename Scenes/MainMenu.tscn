@@ -191,28 +191,28 @@ PopUp = NodePath("message")
 textTimer = NodePath("message/Timer")
 metadata/_edit_group_ = true
 
-[node name="PlayerName" type="LineEdit" parent="SingleplayerMenu/Usernames"]
+[node name="AgentName1" type="LineEdit" parent="SingleplayerMenu/Usernames"]
 layout_mode = 2
 theme = ExtResource("3_roui2")
 placeholder_text = "Varga"
 caret_blink = true
 
-[node name="PlayerName2" type="LineEdit" parent="SingleplayerMenu/Usernames"]
+[node name="AgentName2" type="LineEdit" parent="SingleplayerMenu/Usernames"]
 layout_mode = 2
 theme = ExtResource("3_roui2")
-placeholder_text = "Bain"
+placeholder_text = "SP4R0W"
 caret_blink = true
 
-[node name="PlayerName3" type="LineEdit" parent="SingleplayerMenu/Usernames"]
+[node name="AgentName3" type="LineEdit" parent="SingleplayerMenu/Usernames"]
 layout_mode = 2
 theme = ExtResource("3_roui2")
 placeholder_text = "Joe"
 caret_blink = true
 
-[node name="PlayerName4" type="LineEdit" parent="SingleplayerMenu/Usernames"]
+[node name="AgentName4" type="LineEdit" parent="SingleplayerMenu/Usernames"]
 layout_mode = 2
 theme = ExtResource("3_roui2")
-placeholder_text = "Mama"
+placeholder_text = "Bain"
 caret_blink = true
 
 [node name="message" type="Label" parent="SingleplayerMenu/Usernames"]
@@ -349,14 +349,14 @@ libraries = {
 }
 
 [connection signal="GoPressed" from="SingleplayerMenu/Usernames" to="." method="OnPlayPressed"]
-[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/PlayerName" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
-[connection signal="text_submitted" from="SingleplayerMenu/Usernames/PlayerName" to="SingleplayerMenu/Usernames" method="OnName1Registered"]
-[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/PlayerName2" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
-[connection signal="text_submitted" from="SingleplayerMenu/Usernames/PlayerName2" to="SingleplayerMenu/Usernames" method="OnName2Registered"]
-[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/PlayerName3" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
-[connection signal="text_submitted" from="SingleplayerMenu/Usernames/PlayerName3" to="SingleplayerMenu/Usernames" method="OnName3Registered"]
-[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/PlayerName4" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
-[connection signal="text_submitted" from="SingleplayerMenu/Usernames/PlayerName4" to="SingleplayerMenu/Usernames" method="OnName4Registered"]
+[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
+[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="OnAgent1Registered"]
+[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName2" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
+[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName2" to="SingleplayerMenu/Usernames" method="OnAgent2Registered"]
+[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName3" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
+[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName3" to="SingleplayerMenu/Usernames" method="OnAgent3Registered"]
+[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
+[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="OnAgent4Registered"]
 [connection signal="timeout" from="SingleplayerMenu/Usernames/message/Timer" to="SingleplayerMenu/Usernames" method="OnTimeout"]
 [connection signal="pressed" from="SingleplayerMenu/VBoxContainer/PlayButton" to="." method="OnPlayPressed"]
 [connection signal="pressed" from="SingleplayerMenu/VBoxContainer/CloseButton" to="." method="OnClosePressed"]

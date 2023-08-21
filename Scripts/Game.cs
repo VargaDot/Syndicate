@@ -14,10 +14,7 @@ public partial class Game : Node2D
 	//Loads and instantiates players into the game scene.
 	void LoadGame()
 	{
-		/*
-		UsernamesManager.LoadUsername();
-		TheRegistry.AddPlayers();
-		*/
+		TheRegistry.ListAgents();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

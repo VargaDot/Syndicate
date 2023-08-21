@@ -1,4 +1,5 @@
 using Godot;
+using DataManager;
 
 public partial class Usernames : HFlowContainer
 {
@@ -14,42 +15,37 @@ public partial class Usernames : HFlowContainer
 			EmitSignal("OnPlayPressed");
 		else
 			LaunchWarning(1);
-		
-		DataManager.TheRegistry.ListAgents();
 	}
 
 	///<Summary>
 	///Checks UI Panel interaction and confirms/denies/reacts to them.
 	///</Summary>
-	public void UsernameManager(byte ID, string name = null)
+	public void UsernameManager(byte ID, string name)
     {
-        DataManager.TheRegistry.AddAgents(ID, startingCash, name);
+        TheRegistry.AddAgents(ID, startingCash, name);
+		TheRegistry.ListAgents();
 	}
 
-	public void OnName1Registered()
+	public void OnAgent1Registered(string new_text)
 	{
-		string n = GetNode<LineEdit>("PlayerName").Text;
-		UsernameManager(0, n);
+		UsernameManager(0, new_text);
 		Enter1 = true;
 	}
 
-	public void OnName2Registered()
+	public void OnAgent2Registered(string new_text)
 	{
-		string n = GetNode<LineEdit>("PlayerName2").Text;
-		UsernameManager(1, n);
+		UsernameManager(1, new_text);
 		Enter2 = true;
 	}
 
-	public void OnName3Registered()
+	public void OnAgent3Registered(string new_text)
 	{
-		string n = GetNode<LineEdit>("PlayerName3").Text;
-		UsernameManager(2, n);
+		UsernameManager(2, new_text);
 	}
 
-	public void OnName4Registered()
+	public void OnAgent4Registered(string new_text)
 	{
-		string n = GetNode<LineEdit>("PlayerName4").Text;
-		UsernameManager(3, n);
+		UsernameManager(3, new_text);
 	}
 
 	static ushort startingCash = 2500;
