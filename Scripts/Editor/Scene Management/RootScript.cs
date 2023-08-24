@@ -16,7 +16,6 @@ public partial class RootScript : Node
 
         Globals.composer.AddScene("MainMenu","preset1");
 
-        BoardLoader.CheckTileType();
-        GD.Print(PropertyLoader.GetPropertyPrice("Brown1"));
+        //GD.Print(PropertyLoader.GetPropertyPrice("Brown1"));
     }
 }

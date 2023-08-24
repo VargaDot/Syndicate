@@ -7,6 +7,66 @@ using Godot;
 ///Namespace for loading and saving data, if you're seeing this then intellisense wise, everything's fine
 namespace DataManager
 {
+    public static class BoardLoader
+    {
+        const string BOARD_PATH = "Data/Board.JSON";
+        static readonly string BOARD_FILE = File.ReadAllText(BOARD_PATH, Encoding.UTF8);
+        readonly static Dictionary<string, object>[] BoardData = JsonSerializer.Deserialize<Dictionary<string, object>[]>(BOARD_FILE);
+        
+        /// <summary>
+        /// <list type = "number">
+        /// <item><description><para><em> Property Type </em></para></description></item>
+        /// <item><description><para><em> CardID </em></para></description></item>
+        /// </list>
+        /// </summary>
+        /// <returns> byte </returns>
+        public static byte LoadTileNumData(int BoardID, byte functionID)
+        {  
+            byte value = 0;
+            switch (BoardID)
+            {
+                case 1:
+                    value = (byte)BoardData[BoardID]["Type"];
+                    break;
+                case 2:
+                    value = (byte)BoardData[BoardID]["CardID"];
+                    break;
+                default:
+                    GD.PrintErr("Invalid Operation");
+                    break;
+            }
+
+            return value;
+        }
+        
+        /// <summary>
+        /// <list type = "number">
+        /// <item><description><para><em> Property Name </em></para></description></item>
+        /// <item><description><para><em> InternalPropertyName </em></para></description></item>
+        /// </list>
+        /// </summary>
+        /// <returns> string </returns>
+        public static string LoadTileStrData(int BoardID, byte functionID)
+        {
+            string value = "";
+
+            switch (BoardID)
+            {
+                case 1:
+                    value = (string)BoardData[BoardID]["Name"];
+                    break;
+                case 2:
+                    value = (string)BoardData[BoardID]["ID"];
+                    break;
+                default:
+                    GD.PrintErr("Invalid Operation");
+                    break;
+            }
+
+            return value;
+        }
+    }
+
     ///<summary> Class for requesting data from Properties.JSON </summary>
     public static class PropertyLoader
     {
@@ -14,13 +74,6 @@ namespace DataManager
         readonly static string PROPERTY_FILE = File.ReadAllText(PROPERTY_PATH, Encoding.UTF8);
 
         // This whole portion here is just defining what and how to read the JSON file's structures
-        private static readonly Dictionary<string, Dictionary<string, object>> IDdata = OpenPropertyID();
-        static Dictionary<string, Dictionary<string, object>> OpenPropertyID()
-        {
-            Dictionary<string, Dictionary<string, object>> data = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, object>>>(PROPERTY_FILE);
-            return data;
-        }
-
         private static readonly Dictionary<string, Dictionary<string, Dictionary<string, byte>>> CostData = OpenPropertyCosts();
         static Dictionary<string, Dictionary<string, Dictionary<string, byte>>> OpenPropertyCosts()
         {
@@ -40,7 +93,7 @@ namespace DataManager
         public static ushort GetPropertyPrice(string internalPropName)
         {
             ushort value = 0;
-            if(!IDdata.ContainsKey(internalPropName))
+            if(!CostData.ContainsKey(internalPropName))
             {
                 GD.PushError("Invalid internal property name");
                 return value;
@@ -127,14 +180,11 @@ namespace DataManager
         {
             string value = null;
             byte byteValue = 0;
-            if(!IDdata.ContainsKey(internalPropName))
+            if(!RentData.ContainsKey(internalPropName))
                 GD.PushError("Invalid internal property name");
 
             switch (ID)
             {
-                case 1:
-                    value = (string)IDdata[internalPropName]["Name"];
-                    break;
                 case 2:
                     byteValue = RentData[internalPropName][0];
                     break;
@@ -174,36 +224,8 @@ namespace DataManager
             return value;
         }
 
-        ///<summary>
-        ///Gets CardID or BoardID from the parsed .JSON
-        ///<list type = "number">
-        ///<item><description><para><em> CardID </em></para></description></item>
-        ///<item><description><para><em> BoardID </em></para></description></item>
-        ///</list>
-        ///</summary>
-        ///<returns> Byte </returns>
-        public static byte GetAnyID(string internalPropName, byte ID)
-        {
-            if(!IDdata.ContainsKey(internalPropName))
-                GD.PushError("Invalid internal property name");
 
-            byte value = 0;
-            switch (ID)
-            {
-                case 1:
-                    value = (byte)IDdata[internalPropName]["CardID"];
-                    break;
-                case 2:
-                    value = (byte)IDdata[internalPropName]["BoardID"];
-                    break;
-                default:
-                    GD.PushError("GetAnyID Invalid ID");
-                    GD.Print("Value: ", value, " ID: ", ID);
-                break;
-            }
 
-            return value;
-        }
     }
 
     ///<summary> The data saver, sorter and search engine for the board's registry </summary>
@@ -254,7 +276,7 @@ namespace DataManager
             if(!root.ContainsKey(ID))
                 root[ID] = new Agent(ID, startingCash, username);
             else
-                GD.Print("There's already an ID of the same kind");
+                GD.Print("Username overrided");
         }
 
         public static void RemoveAgent(byte AgentID)
@@ -268,6 +290,12 @@ namespace DataManager
             {
                 GD.Print(Agent.ID, Agent.Name);
             }
+        }
+
+        public static void ConductTransaction(byte agentID, int amount)
+        {
+            Agent agent = root[agentID];
+            agent.Cash += amount;
         }
 
         public static void AddProperty(byte AgentID, byte PropertyID, byte upgradeLevel = 1, bool isMortgaged = false)
@@ -332,90 +360,7 @@ namespace DataManager
             return data;
         }
 
-        ///<summary> Returns the ID of the property owner </summary>
-        ///<returns> byte </returns>
-        public static byte FindPropertyOwner(byte propertyID)
-        {
-            byte owner = 0;
-
-            foreach (byte agentID in root.Keys)
-            {
-                Agent agent = root[agentID];
-
-                if (agent.OwnedProperties.ContainsKey(propertyID))
-                    owner = agentID;
-                else
-                    GD.Print("No owner found!");
-            }
-
-            return owner;
-        }
-
-        //Just for funsies
-        public static byte GetAgentRegistrySize(byte AgentID)
-        {
-            byte data = 0;
-            if(!root.ContainsKey(AgentID))
-            {
-                GD.PushError("Invalid AgentID");
-                return data;
-            }
-
-            data = (byte)root[AgentID].OwnedProperties.Keys.Count;
-            return data;
-        }
-
     }
 
-    public static class UsernamesManager
-    {
-        public static string[] StoreUsernames(string A1, string A2, string A3 = null, string A4 = null)
-        {
-            string[] data = new string[4];
 
-            data.SetValue(A1, 0);
-            data.SetValue(A2, 1);
-
-            if(A3 != null)
-                data.SetValue(A3, 2);
-
-            if(A4 != null)
-                data.SetValue(A4, 3);
-
-            SaveUsernamesToLocal(data);
-            return data;
-        }
-
-        const string USERNAMES_FILE = "Data/Usernames.JSON";
-        private static void SaveUsernamesToLocal(string[] usernameArray)
-        {
-            string data = JsonSerializer.Serialize(usernameArray);
-            File.WriteAllText(USERNAMES_FILE, data);
-        }
-
-        public static string LoadUsername(byte AgentID)
-        {
-            string[] Jsondata = JsonSerializer.Deserialize<string[]>(USERNAMES_FILE);
-
-            string data = Jsondata[AgentID];
-            return data;
-        }
-    }
-
-    public static class BoardLoader
-    {
-        static readonly string BOARD_FILE = File.ReadAllText(@"Data/Board.JSON");
-
-        static readonly Dictionary<string,string>[] BoardData = OpenBoardData();
-        static Dictionary<string,string>[] OpenBoardData()
-        {
-            Dictionary<string,string>[] data = JsonSerializer.Deserialize<Dictionary<string,string>[]>(BOARD_FILE);
-            return data;
-        }
-
-        public static void CheckTileType()
-        {
-            GD.Print("Test");
-        }
-    }
 }

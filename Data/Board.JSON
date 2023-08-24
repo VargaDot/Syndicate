@@ -1,243 +1,243 @@
 [
     {
-        "Type":"GO"
+        "Type":0
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Brown1",
         "Name":"Mediterranean Avenue",
         "CardID":0
     },
 
     {
-        "Type":"CHEST"
+        "Type":2
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Brown2",
         "Name":"Baltic Avenue",
         "CardID":0
     },
 
     {
-        "Type":"ITAX"
+        "Type":4
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Station1",
         "Name":"Reading Railroad",
         "CardID":8
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Cyan1",
         "Name":"Oriental Avenue",
         "CardID":1
     },
 
     {
-        "Type":"CHANCE"
+        "Type":3
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Cyan2",
         "Name":"Vermont Avenue",
         "CardID":1
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Cyan3",
         "Name":"Oriental Avenue",
         "CardID":1
     },
 
     {
-        "Type":"JAIL"
+        "Type":6
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Pink1",
         "Name":"St. Charles Place",
         "CardID":2
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Utility1",
         "Name":"Electric Company",
         "CardID":9
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Pink2",
         "Name":"States Avenue",
         "CardID":2
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Pink3",
         "Name":"Virginia Avenue",
         "CardID":2
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Station2",
         "Name":"Pennsylvania Railroad",
         "CardID":8
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Orange1",
         "Name":"St. James Place",
         "CardID":3
     },
 
     {
-        "Type":"CHEST"
+        "Type":2
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Orange2",
         "Name":"Tennessee Avenue",
         "CardID":3
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Orange3",
         "Name":"New York Avenue",
         "CardID":3
     },
 
     {
-        "Type":"PARKING"
+        "Type":8
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Red1",
         "Name":"Kentucky Avenue",
         "CardID":4
     },
 
     {
-        "Type":"CHANCE"
+        "Type":3
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Red2",
         "Name":"Indiana Avenue",
         "CardID":4
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Red3",
         "Name":"Illinois Avenue",
         "CardID":4
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Station3",
         "Name":"B. & O. Railroad",
         "CardID":8
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Yellow1",
         "Name":"Atlantic Avenue",
         "CardID":5
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Yellow2",
         "Name":"Ventnor Avenue",
         "CardID":5
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Utility2",
         "Name":"Water Works",
         "CardID":10
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Yellow3",
         "Name":"Marvin Gardens",
         "CardID":5
     },
 
     {
-        "Type":"GOJAIL"
+        "Type":7
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Green1",
         "Name":"Pacific Avenue",
         "CardID":6
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Green2",
         "Name":"North Carolina Avenue",
         "CardID":6
     },
 
     {
-        "Type":"CHEST"
+        "Type":2
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Green3",
         "Name":"Pennsylvania Avenue",
         "CardID":6
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Station4",
         "Name":"Short Line",
         "CardID":8
     },
 
     {
-        "Type":"CHANCE"
+        "Type":3
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Blue1",
         "Name":"Park Place",
         "CardID":7
     },
 
     {
-        "Type":"LTAX"
+        "Type":5
     },
 
     {
-        "Type":"PROPERTY",
+        "Type":1,
         "ID":"Blue2",
         "Name":"Boardwalk",
         "CardID":7
