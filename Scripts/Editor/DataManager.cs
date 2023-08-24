@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using Godot;
@@ -270,7 +272,7 @@ namespace DataManager
         // This is the functions part
 
         ///<summary> root is the Agent tree node, from here we can access the entire tree structure </summary>
-        private static readonly Dictionary<byte, Agent> root = new();
+        private static Dictionary<byte, Agent> root = new();
         public static void AddAgents(byte ID, ushort startingCash, string username)
         {
             if(!root.ContainsKey(ID))
@@ -359,6 +361,8 @@ namespace DataManager
             byte[] data = new byte[root[AgentID].OwnedProperties.Count];
             return data;
         }
+
+        
 
     }
 

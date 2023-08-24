@@ -56,10 +56,10 @@ public partial class Game : Node2D
 				HoldChanceEvent();
 				break;
 			case (byte)TileTypes.ITAX:
-				TheRegistry.ConductTransaction(agentPos, 100);
+				TheRegistry.ConductTransaction(agentPos, -100);
 				break;
 			case (byte)TileTypes.LTAX:
-				TheRegistry.ConductTransaction(agentPos, 250);
+				TheRegistry.ConductTransaction(agentPos, -250);
 				break;
 			case (byte)TileTypes.GOJAIL:
 				BrokeTheLaw();
