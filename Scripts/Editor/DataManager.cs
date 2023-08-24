@@ -272,7 +272,7 @@ namespace DataManager
         // This is the functions part
 
         ///<summary> root is the Agent tree node, from here we can access the entire tree structure </summary>
-        private static Dictionary<byte, Agent> root = new();
+        private static readonly Dictionary<byte, Agent> root = new();
         public static void AddAgents(byte ID, ushort startingCash, string username)
         {
             if(!root.ContainsKey(ID))
