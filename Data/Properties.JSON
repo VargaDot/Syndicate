@@ -1,10 +1,6 @@
 {
     "default":
     {
-        "Name":"Varga's Avenue",
-        "CardID":69,
-        "BoardID":69,
-        
         "Costs":
         {
             "PurchasePrice":9999,
@@ -25,10 +21,6 @@
 
     "Brown1":
     {
-        "Name":"Mediterranean Avenue",
-        "CardID":0,
-        "BoardID":1,
-        
         "Costs":
         {
             "PurchasePrice":60,
@@ -49,11 +41,6 @@
 	
 	"Brown2":
     {
-        "Name":"Baltic Avenue",
-        "CardID":0,
-        "BoardID":2,
-        
-        
         "Costs":
         {
             "PurchasePrice":60,
@@ -73,11 +60,7 @@
     },
 	
 	"Cyan1":
-    {
-        "Name":"Oriental Avenue",
-        "CardID":1,
-        "BoardID":3,
-        
+    { 
         "Costs":
         {
             "PurchasePrice":100,
@@ -98,10 +81,6 @@
 	
 	"Cyan2":
     {
-        "Name":"Vermont Avenue",
-        "CardID":1,
-        "BoardID":4,
-        
         "Costs":
         {
             "PurchasePrice":100,
@@ -121,11 +100,7 @@
     },
 	
 	"Cyan3":
-    {
-        "Name":"Oriental Avenue",
-        "CardID":1,
-        "BoardID":5,
-        
+    { 
         "Costs":
         {
             "PurchasePrice":100,
@@ -146,10 +121,6 @@
 	
 	"Pink1":
     {
-        "Name":"St. Charles Place",
-        "CardID":2,
-        "BoardID":6,
-        
         "Costs":
         {
             "PurchasePrice":140,
@@ -170,10 +141,6 @@
 	
 	"Pink2":
     {
-        "Name":"States Avenue",
-        "CardID":2,
-        "BoardID":7,
-        
         "Costs":
         {
             "PurchasePrice":140,
@@ -194,10 +161,6 @@
 	
 	"Pink3":
     {
-        "Name":"Virginia Avenue",
-        "CardID":2,
-        "BoardID":8,
-        
         "Costs":
         {
             "PurchasePrice":160,
@@ -218,10 +181,6 @@
 	
 	"Orange1":
     {
-        "Name":"St. James Place",
-        "CardID":3,
-        "BoardID":9,
-        
         "Costs":
         {
             "PurchasePrice":180,
@@ -242,10 +201,6 @@
 	
 	"Orange2":
     {
-        "Name":"Tennessee Avenue",
-        "CardID":3,
-        "BoardID":10,
-        
         "Costs":
         {
             "PurchasePrice":180,
@@ -266,10 +221,6 @@
 	
 	"Orange3":
     {
-        "Name":"New York Avenue",
-        "CardID":3,
-        "BoardID":11,
-        
         "Costs":
         {
             "PurchasePrice":200,
@@ -290,10 +241,6 @@
 	
 	"Red1":
     {
-        "Name":"Kentucky Avenue",
-        "CardID":4,
-        "BoardID":12,
-        
         "Costs":
         {
             "PurchasePrice":220,
@@ -314,10 +261,6 @@
 	
 	"Red2":
     {
-        "Name":"Indiana Avenue",
-        "CardID":4,
-        "BoardID":13,
-        
         "Costs":
         {
             "PurchasePrice":220,
@@ -338,10 +281,6 @@
 	
 	"Red3":
     {
-        "Name":"Illinois Avenue",
-        "CardID":4,
-        "BoardID":14,
-        
         "Costs":
         {
             "PurchasePrice":240,
@@ -362,10 +301,6 @@
 	
 	"Yellow1":
     {
-        "Name":"Atlantic Avenue",
-        "CardID":5,
-        "BoardID":15,
-        
         "Costs":
         {
             "PurchasePrice":260,
@@ -386,10 +321,6 @@
 	
 	"Yellow2":
     {
-        "Name":"Ventnor Avenue",
-        "CardID":5,
-        "BoardID":16,
-        
         "Costs":
         {
             "PurchasePrice":260,
@@ -410,10 +341,6 @@
 	
 	"Yellow3":
     {
-        "Name":"Marvin Gardens",
-        "CardID":5,
-        "BoardID":17,
-        
         "Costs":
         {
             "PurchasePrice":260,
@@ -434,10 +361,6 @@
 	
 	"Green1":
     {
-        "Name":"Pacific Avenue",
-        "CardID":6,
-        "BoardID":18,
-        
         "Costs":
         {
             "PurchasePrice":300,
@@ -458,11 +381,6 @@
 	
 	"Green2":
     {
-
-        "Name":"North Carolina Avenue",
-        "CardID":6,
-        "BoardID":19,
-        
         "Costs":
         {
             "PurchasePrice":300,
@@ -483,10 +401,6 @@
 	
 	"Green3":
     {
-        "Name":"Pennsylvania Avenue",
-        "CardID":6,
-        "BoardID":20,
-        
         "Costs":
         {
             "PurchasePrice":320,
@@ -507,10 +421,6 @@
 	
 	"Blue1":
     {
-        "Name":"Park Place",
-        "CardID":7,
-        "BoardID":21,
-        
         "Costs":
         {
             "PurchasePrice":350,
@@ -531,10 +441,6 @@
 	
 	"Blue2":
     {
-        "Name":"Boardwalk",
-        "CardID":7,
-        "BoardID":22,
-        
         "Costs":
         {
             "PurchasePrice":400,
@@ -555,109 +461,67 @@
 	
 	"Station1":
     {
-        "Name":"Reading Railroad",
-        "CardID":8,
-        "BoardID":23,
-        
         "Costs":
         {
             "PurchasePrice":200,
 			"Mortgage":100
         },
 
-        "RentValues":
-        [
-            25
-        ]
+        "RentValues":25
     },
 	
 	"Station2":
     {
-        "Name":"Pennsylvania Railroad",
-        "CardID":8,
-        "BoardID":24,
-        
         "Costs":
         {
             "PurchasePrice":200,
 			"Mortgage":100
         },
 
-        "RentValues":
-        [
-            25
-        ]
+        "RentValues":25
     },
 	
 	"Station3":
     {
-        "Name":"B. & O. Railroad",
-        "CardID":8,
-        "BoardID":25,
-        
         "Costs":
         {
             "PurchasePrice":200,
 			"Mortgage":100
         },
 
-        "RentValues":
-        [
-            25
-        ]
+        "RentValues":25
     },
 	
 	"Station4":
     {
-        "Name":"Short Line",
-        "CardID":8,
-        "BoardID":26,
-        
         "Costs":
         {
             "PurchasePrice":200,
 			"Mortgage":100
         },
 
-        "RentValues":
-        [
-            25
-        ]
+        "RentValues":25
     },
 	
 	"Utility1":
     {
-        "Name":"Electric Company",
-        "CardID":9,
-        "BoardID":27,
-        
         "Costs":
         {
             "PurchasePrice":150,
 			"Mortgage":75
         },
 
-        "RentValues":
-        [
-            6
-        ]
+        "RentValues":6
     },
 	
 	"Utility2":
     {
-        "Name":"Water Works",
-        "CardID":10,
-        "BoardID":28,
-        
         "Costs":
         {
             "PurchasePrice":150,
 			"Mortgage":75
         },
 
-        "RentValues":
-        [
-            6
-        ]
+        "RentValues":6
     }
 }

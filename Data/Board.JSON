@@ -5,7 +5,9 @@
 
     {
         "Type":"PROPERTY",
-        "ID":"Brown1"
+        "ID":"Brown1",
+        "Name":"Mediterranean Avenue",
+        "CardID":0
     },
 
     {
@@ -14,7 +16,9 @@
 
     {
         "Type":"PROPERTY",
-        "ID":"Brown2"
+        "ID":"Brown2",
+        "Name":"Baltic Avenue",
+        "CardID":0
     },
 
     {
@@ -23,12 +27,16 @@
 
     {
         "Type":"PROPERTY",
-        "ID":"Station1"
+        "ID":"Station1",
+        "Name":"Reading Railroad",
+        "CardID":8
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Cyan1"
+        "ID":"Cyan1",
+        "Name":"Oriental Avenue",
+        "CardID":1
     },
 
     {
@@ -37,12 +45,16 @@
 
     {
         "Type":"PROPERTY",
-        "ID":"Cyan2"
+        "ID":"Cyan2",
+        "Name":"Vermont Avenue",
+        "CardID":1
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Cyan3"
+        "ID":"Cyan3",
+        "Name":"Oriental Avenue",
+        "CardID":1
     },
 
     {
@@ -51,32 +63,44 @@
 
     {
         "Type":"PROPERTY",
-        "ID":"Pink1"
+        "ID":"Pink1",
+        "Name":"St. Charles Place",
+        "CardID":2
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Utility1"
+        "ID":"Utility1",
+        "Name":"Electric Company",
+        "CardID":9
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Pink2"
+        "ID":"Pink2",
+        "Name":"States Avenue",
+        "CardID":2
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Pink3"
+        "ID":"Pink3",
+        "Name":"Virginia Avenue",
+        "CardID":2
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Station2"
+        "ID":"Station2",
+        "Name":"Pennsylvania Railroad",
+        "CardID":8
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Orange1"
+        "ID":"Orange1",
+        "Name":"St. James Place",
+        "CardID":3
     },
 
     {
@@ -85,12 +109,16 @@
 
     {
         "Type":"PROPERTY",
-        "ID":"Orange2"
+        "ID":"Orange2",
+        "Name":"Tennessee Avenue",
+        "CardID":3
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Orange3"
+        "ID":"Orange3",
+        "Name":"New York Avenue",
+        "CardID":3
     },
 
     {
@@ -99,7 +127,9 @@
 
     {
         "Type":"PROPERTY",
-        "ID":"Red1"
+        "ID":"Red1",
+        "Name":"Kentucky Avenue",
+        "CardID":4
     },
 
     {
@@ -108,37 +138,51 @@
 
     {
         "Type":"PROPERTY",
-        "ID":"Red2"
+        "ID":"Red2",
+        "Name":"Indiana Avenue",
+        "CardID":4
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Red3"
+        "ID":"Red3",
+        "Name":"Illinois Avenue",
+        "CardID":4
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Station3"
+        "ID":"Station3",
+        "Name":"B. & O. Railroad",
+        "CardID":8
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Yellow1"
+        "ID":"Yellow1",
+        "Name":"Atlantic Avenue",
+        "CardID":5
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Yellow2"
+        "ID":"Yellow2",
+        "Name":"Ventnor Avenue",
+        "CardID":5
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Utility2"
+        "ID":"Utility2",
+        "Name":"Water Works",
+        "CardID":10
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Yellow3"
+        "ID":"Yellow3",
+        "Name":"Marvin Gardens",
+        "CardID":5
     },
 
     {
@@ -147,12 +191,16 @@
 
     {
         "Type":"PROPERTY",
-        "ID":"Green1"
+        "ID":"Green1",
+        "Name":"Pacific Avenue",
+        "CardID":6
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Green2"
+        "ID":"Green2",
+        "Name":"North Carolina Avenue",
+        "CardID":6
     },
 
     {
@@ -161,12 +209,16 @@
 
     {
         "Type":"PROPERTY",
-        "ID":"Green3"
+        "ID":"Green3",
+        "Name":"Pennsylvania Avenue",
+        "CardID":6
     },
 
     {
         "Type":"PROPERTY",
-        "ID":"Station4"
+        "ID":"Station4",
+        "Name":"Short Line",
+        "CardID":8
     },
 
     {
@@ -175,7 +227,9 @@
 
     {
         "Type":"PROPERTY",
-        "ID":"Blue1"
+        "ID":"Blue1",
+        "Name":"Park Place",
+        "CardID":7
     },
 
     {
@@ -184,6 +238,8 @@
 
     {
         "Type":"PROPERTY",
-        "ID":"Blue2"
+        "ID":"Blue2",
+        "Name":"Boardwalk",
+        "CardID":7
     }
 ]
