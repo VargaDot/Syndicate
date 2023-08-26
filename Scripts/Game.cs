@@ -14,7 +14,7 @@ public partial class Game : Node2D
 	//Loads and instantiates players into the game scene.
 	void LoadGame()
 	{
-		
+		TheRegistry.LoadAgents(AgentList);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,9 +28,48 @@ public partial class Game : Node2D
 		}
 	}
 
+	bool firstRound = true;
 	public void TurnManager()
 	{
-		MoveAgent(1, 1);
+		byte x = 0;
+		if(firstRound)
+		{
+			x = (byte)GD.RandRange(0,AgentList.Keys.Count - 1);
+		}
+	}
+
+	byte previousDice, DoubleTimes;
+	bool inPrison;
+	public void RollDice(byte y)
+	{
+		byte x = (byte)GD.RandRange(2,12);
+		
+		if(!inPrison)
+		{
+			if (x == previousDice % 2 )
+			{
+				DoubleTimes++;
+				if(DoubleTimes == 3)
+				{
+					EmitSignal("BrokeTheLaw");
+					x = 0;
+					previousDice = 0;
+					DoubleTimes = 0;
+				}
+			}
+		}
+		else if(inPrison)
+		{
+			if(x == x % 2)
+			{
+				PromptBailOption();
+			}
+		}
+		else
+		{
+			MoveAgent(AgentList[y], x);
+			previousDice = x;
+		}
 	}
 
 	void MoveAgent(byte diceRoll, byte agentPos)
@@ -96,13 +135,20 @@ public partial class Game : Node2D
 	
 	}
 
+	void PromptBailOption()
+	{
+
+	}
+
 	public void BrokeTheLaw()
 	{
 		EmitSignal("");
 	}
 
 	[Export] Camera2D cam;
-	[Export] Registry registry;
 
-	byte agentPos1, agentPos2, agentPos3, agentPos4;
+	/// <summary>
+	/// Contains AgentID and Current Position.
+	/// </summary>
+	Dictionary<byte,byte> AgentList = new();
 }

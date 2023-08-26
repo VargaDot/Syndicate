@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8tburcwk5vtb"]
-
-[ext_resource type="Script" path="res://Scripts/Humanoid/Abilities/BailComp.cs" id="1_fuakj"]
-
-[node name="BailComp" type="Node2D"]
-script = ExtResource("1_fuakj")

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddj2y82oe8wur"]
-
-[ext_resource type="Script" path="res://Scripts/Humanoid/AI.cs" id="1_njyyo"]
-
-[node name="AI" type="Node2D"]
-script = ExtResource("1_njyyo")

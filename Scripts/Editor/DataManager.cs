@@ -286,12 +286,20 @@ namespace DataManager
             root.Remove(AgentID);
         }
 
-        public static void ListAgents()
+        public static void LoadAgents(Godot.Collections.Dictionary<byte, byte> AgentList = null)
         {
             foreach(Agent Agent in root.Values)
             {
+                AgentList.Add(Agent.ID, Agent.position);
+
                 GD.Print(Agent.ID, Agent.Name);
             }
+        }
+
+        public static void ChangeAgentPosition(byte AgentID, byte diceRoll)
+        {
+            Agent agent = root[AgentID];
+            agent.position += diceRoll;
         }
 
         public static void ConductTransaction(byte agentID, int amount)
