@@ -25,7 +25,7 @@ namespace DataManager
         public static byte LoadTileNumData(int BoardID, byte functionID)
         {  
             byte value = 0;
-            switch (BoardID)
+            switch (functionID)
             {
                 case 1:
                     value = (byte)BoardData[BoardID]["Type"];
@@ -52,7 +52,7 @@ namespace DataManager
         {
             string value = "";
 
-            switch (BoardID)
+            switch (functionID)
             {
                 case 1:
                     value = (string)BoardData[BoardID]["Name"];
@@ -187,13 +187,13 @@ namespace DataManager
 
             switch (ID)
             {
-                case 2:
+                case 1:
                     byteValue = RentData[internalPropName][0];
                     break;
-                case 3:
+                case 2:
                     byteValue = RentData[internalPropName][1];
                     break;
-                case 4:
+                case 3:
                     byteValue = RentData[internalPropName][2];
                     break;
                 case 5:

@@ -15,4 +15,9 @@ public partial class DiceUI : Control
 		
 	}
 
+	public void OnEventFired()
+	{
+		
+	}
+
 }

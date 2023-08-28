@@ -23,7 +23,7 @@ public partial class Usernames : HFlowContainer
 	public void UsernameManager(byte ID, string name)
     {
         TheRegistry.AddAgents(ID, startingCash, name);
-		TheRegistry.ListAgents();
+		TheRegistry.LoadAgents();
 	}
 
 	public void OnAgent1Registered(string new_text)

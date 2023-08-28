@@ -1,6 +1,6 @@
 using Godot;
 using Godot.Collections;
-using System;
+using DataManager;
 
 public partial class Card : Control
 {
@@ -14,57 +14,37 @@ public partial class Card : Control
 
 	}
 
-	/// <summary>
-	/// Demands information for Card.cs, please count from 0 on this specific one
-	/// <list type = "number">
-    /// <item><description><para><em> Normal </em></para></description></item>
-	///	<item><description><para><em> Train </em></para></description></item>
-	/// <item><description><para><em> Utility </em></para></description></item>
-	/// <item><description><para><em> Chance </em></para></description></item>
-	/// <item><description><para><em> Community Chest </em></para></description></item>
-	/// <item><description><para><em> Police* </em></para></description></item>
-	/// <item><description><para><em> Parking* </em></para></description></item>
-	/// <item><description><para><em> Tax* </em></para></description></item>
-	/// </list>
-	/// * Not used currently
-	/// </summary>
-	/// <returns>
-	///	Card text? what else?
-	/// </returns>
-	public void CardManager(bool isCardNeeded, string internalPropName, byte cardID)
+	/// <summary> Demands information for Card.cs, please count from 0 on this specific one </summary>
+	/// <returns> Card text? what else? </returns>
+	public void CardManager(string internalPropName)
 	{
-		if(isCardNeeded)
-		{
-			TextRelated(internalPropName);
-			CosmeticsRelated(cardID);
+		bool needsSpriteChange = false;
+		byte cardID = 0;
 
-			Show();
-		}
-		else
+		TextRelated(internalPropName);
+		if(needsSpriteChange)
 		{
-			Hide();
+			CosmeticsRelated(cardID);
 		}
+		
+		Show();
+		timer.Start();
 	}
 	
 	void TextRelated(string InternalCardName)
 	{
+		//BoardLoader.LoadTileStrData(InternalCardName, 1);
+		
 		//Changes all of the text inside the card
 		for (byte i = 1; i < AllLabels.Count; i++)
 		{
-			AllLabels[i].Text = DataManager.PropertyLoader.GetTextForCard(InternalCardName, i);
+			AllLabels[i].Text = PropertyLoader.GetTextForCard(InternalCardName, i);
 		}
 	}
 
-	enum CardIDs
+	public void OnTimeout()
 	{
-		NORMAL,
-		TRAIN,
-		UTILITY,
-		CHANCE,
-		COMMUNITYCHEST,
-		POLICE,
-		PARKING,
-		TAX,
+		Hide();
 	}
 
 	void CosmeticsRelated(byte internalCardID)
@@ -75,8 +55,14 @@ public partial class Card : Control
 		_colorRect.Color = Globals.PropertyColors[internalCardID];
 	}
 
+	public void OnEventFired(string internalPropName)
+	{
+		CardManager(internalPropName);
+	}
+
 	[Export] ColorRect _colorRect;
 	[Export] Sprite2D _cardSprite;
+	[Export] Timer timer;
 
 	[Export] Array<Label> AllLabels = new Array<Label>();
 }
