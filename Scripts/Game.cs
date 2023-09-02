@@ -35,7 +35,14 @@ public partial class Game : Node2D
 		if(firstRound)
 		{
 			x = (byte)GD.RandRange(0,AgentList.Keys.Count - 1);
+			firstRound = false;
 		}
+
+		x++; 
+		if(x > AgentList.Keys.Count - 1)
+			x = 0;
+
+		RollDice(x);
 	}
 
 	byte previousDice, DoubleTimes;
@@ -104,7 +111,7 @@ public partial class Game : Node2D
 				BrokeTheLaw();
 				break;
 			case (byte)TileTypes.PARKING:
-
+				HoldParkingEvent();
 				break;
 			default:
 				GD.PrintErr("Property type not valid/Invalid dice roll/Invalid agent position");
@@ -133,6 +140,11 @@ public partial class Game : Node2D
 	void HoldChanceEvent()
 	{
 	
+	}
+
+	void HoldParkingEvent()
+	{
+
 	}
 
 	void PromptBailOption()
