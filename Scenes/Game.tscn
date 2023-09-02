@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6t5q3jctrpr2"]
+[gd_scene load_steps=5 format=3 uid="uid://c6t5q3jctrpr2"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_b5gqs"]
-[ext_resource type="PackedScene" uid="uid://bwu0yupcqyu2v" path="res://Scenes/UI/DiceUI.tscn" id="2_48b4q"]
-[ext_resource type="PackedScene" uid="uid://bjsju4y3y4cbc" path="res://Scenes/UI/Prison.tscn" id="3_adjp0"]
+[ext_resource type="PackedScene" uid="uid://lexwee1hisaf" path="res://Scenes/UI/GameUI.tscn" id="2_0dwkp"]
 [ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://Scenes/Editor/MusicPlayer.tscn" id="3_hwjwm"]
 
 [sub_resource type="TileSet" id="TileSet_im02r"]
@@ -17,20 +16,8 @@ metadata/_edit_group_ = true
 
 [node name="Cam" type="Camera2D" parent="."]
 
-[node name="Card" parent="." instance_placeholder="res://Scenes/UI/Card.tscn"]
-visible = false
-
-[node name="Trade" parent="." instance_placeholder="res://Scenes/UI/Trade.tscn"]
-visible = false
-offset_left = 944.0
-offset_top = 533.0
-offset_right = 944.0
-offset_bottom = 533.0
-
-[node name="DiceUI" parent="." instance=ExtResource("2_48b4q")]
-visible = false
-
-[node name="Prison" parent="." instance=ExtResource("3_adjp0")]
-visible = false
+[node name="GameUI" parent="." instance=ExtResource("2_0dwkp")]
 
 [node name="MusicPlayer" parent="." instance=ExtResource("3_hwjwm")]
+
+[connection signal="UIMessenger" from="." to="GameUI" method="GameSignalReceiver"]

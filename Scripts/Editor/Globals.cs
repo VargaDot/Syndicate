@@ -23,13 +23,26 @@ public partial class Globals : Node
 		{7, Colors.Blue},
 	};
 
+	public enum TileTypes
+    {
+        GO,
+        PROPERTY,
+    	CHEST,
+        CHANCE,
+        ITAX,
+        LTAX,
+        JAIL,
+        GOJAIL,
+        PARKING,
+    }
+
 	///<summary>
 	///Dictionary containing propertyIDs and their assigned sprite based on their filesystem path
 	///</summary>
 	///<returns>
 	///Integers and strings
 	///</returns>
-	public static Dictionary<byte,Texture2D> PropertySprites = new()
+	public static Dictionary<byte,string> PropertySprites = new()
 	{
 		/*
 		{8, },

@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://Assets/Fonts/Themes/Card.tres" id="4_5x8h4"]
 [ext_resource type="FontFile" uid="uid://cw3bbxedp41ds" path="res://Assets/Fonts/Tangerine-Regular.ttf" id="4_fvb35"]
 
-[node name="Card" type="Control" node_paths=PackedStringArray("_colorRect", "_cardSprite", "AllLabels")]
+[node name="Card" type="Control" node_paths=PackedStringArray("_colorRect", "_cardSprite", "timer", "AcquiringOptions", "AllLabels")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,6 +15,8 @@ grow_vertical = 2
 script = ExtResource("1_hp21u")
 _colorRect = NodePath("CardSprite/CardColor")
 _cardSprite = NodePath("CardSprite")
+timer = NodePath("Timer")
+AcquiringOptions = NodePath("AcquiringOptions")
 AllLabels = [NodePath("CardSprite/Title"), NodePath("CardSprite/AllVals/Rent"), NodePath("CardSprite/AllVals/House"), NodePath("CardSprite/AllVals/House2"), NodePath("CardSprite/AllVals/House3"), NodePath("CardSprite/AllVals/House4"), NodePath("CardSprite/AllVals/Hotel"), NodePath("CardSprite/AllVals/Mortgage"), NodePath("CardSprite/AllVals/Build"), NodePath("CardSprite/Price")]
 
 [node name="CardSprite" type="Sprite2D" parent="."]
@@ -200,3 +202,24 @@ theme_override_font_sizes/font_size = 31
 text = "999"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AcquiringOptions" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1447.0
+offset_top = 703.0
+offset_right = 1786.0
+offset_bottom = 751.0
+theme_override_constants/separation = 115
+alignment = 1
+
+[node name="PurchaseButton" type="Button" parent="AcquiringOptions"]
+layout_mode = 2
+text = "Purchase"
+
+[node name="AuctionButton" type="Button" parent="AcquiringOptions"]
+layout_mode = 2
+text = "Auction"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true

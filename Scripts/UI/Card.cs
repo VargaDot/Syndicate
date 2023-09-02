@@ -4,42 +4,30 @@ using DataManager;
 
 public partial class Card : Control
 {
-    public override void _Ready()
-    {
-        LoadValues();
-    }
-
-	void LoadValues()
-	{
-
-	}
-
 	/// <summary> Demands information for Card.cs, please count from 0 on this specific one </summary>
 	/// <returns> Card text? what else? </returns>
-	public void CardManager(string internalPropName)
+	public void CardManager(byte boardID)
 	{
-		bool needsSpriteChange = false;
-		byte cardID = 0;
+		byte propType = BoardLoader.LoadTileNumData(boardID, 1);
+		byte cardID = BoardLoader.LoadTileNumData(boardID, 2);
+		string internalPropName = "";
 
-		TextRelated(internalPropName);
-		if(needsSpriteChange)
+		// This decides when to change the texture of the card
+		if(propType > 7)
 		{
-			CosmeticsRelated(cardID);
+
+		}
+		else
+			_colorRect.Color = Globals.PropertyColors[cardID];
+
+		// This changes the text
+		for (byte i = 1; i < AllLabels.Count; i++)
+		{
+			AllLabels[i].Text = PropertyLoader.GetTextForCard(internalPropName, i);
 		}
 		
 		Show();
 		timer.Start();
-	}
-	
-	void TextRelated(string InternalCardName)
-	{
-		//BoardLoader.LoadTileStrData(InternalCardName, 1);
-		
-		//Changes all of the text inside the card
-		for (byte i = 1; i < AllLabels.Count; i++)
-		{
-			AllLabels[i].Text = PropertyLoader.GetTextForCard(InternalCardName, i);
-		}
 	}
 
 	public void OnTimeout()
@@ -47,22 +35,16 @@ public partial class Card : Control
 		Hide();
 	}
 
-	void CosmeticsRelated(byte internalCardID)
+	public void OnEventFired(byte boardID)
 	{
-		if(!Globals.PropertyColors.ContainsKey(internalCardID))
-			GD.PushError("Invalid CardColor ID");
-
-		_colorRect.Color = Globals.PropertyColors[internalCardID];
-	}
-
-	public void OnEventFired(string internalPropName)
-	{
-		CardManager(internalPropName);
+		CardManager(boardID);
 	}
 
 	[Export] ColorRect _colorRect;
 	[Export] Sprite2D _cardSprite;
 	[Export] Timer timer;
+	[Export] HBoxContainer AcquiringOptions;
 
-	[Export] Array<Label> AllLabels = new Array<Label>();
+	[Export] Array<Label> AllLabels = new();
+
 }

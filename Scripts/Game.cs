@@ -47,19 +47,18 @@ public partial class Game : Node2D
 
 	byte previousDice, DoubleTimes;
 	bool inPrison;
-	public void RollDice(byte y)
+	public void RollDice(byte agentID)
 	{
-		byte x = (byte)GD.RandRange(2,12);
+		byte roll = (byte)GD.RandRange(2,12);
 		
 		if(!inPrison)
 		{
-			if (x == previousDice % 2 )
+			if (roll == previousDice % 2 )
 			{
 				DoubleTimes++;
 				if(DoubleTimes == 3)
 				{
-					EmitSignal("BrokeTheLaw");
-					x = 0;
+					roll = 0;
 					previousDice = 0;
 					DoubleTimes = 0;
 				}
@@ -67,19 +66,16 @@ public partial class Game : Node2D
 		}
 		else if(inPrison)
 		{
-			if(x == x % 2)
-			{
-				PromptBailOption();
-			}
+			EmitSignal("UIMessenger", 2);
 		}
 		else
 		{
-			MoveAgent(AgentList[y], x);
-			previousDice = x;
+			MoveAgent(roll, AgentList[agentID], agentID);
+			previousDice = roll;
 		}
 	}
 
-	void MoveAgent(byte diceRoll, byte agentPos)
+	void MoveAgent(byte diceRoll, byte agentPos, byte agentID)
 	{
 		if(diceRoll + agentPos > 40)
 			agentPos = 0;
@@ -89,29 +85,29 @@ public partial class Game : Node2D
 		byte x = BoardLoader.LoadTileNumData(agentPos, 1);
 		switch (x)
 		{
-			case (byte)TileTypes.GO:
+			case (byte)Globals.TileTypes.GO:
 				TheRegistry.ConductTransaction(agentPos, 200);
 				break;
-			case (byte)TileTypes.PROPERTY:
-				TheRegistry.AddProperty(agentPos, agentPos);
+			case (byte)Globals.TileTypes.PROPERTY:
+				EmitSignal("UIMessenger", 1);
 				break;
-			case (byte)TileTypes.CHEST:
-				HoldChestEvent();
+			case (byte)Globals.TileTypes.CHEST:
+				EmitSignal("UIMessenger", 4);
 				break;
-			case (byte)TileTypes.CHANCE:
-				HoldChanceEvent();
+			case (byte)Globals.TileTypes.CHANCE:
+				EmitSignal("UIMessenger", 5);
 				break;
-			case (byte)TileTypes.ITAX:
+			case (byte)Globals.TileTypes.ITAX:
 				TheRegistry.ConductTransaction(agentPos, -100);
 				break;
-			case (byte)TileTypes.LTAX:
+			case (byte)Globals.TileTypes.LTAX:
 				TheRegistry.ConductTransaction(agentPos, -250);
 				break;
-			case (byte)TileTypes.GOJAIL:
-				BrokeTheLaw();
+			case (byte)Globals.TileTypes.GOJAIL:
+				
 				break;
-			case (byte)TileTypes.PARKING:
-				HoldParkingEvent();
+			case (byte)Globals.TileTypes.PARKING:
+				EmitSignal("UIMessenger", 6);
 				break;
 			default:
 				GD.PrintErr("Property type not valid/Invalid dice roll/Invalid agent position");
@@ -119,45 +115,9 @@ public partial class Game : Node2D
 		}
 	}
 
-	enum TileTypes
-    {
-        GO,
-        PROPERTY,
-    	CHEST,
-        CHANCE,
-        ITAX,
-        LTAX,
-        JAIL,
-        GOJAIL,
-        PARKING,
-    }
-
-	void HoldChestEvent()
-	{
-
-	}
-
-	void HoldChanceEvent()
-	{
-	
-	}
-
-	void HoldParkingEvent()
-	{
-
-	}
-
-	void PromptBailOption()
-	{
-
-	}
-
-	public void BrokeTheLaw()
-	{
-		EmitSignal("");
-	}
-
 	[Export] Camera2D cam;
+
+	[Signal] public delegate void UIMessengerEventHandler(byte functionID, Variant secondOption);
 
 	/// <summary>
 	/// Contains AgentID and Current Position.
