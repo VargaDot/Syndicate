@@ -15,7 +15,7 @@ public partial class Card : Control
 		// This decides when to change the texture of the card
 		if(propType > 7)
 		{
-
+			//_cardSprite.Texture = ResourceLoader.Load(Globals.PropertySprites[propType]);
 		}
 		else
 			_colorRect.Color = Globals.PropertyColors[cardID];
@@ -26,8 +26,8 @@ public partial class Card : Control
 			AllLabels[i].Text = PropertyLoader.GetTextForCard(internalPropName, i);
 		}
 		
-		Show();
 		timer.Start();
+		Show();
 	}
 
 	public void OnTimeout()
