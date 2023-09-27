@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Monopoly"
+config/name="Syndicate"
 run/main_scene="res://Scenes/Editor/SceneManagement/RootScene.tscn"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Assets/Icon.png"
 
 [autoload]
 

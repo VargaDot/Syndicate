@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using DataManager;
 
 public partial class RootScript : Node
 {
@@ -15,7 +13,5 @@ public partial class RootScript : Node
         EmitSignal("ComposerLoaded");
 
         Globals.composer.AddScene("MainMenu","preset1");
-
-        //GD.Print(PropertyLoader.GetPropertyPrice("Brown1"));
     }
 }
