@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Godot;
 
+// Based on the tree data structure
 public partial class Khana : Node
 {
-  // This entire part down here is for the tree data structure!
   ///<summary> The Agent class stores an ID and the property struct (OwnedProperties) </summary>
   struct Agent
   {
@@ -56,7 +56,6 @@ public partial class Khana : Node
     foreach(Agent Agent in root.Values)
     {
       AgentList.Add(Agent.ID, Agent.position);
-
       GD.Print(Agent.ID, Agent.Name);
     }
   }
@@ -122,5 +121,4 @@ public partial class Khana : Node
     byte[] data = new byte[root[AgentID].OwnedProperties.Count];
     return data;
   }
-  
 }
