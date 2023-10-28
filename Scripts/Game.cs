@@ -14,7 +14,7 @@ public partial class Game : Node2D
 	//Loads and instantiates players into the game scene.
 	void LoadGame()
 	{
-		TheRegistry.LoadAgents(AgentList);
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -86,7 +86,7 @@ public partial class Game : Node2D
 		switch (x)
 		{
 			case (byte)Globals.TileTypes.GO:
-				TheRegistry.ConductTransaction(agentPos, 200);
+				
 				break;
 			case (byte)Globals.TileTypes.PROPERTY:
 				EmitSignal("UIMessenger", 1);
@@ -98,10 +98,10 @@ public partial class Game : Node2D
 				EmitSignal("UIMessenger", 5);
 				break;
 			case (byte)Globals.TileTypes.ITAX:
-				TheRegistry.ConductTransaction(agentPos, -100);
+				
 				break;
 			case (byte)Globals.TileTypes.LTAX:
-				TheRegistry.ConductTransaction(agentPos, -250);
+				
 				break;
 			case (byte)Globals.TileTypes.GOJAIL:
 				
