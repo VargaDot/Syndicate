@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwu0yupcqyu2v"]
 
-[ext_resource type="Script" path="res://Scripts/UI/DiceUI.cs" id="1_ox85j"]
-[ext_resource type="SpriteFrames" uid="uid://txsa57qvw707" path="res://Assets/Animations/DiceRollAnim.tres" id="2_ihujc"]
+[ext_resource type="Script" path="res://src/ui/game/DiceUI.cs" id="1_ox85j"]
+[ext_resource type="SpriteFrames" uid="uid://txsa57qvw707" path="res://art/anim/DiceRollAnim.tres" id="2_ihujc"]
 
 [node name="DiceUI" type="Control" node_paths=PackedStringArray("Dice1", "Dice2", "rollTimer")]
 layout_mode = 3

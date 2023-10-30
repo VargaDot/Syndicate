@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://hfdrpxmq1jg4"]
 
-[ext_resource type="Script" path="res://Scripts/Editor/MusicPlayer.cs" id="1_altma"]
+[ext_resource type="Script" path="res://src/Editor/MusicPlayer.cs" id="1_altma"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer"]
 autoplay = true

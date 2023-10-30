@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://csa17s4awpr8e"]
 
-[ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_e8dpg"]
-[ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://Assets/Fonts/Themes/Card.tres" id="2_63w4d"]
-[ext_resource type="Script" path="res://Scripts/UI/MainMenu/SpriteChanger.cs" id="3_ju8de"]
-[ext_resource type="Theme" uid="uid://7is2xs320v4c" path="res://Assets/Fonts/Themes/Fields.tres" id="3_roui2"]
-[ext_resource type="Script" path="res://Scripts/UI/MainMenu/Usernames.cs" id="4_eod01"]
+[ext_resource type="Script" path="res://src/MainMenu.cs" id="1_e8dpg"]
+[ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://art/theme/Card.tres" id="2_63w4d"]
+[ext_resource type="Script" path="res://src/UI/MainMenu/SpriteChanger.cs" id="3_ju8de"]
+[ext_resource type="Theme" uid="uid://7is2xs320v4c" path="res://art/theme/Fields.tres" id="3_roui2"]
+[ext_resource type="Script" path="res://src/UI/MainMenu/Usernames.cs" id="4_eod01"]
 [ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://Scenes/Editor/MusicPlayer.tscn" id="5_rd1by"]
-[ext_resource type="FontFile" uid="uid://c46oubnvhj7jf" path="res://Assets/Fonts/Koblenz-Serial-Regular.ttf" id="6_d3jj1"]
+[ext_resource type="FontFile" uid="uid://c46oubnvhj7jf" path="res://art/font/Koblenz-Serial-Regular.ttf" id="6_d3jj1"]
 
 [sub_resource type="Animation" id="Animation_cmlab"]
 resource_name = "HideSingleplayer"

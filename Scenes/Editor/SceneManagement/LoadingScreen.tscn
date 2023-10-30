@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctjciv0x83ybx"]
 
-[ext_resource type="Script" path="res://Scripts/Editor/Scene Management/LoadingScreen.cs" id="1_mhd8v"]
-[ext_resource type="Texture2D" uid="uid://crt4onjvvokqg" path="res://Assets/Sprites/LoadingScreen/amazon.jpg" id="2_kle6f"]
+[ext_resource type="Script" path="res://src/Editor/Scene Management/LoadingScreen.cs" id="1_mhd8v"]
+[ext_resource type="Texture2D" uid="uid://crt4onjvvokqg" path="res://art/sprite/LoadingScreen/amazon.jpg" id="2_kle6f"]
 
 [node name="LoadingScreen" type="Control"]
 layout_mode = 3

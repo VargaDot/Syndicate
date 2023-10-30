@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bjsju4y3y4cbc"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Prison.cs" id="1_qggfa"]
+[ext_resource type="Script" path="res://src/ui/game/Prison.cs" id="1_qggfa"]
 
 [node name="Prison" type="Control"]
 layout_mode = 3

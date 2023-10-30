@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://c6t5q3jctrpr2"]
 
-[ext_resource type="Script" path="res://Scripts/Game.cs" id="1_b5gqs"]
-[ext_resource type="PackedScene" uid="uid://lexwee1hisaf" path="res://Scenes/UI/GameUI.tscn" id="2_0dwkp"]
-[ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://Scenes/Editor/MusicPlayer.tscn" id="3_hwjwm"]
+[ext_resource type="Script" path="res://src/Game.cs" id="1_b5gqs"]
+[ext_resource type="PackedScene" uid="uid://lexwee1hisaf" path="res://scenes/ui/GameUI.tscn" id="2_0dwkp"]
+[ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://scenes/Editor/MusicPlayer.tscn" id="3_hwjwm"]
 
 [sub_resource type="TileSet" id="TileSet_im02r"]
 

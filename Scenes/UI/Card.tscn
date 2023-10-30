@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bs0vfv6wf6d32"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Card.cs" id="1_hp21u"]
-[ext_resource type="Texture2D" uid="uid://ctw7t3v6hggnt" path="res://Assets/Sprites/PropertyCards/BlankCard.png" id="2_xgf4d"]
-[ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://Assets/Fonts/Themes/Card.tres" id="4_5x8h4"]
-[ext_resource type="FontFile" uid="uid://cw3bbxedp41ds" path="res://Assets/Fonts/Tangerine-Regular.ttf" id="4_fvb35"]
+[ext_resource type="Script" path="res://src/ui/game/Card.cs" id="1_hp21u"]
+[ext_resource type="Texture2D" uid="uid://ctw7t3v6hggnt" path="res://art/sprite/Cards/BlankCard.png" id="2_xgf4d"]
+[ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://art/theme/Card.tres" id="4_5x8h4"]
+[ext_resource type="FontFile" uid="uid://cw3bbxedp41ds" path="res://art/font/Tangerine-Regular.ttf" id="4_fvb35"]
 
 [node name="Card" type="Control" node_paths=PackedStringArray("_colorRect", "_cardSprite", "timer", "AcquiringOptions", "AllLabels")]
 layout_mode = 3

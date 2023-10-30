@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Syndicate"
-run/main_scene="res://Scenes/Editor/SceneManagement/RootScene.tscn"
+run/main_scene="res://scenes/Editor/SceneManagement/RootScene.tscn"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
-config/icon="res://Assets/Icon.png"
+config/icon="res://art/Icon.png"
 
 [autoload]
 
-Globals="*res://Scripts/Editor/Globals.cs"
-Composer="*res://Scripts/Editor/Scene Management/ComposerLib.cs"
+Globals="*res://src/Editor/Globals.cs"
+Composer="*res://src/Editor/Scene Management/ComposerLib.cs"
 
 [display]
 

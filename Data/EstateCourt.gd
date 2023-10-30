@@ -1,6 +1,6 @@
 extends Node
 
-static var BoardJSON = FileAccess.open("Data/Board.JSON", FileAccess.READ)
+static var BoardJSON = FileAccess.open("data/Board.JSON", FileAccess.READ)
 static var BoardTXT = BoardJSON.get_as_text()
 static var BoardDATA = JSON.parse_string(BoardTXT)
 
@@ -16,7 +16,7 @@ static func FetchDistrictData(BoardID, functionID):
 	print(data)
 	return data
 
-static var PropertyFILE = FileAccess.open("Data/Properties.JSON", FileAccess.READ)
+static var PropertyFILE = FileAccess.open("data/Properties.JSON", FileAccess.READ)
 static var PropertyTXT = PropertyFILE.get_as_text()
 static var PropertyDATA = JSON.parse_string(PropertyTXT)
 
