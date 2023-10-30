@@ -1,37 +1,32 @@
 using Godot;
 using Godot.Collections;
-using System;
 
 public partial class MusicPlayer : AudioStreamPlayer
 {
 	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		MusicSelector();
-	}
+	public override void _Ready() { MusicSelector(); }
 
-	byte previousSong;
+	byte previousSong = 0;
 	void MusicSelector()
 	{
-		if(MusicList.Count > 0)
-		{
-			byte x = (byte)GD.RandRange(0, MusicList.Count);
-			if(x == previousSong)
-				for (byte i = 0; x != previousSong; i++)
-					x = (byte)GD.RandRange(0, MusicList.Count);
-
-			Stream = MusicList[x];
-			previousSong = x;
-		}
-		else
+		byte x = 0;
+		if(MusicList.Count <= 0)
 		{
 			GD.PushWarning("No music exists");
 		}
+
+		for (byte i = 0; x != previousSong; i++)
+			x = (byte)GD.RandRange(0, MusicList.Count);
+
+		Stream = MusicList[x];
+		previousSong = x;
 		
+		Play();
 	}
 
 	void WhenFinished()
 	{
+		Stop();
 		MusicSelector();
 	}
 
