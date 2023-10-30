@@ -81,7 +81,7 @@ public partial class Game : Node2D
 
 		agentPos += diceRoll;
 
-		byte x = BoardLoader.LoadTileNumData(agentPos, 1);
+		byte x = 1;
 		switch (x)
 		{
 			case (byte)Globals.TileTypes.GO:

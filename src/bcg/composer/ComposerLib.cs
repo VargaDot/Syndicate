@@ -90,8 +90,8 @@ public partial class ComposerLib : Node
     private static InternalLoadStatus _internalLoadingVal = InternalLoadStatus.Success;
 
     private static readonly Dictionary<string,string> scenePaths = new(){
-        {"MainMenu","res://Scenes/MainMenu.tscn"},
-        {"Game","res://Scenes/Game.tscn"},
+        {"MainMenu","res://scenes/MainMenu.tscn"},
+        {"Game","res://scenes/Game.tscn"},
     };
 
     private static readonly Dictionary<string,bool> currentScenes = new(){

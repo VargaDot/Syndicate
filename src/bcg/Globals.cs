@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 
+[GlobalClass]
 public partial class Globals : Node
 {
 	public static ComposerLib composer;

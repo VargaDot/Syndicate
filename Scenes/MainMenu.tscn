@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://csa17s4awpr8e"]
 
-[ext_resource type="Script" path="res://src/MainMenu.cs" id="1_e8dpg"]
+[ext_resource type="Script" path="res://src/ui/mainmenu/MainMenu.gd" id="1_763w7"]
 [ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://art/theme/Card.tres" id="2_63w4d"]
 [ext_resource type="Script" path="res://src/UI/MainMenu/SpriteChanger.cs" id="3_ju8de"]
 [ext_resource type="Theme" uid="uid://7is2xs320v4c" path="res://art/theme/Fields.tres" id="3_roui2"]
 [ext_resource type="Script" path="res://src/UI/MainMenu/Usernames.cs" id="4_eod01"]
-[ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://Scenes/Editor/MusicPlayer.tscn" id="5_rd1by"]
+[ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://scenes/bcg/MusicPlayer.tscn" id="5_rd1by"]
 [ext_resource type="FontFile" uid="uid://c46oubnvhj7jf" path="res://art/font/Koblenz-Serial-Regular.ttf" id="6_d3jj1"]
 
 [sub_resource type="Animation" id="Animation_cmlab"]
@@ -122,15 +122,15 @@ _data = {
 "ShowSingleplayer": SubResource("Animation_lbg8y")
 }
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("SingleplayerPanel")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("singlePlayer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_e8dpg")
-SingleplayerPanel = NodePath("SingleplayerMenu")
+script = ExtResource("1_763w7")
+singlePlayer = NodePath("SingleplayerMenu")
 
 [node name="SingleplayerMenu" type="Panel" parent="."]
 layout_mode = 1
@@ -177,7 +177,7 @@ position = Vector2(672, 64)
 [node name="4th" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
 position = Vector2(928, 64)
 
-[node name="Usernames" type="HFlowContainer" parent="SingleplayerMenu" node_paths=PackedStringArray("PopUp", "textTimer")]
+[node name="Usernames" type="HFlowContainer" parent="SingleplayerMenu"]
 layout_mode = 0
 offset_left = 147.0
 offset_top = 540.0
@@ -187,8 +187,8 @@ theme_override_constants/h_separation = 160
 theme_override_constants/v_separation = 19
 alignment = 1
 script = ExtResource("4_eod01")
-PopUp = NodePath("message")
-textTimer = NodePath("message/Timer")
+PopUp = null
+textTimer = null
 metadata/_edit_group_ = true
 
 [node name="AgentName1" type="LineEdit" parent="SingleplayerMenu/Usernames"]
@@ -289,8 +289,6 @@ layout_mode = 2
 theme = ExtResource("2_63w4d")
 text = "CLOSE"
 
-[node name="MusicPlayer" parent="." instance=ExtResource("5_rd1by")]
-
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 6
@@ -343,12 +341,13 @@ layout_mode = 2
 theme = ExtResource("2_63w4d")
 text = "MULTIPLAYER"
 
+[node name="MusicPlayer" parent="." instance=ExtResource("5_rd1by")]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_x0kh3")
 }
 
-[connection signal="GoPressed" from="SingleplayerMenu/Usernames" to="." method="OnPlayPressed"]
 [connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
 [connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="OnAgent1Registered"]
 [connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName2" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
@@ -358,7 +357,7 @@ libraries = {
 [connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
 [connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="OnAgent4Registered"]
 [connection signal="timeout" from="SingleplayerMenu/Usernames/message/Timer" to="SingleplayerMenu/Usernames" method="OnTimeout"]
-[connection signal="pressed" from="SingleplayerMenu/VBoxContainer/PlayButton" to="." method="OnPlayPressed"]
-[connection signal="pressed" from="SingleplayerMenu/VBoxContainer/CloseButton" to="." method="OnClosePressed"]
-[connection signal="pressed" from="Menu/BtnHolder/SingleButton" to="." method="OnSinglePlayerPressed"]
-[connection signal="pressed" from="Menu/MultiButton" to="." method="OnMultiPressed"]
+[connection signal="pressed" from="SingleplayerMenu/VBoxContainer/PlayButton" to="." method="_playPressed"]
+[connection signal="pressed" from="SingleplayerMenu/VBoxContainer/CloseButton" to="." method="_closePressed"]
+[connection signal="pressed" from="Menu/BtnHolder/SingleButton" to="." method="_singlePlayerPressed"]
+[connection signal="pressed" from="Menu/MultiButton" to="." method="_multiPressed"]

@@ -1,6 +1,5 @@
 using Godot;
 using Godot.Collections;
-using DataManager;
 
 public partial class Card : Control
 {
@@ -8,9 +7,8 @@ public partial class Card : Control
 	/// <returns> Card text? what else? </returns>
 	public void CardManager(byte boardID)
 	{
-		byte propType = BoardLoader.LoadTileNumData(boardID, 1);
-		byte cardID = BoardLoader.LoadTileNumData(boardID, 2);
-		string internalPropName = "";
+		//string internalPropName = "";
+		int propType = 0;
 
 		// This decides when to change the texture of the card
 		if(propType > 7)
@@ -18,12 +16,12 @@ public partial class Card : Control
 			//_cardSprite.Texture = ResourceLoader.Load(Globals.PropertySprites[propType]);
 		}
 		else
-			_colorRect.Color = Globals.PropertyColors[cardID];
+			_colorRect.Color = Globals.PropertyColors[0];
 
 		// This changes the text
 		for (byte i = 1; i < AllLabels.Count; i++)
 		{
-			AllLabels[i].Text = PropertyLoader.GetTextForCard(internalPropName, i);
+
 		}
 		
 		timer.Start();
