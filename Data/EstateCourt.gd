@@ -1,20 +1,33 @@
 extends Node
 
-const BOARD_FILEPATH:String = "Data/Board.JSON"
-static var BOARDFILE = FileAccess.open(BOARD_FILEPATH, FileAccess.READ)
-static var BOARDDATA = JSON.parse_string(BOARDFILE)
+static var BoardJSON = FileAccess.open("Data/Board.JSON", FileAccess.READ)
+static var BoardTXT = BoardJSON.get_as_text()
+static var BoardDATA = JSON.parse_string(BoardTXT)
 
 static func FetchDistrictData(BoardID, functionID):
-	var value
+	var data
 	match functionID:
-		1: value = BOARDDATA[BoardID]["Type"]
-		2: value = BOARDDATA[BoardID]["CardID"]
-		3: value = BOARDDATA[BoardID]["Name"]
-		4: value = BOARDDATA[BoardID]["ID"]
-		_: printerr("wetard")
+		1: data = BoardDATA[BoardID]["Type"]
+		2: data = BoardDATA[BoardID]["CardID"]
+		3: data = BoardDATA[BoardID]["Name"]
+		4: data = BoardDATA[BoardID]["ID"]
+		_: printerr("unrelated")
 	
-	print(value)
-	return value
+	print(data)
+	return data
 
-const PROPERTY_FILEPATH:String = "Data/Properties.JSON"
-static var PROPERTYFILE = FileAccess.open(PROPERTY_FILEPATH, FileAccess.READ)
+static var PropertyFILE = FileAccess.open("Data/Properties.JSON", FileAccess.READ)
+static var PropertyTXT = PropertyFILE.get_as_text()
+static var PropertyDATA = JSON.parse_string(PropertyTXT)
+
+static func FetchAssetData(internalPropName, functionID, level = 0):
+	var data
+	match functionID:
+		1: data = PropertyDATA[internalPropName]["Costs"]["PurchasePrice"]
+		2: data = PropertyDATA[internalPropName]["Costs"]["BuildCost"]
+		3: data = PropertyDATA[internalPropName]["Costs"]["Mortgage"]
+		4: data = PropertyDATA[internalPropName]["Rent"][level]
+		_: data = PropertyDATA["Default"]
+	
+	print(data)
+	return data

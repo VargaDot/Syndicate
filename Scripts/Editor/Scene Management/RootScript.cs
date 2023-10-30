@@ -14,9 +14,28 @@ public partial class RootScript : Node
 
         Globals.composer.AddScene("MainMenu","preset1");
 
-        GDScript MyGDScript = (GDScript)GD.Load("res://Data//EstateCourt.gd");
-        GodotObject myGDScriptNode = (GodotObject)MyGDScript.New(); // This is a GodotObject
-        myGDScriptNode.Call("FetchDistrictData", 2, 1);
 
+        // UNIT TEST - DISTRICT
+            GDScript estateGD = (GDScript)GD.Load("res://Data//EstateCourt.gd");
+            GodotObject estateND = (GodotObject)estateGD.New();
+            estateND.Call("FetchDistrictData", 0, 1);
+            estateND.Call("FetchDistrictData", 1, 4);
+            estateND.Call("FetchDistrictData", 1, 3);
+            estateND.Call("FetchDistrictData", 1, 2);
+            estateND.Call("FetchDistrictData", 1, 1);
+            estateND.Call("FetchDistrictData", 1, 5);
+        // UNIT TEST - DISTRICT
+
+        // UNIT TEST - ASSET
+            estateND.Call("FetchAssetData", "Brown1", 1);
+            estateND.Call("FetchAssetData", "Brown1", 2);
+            estateND.Call("FetchAssetData", "Brown1", 3);
+            estateND.Call("FetchAssetData", "Brown1", 4);
+            estateND.Call("FetchAssetData", "Brown1", 4, 1);
+            estateND.Call("FetchAssetData", "Brown1", 4, 2);
+            estateND.Call("FetchAssetData", "Brown1", 4, 3);
+            estateND.Call("FetchAssetData", "Brown1", 4, 4);
+            estateND.Call("FetchAssetData", "Brown1", 4, 5);
+        // UNIT TEST - ASSET
     }
 }

@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 ///<Summary>
 ///The script that's responsible for running the main menu button functions.
