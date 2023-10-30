@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://src/ui/mainmenu/MainMenu.gd" id="1_763w7"]
 [ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://art/theme/Card.tres" id="2_63w4d"]
-[ext_resource type="Script" path="res://src/UI/MainMenu/SpriteChanger.cs" id="3_ju8de"]
+[ext_resource type="Script" path="res://src/ui/mainmenu/SpriteChanger.cs" id="3_jwk5c"]
 [ext_resource type="Theme" uid="uid://7is2xs320v4c" path="res://art/theme/Fields.tres" id="3_roui2"]
-[ext_resource type="Script" path="res://src/UI/MainMenu/Usernames.cs" id="4_eod01"]
+[ext_resource type="Script" path="res://src/ui/mainmenu/Usernames.cs" id="4_wpew7"]
 [ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://scenes/bcg/MusicPlayer.tscn" id="5_rd1by"]
 [ext_resource type="FontFile" uid="uid://c46oubnvhj7jf" path="res://art/font/Koblenz-Serial-Regular.ttf" id="6_d3jj1"]
 
@@ -163,7 +163,7 @@ offset_left = 159.0
 offset_top = 238.0
 offset_right = 1247.0
 offset_bottom = 366.0
-script = ExtResource("3_ju8de")
+script = ExtResource("3_jwk5c")
 
 [node name="Main" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
 position = Vector2(160, 64)
@@ -186,9 +186,7 @@ offset_bottom = 650.0
 theme_override_constants/h_separation = 160
 theme_override_constants/v_separation = 19
 alignment = 1
-script = ExtResource("4_eod01")
-PopUp = null
-textTimer = null
+script = ExtResource("4_wpew7")
 metadata/_edit_group_ = true
 
 [node name="AgentName1" type="LineEdit" parent="SingleplayerMenu/Usernames"]
