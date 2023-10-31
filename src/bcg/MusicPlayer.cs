@@ -15,7 +15,7 @@ public partial class MusicPlayer : AudioStreamPlayer
 			GD.PushWarning("No music exists");
 		}
 
-		for (byte i = 0; x != previousSong; i++)
+		while (x == previousSong)
 			x = (byte)GD.RandRange(0, MusicList.Count);
 
 		Stream = MusicList[x];

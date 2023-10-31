@@ -1,9 +1,12 @@
 extends Node
 
-static var BoardJSON = FileAccess.open("data/Board.JSON", FileAccess.READ)
-static var BoardTXT = BoardJSON.get_as_text()
-static var BoardDATA = JSON.parse_string(BoardTXT)
+func _ready():
+	var BoardFILE = FileAccess.open("data/Board.JSON", FileAccess.READ)
+	var PropertyFILE = FileAccess.open("data/Properties.JSON", FileAccess.READ)
+	BoardDATA = JSON.parse_string(BoardFILE.get_as_text())
+	PropertyDATA = JSON.parse_string(PropertyFILE.get_as_text())
 
+static var BoardDATA
 static func FetchDistrictData(BoardID, functionID):
 	var data
 	match functionID:
@@ -16,10 +19,7 @@ static func FetchDistrictData(BoardID, functionID):
 	print(data)
 	return data
 
-static var PropertyFILE = FileAccess.open("data/Properties.JSON", FileAccess.READ)
-static var PropertyTXT = PropertyFILE.get_as_text()
-static var PropertyDATA = JSON.parse_string(PropertyTXT)
-
+static var PropertyDATA
 static func FetchAssetData(internalPropName, functionID, level = 0):
 	var data
 	match functionID:
