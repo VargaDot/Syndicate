@@ -4,8 +4,6 @@ using Godot.Collections;
 [GlobalClass]
 public partial class Globals : Node
 {
-	public static ComposerLib composer;
-
 	///<summary>
 	///Dictionary containing propertyIDs and their assigned color
 	///</summary>

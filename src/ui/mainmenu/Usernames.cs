@@ -46,7 +46,7 @@ public partial class Usernames : HFlowContainer
 		UsernameManager(3, new_text);
 	}
 
-	static ushort startingCash = 2500;
+	//static ushort startingCash = 2500;
 	public void OnCashChosen()
 	{
 		//int x = GetNode<>

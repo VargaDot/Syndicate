@@ -17,7 +17,8 @@ func _multiPressed() -> void:
 	pass
 
 func _playPressed() -> void:
-	ComposerLib.AddScene("Game", "preset1")
+	Composer.disable_scene("MainMenu")
+	Composer.activate_scene("Game")
 
 func _closePressed() -> void:
 	animPlyr.play("HideSingleplayer")

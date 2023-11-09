@@ -4,26 +4,18 @@ using Godot.Collections;
 //This is strictly for UI, player turns and visual stuff.
 public partial class Game : Node2D
 {
-	// Called when the node enters the scene tree for the first time.
+	Variant composer;
 	public override void _Ready()
-	{
-		LoadGame();
-	}
-
-	//Loads and instantiates players into the game scene.
-	void LoadGame()
 	{
 		
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		//Quits the game
 		if(Input.IsActionPressed("Quit"))
 		{
-			GD.PushWarning("No Pause Menu has been made yet.");
-			Globals.composer.AddScene("MainMenu","preset1");
+			
 		}
 	}
 
