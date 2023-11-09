@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Syndicate"
-run/main_scene="res://scenes/bcg/composer/RootScene.tscn"
+run/main_scene="res://scenes/composer/RootScene.tscn"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 config/icon="res://art/Icon.png"
 
 [autoload]
 
 Globals="*res://src/bcg/Globals.cs"
-Composer="*res://src/bcg/composer/ComposerLib.cs"
+Composer="*res://src/composer/ComposerLib.cs"
 
 [display]
 

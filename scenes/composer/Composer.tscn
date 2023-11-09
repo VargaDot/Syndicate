@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dm7fr0myawm5s"]
 
-[ext_resource type="Script" path="res://src/bcg/composer/ComposerLib.cs" id="1_vr47h"]
+[ext_resource type="Script" path="res://src/composer/ComposerLib.cs" id="1_vr47h"]
 
 [node name="Composer" type="Node"]
 script = ExtResource("1_vr47h")
