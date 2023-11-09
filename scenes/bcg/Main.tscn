@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://hp36i61m07xi"]
-
-[ext_resource type="Script" path="res://src/bcg/Globals.cs" id="1_e7whs"]
-
-[node name="Main" type="Node"]
-script = ExtResource("1_e7whs")
