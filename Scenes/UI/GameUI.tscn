@@ -24,3 +24,9 @@ visible = false
 
 [node name="Pause" parent="." instance=ExtResource("6_i4en3")]
 visible = false
+
+[connection signal="RequestCard" from="." to="Card" method="_onRequest"]
+[connection signal="RequestDice" from="." to="Dice" method="_onRequest"]
+[connection signal="RequestPause" from="." to="Pause" method="_onRequest"]
+[connection signal="RequestPrison" from="." to="Prison" method="_onRequest"]
+[connection signal="RequestTrade" from="." to="Trade" method="_onRequest"]

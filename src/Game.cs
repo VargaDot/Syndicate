@@ -1,21 +1,14 @@
 using Godot;
 using Godot.Collections;
 
-//This is strictly for UI, player turns and visual stuff.
-public partial class Game : Node2D
+public partial class Game : TileMap
 {
-	Variant composer;
-	public override void _Ready()
-	{
-		
-	}
-
 	public override void _Process(double delta)
 	{
 		//Quits the game
 		if(Input.IsActionPressed("Quit"))
 		{
-			
+			EmitSignal("RequestUI", 0);
 		}
 	}
 
@@ -55,10 +48,7 @@ public partial class Game : Node2D
 				}
 			}
 		}
-		else if(inPrison)
-		{
-			EmitSignal("UIMessenger", 2);
-		}
+		else if(inPrison) { EmitSignal("RequestUI", 6); }
 		else
 		{
 			MoveAgent(roll, AgentList[agentID], agentID);
@@ -76,29 +66,32 @@ public partial class Game : Node2D
 		byte x = 1;
 		switch (x)
 		{
-			case (byte)Globals.TileTypes.GO:
+			case (byte)TileTypes.GO:
 				
 				break;
-			case (byte)Globals.TileTypes.PROPERTY:
-				EmitSignal("UIMessenger", 1);
+			case (byte)TileTypes.PROPERTY:
+				EmitSignal("RequestUI", 1, agentPos);
 				break;
-			case (byte)Globals.TileTypes.CHEST:
-				EmitSignal("UIMessenger", 4);
+			case (byte)TileTypes.CHEST:
+				EmitSignal("RequestUI", 2);
 				break;
-			case (byte)Globals.TileTypes.CHANCE:
-				EmitSignal("UIMessenger", 5);
+			case (byte)TileTypes.CHANCE:
+				EmitSignal("RequestUI", 3);
 				break;
-			case (byte)Globals.TileTypes.ITAX:
+			case (byte)TileTypes.ITAX:
 				
 				break;
-			case (byte)Globals.TileTypes.LTAX:
+			case (byte)TileTypes.LTAX:
 				
 				break;
-			case (byte)Globals.TileTypes.GOJAIL:
+			case (byte)TileTypes.JAIL:
+
+				break;
+			case (byte)TileTypes.GOJAIL:
 				
 				break;
-			case (byte)Globals.TileTypes.PARKING:
-				EmitSignal("UIMessenger", 6);
+			case (byte)TileTypes.PARKING:
+				EmitSignal("RequestUI", 4);
 				break;
 			default:
 				GD.PrintErr("Property type not valid/Invalid dice roll/Invalid agent position");
@@ -106,9 +99,11 @@ public partial class Game : Node2D
 		}
 	}
 
+	enum TileTypes { GO, PROPERTY, CHEST, CHANCE, ITAX, LTAX, JAIL, GOJAIL, PARKING }
+	
 	[Export] Camera2D cam;
 
-	[Signal] public delegate void UIMessengerEventHandler(byte functionID, Variant secondOption);
+	[Signal] public delegate void RequestUIEventHandler(byte functionID);
 
 	/// <summary>
 	/// Contains AgentID and Current Position.

@@ -22,19 +22,6 @@ public partial class Globals : Node
 		{7, Colors.Blue},
 	};
 
-	public enum TileTypes
-    {
-        GO,
-        PROPERTY,
-    	CHEST,
-        CHANCE,
-        ITAX,
-        LTAX,
-        JAIL,
-        GOJAIL,
-        PARKING,
-    }
-
 	///<summary>
 	///Dictionary containing propertyIDs and their assigned sprite based on their filesystem path
 	///</summary>

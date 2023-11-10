@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6t5q3jctrpr2"]
+[gd_scene load_steps=6 format=3 uid="uid://c6t5q3jctrpr2"]
 
 [ext_resource type="Script" path="res://src/Game.cs" id="1_b5gqs"]
 [ext_resource type="PackedScene" uid="uid://lexwee1hisaf" path="res://scenes/ui/GameUI.tscn" id="2_0dwkp"]
+[ext_resource type="PackedScene" uid="uid://dgw7ot14efapi" path="res://scenes/Registry.tscn" id="2_kohl7"]
 [ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://scenes/bcg/MusicPlayer.tscn" id="3_hwjwm"]
 
 [sub_resource type="TileSet" id="TileSet_im02r"]
@@ -16,8 +17,10 @@ metadata/_edit_group_ = true
 
 [node name="Cam" type="Camera2D" parent="."]
 
+[node name="Registry" parent="." instance=ExtResource("2_kohl7")]
+
 [node name="GameUI" parent="." instance=ExtResource("2_0dwkp")]
 
 [node name="MusicPlayer" parent="." instance=ExtResource("3_hwjwm")]
 
-[connection signal="UIMessenger" from="." to="GameUI" method="GameSignalReceiver"]
+[connection signal="RequestUI" from="." to="GameUI" method="_onRequest"]
