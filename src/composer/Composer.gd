@@ -40,23 +40,15 @@ var settings_presets: Dictionary = {
 }
 
 ## This dictionary contains all loaded scenes and their process states.
-var current_scenes: Dictionary = {
-
-}
+var current_scenes: Dictionary = {}
 
 var is_debug_enabled: bool = false
 
-var _variables = {
+var _variables = {}
 
-}
+var _loading_screen_variables = {}
 
-var _loading_screen_variables = {
-
-}
-
-var _internal_scene_paths: Dictionary = {
-
-}
+var _internal_scene_paths: Dictionary = {}
 
 var _subthreads_enabled = false
 var _cache_mode = 1
@@ -66,13 +58,8 @@ var _loading_path: String = ""
 var _loading_scene: PackedScene
 var _default_loading_screen: Control = null
 
-var _last_settings = {
-
-}
-
-var _last_vars = {
-
-}
+var _last_settings = {}
+var _last_vars = {}
 
 enum INTERNAL_LOADING_VALS {
 	FAILED = 0,
