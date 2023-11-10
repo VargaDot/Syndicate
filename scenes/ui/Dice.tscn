@@ -15,10 +15,12 @@ script = ExtResource("1_c3v3f")
 [node name="Dice1" type="AnimatedSprite2D" parent="."]
 position = Vector2(768, 768)
 sprite_frames = ExtResource("2_ihujc")
+animation = &"rolling"
 
 [node name="Dice2" type="AnimatedSprite2D" parent="."]
 position = Vector2(1152, 768)
 sprite_frames = ExtResource("2_ihujc")
+animation = &"rolling"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
