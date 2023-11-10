@@ -17,7 +17,6 @@ config/icon="res://art/Icon.png"
 
 [autoload]
 
-Globals="*res://src/bcg/Globals.cs"
 Composer="*res://src/composer/Composer.gd"
 
 [display]
