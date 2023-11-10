@@ -1,23 +1,18 @@
 [gd_scene load_steps=5 format=3 uid="uid://bs0vfv6wf6d32"]
 
-[ext_resource type="Script" path="res://src/ui/game/Card.cs" id="1_hp21u"]
+[ext_resource type="Script" path="res://src/ui/game/Card.gd" id="1_r8yki"]
 [ext_resource type="Texture2D" uid="uid://ctw7t3v6hggnt" path="res://art/sprite/Cards/BlankCard.png" id="2_xgf4d"]
 [ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://art/theme/Card.tres" id="4_5x8h4"]
 [ext_resource type="FontFile" uid="uid://cw3bbxedp41ds" path="res://art/font/Tangerine-Regular.ttf" id="4_fvb35"]
 
-[node name="Card" type="Control" node_paths=PackedStringArray("_colorRect", "_cardSprite", "timer", "AcquiringOptions", "AllLabels")]
+[node name="Card" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hp21u")
-_colorRect = NodePath("CardSprite/CardColor")
-_cardSprite = NodePath("CardSprite")
-timer = NodePath("Timer")
-AcquiringOptions = NodePath("AcquiringOptions")
-AllLabels = [NodePath("CardSprite/Title"), NodePath("CardSprite/AllVals/Rent"), NodePath("CardSprite/AllVals/House"), NodePath("CardSprite/AllVals/House2"), NodePath("CardSprite/AllVals/House3"), NodePath("CardSprite/AllVals/House4"), NodePath("CardSprite/AllVals/Hotel"), NodePath("CardSprite/AllVals/Mortgage"), NodePath("CardSprite/AllVals/Build"), NodePath("CardSprite/Price")]
+script = ExtResource("1_r8yki")
 
 [node name="CardSprite" type="Sprite2D" parent="."]
 position = Vector2(1616, 386)

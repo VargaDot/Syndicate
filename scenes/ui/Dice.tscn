@@ -1,19 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwu0yupcqyu2v"]
 
-[ext_resource type="Script" path="res://src/ui/game/DiceUI.cs" id="1_ox85j"]
+[ext_resource type="Script" path="res://src/ui/game/Dice.gd" id="1_c3v3f"]
 [ext_resource type="SpriteFrames" uid="uid://txsa57qvw707" path="res://art/anim/DiceRollAnim.tres" id="2_ihujc"]
 
-[node name="DiceUI" type="Control" node_paths=PackedStringArray("Dice1", "Dice2", "rollTimer")]
+[node name="Dice" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ox85j")
-Dice1 = NodePath("Dice1")
-Dice2 = NodePath("Dice2")
-rollTimer = NodePath("Timer")
+script = ExtResource("1_c3v3f")
 
 [node name="Dice1" type="AnimatedSprite2D" parent="."]
 position = Vector2(768, 768)
