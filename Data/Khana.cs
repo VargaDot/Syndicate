@@ -46,10 +46,7 @@ public partial class Khana : Node
     else GD.Print("Username overrided");
   }
 
-  public static void RemoveAgent(byte AgentID)
-  {
-    root.Remove(AgentID);
-  }
+  public static void RemoveAgent(byte AgentID) { root.Remove(AgentID); }
 
   public static void LoadAgents(Godot.Collections.Dictionary<byte, byte> AgentList = null)
   {
