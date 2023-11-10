@@ -34,6 +34,7 @@ public partial class Game : TileMap
 	public void RollDice(byte agentID)
 	{
 		byte roll = (byte)GD.RandRange(2,12);
+		EmitSignal("RequestUI", 5, roll);
 		
 		if(!inPrison)
 		{
@@ -103,7 +104,7 @@ public partial class Game : TileMap
 	
 	[Export] Camera2D cam;
 
-	[Signal] public delegate void RequestUIEventHandler(byte functionID);
+	[Signal] public delegate void RequestUIEventHandler(byte functionID, Variant secondOption);
 
 	/// <summary>
 	/// Contains AgentID and Current Position.
