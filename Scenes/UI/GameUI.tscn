@@ -1,6 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://lexwee1hisaf"]
+[gd_scene load_steps=7 format=3 uid="uid://lexwee1hisaf"]
 
 [ext_resource type="Script" path="res://src/ui/game/GameUI.gd" id="1_ef41v"]
+[ext_resource type="PackedScene" uid="uid://bs0vfv6wf6d32" path="res://scenes/ui/Card.tscn" id="2_ydfyd"]
+[ext_resource type="PackedScene" uid="uid://bwu0yupcqyu2v" path="res://scenes/ui/Dice.tscn" id="3_0jfq0"]
+[ext_resource type="PackedScene" uid="uid://wkltxog3tco" path="res://scenes/ui/Trade.tscn" id="4_7nsqs"]
+[ext_resource type="PackedScene" uid="uid://bjsju4y3y4cbc" path="res://scenes/ui/Prison.tscn" id="5_yqiml"]
+[ext_resource type="PackedScene" uid="uid://c2td3xuincgl0" path="res://scenes/ui/Pause.tscn" id="6_i4en3"]
 
 [node name="GameUI" type="Node"]
 script = ExtResource("1_ef41v")
+
+[node name="Card" parent="." instance=ExtResource("2_ydfyd")]
+visible = false
+
+[node name="Dice" parent="." instance=ExtResource("3_0jfq0")]
+visible = false
+
+[node name="Prison" parent="." instance=ExtResource("5_yqiml")]
+visible = false
+
+[node name="Trade" parent="." instance=ExtResource("4_7nsqs")]
+visible = false
+
+[node name="Pause" parent="." instance=ExtResource("6_i4en3")]
+visible = false
