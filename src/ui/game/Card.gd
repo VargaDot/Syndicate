@@ -6,3 +6,5 @@ func _onRequest(funcID, pos):
 		2: pass
 		3: pass
 		4: pass
+	
+	show()
