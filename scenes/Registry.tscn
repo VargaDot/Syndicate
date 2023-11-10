@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgw7ot14efapi"]
+
+[ext_resource type="Script" path="res://src/Registry.gd" id="1_5tvbl"]
+[ext_resource type="Script" path="res://data/Khana.cs" id="2_tuca8"]
+[ext_resource type="Script" path="res://data/EstateCourt.gd" id="3_13av7"]
+
+[node name="Registry" type="Node"]
+script = ExtResource("1_5tvbl")
+
+[node name="Khana" type="Node" parent="."]
+script = ExtResource("2_tuca8")
+
+[node name="EstateCourt" type="Node" parent="."]
+script = ExtResource("3_13av7")
