@@ -186,7 +186,7 @@ offset_bottom = 650.0
 theme_override_constants/h_separation = 160
 theme_override_constants/v_separation = 19
 alignment = 1
-script = ExtResource("4_wpew7")
+script = ExtResource("4_1nj5f")
 metadata/_edit_group_ = true
 
 [node name="AgentName1" type="LineEdit" parent="SingleplayerMenu/Usernames"]
@@ -213,7 +213,7 @@ theme = ExtResource("3_roui2")
 placeholder_text = "Bain"
 caret_blink = true
 
-[node name="message" type="Label" parent="SingleplayerMenu/Usernames"]
+[node name="popup" type="Label" parent="SingleplayerMenu/Usernames"]
 visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_d3jj1")
@@ -222,7 +222,7 @@ text = "poopie"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Timer" type="Timer" parent="SingleplayerMenu/Usernames/message"]
+[node name="Timer" type="Timer" parent="SingleplayerMenu/Usernames"]
 wait_time = 3.0
 one_shot = true
 
@@ -346,15 +346,19 @@ libraries = {
 "": SubResource("AnimationLibrary_x0kh3")
 }
 
-[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
-[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="OnAgent1Registered"]
-[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName2" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
-[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName2" to="SingleplayerMenu/Usernames" method="OnAgent2Registered"]
-[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName3" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
-[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName3" to="SingleplayerMenu/Usernames" method="OnAgent3Registered"]
-[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
-[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="OnAgent4Registered"]
-[connection signal="timeout" from="SingleplayerMenu/Usernames/message/Timer" to="SingleplayerMenu/Usernames" method="OnTimeout"]
+[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="_onTextRejected"]
+[connection signal="text_changed" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="_onChange"]
+[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="_onSubmit"]
+[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName2" to="SingleplayerMenu/Usernames" method="_onTextRejected"]
+[connection signal="text_changed" from="SingleplayerMenu/Usernames/AgentName2" to="SingleplayerMenu/Usernames" method="_onChange"]
+[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName2" to="SingleplayerMenu/Usernames" method="_onSubmit"]
+[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName3" to="SingleplayerMenu/Usernames" method="_onTextRejected"]
+[connection signal="text_changed" from="SingleplayerMenu/Usernames/AgentName3" to="SingleplayerMenu/Usernames" method="_onChange"]
+[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName3" to="SingleplayerMenu/Usernames" method="_onSubmit"]
+[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="_onTextRejected"]
+[connection signal="text_changed" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="_onChange"]
+[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="_onSubmit"]
+[connection signal="timeout" from="SingleplayerMenu/Usernames/Timer" to="SingleplayerMenu/Usernames" method="_onTimeout"]
 [connection signal="pressed" from="SingleplayerMenu/VBoxContainer/PlayButton" to="." method="_playPressed"]
 [connection signal="pressed" from="SingleplayerMenu/VBoxContainer/CloseButton" to="." method="_closePressed"]
 [connection signal="pressed" from="Menu/BtnHolder/SingleButton" to="." method="_singlePlayerPressed"]
