@@ -3,6 +3,7 @@ extends Control
 func _onRequest(diceRoll):
 	if diceRoll > 12: printerr("Invalid dice roll outcome")
 	
+	# X represents the frames for AnimatedSprite2D
 	var x = diceRoll - 2
 	x /= 2
 	
@@ -16,20 +17,20 @@ func _playAnimation():
 	
 	show()
 	
-	$Dice1.play("rolling")
-	$Dice2.play("rolling")
+	%Dice1.play("rolling")
+	%Dice2.play("rolling")
 
 func _launchTimer():
 	var t:float = randf_range(1.25,3.25)
-	$Timer.wait_time = t;
-	$Timer.start()
+	%Timer.wait_time = t;
+	%Timer.start()
 
 var ranOnce:bool = false
 func _onTimeout():
 	if ranOnce == false:
 		var s:float = randf_range(0.25,0.75)
-		$Dice1.speed_scale = s
-		$Dice2.speed_scale = s
+		%Dice1.speed_scale = s
+		%Dice2.speed_scale = s
 		
 		_launchTimer()
 		ranOnce = true
