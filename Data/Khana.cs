@@ -35,7 +35,7 @@ public partial class Khana : Node
 
   ///<summary> root is the Agent tree node, from here we can access the entire tree structure </summary>
   private static readonly Dictionary<byte, Agent> root = new();
-  public static void AddAgents(byte ID, ushort startingCash, string username)
+  public static void AddAgent(byte ID, ushort startingCash, string username)
   {
     root[ID] = new Agent(ID, startingCash, username);
   }
