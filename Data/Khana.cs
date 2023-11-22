@@ -5,10 +5,10 @@ public partial class Khana : Node
 {
   struct Agent
   {
-    public byte ID {get; set;}
+    public byte ID { get; set; }
     public List<Property> Portfolio { get; set; }
-    public int Cash {get; set;}
-    public string Name {get; set;}
+    public int Cash { get; set; }
+    public string Name { get; set; }
 
     public Agent(byte id, int cash, string name)
     {
@@ -21,9 +21,9 @@ public partial class Khana : Node
 
   struct Property
   {
-    public byte ID {get; set;}
-    public byte UpgradeLevel {get; set;}
-    public bool IsMortgaged {get; set;}
+    public byte ID { get; set; }
+    public byte UpgradeLevel { get; set; }
+    public bool IsMortgaged { get; set; }
 
     public Property(byte id, byte upgradeLevel, bool isMortgaged = false)
     {
