@@ -18,6 +18,7 @@ config/icon="res://art/Icon.png"
 [autoload]
 
 Composer="*res://src/composer/Composer.gd"
+Registry="*res://scenes/bcg/Registry.tscn"
 
 [display]
 
