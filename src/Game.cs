@@ -1,7 +1,7 @@
 using Godot;
 using Godot.Collections;
 
-public partial class Game : TileMap
+public partial class Game : Node2D
 {
 	public override void _Process(double delta)
 	{
