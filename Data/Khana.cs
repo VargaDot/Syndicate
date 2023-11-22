@@ -63,11 +63,11 @@ public partial class Khana : Node
     return root[AgentID].Cash;
   }
 
-  public static void AddProperty(byte AgentID, byte PropertyID, byte upgradeLevel = 1, bool isMortgaged = false)
+  public static void AddProperty(byte AgentID, byte PropertyID)
   {
     CheckIDValidity(AgentID);
     Agent agent = root[AgentID];
-    agent.Portfolio.Add(new Property(PropertyID, upgradeLevel, isMortgaged));
+    agent.Portfolio.Add(new Property(PropertyID, 1, false));
   }
 
   public static void RemoveProperty(byte AgentID, byte PropertyID)
