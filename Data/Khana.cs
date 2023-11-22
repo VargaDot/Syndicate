@@ -46,7 +46,7 @@ public partial class Khana : Node
     root.Remove(AgentID); 
   }
 
-  public static void CheckIDValidity(byte AgentID)
+  private static void CheckIDValidity(byte AgentID)
   {
     if (!root.ContainsKey(AgentID)) GD.PushError("Agent ID is not valid");
   }
