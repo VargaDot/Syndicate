@@ -25,3 +25,13 @@ func _checkTimer():
 		_checkTimer()
 
 func _onTimeout(): $popup.hide()
+
+signal sendCharacterRequest
+func _on_play_button_pressed():
+	match namesEntered:
+		2: pass
+		3: pass
+		4: pass
+		_: 
+			$popup.text = "You need to submit atleast 2 names" 
+			_checkTimer()

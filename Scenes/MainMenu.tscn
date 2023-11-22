@@ -359,7 +359,7 @@ libraries = {
 [connection signal="text_changed" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="_onChange"]
 [connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="_onSubmit"]
 [connection signal="timeout" from="SingleplayerMenu/Usernames/Timer" to="SingleplayerMenu/Usernames" method="_onTimeout"]
-[connection signal="pressed" from="SingleplayerMenu/VBoxContainer/PlayButton" to="." method="_playPressed"]
+[connection signal="pressed" from="SingleplayerMenu/VBoxContainer/PlayButton" to="SingleplayerMenu/Usernames" method="_on_play_button_pressed"]
 [connection signal="pressed" from="SingleplayerMenu/VBoxContainer/CloseButton" to="." method="_closePressed"]
 [connection signal="pressed" from="Menu/BtnHolder/SingleButton" to="." method="_singlePlayerPressed"]
 [connection signal="pressed" from="Menu/MultiButton" to="." method="_multiPressed"]
