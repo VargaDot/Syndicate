@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public partial class Khana : Node
@@ -32,69 +33,67 @@ public partial class Khana : Node
       IsMortgaged = isMortgaged;
     }
   }
-
-  ///<summary> root is the Agent tree node, from here we can access the entire tree structure </summary>
-  private static readonly Dictionary<byte, Agent> root = new();
+  
+  private static readonly List<Agent> Daftar = new();
   public static void AddAgent(byte ID, ushort startingCash, string username)
   {
-    root[ID] = new Agent(ID, startingCash, username);
+    Daftar.Add(new Agent(ID, startingCash, username));
   }
 
   public static void RemoveAgent(byte AgentID) 
-  { 
-    CheckIDValidity(AgentID);
-    root.Remove(AgentID); 
-  }
-
-  private static void CheckIDValidity(byte AgentID)
   {
-    if (!root.ContainsKey(AgentID)) GD.PushError("Agent ID is not valid");
+    Agent agentToRemove = Daftar.Find(agent => agent.ID == AgentID);
+    Daftar.Remove(agentToRemove);
   }
 
   public static void ConductTransaction(byte AgentID, short amount)
   {
-    CheckIDValidity(AgentID);
-    Agent agent = root[AgentID]; agent.Cash += amount;
+    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
+    selectedAgent.Cash += amount;
+  }
+
+  public static void ExchangeLand(byte BuyerID, byte SellerID, byte PropertyID)
+  {
+    RemoveProperty(SellerID, PropertyID);
+    AddProperty(BuyerID, PropertyID);
   }
 
   public static int GetAgentCash(byte AgentID)
   {
-    CheckIDValidity(AgentID);
-    return root[AgentID].Cash;
+    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
+    return selectedAgent.Cash;
+  }
+
+  public static string GetAgentName(byte AgentID)
+  {
+    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
+    return selectedAgent.Name;
   }
 
   public static void AddProperty(byte AgentID, byte PropertyID)
   {
-    CheckIDValidity(AgentID);
-    Agent agent = root[AgentID];
-    agent.Portfolio.Add(new Property(PropertyID, 1, false));
+    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
+    selectedAgent.Portfolio.Add(new Property(PropertyID, 0));
   }
 
   public static void RemoveProperty(byte AgentID, byte PropertyID)
   {
-    CheckIDValidity(AgentID);
-
-    Agent agent = root[AgentID];
+    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
     Property propertyToRemove = agent.Portfolio.Find(p => p.ID == PropertyID);
-    
     agent.Portfolio.Remove(propertyToRemove);
   }
 
-  public static byte[] GetAgentPortfolio(byte AgentID)
+  public static byte CheckForOwnership(byte PropertyID)
   {
-    CheckIDValidity(AgentID);
-
-    List<byte> propertyIDs = new();
-    foreach (Property property in root[AgentID].Portfolio) { propertyIDs.Add(property.ID);}
-
-    return propertyIDs.ToArray();
+    foreach (Agent agent in Daftar) if (agent.Portfolio.Any(property => property.ID == PropertyID)) { return agent.ID; }
+    
+    // Default if no owner was found
+    return 69;
   }
 
   public static void ToggleMortgageStatus(byte AgentID, byte PropertyID, bool newStatus)
   {
-    CheckIDValidity(AgentID);
-
-    Agent agent = root[AgentID];
+    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
     Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
 
     property.IsMortgaged = newStatus;
@@ -102,11 +101,18 @@ public partial class Khana : Node
 
   public static void ModifyUpgradeLvl(byte AgentID, byte PropertyID, byte newLvl)
   {
-    CheckIDValidity(AgentID);
-
-    Agent agent = root[AgentID];
+    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
     Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
 
     property.UpgradeLevel = newLvl;
+  }
+  
+  public static byte[] GetAgentPortfolio(byte AgentID)
+  {
+    List<byte> propertyIDs = new();
+    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
+
+    foreach (Property property in agent.Portfolio) { propertyIDs.Add(property.ID);}
+    return propertyIDs.ToArray();
   }
 }
