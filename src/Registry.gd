@@ -2,7 +2,8 @@
 extends Node
 
 # Read
-
+func fetch_board(ID, funcID): $EstateCourt.FetchDistrictData(ID, funcID)
+func fetch_card(ID, funcID, lvl = 0): $EstateCourt.FetchAssetData(ID, funcID, lvl)
 
 # Write
 func create_agents(agentname, _type): $Khana.AddAgent(agentname)
