@@ -26,7 +26,7 @@ func _checkTimer():
 
 func _onTimeout(): $popup.hide()
 
-signal sendCharacterRequest
+signal sendCharacterRequest(agentCount)
 var username:String = ""
 func _on_play_button_pressed():
 	if namesEntered >= 2:
@@ -43,3 +43,5 @@ func _on_play_button_pressed():
 	else: 
 		$popup.text = "You need to submit atleast 2 names" 
 		_checkTimer()
+	
+	emit_signal("sendCharacterRequest", namesEntered)

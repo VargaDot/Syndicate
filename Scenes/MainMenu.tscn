@@ -158,11 +158,11 @@ vertical_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="SpriteContainer" type="Container" parent="SingleplayerMenu"]
-layout_mode = 0
+layout_mode = 2
 offset_left = 159.0
 offset_top = 238.0
-offset_right = 1247.0
-offset_bottom = 366.0
+offset_right = 159.0
+offset_bottom = 238.0
 script = ExtResource("3_7buhg")
 
 [node name="Main" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
