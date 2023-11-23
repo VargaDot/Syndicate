@@ -152,7 +152,7 @@ offset_top = 22.0
 offset_right = 1322.0
 offset_bottom = 110.0
 theme = ExtResource("2_63w4d")
-text = "SINGLE PLAYER - 2 PLAYERS"
+text = "SINGLE PLAYER MODE"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
@@ -184,7 +184,7 @@ offset_top = 540.0
 offset_right = 1296.0
 offset_bottom = 650.0
 theme_override_constants/h_separation = 160
-theme_override_constants/v_separation = 19
+theme_override_constants/v_separation = 40
 alignment = 1
 script = ExtResource("4_1nj5f")
 metadata/_edit_group_ = true
@@ -248,20 +248,7 @@ layout_mode = 2
 [node name="CheckBox4" type="CheckBox" parent="SingleplayerMenu/AgentType"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SingleplayerMenu"]
-layout_mode = 0
-offset_left = 372.0
-offset_top = 646.0
-offset_right = 1054.0
-offset_bottom = 750.0
-text = "Typing a name in one of fields above then pressing \"GO!\", will spawn an economic agent.
-
-Checking the box will change the type from AI to Player.
-(Note: The check boxes don't work... yet)"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SingleplayerMenu"]
+[node name="BtnContainer" type="VBoxContainer" parent="SingleplayerMenu"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
 anchors_preset = 7
@@ -277,12 +264,12 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 25
 
-[node name="PlayButton" type="Button" parent="SingleplayerMenu/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="SingleplayerMenu/BtnContainer"]
 layout_mode = 2
 theme = ExtResource("2_63w4d")
 text = "GO!"
 
-[node name="CloseButton" type="Button" parent="SingleplayerMenu/VBoxContainer"]
+[node name="CloseButton" type="Button" parent="SingleplayerMenu/BtnContainer"]
 layout_mode = 2
 theme = ExtResource("2_63w4d")
 text = "CLOSE"
@@ -346,6 +333,7 @@ libraries = {
 "": SubResource("AnimationLibrary_x0kh3")
 }
 
+[connection signal="sendCharacterRequest" from="SingleplayerMenu/Usernames" to="SingleplayerMenu/SpriteContainer" method="_on_character_request"]
 [connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="_onTextRejected"]
 [connection signal="text_changed" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="_onChange"]
 [connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="_onSubmit"]
@@ -359,7 +347,7 @@ libraries = {
 [connection signal="text_changed" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="_onChange"]
 [connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="_onSubmit"]
 [connection signal="timeout" from="SingleplayerMenu/Usernames/Timer" to="SingleplayerMenu/Usernames" method="_onTimeout"]
-[connection signal="pressed" from="SingleplayerMenu/VBoxContainer/PlayButton" to="SingleplayerMenu/Usernames" method="_on_play_button_pressed"]
-[connection signal="pressed" from="SingleplayerMenu/VBoxContainer/CloseButton" to="." method="_closePressed"]
+[connection signal="pressed" from="SingleplayerMenu/BtnContainer/PlayButton" to="SingleplayerMenu/Usernames" method="_on_play_button_pressed"]
+[connection signal="pressed" from="SingleplayerMenu/BtnContainer/CloseButton" to="." method="_closePressed"]
 [connection signal="pressed" from="Menu/BtnHolder/SingleButton" to="." method="_singlePlayerPressed"]
 [connection signal="pressed" from="Menu/MultiButton" to="." method="_multiPressed"]
