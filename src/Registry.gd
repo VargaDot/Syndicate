@@ -6,10 +6,11 @@ func fetch_board(ID, funcID): $EstateCourt.FetchDistrictData(ID, funcID)
 func fetch_card(ID, funcID, lvl = 0): $EstateCourt.FetchAssetData(ID, funcID, lvl)
 
 # Write
-func create_agents(agentname, _type): $Khana.AddAgent(agentname)
+func create_agents(ID, startingCash, Username): $Khana.AddAgent(ID, startingCash, Username)
 func remove_agents(ID): $Khana.RemoveAgent(ID)
 func conduct_transaction(ID, cash): $Khana.ConductTransaction(ID, cash)
 func get_cash(ID): $Khana.GetAgentCash(ID)
+func get_Agentname(ID): $Khana.GetAgentName(ID)
 func add_property(ID, prop): $Khana.AddProperty(ID, prop)
 func remove_property(ID, prop): $Khana.RemoveProperty(ID, prop)
 func change_mortgage(ID, prop, status): $Khana.ToggleMortgageStatus(ID, prop, status)
