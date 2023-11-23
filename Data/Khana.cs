@@ -3,7 +3,7 @@ using System.Linq;
 using Godot;
 
 [GlobalClass]
-public partial class Khana : Node
+public partial class Khana : CSharpScript
 {
   struct Agent
   {
