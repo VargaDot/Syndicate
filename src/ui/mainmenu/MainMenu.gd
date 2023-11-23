@@ -16,10 +16,10 @@ func _singlePlayerPressed() -> void:
 func _multiPressed() -> void:
 	pass
 
-func _playPressed() -> void:
-	Composer.disable_scene("MainMenu")
-	Composer.activate_scene("Game")
-
 func _closePressed() -> void:
 	animPlyr.play("HideSingleplayer")
 	shown = false
+
+func _on_completion():
+	Composer.disable_scene("MainMenu")
+	Composer.activate_scene("Game")

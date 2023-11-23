@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://csa17s4awpr8e"]
+[gd_scene load_steps=13 format=3 uid="uid://csa17s4awpr8e"]
 
 [ext_resource type="Script" path="res://src/ui/mainmenu/MainMenu.gd" id="1_763w7"]
 [ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://art/theme/Card.tres" id="2_63w4d"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://src/ui/mainmenu/Usernames.gd" id="4_1nj5f"]
 [ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://scenes/bcg/MusicPlayer.tscn" id="5_rd1by"]
 [ext_resource type="FontFile" uid="uid://c46oubnvhj7jf" path="res://art/font/Koblenz-Serial-Regular.ttf" id="6_d3jj1"]
+[ext_resource type="Script" path="res://src/ui/mainmenu/AgentType.gd" id="7_do27s"]
 
 [sub_resource type="Animation" id="Animation_cmlab"]
 resource_name = "HideSingleplayer"
@@ -165,16 +166,16 @@ offset_right = 159.0
 offset_bottom = 238.0
 script = ExtResource("3_7buhg")
 
-[node name="Main" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
+[node name="agent1" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
 position = Vector2(160, 64)
 
-[node name="2nd" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
+[node name="agent2" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
 position = Vector2(416, 64)
 
-[node name="3rd" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
+[node name="agent3" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
 position = Vector2(672, 64)
 
-[node name="4th" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
+[node name="agent4" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
 position = Vector2(928, 64)
 
 [node name="Usernames" type="HFlowContainer" parent="SingleplayerMenu"]
@@ -234,6 +235,7 @@ offset_right = 1297.0
 offset_bottom = 620.0
 theme_override_constants/separation = 250
 alignment = 1
+script = ExtResource("7_do27s")
 
 [node name="CheckBox" type="CheckBox" parent="SingleplayerMenu/AgentType"]
 layout_mode = 2
@@ -333,6 +335,7 @@ libraries = {
 "": SubResource("AnimationLibrary_x0kh3")
 }
 
+[connection signal="requestAgentType" from="SingleplayerMenu/SpriteContainer" to="SingleplayerMenu/AgentType" method="_on_request_agent_type"]
 [connection signal="sendCharacterRequest" from="SingleplayerMenu/Usernames" to="SingleplayerMenu/SpriteContainer" method="_on_character_request"]
 [connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="_onTextRejected"]
 [connection signal="text_changed" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="_onChange"]
@@ -347,6 +350,11 @@ libraries = {
 [connection signal="text_changed" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="_onChange"]
 [connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="_onSubmit"]
 [connection signal="timeout" from="SingleplayerMenu/Usernames/Timer" to="SingleplayerMenu/Usernames" method="_onTimeout"]
+[connection signal="onCompletion" from="SingleplayerMenu/AgentType" to="." method="_on_completion"]
+[connection signal="toggled" from="SingleplayerMenu/AgentType/CheckBox" to="SingleplayerMenu/AgentType" method="_on_check_box_toggled"]
+[connection signal="toggled" from="SingleplayerMenu/AgentType/CheckBox2" to="SingleplayerMenu/AgentType" method="_on_check_box_2_toggled"]
+[connection signal="toggled" from="SingleplayerMenu/AgentType/CheckBox3" to="SingleplayerMenu/AgentType" method="_on_check_box_3_toggled"]
+[connection signal="toggled" from="SingleplayerMenu/AgentType/CheckBox4" to="SingleplayerMenu/AgentType" method="_on_check_box_4_toggled"]
 [connection signal="pressed" from="SingleplayerMenu/BtnContainer/PlayButton" to="SingleplayerMenu/Usernames" method="_on_play_button_pressed"]
 [connection signal="pressed" from="SingleplayerMenu/BtnContainer/CloseButton" to="." method="_closePressed"]
 [connection signal="pressed" from="Menu/BtnHolder/SingleButton" to="." method="_singlePlayerPressed"]
