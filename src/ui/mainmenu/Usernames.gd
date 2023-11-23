@@ -11,7 +11,7 @@ func _onTextRejected(rejected_substring):
 	_checkTimer()
 
 func _onSubmit(new_text):
-	namesEntered =+ 1
+	namesEntered = namesEntered + 1
 	$popup.text = new_text + ", has been submitted"
 	_checkTimer()
 
@@ -27,11 +27,19 @@ func _checkTimer():
 func _onTimeout(): $popup.hide()
 
 signal sendCharacterRequest
+var username:String = ""
 func _on_play_button_pressed():
-	match namesEntered:
-		2: pass
-		3: pass
-		4: pass
-		_: 
-			$popup.text = "You need to submit atleast 2 names" 
-			_checkTimer()
+	if namesEntered >= 2:
+		username = $AgentName1.text
+		Khana.AddAgent(1, 2500, username)
+		username = $AgentName2.text
+		Khana.AddAgent(2, 2500, username)
+	elif namesEntered >= 3: 
+		username = $AgentName3.text
+		Khana.AddAgent(3, 2500, username)
+	elif namesEntered >= 4: 
+		username = $AgentName4.text
+		Khana.AddAgent(4, 2500, username)
+	else: 
+		$popup.text = "You need to submit atleast 2 names" 
+		_checkTimer()
