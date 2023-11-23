@@ -10,13 +10,9 @@ public partial class MusicPlayer : AudioStreamPlayer
 	void MusicSelector()
 	{
 		byte x = 0;
-		if(MusicList.Count <= 0)
-		{
-			GD.PushWarning("No music exists");
-		}
-
-		while (x == previousSong)
-			x = (byte)GD.RandRange(0, MusicList.Count);
+		
+		if (MusicList.Count <= 0) GD.PushWarning("No music exists");
+		while (x == previousSong) x = (byte)GD.RandRange(0, MusicList.Count - 1);
 
 		Stream = MusicList[x];
 		previousSong = x;
