@@ -34,6 +34,10 @@ project/assembly_name="Monopoly"
 import/blender/enabled=false
 import/fbx/enabled=false
 
+[gui]
+
+fonts/dynamic_fonts/use_oversampling=false
+
 [input]
 
 Quit={
