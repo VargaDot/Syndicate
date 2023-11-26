@@ -295,7 +295,7 @@ theme_override_constants/separation = 50
 layout_mode = 2
 theme = ExtResource("2_63w4d")
 theme_override_font_sizes/font_size = 55
-text = "MONOPOLY"
+text = "SYNDICATE"
 
 [node name="HSeparator" type="HSeparator" parent="Menu"]
 self_modulate = Color(1, 1, 1, 0)
