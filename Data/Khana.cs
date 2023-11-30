@@ -50,11 +50,9 @@ public partial class Khana : Node
     Daftar.Remove(agentToRemove);
   }
 
-  public void MoveAgent(byte AgentID, byte x)
   public void MoveAgent(byte AgentID, byte newPos)
   {
     Agent agent = Daftar.Find(agent => agent.ID == AgentID);
-    agent.Position += x;
     agent.Position += newPos;
   }
 
@@ -123,12 +121,12 @@ public partial class Khana : Node
     return 69;
   }
 
-  public void ToggleMortgageStatus(byte AgentID, byte PropertyID, bool newStatus)
+  public void ToggleMortgageStatus(byte AgentID, byte PropertyID)
   {
     Agent agent = Daftar.Find(agent => agent.ID == AgentID);
     Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
 
-    property.IsMortgaged = newStatus;
+    property.IsMortgaged = property.IsMortgaged;
   }
 
   public void ModifyUpgradeLvl(byte AgentID, byte PropertyID, byte newLvl)
