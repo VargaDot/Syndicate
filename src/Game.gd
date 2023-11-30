@@ -38,7 +38,7 @@ func _tileInspector():
 		districtTypes.PROPERTY: pass
 		districtTypes.CHEST: pass
 		districtTypes.CHANCE: pass
-		districtTypes.ITAX: Khana.ConductTransaction(currentPlayer, -150)
+		districtTypes.ITAX: Khana.ConductTransaction(currentPlayer, -roundi(Khana.GetAgentCash() * 0.1))
 		districtTypes.LTAX: Khana.ConductTransaction(currentPlayer, -200)
 		districtTypes.JAIL: pass
 		districtTypes.GOJAIL: Khana.ToggleAgentFreedom()
