@@ -1,30 +1,27 @@
 [gd_scene load_steps=5 format=3 uid="uid://bs0vfv6wf6d32"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Card.cs" id="1_hp21u"]
-[ext_resource type="Texture2D" uid="uid://ctw7t3v6hggnt" path="res://Assets/Sprites/PropertyCards/BlankCard.png" id="2_xgf4d"]
-[ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://Assets/Fonts/Themes/Card.tres" id="4_5x8h4"]
-[ext_resource type="FontFile" uid="uid://cw3bbxedp41ds" path="res://Assets/Fonts/Tangerine-Regular.ttf" id="4_fvb35"]
+[ext_resource type="Script" path="res://src/ui/game/Card.gd" id="1_r8yki"]
+[ext_resource type="Texture2D" uid="uid://ctw7t3v6hggnt" path="res://art/sprite/Cards/BlankCard.png" id="2_xgf4d"]
+[ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://art/theme/Card.tres" id="4_5x8h4"]
+[ext_resource type="FontFile" uid="uid://cw3bbxedp41ds" path="res://art/font/Tangerine-Regular.ttf" id="4_fvb35"]
 
-[node name="Card" type="Control" node_paths=PackedStringArray("_colorRect", "_cardSprite", "timer", "AcquiringOptions", "AllLabels")]
+[node name="Card" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hp21u")
-_colorRect = NodePath("CardSprite/CardColor")
-_cardSprite = NodePath("CardSprite")
-timer = NodePath("Timer")
-AcquiringOptions = NodePath("AcquiringOptions")
-AllLabels = [NodePath("CardSprite/Title"), NodePath("CardSprite/AllVals/Rent"), NodePath("CardSprite/AllVals/House"), NodePath("CardSprite/AllVals/House2"), NodePath("CardSprite/AllVals/House3"), NodePath("CardSprite/AllVals/House4"), NodePath("CardSprite/AllVals/Hotel"), NodePath("CardSprite/AllVals/Mortgage"), NodePath("CardSprite/AllVals/Build"), NodePath("CardSprite/Price")]
+script = ExtResource("1_r8yki")
 
 [node name="CardSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(1616, 386)
 texture = ExtResource("2_xgf4d")
 metadata/_edit_group_ = true
 
 [node name="CardColor" type="ColorRect" parent="CardSprite"]
+unique_name_in_owner = true
 offset_left = -132.0
 offset_top = -220.0
 offset_right = 132.0
@@ -56,7 +53,8 @@ text = "SparroWorks"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AllDesc" type="VBoxContainer" parent="CardSprite"]
+[node name="DescContainer" type="VBoxContainer" parent="CardSprite"]
+unique_name_in_owner = true
 offset_left = -142.0
 offset_top = -111.0
 offset_right = 40.0
@@ -64,7 +62,7 @@ offset_bottom = 221.0
 theme_override_constants/separation = 20
 metadata/_edit_group_ = true
 
-[node name="RentDesc" type="Label" parent="CardSprite/AllDesc"]
+[node name="RentDesc" type="Label" parent="CardSprite/DescContainer"]
 layout_mode = 2
 theme = ExtResource("4_5x8h4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -72,7 +70,7 @@ theme_override_font_sizes/font_size = 23
 text = "Rent"
 horizontal_alignment = 1
 
-[node name="Description" type="Label" parent="CardSprite/AllDesc"]
+[node name="Description" type="Label" parent="CardSprite/DescContainer"]
 layout_mode = 2
 theme = ExtResource("4_5x8h4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -89,21 +87,22 @@ With HOTEL"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MortgageDesc" type="Label" parent="CardSprite/AllDesc"]
+[node name="MortgageDesc" type="Label" parent="CardSprite/DescContainer"]
 layout_mode = 2
 theme = ExtResource("4_5x8h4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "Mortgage Value"
 
-[node name="HouseDesc" type="Label" parent="CardSprite/AllDesc"]
+[node name="HouseDesc" type="Label" parent="CardSprite/DescContainer"]
 layout_mode = 2
 theme = ExtResource("4_5x8h4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 13
 text = "Houses Cost"
 
-[node name="AllVals" type="VBoxContainer" parent="CardSprite"]
+[node name="ValuesContainer" type="VBoxContainer" parent="CardSprite"]
+unique_name_in_owner = true
 offset_left = 40.0
 offset_top = -111.0
 offset_right = 143.0
@@ -112,7 +111,7 @@ theme_override_constants/separation = 20
 alignment = 1
 metadata/_edit_group_ = true
 
-[node name="Rent" type="Label" parent="CardSprite/AllVals"]
+[node name="Rent" type="Label" parent="CardSprite/ValuesContainer"]
 layout_mode = 2
 theme = ExtResource("4_5x8h4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -121,7 +120,7 @@ text = "99999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="House" type="Label" parent="CardSprite/AllVals"]
+[node name="House" type="Label" parent="CardSprite/ValuesContainer"]
 layout_mode = 2
 theme = ExtResource("4_5x8h4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -130,7 +129,7 @@ text = "99999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="House2" type="Label" parent="CardSprite/AllVals"]
+[node name="House2" type="Label" parent="CardSprite/ValuesContainer"]
 layout_mode = 2
 theme = ExtResource("4_5x8h4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -139,7 +138,7 @@ text = "99999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="House3" type="Label" parent="CardSprite/AllVals"]
+[node name="House3" type="Label" parent="CardSprite/ValuesContainer"]
 layout_mode = 2
 theme = ExtResource("4_5x8h4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -148,7 +147,7 @@ text = "99999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="House4" type="Label" parent="CardSprite/AllVals"]
+[node name="House4" type="Label" parent="CardSprite/ValuesContainer"]
 layout_mode = 2
 theme = ExtResource("4_5x8h4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -157,7 +156,7 @@ text = "99999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Hotel" type="Label" parent="CardSprite/AllVals"]
+[node name="Hotel" type="Label" parent="CardSprite/ValuesContainer"]
 layout_mode = 2
 theme = ExtResource("4_5x8h4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -166,7 +165,7 @@ text = "99999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Mortgage" type="Label" parent="CardSprite/AllVals"]
+[node name="Mortgage" type="Label" parent="CardSprite/ValuesContainer"]
 layout_mode = 2
 theme = ExtResource("4_5x8h4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -175,7 +174,7 @@ text = "99999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Build" type="Label" parent="CardSprite/AllVals"]
+[node name="Build" type="Label" parent="CardSprite/ValuesContainer"]
 layout_mode = 2
 theme = ExtResource("4_5x8h4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -219,6 +218,9 @@ text = "Purchase"
 [node name="AuctionButton" type="Button" parent="AcquiringOptions"]
 layout_mode = 2
 text = "Auction"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0

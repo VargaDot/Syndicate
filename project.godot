@@ -11,14 +11,15 @@ config_version=5
 [application]
 
 config/name="Syndicate"
-run/main_scene="res://Scenes/Editor/SceneManagement/RootScene.tscn"
-config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
-config/icon="res://Assets/Icon.png"
+run/main_scene="res://scenes/composer/RootScene.tscn"
+config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
+config/icon="res://art/Icon.png"
 
 [autoload]
 
-Globals="*res://Scripts/Editor/Globals.cs"
-Composer="*res://Scripts/Editor/Scene Management/ComposerLib.cs"
+Composer="*res://src/composer/Composer.gd"
+EstateCourt="*res://data/EstateCourt.gd"
+Khana="*res://data/Khana.cs"
 
 [display]
 
@@ -33,6 +34,10 @@ project/assembly_name="Monopoly"
 
 import/blender/enabled=false
 import/fbx/enabled=false
+
+[gui]
+
+fonts/dynamic_fonts/use_oversampling=false
 
 [input]
 

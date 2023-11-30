@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://csa17s4awpr8e"]
+[gd_scene load_steps=13 format=3 uid="uid://csa17s4awpr8e"]
 
-[ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_e8dpg"]
-[ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://Assets/Fonts/Themes/Card.tres" id="2_63w4d"]
-[ext_resource type="Script" path="res://Scripts/UI/MainMenu/SpriteChanger.cs" id="3_ju8de"]
-[ext_resource type="Theme" uid="uid://7is2xs320v4c" path="res://Assets/Fonts/Themes/Fields.tres" id="3_roui2"]
-[ext_resource type="Script" path="res://Scripts/UI/MainMenu/Usernames.cs" id="4_eod01"]
-[ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://Scenes/Editor/MusicPlayer.tscn" id="5_rd1by"]
-[ext_resource type="FontFile" uid="uid://c46oubnvhj7jf" path="res://Assets/Fonts/Koblenz-Serial-Regular.ttf" id="6_d3jj1"]
+[ext_resource type="Script" path="res://src/ui/mainmenu/MainMenu.gd" id="1_763w7"]
+[ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://art/theme/Card.tres" id="2_63w4d"]
+[ext_resource type="Script" path="res://src/ui/mainmenu/SpriteContainer.gd" id="3_7buhg"]
+[ext_resource type="Theme" uid="uid://7is2xs320v4c" path="res://art/theme/Fields.tres" id="3_roui2"]
+[ext_resource type="Script" path="res://src/ui/mainmenu/Usernames.gd" id="4_1nj5f"]
+[ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://scenes/bcg/MusicPlayer.tscn" id="5_rd1by"]
+[ext_resource type="FontFile" uid="uid://c46oubnvhj7jf" path="res://art/font/Koblenz-Serial-Regular.ttf" id="6_d3jj1"]
+[ext_resource type="Script" path="res://src/ui/mainmenu/AgentType.gd" id="7_do27s"]
 
 [sub_resource type="Animation" id="Animation_cmlab"]
 resource_name = "HideSingleplayer"
@@ -122,15 +123,15 @@ _data = {
 "ShowSingleplayer": SubResource("Animation_lbg8y")
 }
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("SingleplayerPanel")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("singlePlayer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_e8dpg")
-SingleplayerPanel = NodePath("SingleplayerMenu")
+script = ExtResource("1_763w7")
+singlePlayer = NodePath("SingleplayerMenu")
 
 [node name="SingleplayerMenu" type="Panel" parent="."]
 layout_mode = 1
@@ -152,43 +153,41 @@ offset_top = 22.0
 offset_right = 1322.0
 offset_bottom = 110.0
 theme = ExtResource("2_63w4d")
-text = "SINGLE PLAYER - 2 PLAYERS"
+text = "SINGLE PLAYER MODE"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="SpriteContainer" type="Container" parent="SingleplayerMenu"]
-layout_mode = 0
+layout_mode = 2
 offset_left = 159.0
 offset_top = 238.0
-offset_right = 1247.0
-offset_bottom = 366.0
-script = ExtResource("3_ju8de")
+offset_right = 159.0
+offset_bottom = 238.0
+script = ExtResource("3_7buhg")
 
-[node name="Main" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
+[node name="agent1" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
 position = Vector2(160, 64)
 
-[node name="2nd" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
+[node name="agent2" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
 position = Vector2(416, 64)
 
-[node name="3rd" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
+[node name="agent3" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
 position = Vector2(672, 64)
 
-[node name="4th" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
+[node name="agent4" type="Sprite2D" parent="SingleplayerMenu/SpriteContainer"]
 position = Vector2(928, 64)
 
-[node name="Usernames" type="HFlowContainer" parent="SingleplayerMenu" node_paths=PackedStringArray("PopUp", "textTimer")]
+[node name="Usernames" type="HFlowContainer" parent="SingleplayerMenu"]
 layout_mode = 0
 offset_left = 147.0
 offset_top = 540.0
 offset_right = 1296.0
 offset_bottom = 650.0
 theme_override_constants/h_separation = 160
-theme_override_constants/v_separation = 19
+theme_override_constants/v_separation = 40
 alignment = 1
-script = ExtResource("4_eod01")
-PopUp = NodePath("message")
-textTimer = NodePath("message/Timer")
+script = ExtResource("4_1nj5f")
 metadata/_edit_group_ = true
 
 [node name="AgentName1" type="LineEdit" parent="SingleplayerMenu/Usernames"]
@@ -215,7 +214,7 @@ theme = ExtResource("3_roui2")
 placeholder_text = "Bain"
 caret_blink = true
 
-[node name="message" type="Label" parent="SingleplayerMenu/Usernames"]
+[node name="popup" type="Label" parent="SingleplayerMenu/Usernames"]
 visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_d3jj1")
@@ -224,7 +223,7 @@ text = "poopie"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Timer" type="Timer" parent="SingleplayerMenu/Usernames/message"]
+[node name="Timer" type="Timer" parent="SingleplayerMenu/Usernames"]
 wait_time = 3.0
 one_shot = true
 
@@ -236,6 +235,7 @@ offset_right = 1297.0
 offset_bottom = 620.0
 theme_override_constants/separation = 250
 alignment = 1
+script = ExtResource("7_do27s")
 
 [node name="CheckBox" type="CheckBox" parent="SingleplayerMenu/AgentType"]
 layout_mode = 2
@@ -250,20 +250,7 @@ layout_mode = 2
 [node name="CheckBox4" type="CheckBox" parent="SingleplayerMenu/AgentType"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SingleplayerMenu"]
-layout_mode = 0
-offset_left = 372.0
-offset_top = 646.0
-offset_right = 1054.0
-offset_bottom = 750.0
-text = "Typing a name in one of fields above then pressing \"GO!\", will spawn an economic agent.
-
-Checking the box will change the type from AI to Player.
-(Note: The check boxes don't work... yet)"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SingleplayerMenu"]
+[node name="BtnContainer" type="VBoxContainer" parent="SingleplayerMenu"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
 anchors_preset = 7
@@ -279,17 +266,15 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 25
 
-[node name="PlayButton" type="Button" parent="SingleplayerMenu/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="SingleplayerMenu/BtnContainer"]
 layout_mode = 2
 theme = ExtResource("2_63w4d")
 text = "GO!"
 
-[node name="CloseButton" type="Button" parent="SingleplayerMenu/VBoxContainer"]
+[node name="CloseButton" type="Button" parent="SingleplayerMenu/BtnContainer"]
 layout_mode = 2
 theme = ExtResource("2_63w4d")
 text = "CLOSE"
-
-[node name="MusicPlayer" parent="." instance=ExtResource("5_rd1by")]
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -310,7 +295,7 @@ theme_override_constants/separation = 50
 layout_mode = 2
 theme = ExtResource("2_63w4d")
 theme_override_font_sizes/font_size = 55
-text = "MONOPOLY"
+text = "SYNDICATE"
 
 [node name="HSeparator" type="HSeparator" parent="Menu"]
 self_modulate = Color(1, 1, 1, 0)
@@ -343,22 +328,34 @@ layout_mode = 2
 theme = ExtResource("2_63w4d")
 text = "MULTIPLAYER"
 
+[node name="MusicPlayer" parent="." instance=ExtResource("5_rd1by")]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_x0kh3")
 }
 
-[connection signal="GoPressed" from="SingleplayerMenu/Usernames" to="." method="OnPlayPressed"]
-[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
-[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="OnAgent1Registered"]
-[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName2" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
-[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName2" to="SingleplayerMenu/Usernames" method="OnAgent2Registered"]
-[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName3" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
-[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName3" to="SingleplayerMenu/Usernames" method="OnAgent3Registered"]
-[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="OnInvalidUsername"]
-[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="OnAgent4Registered"]
-[connection signal="timeout" from="SingleplayerMenu/Usernames/message/Timer" to="SingleplayerMenu/Usernames" method="OnTimeout"]
-[connection signal="pressed" from="SingleplayerMenu/VBoxContainer/PlayButton" to="." method="OnPlayPressed"]
-[connection signal="pressed" from="SingleplayerMenu/VBoxContainer/CloseButton" to="." method="OnClosePressed"]
-[connection signal="pressed" from="Menu/BtnHolder/SingleButton" to="." method="OnSinglePlayerPressed"]
-[connection signal="pressed" from="Menu/MultiButton" to="." method="OnMultiPressed"]
+[connection signal="requestAgentType" from="SingleplayerMenu/SpriteContainer" to="SingleplayerMenu/AgentType" method="_on_request_agent_type"]
+[connection signal="sendCharacterRequest" from="SingleplayerMenu/Usernames" to="SingleplayerMenu/SpriteContainer" method="_on_character_request"]
+[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="_onTextRejected"]
+[connection signal="text_changed" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="_onChange"]
+[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="_onSubmit"]
+[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName2" to="SingleplayerMenu/Usernames" method="_onTextRejected"]
+[connection signal="text_changed" from="SingleplayerMenu/Usernames/AgentName2" to="SingleplayerMenu/Usernames" method="_onChange"]
+[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName2" to="SingleplayerMenu/Usernames" method="_onSubmit"]
+[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName3" to="SingleplayerMenu/Usernames" method="_onTextRejected"]
+[connection signal="text_changed" from="SingleplayerMenu/Usernames/AgentName3" to="SingleplayerMenu/Usernames" method="_onChange"]
+[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName3" to="SingleplayerMenu/Usernames" method="_onSubmit"]
+[connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="_onTextRejected"]
+[connection signal="text_changed" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="_onChange"]
+[connection signal="text_submitted" from="SingleplayerMenu/Usernames/AgentName4" to="SingleplayerMenu/Usernames" method="_onSubmit"]
+[connection signal="timeout" from="SingleplayerMenu/Usernames/Timer" to="SingleplayerMenu/Usernames" method="_onTimeout"]
+[connection signal="onCompletion" from="SingleplayerMenu/AgentType" to="." method="_on_completion"]
+[connection signal="toggled" from="SingleplayerMenu/AgentType/CheckBox" to="SingleplayerMenu/AgentType" method="_on_check_box_toggled"]
+[connection signal="toggled" from="SingleplayerMenu/AgentType/CheckBox2" to="SingleplayerMenu/AgentType" method="_on_check_box_2_toggled"]
+[connection signal="toggled" from="SingleplayerMenu/AgentType/CheckBox3" to="SingleplayerMenu/AgentType" method="_on_check_box_3_toggled"]
+[connection signal="toggled" from="SingleplayerMenu/AgentType/CheckBox4" to="SingleplayerMenu/AgentType" method="_on_check_box_4_toggled"]
+[connection signal="pressed" from="SingleplayerMenu/BtnContainer/PlayButton" to="SingleplayerMenu/Usernames" method="_on_play_button_pressed"]
+[connection signal="pressed" from="SingleplayerMenu/BtnContainer/CloseButton" to="." method="_closePressed"]
+[connection signal="pressed" from="Menu/BtnHolder/SingleButton" to="." method="_singlePlayerPressed"]
+[connection signal="pressed" from="Menu/MultiButton" to="." method="_multiPressed"]

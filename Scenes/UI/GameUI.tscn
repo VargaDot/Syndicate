@@ -1,19 +1,19 @@
 [gd_scene load_steps=7 format=3 uid="uid://lexwee1hisaf"]
 
-[ext_resource type="Script" path="res://Scripts/UI/GameUI.cs" id="1_iqowj"]
-[ext_resource type="PackedScene" uid="uid://bs0vfv6wf6d32" path="res://Scenes/UI/Card.tscn" id="2_ydfyd"]
-[ext_resource type="PackedScene" uid="uid://bwu0yupcqyu2v" path="res://Scenes/UI/DiceUI.tscn" id="3_awhli"]
-[ext_resource type="PackedScene" uid="uid://wkltxog3tco" path="res://Scenes/UI/Trade.tscn" id="4_7nsqs"]
-[ext_resource type="Script" path="res://Scripts/UI/Trade.cs" id="5_i8o2n"]
-[ext_resource type="PackedScene" uid="uid://bjsju4y3y4cbc" path="res://Scenes/UI/Prison.tscn" id="5_yqiml"]
+[ext_resource type="Script" path="res://src/ui/game/GameUI.gd" id="1_ef41v"]
+[ext_resource type="PackedScene" uid="uid://bs0vfv6wf6d32" path="res://scenes/ui/Card.tscn" id="2_ydfyd"]
+[ext_resource type="PackedScene" uid="uid://bwu0yupcqyu2v" path="res://scenes/ui/Dice.tscn" id="3_0jfq0"]
+[ext_resource type="PackedScene" uid="uid://wkltxog3tco" path="res://scenes/ui/Trade.tscn" id="4_7nsqs"]
+[ext_resource type="PackedScene" uid="uid://bjsju4y3y4cbc" path="res://scenes/ui/Prison.tscn" id="5_yqiml"]
+[ext_resource type="PackedScene" uid="uid://c2td3xuincgl0" path="res://scenes/ui/Pause.tscn" id="6_i4en3"]
 
 [node name="GameUI" type="Node"]
-script = ExtResource("1_iqowj")
+script = ExtResource("1_ef41v")
 
 [node name="Card" parent="." instance=ExtResource("2_ydfyd")]
 visible = false
 
-[node name="Dice" parent="." instance=ExtResource("3_awhli")]
+[node name="Dice" parent="." instance=ExtResource("3_0jfq0")]
 visible = false
 
 [node name="Prison" parent="." instance=ExtResource("5_yqiml")]
@@ -21,9 +21,12 @@ visible = false
 
 [node name="Trade" parent="." instance=ExtResource("4_7nsqs")]
 visible = false
-script = ExtResource("5_i8o2n")
 
-[connection signal="CardUI" from="." to="Card" method="OnEventFired"]
-[connection signal="DiceUI" from="." to="Dice" method="OnEventFired"]
-[connection signal="PrisonUI" from="." to="Prison" method="OnEventFired"]
-[connection signal="TradeUI" from="." to="Trade" method="OnEventFired"]
+[node name="Pause" parent="." instance=ExtResource("6_i4en3")]
+visible = false
+
+[connection signal="RequestCard" from="." to="Card" method="_onRequest"]
+[connection signal="RequestDice" from="." to="Dice" method="_onRequest"]
+[connection signal="RequestPause" from="." to="Pause" method="_onRequest"]
+[connection signal="RequestPrison" from="." to="Prison" method="_onRequest"]
+[connection signal="RequestTrade" from="." to="Trade" method="_onRequest"]
