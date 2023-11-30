@@ -1,11 +1,10 @@
 extends Control
 
-func _onRequest(funcID, pos):
+func _onRequest(funcID, secondOp):
 	match(funcID):
-		1: # BUYING PROPERTIES
-			EstateCourt.FetchDistrictData(pos, 4)
-		2: pass
-		3: pass
-		4: pass
+		"PROP": # BUYING PROPERTIES
+			EstateCourt.FetchDistrictData(secondOp, "ID")
+		"CHEST": pass
+		"CHANCE": pass
 	
 	show()

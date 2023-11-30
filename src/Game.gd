@@ -3,7 +3,7 @@ extends Node2D
 signal SendUIRequest
 
 func _ready(): _turnManager()
-func _process(_delta): if Input.is_action_pressed("Quit"): emit_signal("SendUIRequest", 0)
+func _process(_delta): if Input.is_action_pressed("Quit"): emit_signal("SendUIRequest", "PAUSE")
 
 var firstRound:bool = true
 var currentPlayer:int = 0
@@ -14,7 +14,7 @@ func _turnManager():
 		firstRound = false
 	else: currentPlayer = (currentPlayer + 1) % agentCount
 	
-	if Khana.GetAgentStatus(currentPlayer) == true: emit_signal("SendUIRequest", 6)
+	if Khana.GetAgentStatus(currentPlayer) == true: emit_signal("SendUIRequest", "PRISON")
 	else: pass
 	
 	var roll = randi_range(2, 12)
@@ -24,7 +24,7 @@ func _turnManager():
 		if Khana.GetAgentDoublesCount() == 3: Khana.ToggleAgentFreedom(currentPlayer)
 		else: pass
 	
-	emit_signal("SendUIRequest", 5, roll)
+	emit_signal("SendUIRequest", "DICE", roll)
 	Khana.MoveAgent(currentPlayer, roll)
 	_tileInspector()
 
@@ -36,9 +36,9 @@ func _tileInspector():
 	
 	match tiletype:
 		districtTypes.GO: Khana.ConductTransaction(currentPlayer, 200)
-		districtTypes.PROPERTY: emit_signal("SendUIRequest", 1, pos)
-		districtTypes.CHEST: emit_signal("SendUIRequest", 2)
-		districtTypes.CHANCE: emit_signal("SendUIRequest", 3)
+		districtTypes.PROPERTY: emit_signal("SendUIRequest", "PROP", pos)
+		districtTypes.CHEST: emit_signal("SendUIRequest", "CHEST")
+		districtTypes.CHANCE: emit_signal("SendUIRequest", "CHANCE")
 		districtTypes.ITAX: Khana.ConductTransaction(currentPlayer, -roundi(Khana.GetAgentCash() * 0.1))
 		districtTypes.LTAX: Khana.ConductTransaction(currentPlayer, -100)
 		districtTypes.JAIL: pass

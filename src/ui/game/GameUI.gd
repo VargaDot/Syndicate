@@ -8,11 +8,10 @@ signal RequestPrison
 
 func _onRequest(functionID, secondOption):
 	match functionID:
-		0: emit_signal("RequestPause")
-		1: emit_signal("RequestCard", 1, secondOption)
-		2: emit_signal("RequestCard", 2)
-		3: emit_signal("RequestCard", 3)
-		4: emit_signal("RequestCard", 4)
-		5: emit_signal("RequestDice", secondOption)
-		6: emit_signal("RequestPrison")
-		7: emit_signal("RequestTrade")
+		"PAUSE": emit_signal("RequestPause")
+		"PROP": emit_signal("RequestCard", "PROP", secondOption)
+		"CHEST": emit_signal("RequestCard", "CHEST", secondOption)
+		"CHANCE": emit_signal("RequestCard", "CHANCE", secondOption)
+		"DICE": emit_signal("RequestDice", secondOption)
+		"PRISON": emit_signal("RequestPrison")
+		"TRADE": emit_signal("RequestTrade")

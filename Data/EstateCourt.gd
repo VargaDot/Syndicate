@@ -9,17 +9,17 @@ func _ready():
 var BoardDATA
 func FetchDistrictData(BoardID, functionID):
 	match functionID:
-		1: return BoardDATA[BoardID]["Type"]
-		2: return BoardDATA[BoardID]["CardID"]
-		3: return BoardDATA[BoardID]["Name"]
-		4: return BoardDATA[BoardID]["ID"]
+		"TYPE": return BoardDATA[BoardID]["Type"]
+		"CARDID": return BoardDATA[BoardID]["CardID"]
+		"NAME": return BoardDATA[BoardID]["Name"]
+		"ID": return BoardDATA[BoardID]["ID"]
 		_: printerr("unrelated")
 
 var PropertyDATA
 func FetchAssetData(internalPropName, functionID, level = 0):
 	match functionID:
-		1: return PropertyDATA[internalPropName]["Costs"]["PurchasePrice"]
-		2: return PropertyDATA[internalPropName]["Costs"]["BuildCost"]
-		3: return PropertyDATA[internalPropName]["Costs"]["Mortgage"]
-		4: return PropertyDATA[internalPropName]["Rent"][level]
+		"PP": return PropertyDATA[internalPropName]["Costs"]["PurchasePrice"]
+		"BC": return PropertyDATA[internalPropName]["Costs"]["BuildCost"]
+		"MORTGAGE": return PropertyDATA[internalPropName]["Costs"]["Mortgage"]
+		"RENT": return PropertyDATA[internalPropName]["Rent"][level]
 		_: return PropertyDATA["Default"]
