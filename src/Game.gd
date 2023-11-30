@@ -7,13 +7,13 @@ func _process(_delta): if Input.is_action_pressed("Quit"): emit_signal("SendUIRe
 
 var firstRound:bool = true
 var currentPlayer:int = 0
+var agentCount = Khana.AgentCount()
 func _turnManager():
 	if firstRound: 
-		currentPlayer = randi_range(1, Khana.Agentcount)
+		currentPlayer = randi_range(1, agentCount)
 		firstRound = false
 	else: 
-		currentPlayer = currentPlayer + 1
-		if currentPlayer > Khana.Agentcount: currentPlayer = 1
+		currentPlayer = (currentPlayer + 1) % agentCount
 	
 	var roll = randi_range(2, 12)
 	if roll % 2 == 0: Khana.ModifyDoubleCount(currentPlayer)
