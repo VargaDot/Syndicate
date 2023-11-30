@@ -26,3 +26,22 @@ func _turnManager():
 	
 	emit_signal("SendUIRequest", 5, roll)
 	Khana.MoveAgent(currentPlayer, roll)
+
+enum districtTypes { GO, PROPERTY, CHEST, CHANCE, ITAX, LTAX, JAIL, GOJAIL, PARKING }
+
+func _tileInspector(): 
+	var pos:int = Khana.GetAgentPosition(currentPlayer)
+	var tiletype = EstateCourt.FetchDistrictData(pos, 1)
+	
+	match tiletype:
+		districtTypes.GO: Khana.ConductTransaction(currentPlayer, 200)
+		districtTypes.PROPERTY: pass
+		districtTypes.CHEST: pass
+		districtTypes.CHANCE: pass
+		districtTypes.ITAX: Khana.ConductTransaction(currentPlayer, -150)
+		districtTypes.LTAX: Khana.ConductTransaction(currentPlayer, -200)
+		districtTypes.JAIL: pass
+		districtTypes.GOJAIL: Khana.ToggleAgentFreedom()
+		districtTypes.PARKING: pass
+		_: print("not found")
+	
