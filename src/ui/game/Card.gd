@@ -35,6 +35,7 @@ func _onRequest(funcID, secondOp):
 
 func _on_purchase_button_pressed():
 	Khana.AddProperty()
+	hide()
 
 func _on_auction_button_pressed():
 	pass # Replace with function body.
