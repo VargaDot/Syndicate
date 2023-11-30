@@ -14,13 +14,14 @@ func _turnManager():
 		firstRound = false
 	else: currentPlayer = (currentPlayer + 1) % agentCount
 	
+	if Khana.GetAgentStatus(currentPlayer) == true: emit_signal("SendUIRequest", 6)
+	else: pass
+	
 	var roll = randi_range(2, 12)
 	if roll % 2 == 0: Khana.ModifyDoubleCount(currentPlayer)
 	else: 
 		Khana.ModifyDoubleCount(currentPlayer, true)
-		if Khana.GetAgentDoublesCount() == 3: 
-			emit_signal("SendUIRequest", 6)
-			Khana.ToggleAgentFreedom(currentPlayer)
+		if Khana.GetAgentDoublesCount() == 3: Khana.ToggleAgentFreedom(currentPlayer)
 		else: pass
 	
 	emit_signal("SendUIRequest", 5, roll)
