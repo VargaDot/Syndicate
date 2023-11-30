@@ -2,8 +2,8 @@ extends Node2D
 
 signal SendUIRequest
 
-func _process(_delta): if Input.is_action_pressed("Quit"): emit_signal("SendUIRequest", 0)
 func _ready(): _turnManager()
+func _process(_delta): if Input.is_action_pressed("Quit"): emit_signal("SendUIRequest", 0)
 
 var firstRound:bool = true
 var count:int = 0
