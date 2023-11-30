@@ -12,8 +12,7 @@ func _turnManager():
 	if firstRound: 
 		currentPlayer = randi_range(1, agentCount)
 		firstRound = false
-	else: 
-		currentPlayer = (currentPlayer + 1) % agentCount
+	else: currentPlayer = (currentPlayer + 1) % agentCount
 	
 	var roll = randi_range(2, 12)
 	if roll % 2 == 0: Khana.ModifyDoubleCount(currentPlayer)
