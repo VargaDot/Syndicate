@@ -10,6 +10,8 @@ public partial class Khana : Node
     public List<Property> Portfolio { get; set; }
     public int Cash { get; set; }
     public string Name { get; set; }
+    public byte Position = 0;
+    public bool inPrison = false;
 
     public Agent(byte id, int cash, string name)
     {
@@ -48,6 +50,18 @@ public partial class Khana : Node
     Daftar.Remove(agentToRemove);
   }
 
+  public void MoveAgent(byte AgentID, byte x)
+  {
+    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
+    agent.Position += x;
+  }
+
+  public void ToggleAgentFreedom(byte AgentID)
+  {
+    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
+    agent.inPrison = !agent.inPrison;
+  }
+
   public void ConductTransaction(byte AgentID, short amount)
   {
     Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
@@ -70,6 +84,18 @@ public partial class Khana : Node
   {
     Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
     return selectedAgent.Name;
+  }
+
+  public byte GetAgentPosition(byte AgentID)
+  {
+    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
+    return selectedAgent.Position;
+  }
+
+  public bool GetAgentStatus(byte AgentID)
+  {
+    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
+    return selectedAgent.inPrison;
   }
 
   public void AddProperty(byte AgentID, byte PropertyID)
