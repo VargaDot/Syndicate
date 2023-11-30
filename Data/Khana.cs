@@ -35,9 +35,11 @@ public partial class Khana : Node
   }
   
   private readonly List<Agent> Daftar = new();
+  public byte Agentcount = 0;
   public void AddAgent(byte ID, ushort startingCash, string username)
   {
     Daftar.Add(new Agent(ID, startingCash, username));
+    Agentcount = (byte)Daftar.Count;
   }
 
   public void RemoveAgent(byte AgentID) 
