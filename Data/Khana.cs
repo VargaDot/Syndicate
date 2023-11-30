@@ -51,9 +51,13 @@ public partial class Khana : Node
   }
 
   public void MoveAgent(byte AgentID, byte x)
+  public void MoveAgent(byte AgentID, byte newPos)
   {
     Agent agent = Daftar.Find(agent => agent.ID == AgentID);
     agent.Position += x;
+    agent.Position += newPos;
+  }
+
   }
 
   public void ToggleAgentFreedom(byte AgentID)

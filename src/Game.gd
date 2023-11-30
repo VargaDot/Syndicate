@@ -16,3 +16,5 @@ func _turnManager():
 		if currentPlayer > Khana.Agentcount: currentPlayer = 1
 	
 	
+	emit_signal("SendUIRequest", 5, roll)
+	Khana.MoveAgent(currentPlayer, roll)
