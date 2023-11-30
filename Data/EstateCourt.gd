@@ -6,8 +6,8 @@ func _ready():
 	BoardDATA = JSON.parse_string(BoardFILE.get_as_text())
 	PropertyDATA = JSON.parse_string(PropertyFILE.get_as_text())
 
-static var BoardDATA
-static func FetchDistrictData(BoardID, functionID):
+var BoardDATA
+func FetchDistrictData(BoardID, functionID):
 	match functionID:
 		1: return BoardDATA[BoardID]["Type"]
 		2: return BoardDATA[BoardID]["CardID"]
@@ -15,8 +15,8 @@ static func FetchDistrictData(BoardID, functionID):
 		4: return BoardDATA[BoardID]["ID"]
 		_: printerr("unrelated")
 
-static var PropertyDATA
-static func FetchAssetData(internalPropName, functionID, level = 0):
+var PropertyDATA
+func FetchAssetData(internalPropName, functionID, level = 0):
 	match functionID:
 		1: return PropertyDATA[internalPropName]["Costs"]["PurchasePrice"]
 		2: return PropertyDATA[internalPropName]["Costs"]["BuildCost"]
