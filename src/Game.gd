@@ -26,6 +26,7 @@ func _turnManager():
 	
 	emit_signal("SendUIRequest", 5, roll)
 	Khana.MoveAgent(currentPlayer, roll)
+	_tileInspector()
 
 enum districtTypes { GO, PROPERTY, CHEST, CHANCE, ITAX, LTAX, JAIL, GOJAIL, PARKING }
 
