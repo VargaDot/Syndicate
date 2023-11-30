@@ -12,6 +12,7 @@ public partial class Khana : Node
     public string Name { get; set; }
     public byte Position = 0;
     public bool inPrison = false;
+    public byte doublesCount = 0;
 
     public Agent(byte id, int cash, string name)
     {
@@ -56,12 +57,18 @@ public partial class Khana : Node
     agent.Position += newPos;
   }
 
+  public void ModifyDoubleCount(byte AgentID, bool is_even = false)
+  {
+    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
+    if (is_even) selectedAgent.doublesCount++;
+    else selectedAgent.doublesCount = 0;
   }
 
   public void ToggleAgentFreedom(byte AgentID)
   {
     Agent agent = Daftar.Find(agent => agent.ID == AgentID);
     agent.inPrison = !agent.inPrison;
+    agent.Position = 10;
   }
 
   public void ConductTransaction(byte AgentID, short amount)
@@ -92,6 +99,12 @@ public partial class Khana : Node
   {
     Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
     return selectedAgent.Position;
+  }
+
+  public byte GetAgentDoublesCount(byte AgentID)
+  {
+    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
+    return selectedAgent.doublesCount; 
   }
 
   public bool GetAgentStatus(byte AgentID)
