@@ -54,7 +54,7 @@ public partial class Khana : Node
   public void MoveAgent(byte AgentID, byte newPos)
   {
     Agent agent = Daftar.Find(agent => agent.ID == AgentID);
-    agent.Position += newPos;
+    agent.Position = (byte)((agent.Position += newPos) % 39);
   }
 
   public void ModifyDoubleCount(byte AgentID, bool is_even = false)
