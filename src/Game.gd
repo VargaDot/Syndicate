@@ -35,9 +35,9 @@ func _tileInspector():
 	
 	match tiletype:
 		districtTypes.GO: Khana.ConductTransaction(currentPlayer, 200)
-		districtTypes.PROPERTY: pass
-		districtTypes.CHEST: pass
-		districtTypes.CHANCE: pass
+		districtTypes.PROPERTY: emit_signal("SendUIRequest", 1, pos)
+		districtTypes.CHEST: emit_signal("SendUIRequest", 2)
+		districtTypes.CHANCE: emit_signal("SendUIRequest", 3)
 		districtTypes.ITAX: Khana.ConductTransaction(currentPlayer, -roundi(Khana.GetAgentCash() * 0.1))
 		districtTypes.LTAX: Khana.ConductTransaction(currentPlayer, -100)
 		districtTypes.JAIL: pass
