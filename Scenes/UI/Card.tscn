@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://art/theme/Card.tres" id="4_5x8h4"]
 [ext_resource type="FontFile" uid="uid://cw3bbxedp41ds" path="res://art/font/Tangerine-Regular.ttf" id="4_fvb35"]
 
-[node name="Card" type="Control"]
+[node name="Card" type="Control" node_paths=PackedStringArray("values")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_r8yki")
+values = [NodePath("CardSprite/ValuesContainer/Rent"), NodePath("CardSprite/ValuesContainer/House"), NodePath("CardSprite/ValuesContainer/House2"), NodePath("CardSprite/ValuesContainer/House3"), NodePath("CardSprite/ValuesContainer/House4"), NodePath("CardSprite/ValuesContainer/Hotel")]
 
 [node name="CardSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -225,3 +226,6 @@ unique_name_in_owner = true
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[connection signal="pressed" from="AcquiringOptions/PurchaseButton" to="." method="_on_purchase_button_pressed"]
+[connection signal="pressed" from="AcquiringOptions/AuctionButton" to="." method="_on_auction_button_pressed"]
