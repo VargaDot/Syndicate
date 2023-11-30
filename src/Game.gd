@@ -11,7 +11,8 @@ func _turnManager():
 	if firstRound: 
 		count = randi_range(1, Khana.Agentcount)
 		firstRound = false
+	else: 
+		count = count + 1
+		if count > Khana.Agentcount: count = 1
 	
 	
-	
-	if count > Khana.Agentcount: count = 1
