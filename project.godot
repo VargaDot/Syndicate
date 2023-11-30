@@ -17,9 +17,9 @@ config/icon="res://art/Icon.png"
 
 [autoload]
 
-Composer="*res://src/composer/Composer.gd"
-EstateCourt="*res://data/EstateCourt.gd"
-Khana="*res://data/Khana.cs"
+Composer="*res://singleton/composer/Composer.gd"
+EstateCourt="*res://singleton/EstateCourt.gd"
+Khana="*res://singleton/Khana.cs"
 
 [display]
 
