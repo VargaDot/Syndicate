@@ -26,15 +26,10 @@ public partial class Khana : Node
   struct Property
   {
     public byte ID { get; set; }
-    public byte UpgradeLevel { get; set; }
-    public bool IsMortgaged { get; set; }
+    public byte UpgradeLevel = 0;
+    public bool IsMortgaged = false;
 
-    public Property(byte id, byte upgradeLevel, bool isMortgaged = false)
-    {
-      ID = id;
-      UpgradeLevel = upgradeLevel;
-      IsMortgaged = isMortgaged;
-    }
+    public Property(byte id) { ID = id; }
   }
   
   private readonly List<Agent> Daftar = new();
@@ -116,7 +111,7 @@ public partial class Khana : Node
   public void AddProperty(byte AgentID, byte PropertyID)
   {
     Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
-    selectedAgent.Portfolio.Add(new Property(PropertyID, 0));
+    selectedAgent.Portfolio.Add(new Property(PropertyID));
   }
 
   public void RemoveProperty(byte AgentID, byte PropertyID)
