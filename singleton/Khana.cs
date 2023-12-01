@@ -134,7 +134,7 @@ public partial class Khana : Node
     Agent agent = Daftar.Find(agent => agent.ID == AgentID);
     Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
 
-    property.IsMortgaged = property.IsMortgaged;
+    property.IsMortgaged = !property.IsMortgaged;
   }
 
   public void ModifyUpgradeLvl(byte AgentID, byte PropertyID, byte newLvl)
