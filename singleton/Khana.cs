@@ -8,16 +8,15 @@ public partial class Khana : Node
   {
     public byte ID { get; set; }
     public List<Property> Portfolio { get; set; }
-    public short Cash { get; set; }
+    public short Cash = 2500;
     public string Name { get; set; }
     public byte Position = 0;
     public bool inPrison = false;
     public byte doublesCount = 0;
 
-    public Agent(byte id, short cash, string name)
+    public Agent(byte id, string name)
     {
       ID = id;
-      Cash = cash;
       Name = name;
       Portfolio = new ();
     }
@@ -33,9 +32,9 @@ public partial class Khana : Node
   }
   
   private readonly List<Agent> Daftar = new();
-  public void AddAgent(byte ID, ushort startingCash, string username)
+  public void AddAgent(byte ID, string username)
   {
-    Daftar.Add(new Agent(ID, (short)startingCash, username));
+    Daftar.Add(new Agent(ID, username));
   }
 
   public void RemoveAgent(byte AgentID) 

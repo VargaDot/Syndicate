@@ -31,15 +31,15 @@ var username:String = ""
 func _on_play_button_pressed():
 	if namesEntered >= 2:
 		username = $AgentName1.text
-		Khana.AddAgent(1, 2500, username)
+		Khana.AddAgent(1, username)
 		username = $AgentName2.text
-		Khana.AddAgent(2, 2500, username)
+		Khana.AddAgent(2, username)
 	elif namesEntered >= 3: 
 		username = $AgentName3.text
-		Khana.AddAgent(3, 2500, username)
+		Khana.AddAgent(3, username)
 	elif namesEntered >= 4: 
 		username = $AgentName4.text
-		Khana.AddAgent(4, 2500, username)
+		Khana.AddAgent(4, username)
 	else: 
 		$popup.text = "You need to submit atleast 2 names" 
 		_checkTimer()
