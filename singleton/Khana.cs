@@ -8,7 +8,7 @@ public partial class Khana : Node
   {
     public byte ID { get; set; }
     public List<Property> Portfolio { get; set; }
-    public short Cash = 2500;
+    public int Cash = 2500;
     public string Name { get; set; }
     public byte Position = 0;
     public bool inPrison = false;
@@ -63,7 +63,7 @@ public partial class Khana : Node
     agent.Position = 10;
   }
 
-  public void ConductTransaction(byte AgentID, short amount)
+  public void ConductTransaction(byte AgentID, int amount)
   {
     Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
     selectedAgent.Cash += amount;
