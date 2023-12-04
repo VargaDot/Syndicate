@@ -1,14 +1,18 @@
 extends Control
  
+var dice1
+var dice2
 func _onRequest(diceRoll):
 	if diceRoll > 12: printerr("Invalid dice roll outcome")
 	
 	# X represents the frames for AnimatedSprite2D
-	var x = diceRoll - 2
-	x /= 2
+	dice1 = diceRoll - 2
+	dice1 /= 2
 	
-	var result
-	if x % 1 != 0: result = x + 1
+	if dice1 % 1 != 0: 
+		if dice1 == 6: dice2 = dice1 - 1 
+		else: dice2 = dice1 + 1
+	else: dice2 = dice1
 	
 	_playAnimation()
 
@@ -35,5 +39,8 @@ func _onTimeout():
 		_launchTimer()
 		ranOnce = true
 	else:
-		
+		%Dice1.stop()
+		%Dice2.stop()
+		%Dice1.frame = dice1
+		%Dice2.frame = dice2
 		ranOnce = false
