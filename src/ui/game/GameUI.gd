@@ -6,10 +6,10 @@ signal RequestPause
 signal RequestTrade
 signal RequestPrison
 
-func _onRequest(functionID, secondOption):
+func _onRequest(functionID, secondOption, agentID):
 	match functionID:
 		"PAUSE": emit_signal("RequestPause")
-		"PROP": emit_signal("RequestCard", "PROP", secondOption)
+		"PROP": emit_signal("RequestCard", "PROP", secondOption, agentID)
 		"CHEST": emit_signal("RequestCard", "CHEST", secondOption)
 		"CHANCE": emit_signal("RequestCard", "CHANCE", secondOption)
 		"DICE": emit_signal("RequestDice", secondOption)
