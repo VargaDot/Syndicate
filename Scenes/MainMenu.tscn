@@ -335,6 +335,14 @@ libraries = {
 "": SubResource("AnimationLibrary_x0kh3")
 }
 
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1686.0
+offset_top = 985.0
+offset_right = 1877.0
+offset_bottom = 1043.0
+text = "Credits"
+
 [connection signal="requestAgentType" from="SingleplayerMenu/SpriteContainer" to="SingleplayerMenu/AgentType" method="_on_request_agent_type"]
 [connection signal="sendCharacterRequest" from="SingleplayerMenu/Usernames" to="SingleplayerMenu/SpriteContainer" method="_on_character_request"]
 [connection signal="text_change_rejected" from="SingleplayerMenu/Usernames/AgentName1" to="SingleplayerMenu/Usernames" method="_onTextRejected"]
