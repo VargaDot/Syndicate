@@ -371,6 +371,6 @@ offset_bottom = 2161.0
 [connection signal="toggled" from="SingleplayerMenu/AgentType/CheckBox3" to="SingleplayerMenu/AgentType" method="_on_check_box_3_toggled"]
 [connection signal="toggled" from="SingleplayerMenu/AgentType/CheckBox4" to="SingleplayerMenu/AgentType" method="_on_check_box_4_toggled"]
 [connection signal="pressed" from="SingleplayerMenu/BtnContainer/PlayButton" to="SingleplayerMenu/Usernames" method="_on_play_button_pressed"]
-[connection signal="pressed" from="SingleplayerMenu/BtnContainer/CloseButton" to="." method="_closePressed"]
+[connection signal="pressed" from="SingleplayerMenu/BtnContainer/CloseButton" to="." method="_singlePlayerPressed"]
 [connection signal="pressed" from="Menu/BtnHolder/SingleButton" to="." method="_singlePlayerPressed"]
 [connection signal="pressed" from="Menu/MultiButton" to="." method="_multiPressed"]
