@@ -7,7 +7,7 @@ func _process(_delta):
 	if Input.is_action_pressed("Quit"): get_tree().quit()
 	if Input.is_action_just_pressed("SkipAnimation") && animPlyr.is_playing(): animPlyr.seek(1, true)
 
-var singleShown:bool
+var singleShown:bool = false
 func _singlePlayerPressed() -> void:
 	if singleShown: animPlyr.play("HideSingleplayer")
 	else: animPlyr.play("ShowSingleplayer")
