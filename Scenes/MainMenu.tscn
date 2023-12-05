@@ -328,20 +328,27 @@ layout_mode = 2
 theme = ExtResource("2_63w4d")
 text = "MULTIPLAYER"
 
-[node name="MusicPlayer" parent="." instance=ExtResource("5_rd1by")]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_x0kh3")
 }
 
-[node name="Button" type="Button" parent="."]
+[node name="creditbtn" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1686.0
 offset_top = 985.0
 offset_right = 1877.0
 offset_bottom = 1043.0
 text = "Credits"
+
+[node name="Credits" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1077.0
+offset_right = 1923.0
+offset_bottom = 2161.0
+
+[node name="MusicPlayer" parent="." instance=ExtResource("5_rd1by")]
 
 [connection signal="requestAgentType" from="SingleplayerMenu/SpriteContainer" to="SingleplayerMenu/AgentType" method="_on_request_agent_type"]
 [connection signal="sendCharacterRequest" from="SingleplayerMenu/Usernames" to="SingleplayerMenu/SpriteContainer" method="_on_character_request"]
