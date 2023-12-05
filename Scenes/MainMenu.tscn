@@ -342,6 +342,7 @@ offset_bottom = 1043.0
 text = "Credits"
 
 [node name="Credits" type="Panel" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 2.0
 offset_top = 1077.0
@@ -374,3 +375,4 @@ offset_bottom = 2161.0
 [connection signal="pressed" from="SingleplayerMenu/BtnContainer/CloseButton" to="." method="_singlePlayerPressed"]
 [connection signal="pressed" from="Menu/BtnHolder/SingleButton" to="." method="_singlePlayerPressed"]
 [connection signal="pressed" from="Menu/MultiButton" to="." method="_multiPressed"]
+[connection signal="pressed" from="creditbtn" to="." method="_on_credits_pressed"]

@@ -20,3 +20,8 @@ func _on_completion():
 	Composer.disable_scene("MainMenu")
 	Composer.activate_scene("Game")
 
+var creditsShown:bool = false
+func _on_credits_pressed():
+	if creditsShown: animPlyr.play("ShowCredits")
+	else: animPlyr.play("HideCredits")
+	creditsShown = !creditsShown
