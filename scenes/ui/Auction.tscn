@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuye1uyxeo6qq"]
+
+[ext_resource type="Script" path="res://src/ui/game/Auction.gd" id="1_1mp26"]
+
+[node name="Auction" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1mp26")
+
+[node name="bcg" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1078.0
+
+[node name="bid" type="Button" parent="."]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 808.0
+offset_right = 522.0
+offset_bottom = 890.0
+text = "BID"
+
+[node name="fold" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1366.0
+offset_top = 806.0
+offset_right = 1598.0
+offset_bottom = 892.0
+text = "FOLD"
