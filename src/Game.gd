@@ -63,3 +63,9 @@ func _tileInspector():
 		districtTypes.PARKING: pass
 		_: print("not found")
 	
+	_check_for_bankruptcy()
+
+signal file_bankruptcy()
+func _check_for_bankruptcy():
+	if Khana.GetAgentCash(currentPlayer) < 0: emit_signal("file_bankruptcy", currentPlayer)
+	else: pass 
