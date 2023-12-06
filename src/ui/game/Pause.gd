@@ -11,7 +11,8 @@ func _on_load_pressed():
 	pass # Replace with function body.
 
 func _on_soft_quit_pressed():
-	pass # Replace with function body.
+	Composer.disable_scene("Game")
+	Composer.activate_scene("MainMenu")
 
 func _on_hard_quit_pressed():
-	pass # Replace with function body.
+	get_tree().quit()
