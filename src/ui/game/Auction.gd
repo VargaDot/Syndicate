@@ -1,7 +1,9 @@
 extends Control
 
+var bidders = []
 func _on_start_auction(firstAgent, internalName):
-	pass # Replace with function body.
+	bidders = Khana.GetAgentIDs()
+	bidders.remove(firstAgent)
 
 func _on_bid_pressed():
 	pass # Replace with function body.
