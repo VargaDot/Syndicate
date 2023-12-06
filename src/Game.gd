@@ -55,6 +55,7 @@ func _tileInspector():
 					var propPrice:int = EstateCourt.FetchAssetData(internalName, "RENT", proplevel)
 					Khana.ConductTransaction(currentPlayer, -propPrice)
 					Khana.ConductTransaction(propowner, proplevel)
+					bankrupter = propowner
 		districtTypes.CHEST: emit_signal("SendUIRequest", "CHEST")
 		districtTypes.CHANCE: emit_signal("SendUIRequest", "CHANCE")
 		districtTypes.ITAX: Khana.ConductTransaction(currentPlayer, -roundi(Khana.GetAgentCash() * 0.1))
