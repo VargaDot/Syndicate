@@ -10,6 +10,7 @@ func _process(_delta):
 func _singlePlayerPressed() -> void:
 	if $SingleplayerMenu.visible: 
 		animPlyr.play("HideSingleplayer")
+		while animPlyr.is_playing(): pass
 		$SingleplayerMenu.hide()
 	else:
 		$SingleplayerMenu.show()
@@ -25,6 +26,7 @@ func _on_completion():
 func _on_credits_pressed():
 	if $Credits.visible:
 		animPlyr.play("HideCredits")
+		while animPlyr.is_playing(): pass
 		$Credits.hide()
 	else: 
 		animPlyr.play("ShowCredits")
