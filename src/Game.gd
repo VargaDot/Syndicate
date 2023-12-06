@@ -23,7 +23,7 @@ func _turnManager():
 	else: pass
 	
 	var roll = randi_range(2, 12)
-	if roll % 2 == 0: Khana.ModifyDoubleCount(currentPlayer)
+	if roll % 2 == 0: Khana.ModifyDoubleCount(currentPlayer, false)
 	else: 
 		Khana.ModifyDoubleCount(currentPlayer, true)
 		if Khana.GetAgentDoublesCount() == 3: 
