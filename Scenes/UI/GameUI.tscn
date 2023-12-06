@@ -34,3 +34,4 @@ visible = false
 [connection signal="RequestPause" from="." to="Pause" method="_onRequest"]
 [connection signal="RequestPrison" from="." to="Prison" method="_onRequest"]
 [connection signal="RequestTrade" from="." to="Trade" method="_onRequest"]
+[connection signal="startAuction" from="Card" to="Auction" method="_on_start_auction"]

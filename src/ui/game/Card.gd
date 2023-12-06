@@ -43,5 +43,6 @@ func _on_purchase_button_pressed():
 	Khana.AddProperty(agent, propID)
 	hide()
 
+signal startAuction()
 func _on_auction_button_pressed():
-	pass
+	emit_signal("startAuction", agent, internalName)
