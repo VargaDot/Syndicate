@@ -145,9 +145,7 @@ public partial class Khana : Node
   public byte CheckForOwnership(byte PropertyID)
   {
     foreach (Agent agent in Daftar) if (agent.Portfolio.Any(property => property.ID == PropertyID)) { return agent.ID; }
-    
-    // Default if no owner was found
-    return 69;
+    return 69; // Default if no owner was found
   }
 
   public void ToggleMortgageStatus(byte AgentID, byte PropertyID)
