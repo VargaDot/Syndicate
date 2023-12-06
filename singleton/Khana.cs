@@ -135,6 +135,13 @@ public partial class Khana : Node
     return property.UpgradeLevel;
   }
 
+  public bool GetMortgageStatus(byte AgentID, byte PropertyID)
+  {
+    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
+    Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
+    return property.IsMortgaged;
+  }
+
   public byte CheckForOwnership(byte PropertyID)
   {
     foreach (Agent agent in Daftar) if (agent.Portfolio.Any(property => property.ID == PropertyID)) { return agent.ID; }
