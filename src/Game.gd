@@ -37,7 +37,7 @@ enum districtTypes { GO, PROPERTY, CHEST, CHANCE, ITAX, LTAX, JAIL, GOJAIL, PARK
 
 func _tileInspector(): 
 	var pos:int = Khana.GetAgentPosition(currentPlayer)
-	var tiletype = EstateCourt.FetchDistrictData(pos, 1)
+	var tiletype = EstateCourt.FetchDistrictData(pos, "TYPE")
 	
 	match tiletype:
 		districtTypes.GO: Khana.ConductTransaction(currentPlayer, 200)
