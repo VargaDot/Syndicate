@@ -26,7 +26,9 @@ func _turnManager():
 	if roll % 2 == 0: Khana.ModifyDoubleCount(currentPlayer)
 	else: 
 		Khana.ModifyDoubleCount(currentPlayer, true)
-		if Khana.GetAgentDoublesCount() == 3: Khana.ToggleAgentFreedom(currentPlayer)
+		if Khana.GetAgentDoublesCount() == 3: 
+			Khana.ToggleAgentFreedom(currentPlayer)
+			Khana.ModifyDoubleCount(currentPlayer, false)
 		else: pass
 	
 	emit_signal("SendUIRequest", "DICE", roll)
