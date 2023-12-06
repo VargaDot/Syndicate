@@ -46,8 +46,8 @@ func _tileInspector():
 		districtTypes.PROPERTY:
 			var propowner:int = Khana.CheckForOwnership(pos)
 			if propowner == 69: emit_signal("SendUIRequest", "PROP", pos, currentPlayer)
-			else: 
-				if Khana.GetMortgageStatus(owner, pos) == true: pass
+			else:
+				if Khana.GetMortgageStatus(propowner, pos) == true: pass
 				else: 
 					var proplevel:int = Khana.GetUpgradeLevel(currentPlayer, pos)
 					var internalName:String = EstateCourt.FetchDistrictData(pos, "NAME")
