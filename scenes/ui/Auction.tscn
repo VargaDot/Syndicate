@@ -31,3 +31,6 @@ offset_top = 806.0
 offset_right = 1598.0
 offset_bottom = 892.0
 text = "FOLD"
+
+[connection signal="pressed" from="bid" to="." method="_on_bid_pressed"]
+[connection signal="pressed" from="fold" to="." method="_on_fold_pressed"]
