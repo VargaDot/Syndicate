@@ -77,6 +77,14 @@ public partial class Khana : Node
 
   public byte AgentCount() { return (byte)Daftar.Count; }
 
+  public byte[] GetAgentIDs()
+  {
+    List<byte> allAgentIDs = new();
+    
+    foreach (var agentEntry in Daftar) { allAgentIDs.Add(agentEntry.ID); }
+    return allAgentIDs.ToArray();
+  }
+
   public int GetAgentCash(byte AgentID)
   {
     Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
