@@ -40,6 +40,7 @@ enum districtTypes { GO, PROPERTY, CHEST, CHANCE, ITAX, LTAX, JAIL, GOJAIL, PARK
 func _tileInspector(): 
 	var pos:int = Khana.GetAgentPosition(currentPlayer)
 	var tiletype = EstateCourt.FetchDistrictData(pos, "TYPE")
+	var bankrupter:int = 257
 	
 	match tiletype:
 		districtTypes.GO: Khana.ConductTransaction(currentPlayer, 200)
@@ -63,9 +64,10 @@ func _tileInspector():
 		districtTypes.PARKING: pass
 		_: print("not found")
 	
-	_check_for_bankruptcy()
+	_check_for_bankruptcy(bankrupter)
 
 signal file_bankruptcy()
-func _check_for_bankruptcy():
-	if Khana.GetAgentCash(currentPlayer) < 0: emit_signal("file_bankruptcy", currentPlayer)
+func _check_for_bankruptcy(bankrupter):
+	if Khana.GetAgentCash(currentPlayer) < 0:
+		emit_signal("file_bankruptcy", currentPlayer, bankrupter)
 	else: pass 
