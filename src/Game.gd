@@ -57,7 +57,7 @@ func _tileInspector():
 		districtTypes.ITAX: Khana.ConductTransaction(currentPlayer, -roundi(Khana.GetAgentCash() * 0.1))
 		districtTypes.LTAX: Khana.ConductTransaction(currentPlayer, -100)
 		districtTypes.JAIL: pass
-		districtTypes.GOJAIL: Khana.ToggleAgentFreedom()
+		districtTypes.GOJAIL: Khana.ToggleAgentFreedom(currentPlayer)
 		districtTypes.PARKING: pass
 		_: print("not found")
 	
