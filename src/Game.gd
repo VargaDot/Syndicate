@@ -16,6 +16,9 @@ func _turnManager():
 		firstRound = false
 	else: currentPlayer = (currentPlayer + 1) % agentCount
 	
+	if agentCount == 1: emit_signal("SendUIRequest", "WON", currentPlayer)
+	else: pass
+	
 	if Khana.GetAgentStatus(currentPlayer) == true: emit_signal("SendUIRequest", "PRISON")
 	else: pass
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://lexwee1hisaf"]
+[gd_scene load_steps=10 format=3 uid="uid://lexwee1hisaf"]
 
 [ext_resource type="Script" path="res://src/ui/game/GameUI.gd" id="1_ef41v"]
 [ext_resource type="PackedScene" uid="uid://bs0vfv6wf6d32" path="res://scenes/ui/Card.tscn" id="2_ydfyd"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bjsju4y3y4cbc" path="res://scenes/ui/Prison.tscn" id="5_yqiml"]
 [ext_resource type="PackedScene" uid="uid://c2td3xuincgl0" path="res://scenes/ui/Pause.tscn" id="6_i4en3"]
 [ext_resource type="PackedScene" uid="uid://cuye1uyxeo6qq" path="res://scenes/ui/Auction.tscn" id="7_iyckk"]
+[ext_resource type="PackedScene" uid="uid://ds3dbhet4by73" path="res://scenes/ui/win.tscn" id="8_rxdj0"]
+[ext_resource type="PackedScene" uid="uid://b4sfol1tsya54" path="res://scenes/ui/lose.tscn" id="9_yrbvi"]
 
 [node name="GameUI" type="Node"]
 script = ExtResource("1_ef41v")
@@ -29,9 +31,17 @@ visible = false
 [node name="Auction" parent="." instance=ExtResource("7_iyckk")]
 visible = false
 
+[node name="Win" parent="." instance=ExtResource("8_rxdj0")]
+visible = false
+
+[node name="Lose" parent="." instance=ExtResource("9_yrbvi")]
+visible = false
+
 [connection signal="RequestCard" from="." to="Card" method="_onRequest"]
 [connection signal="RequestDice" from="." to="Dice" method="_onRequest"]
+[connection signal="RequestLoss" from="." to="Lose" method="_on_request_loss"]
 [connection signal="RequestPause" from="." to="Pause" method="_onRequest"]
 [connection signal="RequestPrison" from="." to="Prison" method="_onRequest"]
 [connection signal="RequestTrade" from="." to="Trade" method="_onRequest"]
+[connection signal="RequestWin" from="." to="Win" method="_on_request_win"]
 [connection signal="startAuction" from="Card" to="Auction" method="_on_start_auction"]
