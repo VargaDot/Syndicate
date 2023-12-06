@@ -7,8 +7,10 @@ func _process(_delta): if Input.is_action_pressed("Quit"): emit_signal("SendUIRe
 
 var firstRound:bool = true
 var currentPlayer:int = 0
-var agentCount = Khana.AgentCount()
+var agentCount:int
 func _turnManager():
+	agentCount = Khana.AgentCount()
+	
 	if firstRound: 
 		currentPlayer = randi_range(1, agentCount)
 		firstRound = false
