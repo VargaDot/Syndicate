@@ -71,4 +71,5 @@ signal file_bankruptcy()
 func _check_for_bankruptcy(bankrupter):
 	if Khana.GetAgentCash(currentPlayer) < 0:
 		emit_signal("file_bankruptcy", currentPlayer, bankrupter)
+		Khana.RemoveAgent(currentPlayer)
 	else: pass 
