@@ -134,6 +134,7 @@ script = ExtResource("1_763w7")
 singlePlayer = NodePath("SingleplayerMenu")
 
 [node name="SingleplayerMenu" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
