@@ -41,7 +41,17 @@ func _tileInspector():
 	
 	match tiletype:
 		districtTypes.GO: Khana.ConductTransaction(currentPlayer, 200)
-		districtTypes.PROPERTY: emit_signal("SendUIRequest", "PROP", pos, currentPlayer)
+		districtTypes.PROPERTY:
+			var propowner:int = Khana.CheckForOwnership(pos)
+			if propowner == 69: emit_signal("SendUIRequest", "PROP", pos, currentPlayer)
+			else: 
+				if Khana.GetMortgageStatus(owner, pos) == true: pass
+				else: 
+					var proplevel:int = Khana.GetUpgradeLevel(currentPlayer, pos)
+					var internalName:String = EstateCourt.FetchDistrictData(pos, "NAME")
+					var propPrice:int = EstateCourt.FetchAssetData(internalName, "RENT", proplevel)
+					Khana.ConductTransaction(currentPlayer, -propPrice)
+					Khana.ConductTransaction(propowner, proplevel)
 		districtTypes.CHEST: emit_signal("SendUIRequest", "CHEST")
 		districtTypes.CHANCE: emit_signal("SendUIRequest", "CHANCE")
 		districtTypes.ITAX: Khana.ConductTransaction(currentPlayer, -roundi(Khana.GetAgentCash() * 0.1))
