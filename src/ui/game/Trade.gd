@@ -1,4 +1,4 @@
 extends Control
 
-func _onRequest():
+func _onRequest(buyerID, sellerID):
 	show()

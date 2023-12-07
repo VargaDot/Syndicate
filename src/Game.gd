@@ -1,9 +1,15 @@
 extends Node2D
 
-signal SendUIRequest
+signal RequestDice()
+signal RequestCard()
+signal RequestPause()
+signal RequestTrade()
+signal RequestPrison()
+signal RequestWin()
+signal RequestLoss()
 
 func _ready(): _turnManager()
-func _process(_delta): if Input.is_action_pressed("Quit"): emit_signal("SendUIRequest", "PAUSE")
+func _process(_delta): if Input.is_action_pressed("Quit"): emit_signal("RequestPause")
 
 var firstRound:bool = true
 var currentPlayer:int = 0
@@ -16,10 +22,10 @@ func _turnManager():
 		firstRound = false
 	else: currentPlayer = (currentPlayer + 1) % agentCount
 	
-	if agentCount == 1: emit_signal("SendUIRequest", "WON", currentPlayer)
+	if agentCount == 1: emit_signal("RequestWin", currentPlayer)
 	else: pass
 	
-	if Khana.GetAgentStatus(currentPlayer) == true: emit_signal("SendUIRequest", "PRISON")
+	if Khana.GetAgentStatus(currentPlayer) == true: emit_signal("RequestPrison")
 	else: pass
 	
 	var roll = randi_range(2, 12)
@@ -31,7 +37,7 @@ func _turnManager():
 			Khana.ModifyDoubleCount(currentPlayer, false)
 		else: pass
 	
-	emit_signal("SendUIRequest", "DICE", roll)
+	emit_signal("RequestDice", roll)
 	Khana.MoveAgent(currentPlayer, roll)
 	_tileInspector()
 
@@ -46,7 +52,7 @@ func _tileInspector():
 		districtTypes.GO: Khana.ConductTransaction(currentPlayer, 200)
 		districtTypes.PROPERTY:
 			var propowner:int = Khana.CheckForOwnership(pos)
-			if propowner == 69: emit_signal("SendUIRequest", "PROP", pos, currentPlayer)
+			if propowner == 69: emit_signal("RequestCard", "PROP", pos, currentPlayer)
 			else:
 				if Khana.GetMortgageStatus(propowner, pos) == true: pass
 				else: 
@@ -56,8 +62,8 @@ func _tileInspector():
 					Khana.ConductTransaction(currentPlayer, -propPrice)
 					Khana.ConductTransaction(propowner, proplevel)
 					bankrupter = propowner
-		districtTypes.CHEST: emit_signal("SendUIRequest", "CHEST")
-		districtTypes.CHANCE: emit_signal("SendUIRequest", "CHANCE")
+		districtTypes.CHEST: emit_signal("RequestCard", "CHEST")
+		districtTypes.CHANCE: emit_signal("RequestCard", "CHANCE")
 		districtTypes.ITAX: Khana.ConductTransaction(currentPlayer, -roundi(Khana.GetAgentCash() * 0.1))
 		districtTypes.LTAX: Khana.ConductTransaction(currentPlayer, -100)
 		districtTypes.JAIL: pass

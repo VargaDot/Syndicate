@@ -21,3 +21,11 @@ position = Vector2(962, 540)
 [node name="GameUI" parent="." instance=ExtResource("2_0dwkp")]
 
 [node name="MusicPlayer" parent="." instance=ExtResource("3_hwjwm")]
+
+[connection signal="RequestCard" from="." to="GameUI" method="_on_game_request_card"]
+[connection signal="RequestDice" from="." to="GameUI" method="_on_game_request_dice"]
+[connection signal="RequestLoss" from="." to="GameUI" method="_on_game_request_loss"]
+[connection signal="RequestPause" from="." to="GameUI" method="_on_game_request_pause"]
+[connection signal="RequestPrison" from="." to="GameUI" method="_on_game_request_prison"]
+[connection signal="RequestTrade" from="." to="GameUI" method="_on_game_request_trade"]
+[connection signal="RequestWin" from="." to="GameUI" method="_on_game_request_win"]

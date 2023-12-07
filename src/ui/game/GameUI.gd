@@ -1,21 +1,19 @@
 extends Node
 
-signal RequestDice
-signal RequestCard
-signal RequestPause
-signal RequestTrade
-signal RequestPrison
-signal RequestWin
-signal RequestLoss
-
-func _onRequest(functionID, secondOption, thirdOption):
+func _on_game_request_card(functionID, boardID, agentID):
 	match functionID:
-		"PAUSE": emit_signal("RequestPause")
-		"PROP": emit_signal("RequestCard", "PROP", secondOption, thirdOption)
-		"CHEST": emit_signal("RequestCard", "CHEST", secondOption)
-		"CHANCE": emit_signal("RequestCard", "CHANCE", secondOption)
-		"DICE": emit_signal("RequestDice", secondOption)
-		"PRISON": emit_signal("RequestPrison", secondOption)
-		"TRADE": emit_signal("RequestTrade", secondOption, thirdOption)
-		"WON": emit_signal("RequestWin", secondOption)
-		"LOSE": emit_signal("RequestLoss", secondOption)
+		"PROP": $Card._displayPropCard(boardID, agentID)
+		"CHEST": $Card._displayChestCard(boardID, agentID)
+		"CHANCE": $Card._displayChanceCard(boardID, agentID)
+
+func _on_game_request_dice(diceroll): $Dice._onRequest(diceroll)
+
+func _on_game_request_loss(loserID): $Lose._on_request_loss(loserID)
+
+func _on_game_request_pause(): $Pause._onRequest()
+
+func _on_game_request_prison(agentID): $Prison._onRequest(agentID)
+
+func _on_game_request_trade(buyerID, sellerID): $Trade._onRequest(buyerID, sellerID)
+
+func _on_game_request_win(winnerID): $Win._on_request_win(winnerID)
