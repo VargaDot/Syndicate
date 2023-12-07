@@ -16,13 +16,29 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1078.0
 
-[node name="bid" type="Button" parent="."]
+[node name="bid1" type="Button" parent="."]
 layout_mode = 0
-offset_left = 290.0
-offset_top = 808.0
-offset_right = 522.0
-offset_bottom = 890.0
-text = "BID"
+offset_left = 268.0
+offset_top = 264.0
+offset_right = 500.0
+offset_bottom = 346.0
+text = "BID - 1$"
+
+[node name="bid10" type="Button" parent="."]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 428.0
+offset_right = 500.0
+offset_bottom = 506.0
+text = "BID - 10$"
+
+[node name="bid100" type="Button" parent="."]
+layout_mode = 0
+offset_left = 274.0
+offset_top = 580.0
+offset_right = 498.0
+offset_bottom = 658.0
+text = "BID - 100$"
 
 [node name="fold" type="Button" parent="."]
 layout_mode = 0
@@ -32,5 +48,7 @@ offset_right = 1598.0
 offset_bottom = 892.0
 text = "FOLD"
 
-[connection signal="pressed" from="bid" to="." method="_on_bid_pressed"]
+[connection signal="pressed" from="bid1" to="." method="_on_bid_1_pressed"]
+[connection signal="pressed" from="bid10" to="." method="_on_bid_10_pressed"]
+[connection signal="pressed" from="bid100" to="." method="_on_bid_100_pressed"]
 [connection signal="pressed" from="fold" to="." method="_on_fold_pressed"]
