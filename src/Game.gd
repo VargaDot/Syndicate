@@ -32,7 +32,7 @@ func _turnManager():
 	if roll % 2 == 0: Khana.ModifyDoubleCount(currentPlayer, false)
 	else: 
 		Khana.ModifyDoubleCount(currentPlayer, true)
-		if Khana.GetAgentDoublesCount() == 3: 
+		if Khana.GetAgentDoublesCount(currentPlayer) == 3: 
 			Khana.ToggleAgentFreedom(currentPlayer)
 			Khana.ModifyDoubleCount(currentPlayer, false)
 		else: pass
