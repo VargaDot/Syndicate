@@ -24,16 +24,17 @@ enum DISTRICT_TYPE { GO, PROPERTY, CHEST, CHANCE, ITAX, LTAX, JAIL, GOJAIL, PARK
 
 var firstRound:bool = true
 var currentPlayer:int = 0
-var agentCount:int
+var agentList:Array = Khana.GetAgentIDs()
 func _turnManager():
-	agentCount = Khana.AgentCount() # Create some sort of array or list instead
-	
 	if firstRound:
-		currentPlayer = randi_range(1, agentCount)
+		currentPlayer = agentList.pick_random()
 		firstRound = false
-	else: currentPlayer = (currentPlayer + 1) % agentCount
+	else: 
+		currentPlayer += 1 % (agentList.size() - 1)
+		currentPlayer = agentList[currentPlayer]
 	
-	if agentCount == 1: emit_signal("RequestWin", currentPlayer)
+	if agentList.size() == 1: emit_signal("RequestWin", currentPlayer)
+	
 	if Khana.GetAgentStatus(currentPlayer) == true: emit_signal("RequestPrison")
 	
 	var roll = randi_range(2, 12)
@@ -77,6 +78,7 @@ func _turnManager():
 	if Khana.GetAgentCash(currentPlayer) < 0:
 		emit_signal("RequestLoss", currentPlayer, debtor)
 		Khana.RemoveAgent(currentPlayer)
+		agentList.remove_at(currentPlayer)
 	
 	$UI/NextTurn.show()
 	if Input.is_action_pressed("Confirm"): _on_next_turn_pressed()
