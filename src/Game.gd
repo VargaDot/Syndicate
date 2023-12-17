@@ -37,7 +37,7 @@ func _turnManager():
 	if Khana.GetAgentStatus(currentPlayer) == true: emit_signal("RequestPrison")
 	
 	var roll = randi_range(2, 12)
-	if roll % 2 == 0: Khana.ModifyDoubleCount(currentPlayer, false)
+	if roll % 2 != 0: Khana.ModifyDoubleCount(currentPlayer, false)
 	else:
 		Khana.ModifyDoubleCount(currentPlayer, true)
 		if Khana.GetAgentDoublesCount(currentPlayer) == 3: 
@@ -48,23 +48,23 @@ func _turnManager():
 	emit_signal("RequestDice", roll)
 	Khana.MoveAgent(currentPlayer, roll)
 	
-	var pos:int = Khana.GetAgentPosition(currentPlayer)
-	var tiletype = EstateCourt.FetchDistrictData(pos, "TYPE")
-	var bankrupter:int = 257
+	var boardPos:int = Khana.GetAgentPosition(currentPlayer)
+	var tileType = EstateCourt.FetchDistrictData(boardPos, "TYPE")
+	var debtor:int = 257
 	
-	match tiletype:
+	match tileType:
 		DISTRICT_TYPE.GO: Khana.ConductTransaction(currentPlayer, 200)
 		DISTRICT_TYPE.PROPERTY:
-			var propowner:int = Khana.CheckForOwnership(pos)
-			if propowner == 69: emit_signal("RequestCard", "PROP", pos, currentPlayer)
-			elif propowner != 69: if Khana.GetMortgageStatus(propowner, pos) == true: pass
+			var propOwner:int = Khana.CheckForOwnership(boardPos)
+			if propOwner == 69: emit_signal("RequestCard", "PROP", boardPos, currentPlayer)
+			else: if Khana.GetMortgageStatus(propOwner, boardPos) == true: pass
 			else:
-				var proplevel:int = Khana.GetUpgradeLevel(currentPlayer, pos)
-				var internalName:String = EstateCourt.FetchDistrictData(pos, "NAME")
+				var proplevel:int = Khana.GetUpgradeLevel(currentPlayer, boardPos)
+				var internalName:String = EstateCourt.FetchDistrictData(boardPos, "NAME")
 				var propPrice:int = EstateCourt.FetchAssetData(internalName, "RENT", proplevel)
 				Khana.ConductTransaction(currentPlayer, -propPrice)
-				Khana.ConductTransaction(propowner, proplevel)
-				bankrupter = propowner
+				Khana.ConductTransaction(propOwner, proplevel)
+				debtor = propOwner
 		DISTRICT_TYPE.CHEST: emit_signal("RequestCard", "CHEST")
 		DISTRICT_TYPE.CHANCE: emit_signal("RequestCard", "CHANCE")
 		DISTRICT_TYPE.ITAX: Khana.ConductTransaction(currentPlayer, -roundi(Khana.GetAgentCash() * 0.1))
@@ -75,7 +75,7 @@ func _turnManager():
 		_: print("not found")
 	
 	if Khana.GetAgentCash(currentPlayer) < 0:
-		emit_signal("RequestLoss", currentPlayer, bankrupter)
+		emit_signal("RequestLoss", currentPlayer, debtor)
 		Khana.RemoveAgent(currentPlayer)
 	
 	$UI/NextTurn.show()
