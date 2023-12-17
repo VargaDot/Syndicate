@@ -44,6 +44,15 @@ layout_mode = 1
 [node name="Dice" parent="UI" instance=ExtResource("8_1o8bs")]
 visible = false
 
+[node name="NextTurn" type="Button" parent="UI"]
+visible = false
+offset_left = 1620.0
+offset_top = 935.0
+offset_right = 1892.0
+offset_bottom = 1057.0
+theme_override_font_sizes/font_size = 41
+text = "Next turn"
+
 [node name="MusicPlayer" parent="." instance=ExtResource("3_hwjwm")]
 
 [connection signal="RequestCard" from="." to="UI/Card" method="_on_game_request_card"]
@@ -52,3 +61,4 @@ visible = false
 [connection signal="RequestPrison" from="." to="UI/Prison" method="_on_game_request_prison"]
 [connection signal="RequestTrade" from="." to="UI/Trade" method="_on_game_request_trade"]
 [connection signal="startAuction" from="UI/Card" to="UI/Card/Auction" method="_on_card_start_auction"]
+[connection signal="pressed" from="UI/NextTurn" to="." method="_on_next_turn_pressed"]
