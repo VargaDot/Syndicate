@@ -1,4 +1,4 @@
 extends Control
 
-func _onRequest():
+func _on_game_request_prison(agentID):
 	show()

@@ -2,7 +2,7 @@ extends Control
  
 var dice1
 var dice2
-func _onRequest(diceRoll):
+func _on_game_request_dice(diceRoll):
 	if diceRoll > 12: printerr("Invalid dice roll outcome")
 	
 	# X represents the frames for AnimatedSprite2D
@@ -14,13 +14,9 @@ func _onRequest(diceRoll):
 		else: dice2 = dice1 + 1
 	else: dice2 = dice1
 	
-	_playAnimation()
-
-func _playAnimation():
 	_launchTimer()
 	
 	show()
-	
 	%Dice1.play("rolling")
 	%Dice2.play("rolling")
 
@@ -44,3 +40,4 @@ func _onTimeout():
 		%Dice1.frame = dice1
 		%Dice2.frame = dice2
 		ranOnce = false
+	

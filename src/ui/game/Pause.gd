@@ -1,6 +1,6 @@
 extends Control
 
-func _onRequest():
+func _on_game_request_pause():
 	if visible: hide()
 	else: show()
 

@@ -1,4 +1,4 @@
 extends Control
 
-func _onRequest(buyerID, sellerID):
+func _on_game_request_trade(buyerID, sellerID):
 	show()

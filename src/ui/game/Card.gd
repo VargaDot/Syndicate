@@ -5,10 +5,16 @@ enum tileColors { BROWN, CYAN, PINK, ORANGE, RED, YELLOW, GREEN, BLUE, STATION, 
 
 var propID
 var agent
-func _displayPropCard(boardID, agentID):
+func _on_game_request_card(functionID, boardID, agentID):
 	propID = boardID
 	agent = agentID
 	
+	match functionID:
+		"PROP": $Card._displayPropCard(boardID, agentID)
+		"CHEST": $Card._displayChestCard(boardID, agentID)
+		"CHANCE": $Card._displayChanceCard(boardID, agentID)
+
+func _displayPropCard(boardID, agentID):
 	var id = EstateCourt.FetchDistrictData(boardID, "CARDID")
 	match id:
 		tileColors.BROWN: %CardSprite/CardColor.color = Color.BROWN
