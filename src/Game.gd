@@ -29,7 +29,10 @@ func _turnManager():
 		currentPlayer += 1 % (agentList.size() - 1)
 		currentPlayer = agentList[currentPlayer]
 	
-	if Khana.GetAgentStatus(currentPlayer) == true: emit_signal("RequestPrison")
+	if Khana.GetAgentStatus(currentPlayer) == true:
+		currentGame = GAME_STATES.PRISON
+		emit_signal("RequestPrison")
+		while currentGame == GAME_STATES.PRISON: pass
 	
 	while currentGame == GAME_STATES.IDLE:
 		if Input.is_action_pressed("Confirm"): currentGame = GAME_STATES.ROLL
@@ -101,3 +104,7 @@ func _on_defaulted():
 	agentList.remove_at(currentPlayer)
 	if agentList.size() == 1: emit_signal("RequestWin", currentPlayer)
 	currentGame = GAME_STATES.IDLE
+
+func _on_release_status_sent(released):
+	if released == true: GAME_STATES.INSPECT
+	if released == false: GAME_STATES.IDLE

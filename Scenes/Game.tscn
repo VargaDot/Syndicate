@@ -61,6 +61,7 @@ visible = false
 [connection signal="RequestPrison" from="." to="UI/Prison" method="_on_game_request_prison"]
 [connection signal="RequestTrade" from="." to="UI/Trade" method="_on_game_request_trade"]
 [connection signal="pressed" from="UI/NextTurn" to="." method="_on_next_turn_pressed"]
+[connection signal="sendReleaseStatus" from="UI/Prison" to="." method="_on_release_status_sent"]
 [connection signal="defaulted" from="UI/Trade" to="." method="_on_defaulted"]
 [connection signal="restructured" from="UI/Trade" to="." method="_on_restructured"]
 [connection signal="startAuction" from="UI/Card" to="UI/Auction" method="_on_card_start_auction"]
