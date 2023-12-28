@@ -121,5 +121,5 @@ func _on_defaulted():
 	currentGame = GAME_STATES.IDLE
 
 func _on_release_status_sent(released):
-	if released == true: GAME_STATES.INSPECT
-	if released == false: GAME_STATES.IDLE
+	if released == true: currentGame = GAME_STATES.INSPECT
+	if released == false: currentGame = GAME_STATES.IDLE
