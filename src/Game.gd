@@ -42,6 +42,7 @@ func _turnManager():
 		if Khana.GetAgentDoublesCount(currentPlayer) == 3: 
 			Khana.ToggleAgentFreedom(currentPlayer)
 			Khana.ModifyDoubleCount(currentPlayer, false)
+			_on_next_turn_pressed()
 		else: pass
 	
 	emit_signal("RequestDice", roll)
