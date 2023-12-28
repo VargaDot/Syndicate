@@ -7,18 +7,14 @@ signal RequestTrade()
 signal RequestPrison()
 signal RequestWin()
 signal RequestLoss()
+signal Bankrupt()
 
 func _ready(): _turnManager()
 func _process(_delta): 
 	if Input.is_action_pressed("Quit"): emit_signal("RequestPause")
-	match currentGame:
-		GAME_STATES.ROLL: pass
-		GAME_STATES.BANKRUPT: pass
-		GAME_STATES.COMPLETE: pass
-		_: pass
 
-enum GAME_STATES {NORMAL, ROLL, BANKRUPT, COMPLETE}
-var currentGame = GAME_STATES.NORMAL
+enum GAME_STATES {IDLE, ROLL, PRISON, INSPECT, BANKRUPT, DONE}
+var currentGame = GAME_STATES.IDLE
 
 enum DISTRICT_TYPE { GO, PROPERTY, CHEST, CHANCE, ITAX, LTAX, JAIL, GOJAIL, PARKING }
 
@@ -29,13 +25,15 @@ func _turnManager():
 	if firstRound:
 		currentPlayer = agentList.pick_random()
 		firstRound = false
-	else: 
+	else:
 		currentPlayer += 1 % (agentList.size() - 1)
 		currentPlayer = agentList[currentPlayer]
 	
-	if agentList.size() == 1: emit_signal("RequestWin", currentPlayer)
-	
 	if Khana.GetAgentStatus(currentPlayer) == true: emit_signal("RequestPrison")
+	
+	while currentGame == GAME_STATES.IDLE:
+		if Input.is_action_pressed("Confirm"): currentGame = GAME_STATES.ROLL
+		else: pass
 	
 	var roll = randi_range(2, 12)
 	if roll % 2 != 0: Khana.ModifyDoubleCount(currentPlayer, false)
@@ -53,6 +51,7 @@ func _turnManager():
 	var tileType = EstateCourt.FetchDistrictData(boardPos, "TYPE")
 	var debtor:int = 257
 	
+	currentGame = GAME_STATES.INSPECT
 	match tileType:
 		DISTRICT_TYPE.GO: Khana.ConductTransaction(currentPlayer, 200)
 		DISTRICT_TYPE.PROPERTY:
@@ -76,14 +75,28 @@ func _turnManager():
 		_: print("not found")
 	
 	if Khana.GetAgentCash(currentPlayer) < 0:
-		emit_signal("RequestLoss", currentPlayer, debtor)
-		Khana.RemoveAgent(currentPlayer)
-		agentList.remove_at(currentPlayer)
+		currentGame = GAME_STATES.BANKRUPT
+		emit_signal("Bankrupt", currentPlayer, debtor)
+		while currentGame == GAME_STATES.BANKRUPT: pass
 	
+	currentGame = GAME_STATES.DONE
 	$UI/NextTurn.show()
-	if Input.is_action_pressed("Confirm"): _on_next_turn_pressed()
+	while currentGame == GAME_STATES.DONE:
+		if Input.is_action_pressed("Confirm"):
+			currentGame = GAME_STATES.IDLE
+			_on_next_turn_pressed()
+		else: pass
 	
 
 func _on_next_turn_pressed():
 	_turnManager()
 	$UI/NextTurn.hide()
+
+func _on_restructured():
+	currentGame = GAME_STATES.IDLE
+
+func _on_defaulted():
+	Khana.RemoveAgent(currentPlayer)
+	agentList.remove_at(currentPlayer)
+	if agentList.size() == 1: emit_signal("RequestWin", currentPlayer)
+	currentGame = GAME_STATES.IDLE
