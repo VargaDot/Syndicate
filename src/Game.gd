@@ -20,11 +20,16 @@ enum DISTRICT_TYPE { GO, PROPERTY, CHEST, CHANCE, ITAX, LTAX, JAIL, GOJAIL, PARK
 
 var firstRound:bool = true
 var currentPlayer:int = 0
-var agentList:Array = Khana.GetAgentIDs()
+var agentList:PackedByteArray = Khana.GetAgentIDs()
 func _turnManager():
 #region TurnManager
 	if firstRound:
-		currentPlayer = agentList.pick_random()
+		# Check if the array is not empty
+		if agentList.size() > 0:
+			# Generate a random index within the valid range
+			var randomIndex = randi_range(0, agentList.size() - 1)
+			currentPlayer = agentList[randomIndex]
+		else: print("PackedByteArray is empty")
 		firstRound = false
 	else:
 		currentPlayer += 1 % (agentList.size() - 1)
