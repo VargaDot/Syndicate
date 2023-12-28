@@ -83,12 +83,12 @@ func _turnManager():
 	$UI/NextTurn.show()
 	while currentGame == GAME_STATES.DONE:
 		if Input.is_action_pressed("Confirm"):
-			currentGame = GAME_STATES.IDLE
 			_on_next_turn_pressed()
 		else: pass
 	
 
 func _on_next_turn_pressed():
+	currentGame = GAME_STATES.IDLE
 	_turnManager()
 	$UI/NextTurn.hide()
 
