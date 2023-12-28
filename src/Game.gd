@@ -22,22 +22,27 @@ var firstRound:bool = true
 var currentPlayer:int = 0
 var agentList:Array = Khana.GetAgentIDs()
 func _turnManager():
+#region TurnManager
 	if firstRound:
 		currentPlayer = agentList.pick_random()
 		firstRound = false
 	else:
 		currentPlayer += 1 % (agentList.size() - 1)
 		currentPlayer = agentList[currentPlayer]
+#endregion
 	
+#region Prison Check
 	if Khana.GetAgentStatus(currentPlayer) == true:
 		currentGame = GAME_STATES.PRISON
 		emit_signal("RequestPrison")
 		while currentGame == GAME_STATES.PRISON: pass
+#endregion
 	
 	while currentGame == GAME_STATES.IDLE:
 		if Input.is_action_pressed("Confirm"): currentGame = GAME_STATES.ROLL
 		else: pass
 	
+#region Dice roll & Doubles Check
 	var roll = randi_range(2, 12)
 	if roll % 2 != 0: Khana.ModifyDoubleCount(currentPlayer, false)
 	else:
@@ -47,15 +52,17 @@ func _turnManager():
 			Khana.ModifyDoubleCount(currentPlayer, false)
 			_on_next_turn_pressed()
 		else: pass
+#endregion
 	
 	emit_signal("RequestDice", roll)
 	Khana.MoveAgent(currentPlayer, roll)
 	
+#region TileInspector
 	var boardPos:int = Khana.GetAgentPosition(currentPlayer)
 	var tileType = EstateCourt.FetchDistrictData(boardPos, "TYPE")
 	var debtor:int = 257
-	
 	currentGame = GAME_STATES.INSPECT
+	
 	match tileType:
 		DISTRICT_TYPE.GO: Khana.ConductTransaction(currentPlayer, 200)
 		DISTRICT_TYPE.PROPERTY:
@@ -77,11 +84,14 @@ func _turnManager():
 		DISTRICT_TYPE.GOJAIL: Khana.ToggleAgentFreedom(currentPlayer)
 		DISTRICT_TYPE.PARKING: pass
 		_: print("not found")
+#endregion
 	
+#region Bankruptcy check
 	if Khana.GetAgentCash(currentPlayer) < 0:
 		currentGame = GAME_STATES.BANKRUPT
 		emit_signal("Bankrupt", currentPlayer, debtor)
 		while currentGame == GAME_STATES.BANKRUPT: pass
+#endregion
 	
 	currentGame = GAME_STATES.DONE
 	$UI/NextTurn.show()
