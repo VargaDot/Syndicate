@@ -8,13 +8,10 @@ func _process(_delta):
 	if Input.is_action_just_pressed("SkipAnimation") && animPlyr.is_playing(): animPlyr.seek(1, true)
 
 func _singlePlayerPressed() -> void:
-	if $SingleplayerMenu.visible: 
-		animPlyr.play("HideSingleplayer")
-		while animPlyr.is_playing(): pass
-		$SingleplayerMenu.hide()
+	if $SingleplayerMenu.visible:
+		play_animation("HideSingleplayer")
 	else:
-		$SingleplayerMenu.show()
-		animPlyr.play("ShowSingleplayer")
+		play_animation("ShowSingleplayer")
 
 func _multiPressed() -> void:
 	pass
@@ -25,9 +22,10 @@ func _on_completion():
 
 func _on_credits_pressed():
 	if $Credits.visible:
-		animPlyr.play("HideCredits")
-		while animPlyr.is_playing(): pass
-		$Credits.hide()
-	else: 
-		animPlyr.play("ShowCredits")
-		$Credits.show()
+		play_animation("HideCredits")
+	else:
+		play_animation("ShowCredits")
+
+func play_animation(anim: String):
+	if animPlyr.is_playing(): await animPlyr.animation_finished
+	animPlyr.play(anim)
