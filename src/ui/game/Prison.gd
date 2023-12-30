@@ -6,6 +6,7 @@ var currentPrisoner:int
 func _on_game_request_prison(agentID):
 	currentPrisoner = agentID
 	show()
+	$AnimationPlayer.play("Show")
 
 func _on_bail_pressed():
 	Khana.ConductTransaction(currentPrisoner, -50)

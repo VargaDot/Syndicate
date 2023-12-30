@@ -1,6 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c6t5q3jctrpr2"]
 
 [ext_resource type="Script" path="res://src/Game.gd" id="1_msux6"]
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="1_q60uu"]
 [ext_resource type="PackedScene" uid="uid://cuye1uyxeo6qq" path="res://scenes/ui/Auction.tscn" id="3_5nkuo"]
 [ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://scenes/bcg/MusicPlayer.tscn" id="3_hwjwm"]
 [ext_resource type="PackedScene" uid="uid://bjsju4y3y4cbc" path="res://scenes/ui/Prison.tscn" id="4_vveie"]
@@ -9,9 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://bs0vfv6wf6d32" path="res://scenes/ui/Card.tscn" id="7_kja1m"]
 [ext_resource type="PackedScene" uid="uid://bwu0yupcqyu2v" path="res://scenes/ui/Dice.tscn" id="8_1o8bs"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_joj5i"]
+shader = ExtResource("1_q60uu")
+shader_parameter/lod = 1.124
+
 [sub_resource type="TileSet" id="TileSet_im02r"]
 
 [node name="Game" type="Node2D"]
+material = SubResource("ShaderMaterial_joj5i")
 script = ExtResource("1_msux6")
 
 [node name="Board" type="TileMap" parent="."]

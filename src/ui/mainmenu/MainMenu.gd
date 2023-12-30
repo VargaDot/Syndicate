@@ -3,6 +3,9 @@ extends Control
 @export var singlePlayer:Panel
 @onready var animPlyr:AnimationPlayer = $AnimationPlayer
 
+func _ready():
+	play_animation("RESET")
+
 func _process(_delta):
 	if Input.is_action_pressed("Quit"): get_tree().quit()
 	if Input.is_action_just_pressed("SkipAnimation") && animPlyr.is_playing(): animPlyr.seek(1, true)

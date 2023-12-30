@@ -1,7 +1,98 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjsju4y3y4cbc"]
+[gd_scene load_steps=7 format=3 uid="uid://cv2c42yknwbbh"]
 
 [ext_resource type="Script" path="res://src/ui/game/Prison.gd" id="1_gyycj"]
 [ext_resource type="Texture2D" uid="uid://dpkc7vn3ewwy1" path="res://art/sprite/UI/jailcell.webp" id="2_vt7u0"]
+
+[sub_resource type="Animation" id="Animation_5gicn"]
+resource_name = "Hide"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bail:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("roll:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_42d3b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bail:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("roll:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xmebj"]
+resource_name = "Show"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bail:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("roll:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f8fkh"]
+_data = {
+"Hide": SubResource("Animation_5gicn"),
+"RESET": SubResource("Animation_42d3b"),
+"Show": SubResource("Animation_xmebj")
+}
 
 [node name="Prison" type="Control"]
 layout_mode = 3
@@ -20,19 +111,28 @@ texture = ExtResource("2_vt7u0")
 
 [node name="bail" type="Button" parent="."]
 layout_mode = 0
-offset_left = 211.0
+offset_left = 210.0
 offset_top = 639.0
-offset_right = 475.0
+offset_right = 474.0
 offset_bottom = 714.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(132, 37)
 text = "BAIL"
 
 [node name="roll" type="Button" parent="."]
 layout_mode = 0
-offset_left = 216.0
+offset_left = 210.0
 offset_top = 775.0
-offset_right = 478.0
+offset_right = 472.0
 offset_bottom = 841.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(108, 33)
 text = "ROLL DICE"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f8fkh")
+}
 
 [connection signal="pressed" from="bail" to="." method="_on_bail_pressed"]
 [connection signal="pressed" from="roll" to="." method="_on_roll_pressed"]
