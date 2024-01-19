@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjsju4y3y4cbc"]
 
-[ext_resource type="Script" path="res://src/ui/game/Prison.gd" id="1_gyycj"]
+[ext_resource type="Script" path="res://src/ui/prison/Prison.gd" id="1_gyycj"]
 [ext_resource type="Texture2D" uid="uid://dpkc7vn3ewwy1" path="res://art/sprite/UI/jailcell.webp" id="2_vt7u0"]
 
 [node name="Prison" type="Control"]

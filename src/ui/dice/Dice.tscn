@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwu0yupcqyu2v"]
 
-[ext_resource type="Script" path="res://src/ui/game/Dice.gd" id="1_c3v3f"]
+[ext_resource type="Script" path="res://src/ui/dice/Dice.gd" id="1_c3v3f"]
 [ext_resource type="SpriteFrames" uid="uid://txsa57qvw707" path="res://art/anim/DiceRollAnim.tres" id="2_ihujc"]
 
 [node name="Dice" type="Control"]
