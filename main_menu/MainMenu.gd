@@ -20,8 +20,7 @@ func _multiPressed() -> void:
 	pass
 
 func _on_completion():
-	Composer.disable_scene("MainMenu")
-	Composer.activate_scene("Game")
+	pass
 
 func _on_credits_pressed():
 	if $Credits.visible:
