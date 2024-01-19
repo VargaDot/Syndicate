@@ -20,7 +20,7 @@ func _multiPressed() -> void:
 	pass
 
 func _on_completion():
-	ComposerGD.AddScene("Game", "res://scenes/Game.tscn", {
+	ComposerGD.AddScene("Game", "res://src/Game.tscn", {
 		"instant_load":true,
 		"instant_create":true,
 	})
