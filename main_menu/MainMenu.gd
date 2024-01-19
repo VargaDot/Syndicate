@@ -20,7 +20,11 @@ func _multiPressed() -> void:
 	pass
 
 func _on_completion():
-	pass
+	ComposerGD.AddScene("Game", "res://scenes/Game.tscn", {
+		"instant_load":true,
+		"instant_create":true,
+	})
+	ComposerGD.RemoveScene("MainMenu")
 
 func _on_credits_pressed():
 	if $Credits.visible:
