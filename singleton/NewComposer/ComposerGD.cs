@@ -50,6 +50,7 @@ namespace ComposerLib
         {
             return Composer.GetScene(name);
         }
+        
         public void AddScene(string name, string path, Dictionary<string, Variant> dictSettings = null)
         {
             AddSettings addSettings = new();

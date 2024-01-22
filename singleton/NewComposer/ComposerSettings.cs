@@ -4,7 +4,7 @@ namespace ComposerLib
 {
     public partial class CreateSettings : Resource
     {
-        public Node SceneParent {get; set;} = null;
+        public Node SceneParent {get; set;} = ((SceneTree)Engine.GetMainLoop()).Root;
         public bool DisableProcessing {get; set;} = false;
     }
 

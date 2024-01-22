@@ -32,7 +32,6 @@ namespace ComposerLib
 
         public Godot.Collections.Dictionary<string, Scene> Scenes = new();
         internal ComposerGD ComposerGD {get; set;} = null;
-        private readonly CreateSettings DefaultCreateSettings = new(){SceneParent = ((SceneTree)Engine.GetMainLoop()).Root};
         private readonly Loader Loader = new();
 
         public override void _EnterTree()
@@ -119,11 +118,12 @@ namespace ComposerLib
                 return;
             }
 
-            if (settings != null) VerifyPreLoadSettings(name, settings);
-
-            if (settings != null)
+            if (settings != null) 
+            { 
+                VerifyPreLoadSettings(name, settings);
                 scene.Load(settings.UseSubthreads, settings.CacheMode);
-            else
+            }
+            else 
                 scene.Load();
 
             await ToSignal(scene,Scene.SignalName.FinishedLoading);
@@ -133,7 +133,7 @@ namespace ComposerLib
 
         public async void CreateScene(string name, CreateSettings settings = null)
         {
-            settings ??= DefaultCreateSettings;
+            settings ??= new();
             var scene = GetScene(name);
 
             if (scene == null)
@@ -142,13 +142,13 @@ namespace ComposerLib
                 return;
             }
 
-            if (settings != null) VerifyPreCreateSettings(name, settings);
+            VerifyPreCreateSettings(name, settings);
 
             scene.Create(settings.SceneParent);
 
             await ToSignal(scene, Scene.SignalName.FinishedCreating);
 
-            if (settings != null) VerifyPostCreateSettings(name, settings);
+            VerifyPostCreateSettings(name, settings);
         }
 
         public void ReplaceScene(string sceneToRemove, string sceneToAdd, Node parent)
@@ -285,9 +285,7 @@ namespace ComposerLib
         private void VerifyPostCreateSettings(string name, CreateSettings settings)
         {
             if (settings.DisableProcessing)
-            {
                 GetScene(name).Disable();
-            }
         }
 
         private void OnSceneCreated(string sceneName)
