@@ -14,9 +14,9 @@ func _on_save_pressed():
 func _on_load_pressed():
 	pass # Replace with function body.
 
+signal MainMenuPressed
 func _on_soft_quit_pressed():
-	ComposerGD.AddScene("MainMenu")
-	ComposerGD.RemoveScene("Game")
+	emit_signal("MainMenuPressed")
 
 func _on_hard_quit_pressed():
 	get_tree().quit()

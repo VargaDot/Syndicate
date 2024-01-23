@@ -19,12 +19,9 @@ func _singlePlayerPressed() -> void:
 func _multiPressed() -> void:
 	pass
 
+signal PlayPressed
 func _on_completion():
-	ComposerGD.AddScene("Game", "res://src/Game.tscn", {
-		"instant_load":true,
-		"instant_create":true,
-	})
-	ComposerGD.RemoveScene("MainMenu")
+	emit_signal("PlayPressed")
 
 func _on_credits_pressed():
 	if $Credits.visible:
