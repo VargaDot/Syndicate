@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://csa17s4awpr8e"]
 
-[ext_resource type="Script" path="res://src/main_menu/MainMenu.gd" id="1_763w7"]
+[ext_resource type="Script" path="res://main_menu/MainMenu.gd" id="1_763w7"]
 [ext_resource type="Theme" uid="uid://b2urxupaos8rh" path="res://ui/card/Card.tres" id="2_63w4d"]
-[ext_resource type="Script" path="res://src/main_menu/SpriteContainer.gd" id="3_7buhg"]
+[ext_resource type="Script" path="res://main_menu/comps/SpriteContainer.gd" id="3_7buhg"]
 [ext_resource type="Theme" uid="uid://7is2xs320v4c" path="res://ui/Fields.tres" id="3_roui2"]
-[ext_resource type="Script" path="res://src/main_menu/Usernames.gd" id="4_1nj5f"]
+[ext_resource type="Script" path="res://main_menu/comps/Usernames.gd" id="4_1nj5f"]
 [ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://music_player/MusicPlayer.tscn" id="5_rd1by"]
 [ext_resource type="FontFile" uid="uid://c46oubnvhj7jf" path="res://ui/fonts/Koblenz-Serial-Regular.ttf" id="6_d3jj1"]
-[ext_resource type="Script" path="res://src/main_menu/AgentType.gd" id="7_do27s"]
+[ext_resource type="Script" path="res://main_menu/comps/AgentType.gd" id="7_do27s"]
 
 [sub_resource type="Animation" id="Animation_cmlab"]
 resource_name = "HideSingleplayer"

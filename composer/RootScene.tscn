@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dtngk8msr28f3"]
 
-[ext_resource type="Script" path="res://src/composer/RootScript.gd" id="1_pkbn0"]
+[ext_resource type="Script" path="res://composer/RootScript.gd" id="1_pkbn0"]
 [ext_resource type="PackedScene" uid="uid://ctjciv0x83ybx" path="res://composer/LoadingScreen.tscn" id="2_fgbh7"]
 
 [node name="RootScene" type="Node"]

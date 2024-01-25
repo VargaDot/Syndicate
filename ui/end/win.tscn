@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ds3dbhet4by73"]
 
-[ext_resource type="Script" path="res://src/ui/end/win.gd" id="1_ys4el"]
+[ext_resource type="Script" path="res://ui/end/win.gd" id="1_ys4el"]
 
 [node name="Win" type="Control"]
 layout_mode = 3

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctjciv0x83ybx"]
 
-[ext_resource type="Script" path="res://src/composer/LoadingScreen.gd" id="1_miku1"]
+[ext_resource type="Script" path="res://composer/LoadingScreen.gd" id="1_miku1"]
 [ext_resource type="Texture2D" uid="uid://crt4onjvvokqg" path="res://composer/amazon.jpg" id="2_7tgm0"]
 
 [node name="LoadingScreen" type="Control"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://wkltxog3tco"]
 
-[ext_resource type="Script" path="res://src/ui/trade/Trade.gd" id="1_kplhs"]
+[ext_resource type="Script" path="res://ui/trade/Trade.gd" id="1_kplhs"]
 
 [node name="Trade" type="Control"]
 layout_mode = 3

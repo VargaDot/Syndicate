@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://hfdrpxmq1jg4"]
 
-[ext_resource type="Script" path="res://src/music_player/MusicPlayer.cs" id="1_altma"]
-[ext_resource type="AudioStream" uid="uid://dgdhiqb5hq1ru" path="res://src/music_player/music/jazz1.ogg" id="2_lmi5a"]
-[ext_resource type="AudioStream" uid="uid://cxvv5s0hpi5u5" path="res://src/music_player/music/jazz2.ogg" id="3_bu4bq"]
-[ext_resource type="AudioStream" uid="uid://hcqlai8ati8g" path="res://src/music_player/music/jazz3.ogg" id="4_o3gqb"]
-[ext_resource type="AudioStream" uid="uid://0x62msyh5sc4" path="res://src/music_player/music/jazz4.ogg" id="5_60lmp"]
-[ext_resource type="AudioStream" uid="uid://36caom6h8g8s" path="res://src/music_player/music/jazz5.ogg" id="6_ugaq4"]
-[ext_resource type="AudioStream" uid="uid://d0o8ky75po1eu" path="res://src/music_player/music/Speakeasy.ogg" id="7_d351o"]
+[ext_resource type="Script" path="res://music_player/MusicPlayer.cs" id="1_altma"]
+[ext_resource type="AudioStream" uid="uid://dgdhiqb5hq1ru" path="res://music_player/music/jazz1.ogg" id="2_lmi5a"]
+[ext_resource type="AudioStream" uid="uid://cxvv5s0hpi5u5" path="res://music_player/music/jazz2.ogg" id="3_bu4bq"]
+[ext_resource type="AudioStream" uid="uid://hcqlai8ati8g" path="res://music_player/music/jazz3.ogg" id="4_o3gqb"]
+[ext_resource type="AudioStream" uid="uid://0x62msyh5sc4" path="res://music_player/music/jazz4.ogg" id="5_60lmp"]
+[ext_resource type="AudioStream" uid="uid://36caom6h8g8s" path="res://music_player/music/jazz5.ogg" id="6_ugaq4"]
+[ext_resource type="AudioStream" uid="uid://d0o8ky75po1eu" path="res://music_player/music/Speakeasy.ogg" id="7_d351o"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer"]
 autoplay = true

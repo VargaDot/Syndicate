@@ -1,8 +1,8 @@
 extends Node
 
 func _ready():
-	var BoardFILE = FileAccess.open("data/Board.JSON", FileAccess.READ)
-	var PropertyFILE = FileAccess.open("data/Properties.JSON", FileAccess.READ)
+	var BoardFILE = FileAccess.open("data_manager/Board.JSON", FileAccess.READ)
+	var PropertyFILE = FileAccess.open("data_manager/Properties.JSON", FileAccess.READ)
 	BoardDATA = JSON.parse_string(BoardFILE.get_as_text())
 	PropertyDATA = JSON.parse_string(PropertyFILE.get_as_text())
 

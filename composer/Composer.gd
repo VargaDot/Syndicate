@@ -30,8 +30,8 @@ var loading_screens_default_path = "CanvasLayer/"
 
 ## This dictionary contains shortcuts for scene paths. You can use the shortcut key with add_scene_from_string instead of typing the whole path.
 var scene_paths: Dictionary = {
-	"MainMenu":"res://scenes/MainMenu.tscn",
-	"Game":"res://scenes/Game.tscn",
+	"MainMenu":"res://main_menu/MainMenu.tscn",
+	"Game":"res://game/Game.tscn",
 }
 
 ## This dictionary contains settings presets. You can use the shorcut key as parameter for args instead of typing the settings manually.
