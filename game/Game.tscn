@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://c6t5q3jctrpr2"]
+
+[ext_resource type="Script" path="res://game/Game.gd" id="1_msux6"]
+[ext_resource type="PackedScene" uid="uid://cuye1uyxeo6qq" path="res://ui/auction/Auction.tscn" id="3_5nkuo"]
+[ext_resource type="PackedScene" uid="uid://hfdrpxmq1jg4" path="res://music_player/MusicPlayer.tscn" id="3_hwjwm"]
+[ext_resource type="PackedScene" uid="uid://bjsju4y3y4cbc" path="res://ui/prison/Prison.tscn" id="4_vveie"]
+[ext_resource type="PackedScene" uid="uid://wkltxog3tco" path="res://ui/trade/Trade.tscn" id="5_2xjxe"]
+[ext_resource type="PackedScene" uid="uid://c2td3xuincgl0" path="res://ui/pause/Pause.tscn" id="6_pb2xo"]
+[ext_resource type="PackedScene" uid="uid://bs0vfv6wf6d32" path="res://ui/card/Card.tscn" id="7_kja1m"]
+[ext_resource type="PackedScene" uid="uid://bwu0yupcqyu2v" path="res://ui/dice/Dice.tscn" id="8_1o8bs"]
+
+[sub_resource type="TileSet" id="TileSet_im02r"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_msux6")
+
+[node name="Board" type="TileMap" parent="."]
+position = Vector2(962, 540)
+tile_set = SubResource("TileSet_im02r")
+format = 2
+metadata/_edit_group_ = true
+
+[node name="Cam" type="Camera2D" parent="."]
+position = Vector2(962, 540)
+
+[node name="UI" type="Node" parent="."]
+
+[node name="NextTurn" type="Button" parent="UI"]
+visible = false
+offset_left = 1620.0
+offset_top = 935.0
+offset_right = 1892.0
+offset_bottom = 1057.0
+theme_override_font_sizes/font_size = 41
+text = "Next turn"
+
+[node name="Prison" parent="UI" instance=ExtResource("4_vveie")]
+visible = false
+
+[node name="Trade" parent="UI" instance=ExtResource("5_2xjxe")]
+visible = false
+
+[node name="Pause" parent="UI" instance=ExtResource("6_pb2xo")]
+visible = false
+
+[node name="Card" parent="UI" instance=ExtResource("7_kja1m")]
+visible = false
+
+[node name="Dice" parent="UI" instance=ExtResource("8_1o8bs")]
+visible = false
+
+[node name="Auction" parent="UI" instance=ExtResource("3_5nkuo")]
+visible = false
+
+[node name="MusicPlayer" parent="." instance=ExtResource("3_hwjwm")]
+
+[connection signal="Bankrupt" from="." to="UI/Trade" method="_on_game_bankrupt"]
+[connection signal="RequestCard" from="." to="UI/Card" method="_on_game_request_card"]
+[connection signal="RequestDice" from="." to="UI/Dice" method="_on_game_request_dice"]
+[connection signal="RequestPause" from="." to="UI/Pause" method="_on_game_request_pause"]
+[connection signal="RequestPrison" from="." to="UI/Prison" method="_on_game_request_prison"]
+[connection signal="RequestTrade" from="." to="UI/Trade" method="_on_game_request_trade"]
+[connection signal="pressed" from="UI/NextTurn" to="." method="_on_next_turn_pressed"]
+[connection signal="sendReleaseStatus" from="UI/Prison" to="." method="_on_release_status_sent"]
+[connection signal="defaulted" from="UI/Trade" to="." method="_on_defaulted"]
+[connection signal="restructured" from="UI/Trade" to="." method="_on_restructured"]
+[connection signal="startAuction" from="UI/Card" to="UI/Auction" method="_on_card_start_auction"]

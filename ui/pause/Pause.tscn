@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2td3xuincgl0"]
+
+[ext_resource type="Script" path="res://ui/pause/Pause.gd" id="1_84trk"]
+
+[node name="Pause" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_84trk")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 292.0
+offset_top = 80.0
+offset_right = 1708.0
+offset_bottom = 1010.0
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 42.0
+offset_right = 910.0
+offset_bottom = 174.0
+theme_override_font_sizes/font_size = 96
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="save" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 608.0
+offset_top = 370.0
+offset_right = 828.0
+offset_bottom = 436.0
+text = "SAVE GAME"
+
+[node name="load" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 608.0
+offset_top = 484.0
+offset_right = 828.0
+offset_bottom = 546.0
+text = "LOAD GAME"
+
+[node name="softQuit" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 606.0
+offset_top = 596.0
+offset_right = 828.0
+offset_bottom = 676.0
+text = "QUIT TO MAIN MENU"
+
+[node name="hardQuit" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 606.0
+offset_top = 710.0
+offset_right = 828.0
+offset_bottom = 788.0
+text = "QUIT TO DESKTOP"
+
+[connection signal="pressed" from="Panel/save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Panel/load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="Panel/softQuit" to="." method="_on_soft_quit_pressed"]
+[connection signal="pressed" from="Panel/hardQuit" to="." method="_on_hard_quit_pressed"]
