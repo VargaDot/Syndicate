@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cl2dli7ew5o0o"
-path="res://.godot/imported/kabel.ttf-c6e8baa81ca1605ded83eaae0e104efb.fontdata"
+path="res://.godot/imported/kabel.ttf-e081e2efe987e39a6f13813a711e5243.fontdata"
 
 [deps]
 
-source_file="res://fonts/kabel.ttf"
-dest_files=["res://.godot/imported/kabel.ttf-c6e8baa81ca1605ded83eaae0e104efb.fontdata"]
+source_file="res://ui/fonts/kabel.ttf"
+dest_files=["res://.godot/imported/kabel.ttf-e081e2efe987e39a6f13813a711e5243.fontdata"]
 
 [params]
 

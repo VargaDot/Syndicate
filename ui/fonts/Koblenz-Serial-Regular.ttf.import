@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cw3bbxedp41ds"
-path="res://.godot/imported/Tangerine-Regular.ttf-37aca8a3049d5d205ad4b7599275bc54.fontdata"
+uid="uid://c46oubnvhj7jf"
+path="res://.godot/imported/Koblenz-Serial-Regular.ttf-14029fbf976970bd22da2b290a80bd0c.fontdata"
 
 [deps]
 
-source_file="res://fonts/Tangerine-Regular.ttf"
-dest_files=["res://.godot/imported/Tangerine-Regular.ttf-37aca8a3049d5d205ad4b7599275bc54.fontdata"]
+source_file="res://ui/fonts/Koblenz-Serial-Regular.ttf"
+dest_files=["res://.godot/imported/Koblenz-Serial-Regular.ttf-14029fbf976970bd22da2b290a80bd0c.fontdata"]
 
 [params]
 
@@ -20,9 +20,9 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
-hinting=1
+hinting=2
 subpixel_positioning=0
-oversampling=10.0
+oversampling=0.0
 Fallbacks=null
 fallbacks=[]
 Compress=null
@@ -31,7 +31,8 @@ preload=[{
 "chars": [],
 "glyphs": [],
 "name": "New Configuration",
-"size": Vector2i(16, 0)
+"size": Vector2i(16, 0),
+"variation_embolden": 0.0
 }]
 language_support={}
 script_support={}

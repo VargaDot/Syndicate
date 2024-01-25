@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://gyg1edy4dquf"
-path="res://.godot/imported/Morning Glory NF W01 Regular.ttf-0707c40ab8bd87a147d10daca709e591.fontdata"
+path="res://.godot/imported/Morning Glory NF W01 Regular.ttf-04506c6a6a752abf26316f66346caf73.fontdata"
 
 [deps]
 
-source_file="res://fonts/Morning Glory NF W01 Regular.ttf"
-dest_files=["res://.godot/imported/Morning Glory NF W01 Regular.ttf-0707c40ab8bd87a147d10daca709e591.fontdata"]
+source_file="res://ui/fonts/Morning Glory NF W01 Regular.ttf"
+dest_files=["res://.godot/imported/Morning Glory NF W01 Regular.ttf-04506c6a6a752abf26316f66346caf73.fontdata"]
 
 [params]
 

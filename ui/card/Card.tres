@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://b2urxupaos8rh"]
 
-[ext_resource type="FontFile" uid="uid://cl2dli7ew5o0o" path="res://fonts/kabel.ttf" id="1_f2dhp"]
+[ext_resource type="FontFile" uid="uid://cl2dli7ew5o0o" path="res://ui/fonts/kabel.ttf" id="1_f2dhp"]
 
 [resource]
 default_font = ExtResource("1_f2dhp")
