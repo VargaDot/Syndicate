@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwu0yupcqyu2v"]
+
+[ext_resource type="Script" path="res://src/ui/dice/Dice.gd" id="1_c3v3f"]
+[ext_resource type="SpriteFrames" uid="uid://txsa57qvw707" path="res://src/ui/dice/DiceRollAnim.tres" id="2_ihujc"]
+
+[node name="Dice" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c3v3f")
+
+[node name="Dice1" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(768, 768)
+sprite_frames = ExtResource("2_ihujc")
+animation = &"rolling"
+
+[node name="Dice2" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1152, 768)
+sprite_frames = ExtResource("2_ihujc")
+animation = &"rolling"
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_onTimeout"]

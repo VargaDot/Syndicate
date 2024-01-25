@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjsju4y3y4cbc"]
+
+[ext_resource type="Script" path="res://src/ui/prison/Prison.gd" id="1_gyycj"]
+[ext_resource type="Texture2D" uid="uid://dpkc7vn3ewwy1" path="res://src/ui/prison/jailcell.webp" id="2_vt7u0"]
+
+[node name="Prison" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gyycj")
+
+[node name="bg" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1923.0
+offset_bottom = 1084.0
+texture = ExtResource("2_vt7u0")
+
+[node name="bail" type="Button" parent="."]
+layout_mode = 0
+offset_left = 211.0
+offset_top = 639.0
+offset_right = 475.0
+offset_bottom = 714.0
+text = "BAIL"
+
+[node name="roll" type="Button" parent="."]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 775.0
+offset_right = 478.0
+offset_bottom = 841.0
+text = "ROLL DICE"
+
+[connection signal="pressed" from="bail" to="." method="_on_bail_pressed"]
+[connection signal="pressed" from="roll" to="." method="_on_roll_pressed"]
