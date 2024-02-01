@@ -5,31 +5,6 @@ namespace ComposerLib
 {
     public partial class ComposerGD : Node
     {
-        [Signal]
-        public delegate void SceneBeganLoadingEventHandler(string sceneName);
-
-        [Signal]
-        public delegate void SceneLoadingProcessUpdatedEventHandler(string sceneName, float progress);
-
-        [Signal]
-        public delegate void SceneLoadedEventHandler(string sceneName);
-
-        [Signal]
-        public delegate void SceneCreatedEventHandler(string sceneName);
-
-        [Signal]
-        public delegate void SceneEnabledEventHandler(string sceneName);
-
-        [Signal]
-        public delegate void SceneDisabledEventHandler(string sceneName);
-
-        [Signal]
-        public delegate void SceneRemovedEventHandler(string sceneName);
-
-        [Signal]
-        public delegate void SceneDisposedEventHandler(string sceneName);
-
-
         private Composer Composer;
         private readonly Array<string> AllowedSettings = new(){
             "SceneParent",
@@ -40,65 +15,53 @@ namespace ComposerLib
             "CacheMode",
         };
 
-        public override void _Ready()
+        public override void _EnterTree()
         {
-            Composer = GetNode<Composer>("/root/Composer");
-            Composer.ComposerGD = this;
+            Composer = GetNodeOrNull<Composer>("/root/Composer");
+            if (Composer == null)
+            {
+                GD.PrintErr("ComposerGD Error: Composer has not been found.");
+            }
         }
 
         public Scene GetScene(string name)
         {
             return Composer.GetScene(name);
         }
-        
+
         public void AddScene(string name, string path, Dictionary<string, Variant> dictSettings = null)
         {
-            AddSettings addSettings = new();
+            SceneSettings settings = new();
 
             if (dictSettings != null)
-                addSettings = MatchSettings(dictSettings);
+                settings = MatchSettings(dictSettings);
 
-            Composer.AddScene(name, path, addSettings);
+            Composer.AddScene(name, path, settings);
         }
 
-        public void AddScene(string name, PackedScene resource, Dictionary<string, Variant> dictSettings = null, string path = "")
+        public void AddScene(string name, PackedScene resource, string path = "", Dictionary<string, Variant> dictSettings = null)
         {
-            AddSettings addSettings = new();
+            SceneSettings settings = new();
 
             if (dictSettings != null)
-                addSettings = MatchSettings(dictSettings);
+                settings = MatchSettings(dictSettings);
 
-            Composer.AddScene(name, resource, addSettings, path);
+            Composer.AddScene(name, resource, path, settings);
         }
 
-        public void AddScene(Scene scene, Dictionary<string, Variant> dictSettings = null)
+        public void AddScene(Scene scene)
         {
-            AddSettings addSettings = new();
-
-            if (dictSettings != null)
-                addSettings = MatchSettings(dictSettings);
-
-            Composer.AddScene(scene, addSettings);
+            Composer.AddScene(scene);
         }
 
-        public void LoadScene(string name, Dictionary<string, Variant> dictSettings = null)
+        public void LoadScene(string name)
         {
-            LoadSettings loadSettings = new();
-
-            if (dictSettings != null)
-                loadSettings = MatchSettings(dictSettings);
-
-            Composer.LoadScene(name, loadSettings);
+            Composer.LoadScene(name);
         }
 
-        public void CreateScene(string name, Dictionary<string, Variant> dictSettings = null)
+        public void CreateScene(string name, Node newParent = null)
         {
-            CreateSettings createSettings = new();
-
-            if (dictSettings != null)
-                createSettings = MatchSettings(dictSettings);
-
-            Composer.CreateScene(name, createSettings);
+            Composer.CreateScene(name, newParent);
         }
 
         public void ReplaceScene(string sceneToRemove, string sceneToAdd, Node parent)
@@ -121,6 +84,11 @@ namespace ComposerLib
             Composer.DisableScene(name);
         }
 
+        public void UnloadScene(string name)
+        {
+            Composer.UnloadScene(name);
+        }
+
         public void RemoveScene(string name)
         {
             Composer.RemoveScene(name);
@@ -131,30 +99,28 @@ namespace ComposerLib
             Composer.DisposeScene(name);
         }
 
-        private ComposerSettings MatchSettings(Dictionary<string, Variant> dictSettings)
+        private SceneSettings MatchSettings(Dictionary<string, Variant> dictSettings)
         {
             var set = CheckKeys(dictSettings);
             return set;
         }
 
-        private ComposerSettings CheckKeys(Dictionary<string, Variant> dictSettings)
+        private SceneSettings CheckKeys(Dictionary<string, Variant> dictSettings)
         {
-            var settings = new ComposerSettings();
+            var settings = new SceneSettings();
 
             foreach (string key in dictSettings.Keys)
             {
                 var cleanedKey = CleanKey(key);
 
                 if (AllowedSettings.Contains(cleanedKey))
-                {
                     MatchKey(cleanedKey, key, dictSettings, ref settings);
-                }
             }
 
             return settings;
         }
 
-        private void MatchKey(string cleanedKey, string key, Dictionary<string, Variant> dictSettings, ref ComposerSettings settings)
+        private void MatchKey(string cleanedKey, string key, Dictionary<string, Variant> dictSettings, ref SceneSettings settings)
         {
             switch(cleanedKey)
             {

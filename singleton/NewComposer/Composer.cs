@@ -12,6 +12,9 @@ namespace ComposerLib
         public delegate void SceneLoadedEventHandler(string sceneName);
 
         [Signal]
+        public delegate void ScenesAllLoadedEventHandler();
+
+        [Signal]
         public delegate void SceneLoadingProcessUpdatedEventHandler(string sceneName, float progress);
 
         [Signal]
@@ -29,21 +32,21 @@ namespace ComposerLib
         [Signal]
         public delegate void SceneDisposedEventHandler(string sceneName);
 
-
-        public Godot.Collections.Dictionary<string, Scene> Scenes = new();
-        internal ComposerGD ComposerGD {get; set;} = null;
         private readonly Loader Loader = new();
+        private Godot.Collections.Dictionary<string, Scene> SceneManifest = new();
 
         public override void _EnterTree()
         {
-            AddChild(Loader,true);
+            AddChild(Loader, true);
+            Loader.Name = "Loader";
             Loader.LoaderStarted += OnSceneBeganLoading;
             Loader.LoaderLoadingUpdated += OnLoadingUpdated;
+            Loader.LoaderAllFinished += OnLoadingAllFinished;
         }
 
         public Scene GetScene(string name)
         {
-            if (!Scenes.TryGetValue(name, out Scene scene))
+            if (!SceneManifest.TryGetValue(name, out Scene scene))
             {
                 GD.PrintErr($"GetScene error: Scene {name} doesn't exist in memory.");
                 return null;
@@ -52,264 +55,204 @@ namespace ComposerLib
             return scene;
         }
 
-        public void AddScene(string name, string path, AddSettings settings = null)
+        public void AddScene(string name, string path, SceneSettings settings = null)
         {
-            if (Scenes.ContainsKey(name))
-            {
-                GD.PrintErr($"AddScene error: Scene {name} already exists in memory.");
-                return;
-            }
+            if (!CheckIfExists(name)) return;
 
-            var scene = new Scene(name, path);
+            var scene = new Scene(name, path, settings);
             scene.FinishedLoading += OnSceneLoaded;
             scene.FinishedCreating += OnSceneCreated;
 
-            if (settings != null) VerifyPreAddSettings(name, settings);
-
-            Scenes.Add(name,scene);
-
-            if (settings != null) VerifyPostAddSettings(name, settings);
+            SceneManifest.Add(name, scene);
         }
 
-        public void AddScene(string name, PackedScene resource, AddSettings settings = null, string path = "")
+        public void AddScene(string name, PackedScene resource, string path = "", SceneSettings settings = null)
         {
-            if (Scenes.ContainsKey(name))
-            {
-                GD.PrintErr($"AddScene error: Scene {name} already exists in memory.");
-                return;
-            }
+            if (!CheckIfExists(name)) return;
 
-            var scene = new Scene(name, resource, path);
+            var scene = new Scene(name, resource, path, settings);
             scene.FinishedLoading += OnSceneLoaded;
             scene.FinishedCreating += OnSceneCreated;
 
-            if (settings != null) VerifyPreAddSettings(name, settings);
-
-            Scenes.Add(name,scene);
-
-            if (settings != null) VerifyPostAddSettings(name, settings);
+            SceneManifest.Add(name, scene);
         }
 
-        public void AddScene(Scene scene, AddSettings settings = null)
+        public void AddScene(Scene scene)
         {
-            if (Scenes.ContainsKey(scene.InternalName))
-            {
-                GD.PrintErr($"AddScene error: Scene {scene.InternalName} already exists in memory.");
-                return;
-            }
+            if (!CheckIfExists(scene.InternalName)) return;
 
             scene.FinishedLoading += OnSceneLoaded;
             scene.FinishedCreating += OnSceneCreated;
 
-            if (settings != null) VerifyPreAddSettings(scene.InternalName, settings);
-
-            Scenes.Add(scene.InternalName,scene);
-
-            if (settings != null) VerifyPostAddSettings(scene.InternalName, settings);
+            SceneManifest.Add(scene.InternalName, scene);
         }
 
-        public async void LoadScene(string name, LoadSettings settings = null)
+        public void AddScenes(Godot.Collections.Array<Scene> scenes, bool autoLoad = false)
+        {
+            foreach (Scene scene in scenes)
+            {
+                AddScene(scene);
+            }
+
+            if (autoLoad) LoadScenes(scenes);
+        }
+
+        public void LoadScene(string name)
         {
             var scene = GetScene(name);
+            if (!CheckForNull(scene, "LoadScene")) return;
 
-            if (scene == null)
+            scene.Load();
+        }
+
+        public void LoadScenes(Godot.Collections.Array<Scene> scenes)
+        {
+            foreach (Scene scene in scenes)
             {
-                GD.PrintErr($"LoadScene error: Scene {name} doesn't exist in memory.");
-                return;
-            }
-
-            if (settings != null) 
-            { 
-                VerifyPreLoadSettings(name, settings);
-                scene.Load(settings.UseSubthreads, settings.CacheMode);
-            }
-            else 
                 scene.Load();
-
-            await ToSignal(scene,Scene.SignalName.FinishedLoading);
-
-            if (settings != null) VerifyPostLoadSettings(name, settings);
-        }
-
-        public async void CreateScene(string name, CreateSettings settings = null)
-        {
-            settings ??= new();
-            var scene = GetScene(name);
-
-            if (scene == null)
-            {
-                GD.PrintErr($"CreateScene error: Scene {name} doesn't exist in memory.");
-                return;
             }
-
-            VerifyPreCreateSettings(name, settings);
-
-            scene.Create(settings.SceneParent);
-
-            await ToSignal(scene, Scene.SignalName.FinishedCreating);
-
-            VerifyPostCreateSettings(name, settings);
         }
 
-        public void ReplaceScene(string sceneToRemove, string sceneToAdd, Node parent)
+        public void CreateScene(string name, Node newParent = null)
         {
+            var scene = GetScene(name);
+            if (!CheckForNull(scene, "CreateScene")) return;
+
+            if (IsInstanceValid(newParent))
+                scene.Settings.SceneParent = newParent;
+
+            scene.Create();
+        }
+
+        public void CreateScenes(Godot.Collections.Array<Scene> scenes)
+        {
+            foreach (Scene scene in scenes)
+            {
+                scene.Create();
+            }
+        }
+
+        public void ReplaceScene(string sceneToRemove, string sceneToAdd, Node newParent = null)
+        {
+            if (IsInstanceValid(newParent))
+                GetScene(sceneToAdd).Settings.SceneParent = newParent;
+
             RemoveScene(sceneToRemove);
-            CreateScene(sceneToAdd, new CreateSettings{
-                SceneParent = parent
-            });
+            CreateScene(sceneToAdd);
         }
 
-        public void ReloadScene(string name)
+        public async void ReloadScene(string name)
         {
             var scene = GetScene(name);
+            if (!CheckForNull(scene, "ReloadScene")) return;
 
-            if (scene.Instance == null)
-            {
-                GD.PrintErr($"ReloadScene error: Scene {name} doesn't have an instance.");
-                return;
-            }
-
-            var parent = scene.Instance.GetParent();
             RemoveScene(name);
-            CreateScene(name, new(){
-                SceneParent = parent
-            });
+
+            await ToSignal(this, SignalName.SceneRemoved);
+
+            CreateScene(name);
         }
 
         public void EnableScene(string name)
         {
             var scene = GetScene(name);
-
-            if (scene == null)
-            {
-                GD.PrintErr($"EnableScene error: Scene {name} doesn't exist in memory.");
-                return;
-            }
+            if (!CheckForNull(scene, "EnableScene")) return;
 
             scene.Enable();
             EmitSignal(SignalName.SceneEnabled, name);
-            ComposerGD?.EmitSignal(ComposerGD.SignalName.SceneEnabled, name);
         }
 
         public void DisableScene(string name)
         {
             var scene = GetScene(name);
-
-            if (scene == null)
-            {
-                GD.PrintErr($"EnableScene error: Scene {name} doesn't exist in memory.");
-                return;
-            }
+            if (!CheckForNull(scene, "DisableScene")) return;
 
             scene.Disable();
             EmitSignal(SignalName.SceneDisabled, name);
-            ComposerGD?.EmitSignal(ComposerGD.SignalName.SceneDisabled, name);
+        }
+
+        public void UnloadScene(string name)
+        {
+            var scene = GetScene(name);
+            if (!CheckForNull(scene, "UnloadScene")) return;
+
+            scene.Unload();
         }
 
         public void RemoveScene(string name)
         {
             var scene = GetScene(name);
-
-            if (scene == null)
-            {
-                GD.PrintErr($"RemoveScene error: Scene {name} doesn't exist in memory.");
-                return;
-            }
+            if (!CheckForNull(scene, "RemoveScene")) return;
 
             scene.Remove();
             EmitSignal(SignalName.SceneRemoved, name);
-            ComposerGD?.EmitSignal(ComposerGD.SignalName.SceneRemoved, name);
         }
 
         public void DisposeScene(string name)
         {
             var scene = GetScene(name);
-
-            if (scene == null)
-            {
-                GD.PrintErr($"DisposeScene error: Scene {name} doesn't exist in memory.");
-                return;
-            }
+            if (!CheckForNull(scene, "DisposeScene")) return;
 
             scene.FinishedLoading -= OnSceneLoaded;
             scene.FinishedCreating -= OnSceneCreated;
             scene.Dispose();
-            Scenes.Remove(name);
+            SceneManifest.Remove(name);
 
             EmitSignal(SignalName.SceneDisposed, name);
-            ComposerGD?.EmitSignal(ComposerGD.SignalName.SceneDisposed, name);
         }
 
-        private void VerifyPreAddSettings(string name, AddSettings settings)
+        private bool CheckIfExists(string name)
         {
-
-        }
-
-        private void VerifyPostAddSettings(string name, AddSettings settings)
-        {
-            if (settings.InstantLoad)
+            if (SceneManifest.ContainsKey(name))
             {
-                LoadScene(name,new LoadSettings{
-                    SceneParent = settings.SceneParent,
-                    InstantCreate = settings.InstantCreate
-                });
+                GD.PrintErr($"AddScene error: Scene {name} already exists in memory.");
+                return false;
             }
+
+            return true;
         }
 
-        private void VerifyPreLoadSettings(string name, LoadSettings settings)
+        private bool CheckForNull(Scene scene, string functionName)
         {
-
-        }
-
-        private void VerifyPostLoadSettings(string name, LoadSettings settings)
-        {
-            if (settings.SceneParent != null)
+            if (scene == null)
             {
-                if (settings.InstantCreate)
-                {
-                    CreateScene(name,new CreateSettings{
-                        SceneParent = settings.SceneParent
-                    });
-                }
+                GD.PrintErr($"{functionName} error: Scene {scene?.InternalName} doesn't exist in memory.");
+                return false;
             }
-        }
 
-        private void VerifyPreCreateSettings(string name, CreateSettings settings)
-        {
-            if (!IsInstanceValid(settings.SceneParent))
-            {
-                throw new ArgumentException($"Invalid SceneParent argument for CreateScene, scene {name}");
-            }
-        }
-
-        private void VerifyPostCreateSettings(string name, CreateSettings settings)
-        {
-            if (settings.DisableProcessing)
-                GetScene(name).Disable();
+            return true;
         }
 
         private void OnSceneCreated(string sceneName)
         {
             EmitSignal(SignalName.SceneCreated, sceneName);
-            ComposerGD?.EmitSignal(ComposerGD.SignalName.SceneCreated, sceneName);
         }
 
         private void OnSceneBeganLoading(Scene scene)
         {
             EmitSignal(SignalName.SceneBeganLoaded, scene.InternalName);
-            ComposerGD?.EmitSignal(ComposerGD.SignalName.SceneBeganLoading, scene.InternalName);
         }
 
         private void OnLoadingUpdated(Scene scene, float progress)
         {
             EmitSignal(SignalName.SceneLoadingProcessUpdated, scene.InternalName, progress);
-            ComposerGD?.EmitSignal(ComposerGD.SignalName.SceneLoadingProcessUpdated, scene.InternalName, progress);
+        }
+
+        private void OnLoadingAllFinished()
+        {
+            Loader.Disable();
+
+            EmitSignal(SignalName.ScenesAllLoaded);
         }
 
         private void OnSceneLoaded(string sceneName)
         {
             EmitSignal(SignalName.SceneLoaded, sceneName);
-            ComposerGD?.EmitSignal(ComposerGD.SignalName.SceneLoaded, sceneName);
+        }
+
+        private void OnLoaderEnableRequested()
+        {
+            Loader.Enable();
         }
     }
 }
