@@ -9,7 +9,7 @@ signal RequestWin()
 signal RequestLoss()
 signal Bankrupt()
 
-func _ready(): _turnManager()
+func _ready(): print("HI")
 func _process(_delta): 
 	if Input.is_action_pressed("Quit"): emit_signal("RequestPause")
 
