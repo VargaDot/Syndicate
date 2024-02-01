@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Syndicate"
-run/main_scene="res://composer/RootScene.tscn"
+run/main_scene="res://main/main.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://Icon.png"
 
 [autoload]
 
-Composer="*res://composer/Composer.gd"
+Composer="*res://composer/Composer.cs"
+ComposerGD="*res://composer/ComposerGD.cs"
 EstateCourt="*res://data_manager/EstateCourt.gd"
 Khana="*res://data_manager/Khana.cs"
 
