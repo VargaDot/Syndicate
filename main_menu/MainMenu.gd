@@ -19,9 +19,9 @@ func _singlePlayerPressed() -> void:
 func _multiPressed() -> void:
 	pass
 
+signal PlayPressed
 func _on_completion():
-	Composer.disable_scene("MainMenu")
-	Composer.activate_scene("Game")
+	emit_signal("PlayPressed")
 
 func _on_credits_pressed():
 	if $Credits.visible:

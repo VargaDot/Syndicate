@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monopoly", "Monopoly.csproj", "{0FE5F7AB-129E-45FE-BF7C-95C40FE34564}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monopoly", "Monopoly.csproj", "{8795BF7D-E49D-407A-A6AE-84D66FEF2A0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0FE5F7AB-129E-45FE-BF7C-95C40FE34564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0FE5F7AB-129E-45FE-BF7C-95C40FE34564}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0FE5F7AB-129E-45FE-BF7C-95C40FE34564}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{0FE5F7AB-129E-45FE-BF7C-95C40FE34564}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{0FE5F7AB-129E-45FE-BF7C-95C40FE34564}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{0FE5F7AB-129E-45FE-BF7C-95C40FE34564}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{8795BF7D-E49D-407A-A6AE-84D66FEF2A0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8795BF7D-E49D-407A-A6AE-84D66FEF2A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8795BF7D-E49D-407A-A6AE-84D66FEF2A0F}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{8795BF7D-E49D-407A-A6AE-84D66FEF2A0F}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{8795BF7D-E49D-407A-A6AE-84D66FEF2A0F}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{8795BF7D-E49D-407A-A6AE-84D66FEF2A0F}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal

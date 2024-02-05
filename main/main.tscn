@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhfprnpo17v0e"]
+
+[ext_resource type="Script" path="res://main/main.gd" id="1_hi0ks"]
+[ext_resource type="Texture2D" uid="uid://crt4onjvvokqg" path="res://main/amazon.jpg" id="2_cmom8"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_hi0ks")
+
+[node name="LoadingScreen" type="CanvasLayer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="LoadingScreen"]
+position = Vector2(963, 540)
+scale = Vector2(1.51094, 1.50556)
+texture = ExtResource("2_cmom8")
+
+[node name="ProgressBar" type="ProgressBar" parent="LoadingScreen"]
+offset_left = 218.0
+offset_top = 840.0
+offset_right = 574.0
+offset_bottom = 867.0
