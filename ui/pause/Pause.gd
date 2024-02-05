@@ -1,12 +1,7 @@
 extends Control
 
 func _on_game_request_pause():
-	if visible:
-		hide()
-		get_tree().paused = false
-	else:
-		get_tree().paused = true
-		show()
+	show()
 
 func _on_save_pressed():
 	pass # Replace with function body.
@@ -16,7 +11,7 @@ func _on_load_pressed():
 
 signal MainMenuPressed
 func _on_soft_quit_pressed():
-	emit_signal("MainMenuPressed")
+	ComposerGD.ReplaceScene("Game", "MainMenu", self)
 
 func _on_hard_quit_pressed():
 	get_tree().quit()
