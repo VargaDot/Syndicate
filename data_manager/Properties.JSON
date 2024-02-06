@@ -1,0 +1,389 @@
+{
+	"default": {
+		"Costs": {
+			"PurchasePrice": 9999,
+			"BuildCost": 9999,
+			"Mortgage": 9999
+		},
+		"Rent": [
+			9999,
+			9999,
+			9999,
+			9999,
+			9999,
+			9999
+		]
+	},
+	"Brown1": {
+		"Costs": {
+			"PurchasePrice": 60,
+			"BuildCost": 50,
+			"Mortgage": 30
+		},
+		"Rent": [
+			2,
+			10,
+			30,
+			90,
+			160,
+			250
+		]
+	},
+	"Brown2": {
+		"Costs": {
+			"PurchasePrice": 60,
+			"BuildCost": 50,
+			"Mortgage": 30
+		},
+		"Rent": [
+			4,
+			20,
+			60,
+			180,
+			320,
+			450
+		]
+	},
+	"Cyan1": {
+		"Costs": {
+			"PurchasePrice": 100,
+			"BuildCost": 50,
+			"Mortgage": 50
+		},
+		"Rent": [
+			6,
+			30,
+			90,
+			270,
+			400,
+			550
+		]
+	},
+	"Cyan2": {
+		"Costs": {
+			"PurchasePrice": 100,
+			"BuildCost": 50,
+			"Mortgage": 50
+		},
+		"Rent": [
+			6,
+			30,
+			90,
+			270,
+			400,
+			550
+		]
+	},
+	"Cyan3": {
+		"Costs": {
+			"PurchasePrice": 100,
+			"BuildCost": 50,
+			"Mortgage": 50
+		},
+		"Rent": [
+			8,
+			40,
+			100,
+			300,
+			450,
+			600
+		]
+	},
+	"Pink1": {
+		"Costs": {
+			"PurchasePrice": 140,
+			"BuildCost": 100,
+			"Mortgage": 70
+		},
+		"Rent": [
+			10,
+			50,
+			150,
+			450,
+			625,
+			750
+		]
+	},
+	"Pink2": {
+		"Costs": {
+			"PurchasePrice": 140,
+			"BuildCost": 100,
+			"Mortgage": 70
+		},
+		"Rent": [
+			10,
+			50,
+			150,
+			450,
+			625,
+			750
+		]
+	},
+	"Pink3": {
+		"Costs": {
+			"PurchasePrice": 160,
+			"BuildCost": 100,
+			"Mortgage": 80
+		},
+		"Rent": [
+			12,
+			60,
+			180,
+			500,
+			700,
+			900
+		]
+	},
+	"Orange1": {
+		"Costs": {
+			"PurchasePrice": 180,
+			"BuildCost": 100,
+			"Mortgage": 90
+		},
+		"Rent": [
+			14,
+			70,
+			200,
+			550,
+			750,
+			950
+		]
+	},
+	"Orange2": {
+		"Costs": {
+			"PurchasePrice": 180,
+			"BuildCost": 100,
+			"Mortgage": 90
+		},
+		"Rent": [
+			14,
+			70,
+			200,
+			550,
+			750,
+			950
+		]
+	},
+	"Orange3": {
+		"Costs": {
+			"PurchasePrice": 200,
+			"BuildCost": 100,
+			"Mortgage": 100
+		},
+		"Rent": [
+			16,
+			80,
+			220,
+			600,
+			800,
+			1000
+		]
+	},
+	"Red1": {
+		"Costs": {
+			"PurchasePrice": 220,
+			"BuildCost": 150,
+			"Mortgage": 110
+		},
+		"Rent": [
+			18,
+			90,
+			250,
+			700,
+			875,
+			1050
+		]
+	},
+	"Red2": {
+		"Costs": {
+			"PurchasePrice": 220,
+			"BuildCost": 150,
+			"Mortgage": 110
+		},
+		"Rent": [
+			18,
+			90,
+			250,
+			700,
+			875,
+			1050
+		]
+	},
+	"Red3": {
+		"Costs": {
+			"PurchasePrice": 240,
+			"BuildCost": 150,
+			"Mortgage": 120
+		},
+		"Rent": [
+			20,
+			100,
+			300,
+			750,
+			925,
+			1100
+		]
+	},
+	"Yellow1": {
+		"Costs": {
+			"PurchasePrice": 260,
+			"BuildCost": 150,
+			"Mortgage": 130
+		},
+		"Rent": [
+			22,
+			110,
+			330,
+			800,
+			975,
+			1150
+		]
+	},
+	"Yellow2": {
+		"Costs": {
+			"PurchasePrice": 260,
+			"BuildCost": 150,
+			"Mortgage": 130
+		},
+		"Rent": [
+			22,
+			110,
+			330,
+			800,
+			975,
+			1150
+		]
+	},
+	"Yellow3": {
+		"Costs": {
+			"PurchasePrice": 260,
+			"BuildCost": 150,
+			"Mortgage": 130
+		},
+		"Rent": [
+			24,
+			120,
+			360,
+			850,
+			1025,
+			1200
+		]
+	},
+	"Green1": {
+		"Costs": {
+			"PurchasePrice": 300,
+			"BuildCost": 200,
+			"Mortgage": 150
+		},
+		"Rent": [
+			26,
+			130,
+			390,
+			900,
+			1100,
+			1275
+		]
+	},
+	"Green2": {
+		"Costs": {
+			"PurchasePrice": 300,
+			"BuildCost": 200,
+			"Mortgage": 150
+		},
+		"Rent": [
+			26,
+			130,
+			390,
+			900,
+			1100,
+			1275
+		]
+	},
+	"Green3": {
+		"Costs": {
+			"PurchasePrice": 320,
+			"BuildCost": 200,
+			"Mortgage": 160
+		},
+		"Rent": [
+			28,
+			150,
+			450,
+			1000,
+			1200,
+			1400
+		]
+	},
+	"Blue1": {
+		"Costs": {
+			"PurchasePrice": 350,
+			"BuildCost": 200,
+			"Mortgage": 175
+		},
+		"Rent": [
+			35,
+			175,
+			500,
+			1100,
+			1300,
+			1500
+		]
+	},
+	"Blue2": {
+		"Costs": {
+			"PurchasePrice": 400,
+			"BuildCost": 200,
+			"Mortgage": 200
+		},
+		"Rent": [
+			50,
+			200,
+			600,
+			1400,
+			1700,
+			2000
+		]
+	},
+	"Station1": {
+		"Costs": {
+			"PurchasePrice": 200,
+			"Mortgage": 100
+		},
+		"Rent": 25
+	},
+	"Station2": {
+		"Costs": {
+			"PurchasePrice": 200,
+			"Mortgage": 100
+		},
+		"Rent": 25
+	},
+	"Station3": {
+		"Costs": {
+			"PurchasePrice": 200,
+			"Mortgage": 100
+		},
+		"Rent": 25
+	},
+	"Station4": {
+		"Costs": {
+			"PurchasePrice": 200,
+			"Mortgage": 100
+		},
+		"Rent": 25
+	},
+	"Utility1": {
+		"Costs": {
+			"PurchasePrice": 150,
+			"Mortgage": 75
+		},
+		"Rent": 6
+	},
+	"Utility2": {
+		"Costs": {
+			"PurchasePrice": 150,
+			"Mortgage": 75
+		},
+		"Rent": 6
+	}
+}

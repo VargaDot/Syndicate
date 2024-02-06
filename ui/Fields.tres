@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://7is2xs320v4c"]
+
+[ext_resource type="FontFile" uid="uid://c46oubnvhj7jf" path="res://ui/fonts/Koblenz-Serial-Regular.ttf" id="1_gqldm"]
+
+[resource]
+default_font = ExtResource("1_gqldm")
+default_font_size = 32
