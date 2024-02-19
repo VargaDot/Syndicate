@@ -4,172 +4,192 @@ using Godot;
 
 public partial class Khana : Node
 {
-  struct Agent
-  {
-    public byte ID { get; set; }
-    public List<Property> Portfolio { get; set; }
-    public int Cash = 2500;
-    public string Name { get; set; }
-    public byte Position = 0;
-    public bool inPrison = false;
-    public byte doublesCount = 0;
-
-    public Agent(byte id, string name)
+    struct Agent
     {
-      ID = id;
-      Name = name;
-      Portfolio = new ();
+        public byte ID {get; set;}
+        public List<Property> Portfolio {get; set;}
+        public int Cash = 2500;
+        public string Name {get; set;}
+        public byte Position = 0;
+        public bool inPrison = false;
+        public byte doublesCount = 0;
+
+        public Agent(byte id, string name)
+        {
+            ID = id;
+            Name = name;
+            Portfolio = new ();
+        }
     }
-  }
 
-  struct Property
-  {
-    public byte ID { get; set; }
-    public byte UpgradeLevel = 0;
-    public bool IsMortgaged = false;
-
-    public Property(byte id) { ID = id; }
-  }
+    struct Property
+    {
+        public byte ID {get; set;}
+        public byte UpgradeLevel = 0;
+        public bool IsMortgaged = false;
+        public Property(byte id) 
+        {
+            ID = id;
+        }
+    }
   
-  private readonly List<Agent> Daftar = new();
-  public void AddAgent(byte ID, string username)
-  {
-    Daftar.Add(new Agent(ID, username));
-  }
+    private readonly List<Agent> Daftar = new();
+    public void AddAgent(byte ID, string username)
+    {
+        Daftar.Add(new Agent(ID, username));
+    }
 
-  public void RemoveAgent(byte AgentID) 
-  {
-    Agent agentToRemove = Daftar.Find(agent => agent.ID == AgentID);
-    Daftar.Remove(agentToRemove);
-  }
+    public void RemoveAgent(byte AgentID) 
+    {
+        Daftar.Remove(FindAgent(AgentID));
+    }
 
-  public void MoveAgent(byte AgentID, byte newPos)
-  {
-    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
-    agent.Position = (byte)((agent.Position += newPos) % 39);
-  }
+    public void MoveAgent(byte AgentID, byte newPos)
+    {
+        Agent agent = FindAgent(AgentID);
+        agent.Position = (byte)((agent.Position += newPos) % 39);
+    }
 
-  public void ModifyDoubleCount(byte AgentID, bool is_even)
-  {
-    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
-    if (is_even) selectedAgent.doublesCount++;
-    else selectedAgent.doublesCount = 0;
-  }
+    public void ModifyDoubleCount(byte AgentID, bool is_even)
+    {
+        Agent agent = FindAgent(AgentID);
+        if (is_even) agent.doublesCount++;
+        else agent.doublesCount = 0;
+    }
 
-  public void ToggleAgentFreedom(byte AgentID)
-  {
-    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
-    agent.inPrison = !agent.inPrison;
-    agent.Position = 10;
-  }
+    public void ToggleAgentFreedom(byte AgentID)
+    {
+        Agent agent = FindAgent(AgentID);
+        agent.inPrison = !agent.inPrison;
+        agent.Position = 10;
+    }
 
-  public void ConductTransaction(byte AgentID, int amount)
-  {
-    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
-    selectedAgent.Cash += amount;
-  }
+    public void ConductTransaction(byte AgentID, int amount)
+    {
+        Agent agent = FindAgent(AgentID);
+        agent.Cash += amount;
+    }
 
-  public void ExchangeLand(byte BuyerID, byte SellerID, byte PropertyID)
-  {
-    RemoveProperty(SellerID, PropertyID);
-    AddProperty(BuyerID, PropertyID);
-  }
+    public void ExchangeLand(byte BuyerID, byte SellerID, byte PropertyID)
+    {
+        RemoveProperty(SellerID, PropertyID);
+        AddProperty(BuyerID, PropertyID);
+    }
 
-  public byte AgentCount() { return (byte)Daftar.Count; }
+    public byte AgentCount() 
+    { 
+        return (byte)Daftar.Count;
+    }
 
-  public byte[] GetAgentIDs()
-  {
-    List<byte> allAgentIDs = new();
+    public byte[] GetAgentIDs()
+    {
+        List<byte> allAgentIDs = new();
+
+        foreach (var agentEntry in Daftar) 
+        {
+            allAgentIDs.Add(agentEntry.ID);
+        }
+        
+        return allAgentIDs.ToArray();
+    }
+
+    public int GetAgentCash(byte AgentID)
+    {
+        return FindAgent(AgentID).Cash;
+    }
+
+    public string GetAgentName(byte AgentID)
+    {
+        return FindAgent(AgentID).Name;
+    }
+
+    public byte GetAgentPosition(byte AgentID)
+    {
+        return FindAgent(AgentID).Position;
+    }
+
+    public byte GetAgentDoublesCount(byte AgentID)
+    {
+        return FindAgent(AgentID).doublesCount; 
+    }
+
+    public bool GetAgentStatus(byte AgentID)
+    {
+        return FindAgent(AgentID).inPrison;
+    }
+
+    public void AddProperty(byte AgentID, byte PropertyID)
+    {
+        Agent agent = FindAgent(AgentID);
+        agent.Portfolio.Add(new Property(PropertyID));
+    }
+
+    public void RemoveProperty(byte AgentID, byte PropertyID)
+    {
+        Agent agent = FindAgent(AgentID);
+        agent.Portfolio.RemoveAll(p => p.ID == PropertyID);
+    }
+
+    public byte GetUpgradeLevel(byte AgentID, byte PropertyID)
+    {
+        return FindProperty(AgentID, PropertyID).UpgradeLevel;
+    }
+
+    public bool GetMortgageStatus(byte AgentID, byte PropertyID)
+    {
+        return FindProperty(AgentID, PropertyID).IsMortgaged;
+    }
+
+    public byte CheckForOwnership(byte PropertyID)
+    {
+        foreach (Agent agent in Daftar)
+        {
+            if (agent.Portfolio.Any(property => property.ID == PropertyID))
+            {
+                return agent.ID;
+            }
+        }
+
+        return 69; // Default if no owner was found
+    }
+
+    public void ToggleMortgageStatus(byte AgentID, byte PropertyID)
+    {
+        Agent agent = FindAgent(AgentID);
+        Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
+
+        property.IsMortgaged = !property.IsMortgaged;
+    }
+
+    public void ModifyUpgradeLvl(byte AgentID, byte PropertyID, byte newLvl)
+    {
+        Agent agent = FindAgent(AgentID);
+        Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
+
+        property.UpgradeLevel = newLvl;
+    }
     
-    foreach (var agentEntry in Daftar) { allAgentIDs.Add(agentEntry.ID); }
-    return allAgentIDs.ToArray();
-  }
+    public byte[] GetAgentPortfolio(byte AgentID)
+    {
+        List<byte> propertyIDs = new();
+        Agent agent = FindAgent(AgentID);
 
-  public int GetAgentCash(byte AgentID)
-  {
-    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
-    return selectedAgent.Cash;
-  }
+        foreach (Property property in agent.Portfolio)
+        {
+            propertyIDs.Add(property.ID);
+        }
 
-  public string GetAgentName(byte AgentID)
-  {
-    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
-    return selectedAgent.Name;
-  }
+        return propertyIDs.ToArray();
+    }
 
-  public byte GetAgentPosition(byte AgentID)
-  {
-    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
-    return selectedAgent.Position;
-  }
+    private Agent FindAgent(byte AgentID)
+    {
+        return Daftar.Find(agent => agent.ID == AgentID);
+    }
 
-  public byte GetAgentDoublesCount(byte AgentID)
-  {
-    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
-    return selectedAgent.doublesCount; 
-  }
-
-  public bool GetAgentStatus(byte AgentID)
-  {
-    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
-    return selectedAgent.inPrison;
-  }
-
-  public void AddProperty(byte AgentID, byte PropertyID)
-  {
-    Agent selectedAgent = Daftar.Find(agent => agent.ID == AgentID);
-    selectedAgent.Portfolio.Add(new Property(PropertyID));
-  }
-
-  public void RemoveProperty(byte AgentID, byte PropertyID)
-  {
-    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
-    Property propertyToRemove = agent.Portfolio.Find(p => p.ID == PropertyID);
-    agent.Portfolio.Remove(propertyToRemove);
-  }
-
-  public byte GetUpgradeLevel(byte AgentID, byte PropertyID)
-  {
-    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
-    Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
-    return property.UpgradeLevel;
-  }
-
-  public bool GetMortgageStatus(byte AgentID, byte PropertyID)
-  {
-    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
-    Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
-    return property.IsMortgaged;
-  }
-
-  public byte CheckForOwnership(byte PropertyID)
-  {
-    foreach (Agent agent in Daftar) if (agent.Portfolio.Any(property => property.ID == PropertyID)) { return agent.ID; }
-    return 69; // Default if no owner was found
-  }
-
-  public void ToggleMortgageStatus(byte AgentID, byte PropertyID)
-  {
-    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
-    Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
-
-    property.IsMortgaged = !property.IsMortgaged;
-  }
-
-  public void ModifyUpgradeLvl(byte AgentID, byte PropertyID, byte newLvl)
-  {
-    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
-    Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
-
-    property.UpgradeLevel = newLvl;
-  }
-  
-  public byte[] GetAgentPortfolio(byte AgentID)
-  {
-    List<byte> propertyIDs = new();
-    Agent agent = Daftar.Find(agent => agent.ID == AgentID);
-
-    foreach (Property property in agent.Portfolio) { propertyIDs.Add(property.ID);}
-    return propertyIDs.ToArray();
-  }
+    private Property FindProperty(byte AgentID, byte PropertyID)
+    {
+        Agent agent = FindAgent(AgentID);
+        return agent.Portfolio.Find(property => property.ID == PropertyID);
+    }
 }
