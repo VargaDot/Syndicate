@@ -2,24 +2,26 @@ extends Node
 
 func _ready():
 	var BoardFILE = FileAccess.open("data_manager/Board.JSON", FileAccess.READ)
-	var PropertyFILE = FileAccess.open("data_manager/Properties.JSON", FileAccess.READ)
 	BoardDATA = JSON.parse_string(BoardFILE.get_as_text())
-	PropertyDATA = JSON.parse_string(PropertyFILE.get_as_text())
 
 var BoardDATA
-func FetchDistrictData(BoardID, functionID):
-	match functionID:
-		"TYPE": return BoardDATA[BoardID]["Type"]
-		"CARDID": return BoardDATA[BoardID]["CardID"]
-		"NAME": return BoardDATA[BoardID]["Name"]
-		"ID": return BoardDATA[BoardID]["ID"]
-		_: printerr("unrelated")
+func _fetch_tile_type(BoardID):
+	return BoardDATA[BoardID]["Type"]
 
-var PropertyDATA
-func FetchAssetData(internalPropName, functionID, level = 0):
-	match functionID:
-		"PP": return PropertyDATA[internalPropName]["Costs"]["PurchasePrice"]
-		"BC": return PropertyDATA[internalPropName]["Costs"]["BuildCost"]
-		"MORTGAGE": return PropertyDATA[internalPropName]["Costs"]["Mortgage"]
-		"RENT": return PropertyDATA[internalPropName]["Rent"][level]
-		_: return PropertyDATA["Default"]
+func _fetch_card_id(BoardID):
+	return BoardDATA[BoardID]["CardID"]
+
+func _fetch_property_name(BoardID):
+	return BoardDATA[BoardID]["Name"]
+
+func _fetch_property_price(BoardID):
+	return BoardDATA[BoardID]["Costs"]["PurchasePrice"]
+
+func _fetch_property_mortgage(BoardID):
+	return BoardDATA[BoardID]["Costs"]["Mortgage"]
+
+func _fetch_property_buildcost(BoardID):
+	return BoardDATA[BoardID]["Costs"]["BuildCost"]
+
+func _fetch_property_rent(BoardID, level = 0):
+	return BoardDATA[BoardID]["Rent"][level]
