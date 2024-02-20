@@ -73,7 +73,7 @@ func _turnManager():
 	
 #region TileInspector
 	var boardPos:int = Khana.GetAgentPosition(currentPlayer)
-	var tileType = EstateCourt.FetchDistrictData(boardPos, "TYPE")
+	var tileType = EstateCourt._fetch_tile_type(boardPos)
 	var debtor:int = 257
 	currentGame = GAME_STATES.INSPECT
 	
@@ -82,17 +82,17 @@ func _turnManager():
 			Khana.ConductTransaction(currentPlayer, 200)
 		DISTRICT_TYPE.PROPERTY:
 			var propOwner:int = Khana.CheckForOwnership(boardPos)
-			if propOwner == 69: 
+			if propOwner == 69:
 				emit_signal("RequestCard", "PROP", boardPos, currentPlayer)
 			else:
 				if Khana.GetMortgageStatus(propOwner, boardPos) == true:
 					pass
 				else:
-					var proplevel:int = Khana.GetUpgradeLevel(currentPlayer, boardPos)
-					var internalName:String = EstateCourt.FetchDistrictData(boardPos, "NAME")
-					var propPrice:int = EstateCourt.FetchAssetData(internalName, "RENT", proplevel)
+					var propPrice:int = EstateCourt._fetch_property_rent(
+						boardPos, Khana.GetUpgradeLevel(currentPlayer, boardPos)
+					)
 					Khana.ConductTransaction(currentPlayer, -propPrice)
-					Khana.ConductTransaction(propOwner, proplevel)
+					Khana.ConductTransaction(propOwner, propPrice)
 					debtor = propOwner
 		DISTRICT_TYPE.CHEST:
 			emit_signal("RequestCard", "CHEST")
