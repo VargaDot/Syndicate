@@ -5,9 +5,23 @@
 
 	{
 		"Type":1,
-		"ID":"Brown1",
 		"Name":"Mediterranean Avenue",
-		"CardID":0
+		"CardID":0,
+		"Costs":
+		{
+			"PurchasePrice": 60,
+			"BuildCost": 50,
+			"Mortgage": 30
+		},
+		"Rent":
+		[
+			2,
+			10,
+			30,
+			90,
+			160,
+			250
+		]
 	},
 
 	{
@@ -16,9 +30,23 @@
 
 	{
 		"Type":1,
-		"ID":"Brown2",
 		"Name":"Baltic Avenue",
-		"CardID":0
+		"CardID":0,
+		"Costs":
+		{
+			"PurchasePrice": 60,
+			"BuildCost": 50,
+			"Mortgage": 30
+		},
+		"Rent":
+		[
+			4,
+			20,
+			60,
+			180,
+			320,
+			450
+		]
 	},
 
 	{
@@ -27,16 +55,38 @@
 
 	{
 		"Type":1,
-		"ID":"Station1",
 		"Name":"Reading Railroad",
-		"CardID":8
+		"CardID":8,
+		"Costs":
+		{
+			"PurchasePrice": 200,
+			"Mortgage": 100
+		},
+		"Rent":
+		[
+			25
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Cyan1",
 		"Name":"Oriental Avenue",
-		"CardID":1
+		"CardID":1,
+		"Costs":
+		{
+			"PurchasePrice": 100,
+			"BuildCost": 50,
+			"Mortgage": 50
+		},
+		"Rent":
+		[
+			6,
+			30,
+			90,
+			270,
+			400,
+			550
+		]
 	},
 
 	{
@@ -45,16 +95,44 @@
 
 	{
 		"Type":1,
-		"ID":"Cyan2",
 		"Name":"Vermont Avenue",
-		"CardID":1
+		"CardID":1,
+		"Costs":
+		{
+			"PurchasePrice": 100,
+			"BuildCost": 50,
+			"Mortgage": 50
+		},
+		"Rent":
+		[
+			6,
+			30,
+			90,
+			270,
+			400,
+			550
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Cyan3",
 		"Name":"Oriental Avenue",
-		"CardID":1
+		"CardID":1,
+		"Costs":
+		{
+			"PurchasePrice": 100,
+			"BuildCost": 50,
+			"Mortgage": 50
+		},
+		"Rent":
+		[
+			8,
+			40,
+			100,
+			300,
+			450,
+			600
+		]
 	},
 
 	{
@@ -63,44 +141,116 @@
 
 	{
 		"Type":1,
-		"ID":"Pink1",
 		"Name":"St. Charles Place",
-		"CardID":2
+		"CardID":2,
+		"Costs":
+		{
+			"PurchasePrice": 140,
+			"BuildCost": 100,
+			"Mortgage": 70
+		},
+		"Rent":
+		[
+			10,
+			50,
+			150,
+			450,
+			625,
+			750
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Utility1",
 		"Name":"Electric Company",
-		"CardID":9
+		"CardID":9,
+		"Costs":
+		{
+			"PurchasePrice": 150,
+			"Mortgage": 75
+		},
+		"Rent":
+		[
+			6
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Pink2",
 		"Name":"States Avenue",
-		"CardID":2
+		"CardID":2,
+		"Costs":
+		{
+			"PurchasePrice": 140,
+			"BuildCost": 100,
+			"Mortgage": 70
+		},
+		"Rent":
+		[
+			10,
+			50,
+			150,
+			450,
+			625,
+			750
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Pink3",
 		"Name":"Virginia Avenue",
-		"CardID":2
+		"CardID":2,
+		"Costs":
+		{
+			"PurchasePrice": 160,
+			"BuildCost": 100,
+			"Mortgage": 80
+		},
+		"Rent":
+		[
+			12,
+			60,
+			180,
+			500,
+			700,
+			900
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Station2",
 		"Name":"Pennsylvania Railroad",
-		"CardID":8
+		"CardID":8,
+		"Costs":
+		{
+			"PurchasePrice": 200,
+			"Mortgage": 100
+		},
+		"Rent":
+		[
+			25
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Orange1",
 		"Name":"St. James Place",
-		"CardID":3
+		"CardID":3,
+		"Costs":
+		{
+			"PurchasePrice": 180,
+			"BuildCost": 100,
+			"Mortgage": 90
+		},
+		"Rent":
+		[
+			14,
+			70,
+			200,
+			550,
+			750,
+			950
+		]
 	},
 
 	{
@@ -109,16 +259,44 @@
 
 	{
 		"Type":1,
-		"ID":"Orange2",
 		"Name":"Tennessee Avenue",
-		"CardID":3
+		"CardID":3,
+		"Costs":
+		{
+			"PurchasePrice": 180,
+			"BuildCost": 100,
+			"Mortgage": 90
+		},
+		"Rent":
+		[
+			14,
+			70,
+			200,
+			550,
+			750,
+			950
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Orange3",
 		"Name":"New York Avenue",
-		"CardID":3
+		"CardID":3,
+		"Costs":
+		{
+			"PurchasePrice": 200,
+			"BuildCost": 100,
+			"Mortgage": 100
+		},
+		"Rent":
+		[
+			16,
+			80,
+			220,
+			600,
+			800,
+			1000
+		]
 	},
 
 	{
@@ -127,9 +305,23 @@
 
 	{
 		"Type":1,
-		"ID":"Red1",
 		"Name":"Kentucky Avenue",
-		"CardID":4
+		"CardID":4,
+		"Costs":
+		{
+			"PurchasePrice": 220,
+			"BuildCost": 150,
+			"Mortgage": 110
+		},
+		"Rent":
+		[
+			18,
+			90,
+			250,
+			700,
+			875,
+			1050
+		]
 	},
 
 	{
@@ -138,51 +330,137 @@
 
 	{
 		"Type":1,
-		"ID":"Red2",
 		"Name":"Indiana Avenue",
-		"CardID":4
+		"CardID":4,
+		"Costs":
+		{
+			"PurchasePrice": 220,
+			"BuildCost": 150,
+			"Mortgage": 110
+		},
+		"Rent":
+		[
+			18,
+			90,
+			250,
+			700,
+			875,
+			1050
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Red3",
 		"Name":"Illinois Avenue",
-		"CardID":4
+		"CardID":4,
+		"Costs":
+		{
+			"PurchasePrice": 240,
+			"BuildCost": 150,
+			"Mortgage": 120
+		},
+		"Rent":
+		[
+			20,
+			100,
+			300,
+			750,
+			925,
+			1100
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Station3",
 		"Name":"B. & O. Railroad",
-		"CardID":8
+		"CardID":8,
+		"Costs":
+		{
+			"PurchasePrice": 200,
+			"Mortgage": 100
+		},
+		"Rent":
+		[
+			25
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Yellow1",
 		"Name":"Atlantic Avenue",
-		"CardID":5
+		"CardID":5,
+		"Costs":
+		{
+			"PurchasePrice": 260,
+			"BuildCost": 150,
+			"Mortgage": 130
+		},
+		"Rent":
+		[
+			22,
+			110,
+			330,
+			800,
+			975,
+			1150
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Yellow2",
 		"Name":"Ventnor Avenue",
-		"CardID":5
+		"CardID":5,
+		"Costs":
+		{
+			"PurchasePrice": 260,
+			"BuildCost": 150,
+			"Mortgage": 130
+		},
+		"Rent":
+		[
+			22,
+			110,
+			330,
+			800,
+			975,
+			1150
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Utility2",
 		"Name":"Water Works",
-		"CardID":10
+		"CardID":10,
+		"Costs":
+		{
+			"PurchasePrice": 150,
+			"Mortgage": 75
+		},
+		"Rent":
+		[
+			6
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Yellow3",
 		"Name":"Marvin Gardens",
-		"CardID":5
+		"CardID":5,
+		"Costs":
+		{
+			"PurchasePrice": 260,
+			"BuildCost": 150,
+			"Mortgage": 130
+		},
+		"Rent":
+		[
+			24,
+			120,
+			360,
+			850,
+			1025,
+			1200
+		]
 	},
 
 	{
@@ -191,16 +469,44 @@
 
 	{
 		"Type":1,
-		"ID":"Green1",
 		"Name":"Pacific Avenue",
-		"CardID":6
+		"CardID":6,
+		"Costs":
+		{
+			"PurchasePrice": 300,
+			"BuildCost": 200,
+			"Mortgage": 150
+		},
+		"Rent":
+		[
+			26,
+			130,
+			390,
+			900,
+			1100,
+			1275
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Green2",
 		"Name":"North Carolina Avenue",
-		"CardID":6
+		"CardID":6,
+		"Costs":
+		{
+			"PurchasePrice": 300,
+			"BuildCost": 200,
+			"Mortgage": 150
+		},
+		"Rent":
+		[
+			26,
+			130,
+			390,
+			900,
+			1100,
+			1275
+		]
 	},
 
 	{
@@ -209,16 +515,38 @@
 
 	{
 		"Type":1,
-		"ID":"Green3",
 		"Name":"Pennsylvania Avenue",
-		"CardID":6
+		"CardID":6,
+		"Costs":
+		{
+			"PurchasePrice": 320,
+			"BuildCost": 200,
+			"Mortgage": 160
+		},
+		"Rent":
+		[
+			28,
+			150,
+			450,
+			1000,
+			1200,
+			1400
+		]
 	},
 
 	{
 		"Type":1,
-		"ID":"Station4",
 		"Name":"Short Line",
-		"CardID":8
+		"CardID":8,
+		"Costs":
+		{
+			"PurchasePrice": 200,
+			"Mortgage": 100
+		},
+		"Rent":
+		[
+			25
+		]
 	},
 
 	{
@@ -227,9 +555,23 @@
 
 	{
 		"Type":1,
-		"ID":"Blue1",
 		"Name":"Park Place",
-		"CardID":7
+		"CardID":7,
+		"Costs":
+		{
+			"PurchasePrice": 350,
+			"BuildCost": 200,
+			"Mortgage": 175
+		},
+		"Rent":
+		[
+			35,
+			175,
+			500,
+			1100,
+			1300,
+			1500
+		]
 	},
 
 	{
@@ -238,8 +580,22 @@
 
 	{
 		"Type":1,
-		"ID":"Blue2",
 		"Name":"Boardwalk",
-		"CardID":7
+		"CardID":7,
+		"Costs":
+		{
+			"PurchasePrice": 400,
+			"BuildCost": 200,
+			"Mortgage": 200
+		},
+		"Rent":
+		[
+			50,
+			200,
+			600,
+			1400,
+			1700,
+			2000
+		]
 	}
 ]
