@@ -211,12 +211,16 @@ public partial class Khana : Node
 
     private Agent FindAgent(byte AgentID)
     {
-        return Daftar.Find(agent => agent.ID == AgentID);
+        var x = Daftar.Find(agent => agent.ID == AgentID);
+        if (x.Equals(default(Agent))) GD.PrintErr($"{x} is an invalid AgentID");
+        return x;
     }
 
     private Property FindProperty(byte AgentID, byte PropertyID)
     {
         Agent agent = FindAgent(AgentID);
-        return agent.Portfolio.Find(property => property.ID == PropertyID);
+        var x = agent.Portfolio.Find(property => property.ID == PropertyID);
+        if (x.Equals(default(Property))) GD.PrintErr($"{x} is an invalid PropertyID");
+        return x;
     }
 }
