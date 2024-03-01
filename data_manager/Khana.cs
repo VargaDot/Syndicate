@@ -155,17 +155,13 @@ public partial class Khana : Node
 
     public void ToggleMortgageStatus(byte AgentID, byte PropertyID)
     {
-        Agent agent = FindAgent(AgentID);
-        Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
-
+        Property property = FindProperty(AgentID, PropertyID);
         property.IsMortgaged = !property.IsMortgaged;
     }
 
     public void ModifyUpgradeLvl(byte AgentID, byte PropertyID, byte newLvl)
     {
-        Agent agent = FindAgent(AgentID);
-        Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
-
+        Property property = FindProperty(AgentID, PropertyID);
         property.UpgradeLevel = newLvl;
     }
     
