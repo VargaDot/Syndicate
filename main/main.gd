@@ -24,7 +24,7 @@ func _ready():
 func _on_play_pressed():
 	$LoadingScreen.show()
 	$LoadingScreen/ProgressBar.value = 50
-	Composer.ReplaceScene("MainMenu", "Game", self)
+	Composer.ReplaceScene("MainMenu", "Game", null)
 	$LoadingScreen/ProgressBar.value = 100
 	$LoadingScreen.hide()
 	$LoadingScreen/ProgressBar.value = 0
