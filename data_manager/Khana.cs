@@ -193,8 +193,11 @@ public partial class Khana : Node
         return agent.Portfolio.Find(property => property.ID == PropertyID);
     }
 
+    [Signal]
+    public delegate void DataWipedEventHandler();
     public void WipeMemory()
     {
         Daftar.Clear();
+        EmitSignal(SignalName.DataWiped);
     }
 }
