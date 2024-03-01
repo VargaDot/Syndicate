@@ -9,7 +9,6 @@ func _on_save_pressed():
 func _on_load_pressed():
 	pass # Replace with function body.
 
-signal MainMenuPressed
 func _on_soft_quit_pressed():
 	Khana.WipeMemory()
 	ComposerGD.ReplaceScene("Game", "MainMenu", null)
