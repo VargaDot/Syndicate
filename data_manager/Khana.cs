@@ -192,4 +192,9 @@ public partial class Khana : Node
         Agent agent = FindAgent(AgentID);
         return agent.Portfolio.Find(property => property.ID == PropertyID);
     }
+
+    public void WipeMemory()
+    {
+        Daftar.Clear();
+    }
 }
