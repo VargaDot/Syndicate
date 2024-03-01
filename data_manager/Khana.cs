@@ -4,6 +4,8 @@ using Godot;
 
 public partial class Khana : Node
 {
+    private readonly List<Agent> Daftar = new();
+    
     struct Agent
     {
         public byte ID {get; set;}
@@ -32,24 +34,31 @@ public partial class Khana : Node
             ID = id;
         }
     }
-  
-    private readonly List<Agent> Daftar = new();
+
+    [Signal]
+    public delegate void AgentAddedEventHandler(byte ID, string username);
     public void AddAgent(byte ID, string username)
     {
         Daftar.Add(new Agent(ID, username));
     }
 
+    [Signal]
+    public delegate void AgentRemovedEventHandler(byte ID);
     public void RemoveAgent(byte AgentID) 
     {
         Daftar.Remove(FindAgent(AgentID));
     }
 
+    [Signal]
+    public delegate void AgentMovedEventHandler(byte ID, byte Position);
     public void MoveAgent(byte AgentID, byte newPos)
     {
         Agent agent = FindAgent(AgentID);
         agent.Position = (byte)((agent.Position += newPos) % 39);
     }
 
+    [Signal]
+    public delegate void DoubleCountModifiedEventHandler(byte ID, bool is_even);
     public void ModifyDoubleCount(byte AgentID, bool is_even)
     {
         Agent agent = FindAgent(AgentID);
@@ -57,6 +66,8 @@ public partial class Khana : Node
         else agent.doublesCount = 0;
     }
 
+    [Signal]
+    public delegate void AgentImprisonedEventHandler(byte ID);
     public void ToggleAgentFreedom(byte AgentID)
     {
         Agent agent = FindAgent(AgentID);
@@ -64,6 +75,8 @@ public partial class Khana : Node
         agent.Position = 10;
     }
 
+    [Signal]
+    public delegate void TransactionConductedEventHandler(byte ID, int amount);
     public void ConductTransaction(byte AgentID, int amount)
     {
         Agent agent = FindAgent(AgentID);
@@ -76,7 +89,7 @@ public partial class Khana : Node
         AddProperty(BuyerID, PropertyID);
     }
 
-    public byte AgentCount() 
+    public byte AgentCount()
     { 
         return (byte)Daftar.Count;
     }
@@ -118,12 +131,16 @@ public partial class Khana : Node
         return FindAgent(AgentID).inPrison;
     }
 
+    [Signal]
+    public delegate void PropertyGrantedEventHandler(byte AgentID, byte PropID);
     public void AddProperty(byte AgentID, byte PropertyID)
     {
         Agent agent = FindAgent(AgentID);
         agent.Portfolio.Add(new Property(PropertyID));
     }
 
+    [Signal]
+    public delegate void PropertyRemovedEventHandler(byte AgentID, byte PropID);
     public void RemoveProperty(byte AgentID, byte PropertyID)
     {
         Agent agent = FindAgent(AgentID);
@@ -140,6 +157,8 @@ public partial class Khana : Node
         return FindProperty(AgentID, PropertyID).IsMortgaged;
     }
 
+    [Signal]
+    public delegate void PropertyOwnershipCheckedEventHandler(byte PropID);
     public byte CheckForOwnership(byte PropertyID)
     {
         foreach (Agent agent in Daftar)
@@ -153,12 +172,16 @@ public partial class Khana : Node
         return 69; // Default if no owner was found
     }
 
+    [Signal]
+    public delegate void MortgageStatusChangedEventHandler(byte AgentID, byte PropID);
     public void ToggleMortgageStatus(byte AgentID, byte PropertyID)
     {
         Property property = FindProperty(AgentID, PropertyID);
         property.IsMortgaged = !property.IsMortgaged;
     }
 
+    [Signal]
+    public delegate void UpgradeLevelChangedEventHandler(byte AgentID, byte PropID);
     public void ModifyUpgradeLvl(byte AgentID, byte PropertyID, byte newLvl)
     {
         Property property = FindProperty(AgentID, PropertyID);
