@@ -6,6 +6,8 @@ using System.IO;
 
 public partial class Khana : Node
 {
+    private readonly List<Agent> Daftar = new();
+    
     struct Agent
     {
         public byte ID {get; set;}
@@ -34,42 +36,59 @@ public partial class Khana : Node
             ID = id;
         }
     }
-  
-    private List<Agent> Daftar = new();
+
+    [Signal]
+    public delegate void AgentAddedEventHandler(byte ID, string username);
     public void AddAgent(byte ID, string username)
     {
         Daftar.Add(new Agent(ID, username));
+        EmitSignal(SignalName.AgentAdded, ID, username);
     }
 
-    public void RemoveAgent(byte AgentID) 
+    [Signal]
+    public delegate void AgentRemovedEventHandler(byte ID);
+    public void RemoveAgent(byte AgentID)
     {
         Daftar.Remove(FindAgent(AgentID));
+        EmitSignal(SignalName.AgentRemoved, AgentID);
     }
 
+    [Signal]
+    public delegate void AgentMovedEventHandler(byte ID, byte newPosition);
     public void MoveAgent(byte AgentID, byte newPos)
     {
         Agent agent = FindAgent(AgentID);
         agent.Position = (byte)((agent.Position += newPos) % 39);
+        EmitSignal(SignalName.AgentMoved, AgentID, newPos);
     }
 
+    [Signal]
+    public delegate void DoubleCountModifiedEventHandler(byte AgentID, bool is_even);
     public void ModifyDoubleCount(byte AgentID, bool is_even)
     {
         Agent agent = FindAgent(AgentID);
         if (is_even) agent.doublesCount++;
         else agent.doublesCount = 0;
+        EmitSignal(SignalName.DoubleCountModified, AgentID, is_even);
     }
 
+    [Signal]
+    public delegate void AgentImprisonedEventHandler(byte ID);
     public void ToggleAgentFreedom(byte AgentID)
     {
         Agent agent = FindAgent(AgentID);
         agent.inPrison = !agent.inPrison;
         agent.Position = 10;
+        EmitSignal(SignalName.AgentImprisoned, AgentID);
     }
 
+    [Signal]
+    public delegate void TransactionConductedEventHandler(byte ID, int amount);
     public void ConductTransaction(byte AgentID, int amount)
     {
         Agent agent = FindAgent(AgentID);
         agent.Cash += amount;
+        EmitSignal(SignalName.TransactionConducted, AgentID, amount);
     }
 
     public void ExchangeLand(byte BuyerID, byte SellerID, byte PropertyID)
@@ -78,7 +97,7 @@ public partial class Khana : Node
         AddProperty(BuyerID, PropertyID);
     }
 
-    public byte AgentCount() 
+    public byte AgentCount()
     { 
         return (byte)Daftar.Count;
     }
@@ -120,26 +139,40 @@ public partial class Khana : Node
         return FindAgent(AgentID).inPrison;
     }
 
+    [Signal]
+    public delegate void PropertyGrantedEventHandler(byte AgentID, byte PropID);
     public void AddProperty(byte AgentID, byte PropertyID)
     {
         Agent agent = FindAgent(AgentID);
         agent.Portfolio.Add(new Property(PropertyID));
+        EmitSignal(SignalName.PropertyGranted, AgentID, PropertyID);
     }
 
+    [Signal]
+    public delegate void PropertyRemovedEventHandler(byte AgentID, byte PropID);
     public void RemoveProperty(byte AgentID, byte PropertyID)
     {
         Agent agent = FindAgent(AgentID);
         agent.Portfolio.RemoveAll(p => p.ID == PropertyID);
+        EmitSignal(SignalName.PropertyRemoved, AgentID, PropertyID);
     }
 
-    public byte GetUpgradeLevel(byte AgentID, byte PropertyID)
+    [Signal]
+    public delegate void MortgageStatusChangedEventHandler(byte AgentID, byte PropID, bool MortgageStatus);
+    public void ToggleMortgageStatus(byte AgentID, byte PropertyID)
     {
-        return FindProperty(AgentID, PropertyID).UpgradeLevel;
+        Property property = FindProperty(AgentID, PropertyID);
+        property.IsMortgaged = !property.IsMortgaged;
+        EmitSignal(SignalName.MortgageStatusChanged, AgentID, PropertyID, property.IsMortgaged);
     }
 
-    public bool GetMortgageStatus(byte AgentID, byte PropertyID)
+    [Signal]
+    public delegate void UpgradeLevelChangedEventHandler(byte AgentID, byte PropID, byte PropertyLevel);
+    public void ModifyUpgradeLvl(byte AgentID, byte PropertyID, byte newLvl)
     {
-        return FindProperty(AgentID, PropertyID).IsMortgaged;
+        Property property = FindProperty(AgentID, PropertyID);
+        property.UpgradeLevel = newLvl;
+        EmitSignal(SignalName.UpgradeLevelChanged, AgentID, PropertyID, property.UpgradeLevel);
     }
 
     public byte CheckForOwnership(byte PropertyID)
@@ -155,22 +188,16 @@ public partial class Khana : Node
         return 69; // Default if no owner was found
     }
 
-    public void ToggleMortgageStatus(byte AgentID, byte PropertyID)
+    public byte GetUpgradeLevel(byte AgentID, byte PropertyID)
     {
-        Agent agent = FindAgent(AgentID);
-        Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
-
-        property.IsMortgaged = !property.IsMortgaged;
+        return FindProperty(AgentID, PropertyID).UpgradeLevel;
     }
 
-    public void ModifyUpgradeLvl(byte AgentID, byte PropertyID, byte newLvl)
+    public bool GetMortgageStatus(byte AgentID, byte PropertyID)
     {
-        Agent agent = FindAgent(AgentID);
-        Property property = agent.Portfolio.Find(p => p.ID == PropertyID);
-
-        property.UpgradeLevel = newLvl;
+        return FindProperty(AgentID, PropertyID).IsMortgaged;
     }
-    
+
     public byte[] GetAgentPortfolio(byte AgentID)
     {
         List<byte> propertyIDs = new();
@@ -186,13 +213,25 @@ public partial class Khana : Node
 
     private Agent FindAgent(byte AgentID)
     {
-        return Daftar.Find(agent => agent.ID == AgentID);
+        var x = Daftar.Find(agent => agent.ID == AgentID);
+        if (x.Equals(default(Agent))) GD.PrintErr($"{x} is an invalid AgentID");
+        return x;
     }
 
     private Property FindProperty(byte AgentID, byte PropertyID)
     {
         Agent agent = FindAgent(AgentID);
-        return agent.Portfolio.Find(property => property.ID == PropertyID);
+        var x = agent.Portfolio.Find(property => property.ID == PropertyID);
+        if (x.Equals(default(Property))) GD.PrintErr($"{x} is an invalid PropertyID");
+        return x;
+    }
+
+    [Signal]
+    public delegate void DataWipedEventHandler();
+    public void WipeMemory()
+    {
+        Daftar.Clear();
+        EmitSignal(SignalName.DataWiped);
     }
 
     [Signal]
