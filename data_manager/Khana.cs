@@ -223,4 +223,12 @@ public partial class Khana : Node
         if (x.Equals(default(Property))) GD.PrintErr($"{x} is an invalid PropertyID");
         return x;
     }
+
+    [Signal]
+    public delegate void DataWipedEventHandler();
+    public void WipeMemory()
+    {
+        Daftar.Clear();
+        EmitSignal(SignalName.DataWiped);
+    }
 }
