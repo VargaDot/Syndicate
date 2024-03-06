@@ -22,12 +22,12 @@ var currentGame = GAME_STATES.IDLE
 func _process(_delta):
 	if Input.is_action_pressed("Quit"):
 		emit_signal("RequestPause")
-	if currentGame == GAME_STATES.ROLL:
+	elif currentGame == GAME_STATES.ROLL:
 		if Input.is_action_pressed("Confirm") or Input.is_action_just_pressed("Roll"):
-			currentGame = GAME_STATES.IDLE
+			_diceManager()
 			print(currentPlayer, " rolled")
 		else:
-			print("waiting for input")
+			pass
 	else:
 		pass
 
@@ -62,9 +62,12 @@ func _turnManager():
 		while currentGame == GAME_STATES.PRISON: 
 			pass
 	print(currentPlayer, " is not jailed")
-#endregion
 	
-#region Dice roll & Doubles Check
+	currentGame = GAME_STATES.ROLL
+#endregion
+
+func _diceManager():
+	currentGame = GAME_STATES.IDLE
 	var dice1 = randi_range(1, 6)
 	var dice2 = randi_range(1, 6)
 	if dice1 != dice2: Khana.ModifyDoubleCount(currentPlayer, false)
@@ -80,13 +83,11 @@ func _turnManager():
 			pass
 	var roll = dice1 + dice2
 	print("dice rolled! ", roll)
-#endregion
-	
 	emit_signal("RequestDice", roll)
 	Khana.MoveAgent(currentPlayer, roll)
 	print(currentPlayer, " advanced to ", Khana.GetAgentPosition(currentPlayer))
 	
-#region TileInspector
+func _tileInspector():
 	var boardPos:int = Khana.GetAgentPosition(currentPlayer)
 	print(boardPos)
 	var tileType:int = EstateCourt._fetch_tile_type(boardPos)
