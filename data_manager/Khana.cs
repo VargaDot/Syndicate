@@ -58,6 +58,7 @@ public partial class Khana : Node
     public void MoveAgent(byte AgentID, byte newPos)
     {
         Agent agent = FindAgent(AgentID);
+        GD.Print($"MOVEAGENT, ID Received: {AgentID}, Position Received: {newPos}, Agent found: {agent.ID}, {agent.Name}");
         agent.Position = (byte)((agent.Position += newPos) % 39);
         EmitSignal(SignalName.AgentMoved, AgentID, newPos);
     }

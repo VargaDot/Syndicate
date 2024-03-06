@@ -64,9 +64,6 @@ func _turnManager():
 	print(currentPlayer, " is not jailed")
 #endregion
 	
-	while currentGame == GAME_STATES.ROLL:
-		pass
-	
 #region Dice roll & Doubles Check
 	var dice1 = randi_range(1, 6)
 	var dice2 = randi_range(1, 6)
@@ -90,7 +87,7 @@ func _turnManager():
 	print(currentPlayer, " advanced to ", Khana.GetAgentPosition(currentPlayer))
 	
 #region TileInspector
-	var boardPos:int = 7 #Khana.GetAgentPosition(currentPlayer)
+	var boardPos:int = Khana.GetAgentPosition(currentPlayer)
 	print(boardPos)
 	var tileType:int = EstateCourt._fetch_tile_type(boardPos)
 	print(tileType)
