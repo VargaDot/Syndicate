@@ -54,6 +54,10 @@ visible = false
 
 [node name="MusicPlayer" parent="." instance=ExtResource("3_hwjwm")]
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="Bankrupt" from="." to="UI/Trade" method="_on_game_bankrupt"]
 [connection signal="RequestCard" from="." to="UI/Card" method="_on_game_request_card"]
 [connection signal="RequestDice" from="." to="UI/Dice" method="_on_game_request_dice"]
@@ -65,3 +69,4 @@ visible = false
 [connection signal="defaulted" from="UI/Trade" to="." method="_on_defaulted"]
 [connection signal="restructured" from="UI/Trade" to="." method="_on_restructured"]
 [connection signal="startAuction" from="UI/Card" to="UI/Auction" method="_on_card_start_auction"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
