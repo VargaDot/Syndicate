@@ -25,43 +25,35 @@ func _process(_delta):
 	elif currentGame == GAME_STATES.ROLL:
 		if Input.is_action_pressed("Confirm") or Input.is_action_just_pressed("Roll"):
 			_diceManager()
-			print(currentPlayer, " rolled")
-		else:
-			pass
-	else:
-		pass
+			print(activePlayer, " rolled")
+		else: pass
+	else: pass
 
 enum DISTRICT_TYPE {GO, PROPERTY, CHEST, CHANCE, ITAX, LTAX, JAIL, GOJAIL, PARKING}
 
 var firstRound:bool = true
-var currentPlayer:int = 0
+var activePlayer:int = 0 # Current player in turn
 var agentList:PackedByteArray = Khana.GetAgentIDs()
 
 func _turnManager():
-#region TurnManager
-	if firstRound:
-		# Check if the array is not empty
-		if agentList.size() > 0:
-			# Generate a random index within the valid range
-			var randomIndex = randi_range(0, agentList.size() - 1)
-			currentPlayer = agentList[randomIndex]
-		else:
-			print("PackedByteArray is empty")
+	if !firstRound:
+		activePlayer += 1 % (agentList.size() - 1)
+		activePlayer = agentList[activePlayer]
 		firstRound = false
 	else:
-		currentPlayer += 1 % (agentList.size() - 1)
-		currentPlayer = agentList[currentPlayer]
-	print(currentPlayer, " is playing")
-#endregion
+		if agentList.size() > 0:
+			var randomIndex = randi_range(0, agentList.size() - 1)
+			activePlayer = agentList[randomIndex]
+		else:
+			print("agentList is empty")
+	print(activePlayer, " is playing")
 	
 #region Prison Check
-	if Khana.GetAgentStatus(currentPlayer) == true:
+	if Khana.GetAgentStatus(activePlayer) == true:
 		currentGame = GAME_STATES.PRISON
 		emit_signal("RequestPrison")
-		print(currentPlayer, " is in prison")
-		while currentGame == GAME_STATES.PRISON: 
-			pass
-	print(currentPlayer, " is not jailed")
+		print(activePlayer, " is in prison")
+	print(activePlayer, " is not jailed")
 	
 	currentGame = GAME_STATES.ROLL
 #endregion
@@ -70,49 +62,53 @@ func _diceManager():
 	currentGame = GAME_STATES.IDLE
 	var dice1 = randi_range(1, 6)
 	var dice2 = randi_range(1, 6)
+	var roll = dice1 + dice2
 	var flagged:bool = false
-	if dice1 != dice2: Khana.ModifyDoubleCount(currentPlayer, false)
+	
+	if dice1 != dice2: Khana.ModifyDoubleCount(activePlayer, false)
 	else:
 		flagged = true
-		Khana.ModifyDoubleCount(currentPlayer, true)
-		if Khana.GetAgentDoublesCount(currentPlayer) == 3: 
-			Khana.ToggleAgentFreedom(currentPlayer)
-			Khana.ModifyDoubleCount(currentPlayer, false)
+		Khana.ModifyDoubleCount(activePlayer, true)
+		
+		if Khana.GetAgentDoublesCount(activePlayer) == 3: 
+			Khana.ToggleAgentFreedom(activePlayer)
+			Khana.ModifyDoubleCount(activePlayer, false)
+			
 			_on_next_turn_pressed()
-			print(currentPlayer, " has been imprisoned")
+			print(activePlayer, " has been imprisoned")
 		else:
-			print(currentPlayer, " is in risk of going to jail")
-			pass
-	var roll = dice1 + dice2
-	print("dice rolled! ", roll)
+			print(activePlayer, " is in risk of going to jail")
+	
 	emit_signal("RequestDice", dice1, dice2, flagged)
-	Khana.MoveAgent(currentPlayer, roll)
-	print(currentPlayer, " advanced to ", Khana.GetAgentPosition(currentPlayer))
+	print("dice rolled! ", roll)
+	
+	Khana.MoveAgent(activePlayer, roll)
+	print(activePlayer, " advanced to ", Khana.GetAgentPosition(activePlayer))
 	
 func _tileInspector():
-	var boardPos:int = Khana.GetAgentPosition(currentPlayer)
-	print(boardPos)
-	var tileType:int = EstateCourt._fetch_tile_type(boardPos)
+	var activePlayerPos:int = Khana.GetAgentPosition(activePlayer)
+	print(activePlayerPos)
+	var tileType:int = EstateCourt._fetch_tile_type(activePlayerPos)
 	print(tileType)
 	var debtor:int = 257
 	currentGame = GAME_STATES.INSPECT
 	
 	match tileType:
 		DISTRICT_TYPE.GO:
-			Khana.ConductTransaction(currentPlayer, 200)
-			print(currentPlayer, " has collected 200")
+			Khana.ConductTransaction(activePlayer, 200)
+			print(activePlayer, " has collected 200")
 		DISTRICT_TYPE.PROPERTY:
-			var propOwner:int = Khana.CheckForOwnership(boardPos)
+			var propOwner:int = Khana.CheckForOwnership(activePlayerPos)
 			if propOwner == 69:
-				emit_signal("RequestCard", "PROP", boardPos, currentPlayer)
+				emit_signal("RequestCard", "PROP", activePlayerPos, activePlayer)
 			else:
-				if Khana.GetMortgageStatus(propOwner, boardPos) == true:
+				if Khana.GetMortgageStatus(propOwner, activePlayerPos) == true:
 					pass
 				else:
 					var propPrice:int = EstateCourt._fetch_property_rent(
-						boardPos, Khana.GetUpgradeLevel(currentPlayer, boardPos)
+						activePlayerPos, Khana.GetUpgradeLevel(activePlayer, activePlayerPos)
 					)
-					Khana.ConductTransaction(currentPlayer, -propPrice)
+					Khana.ConductTransaction(activePlayer, -propPrice)
 					Khana.ConductTransaction(propOwner, propPrice)
 					debtor = propOwner
 		DISTRICT_TYPE.CHEST:
@@ -120,13 +116,13 @@ func _tileInspector():
 		DISTRICT_TYPE.CHANCE:
 			emit_signal("RequestCard", "CHANCE")
 		DISTRICT_TYPE.ITAX:
-			Khana.ConductTransaction(currentPlayer, -roundi(Khana.GetAgentCash() * 0.1))
+			Khana.ConductTransaction(activePlayer, -roundi(Khana.GetAgentCash() * 0.1))
 		DISTRICT_TYPE.LTAX:
-			Khana.ConductTransaction(currentPlayer, -100)
+			Khana.ConductTransaction(activePlayer, -100)
 		DISTRICT_TYPE.JAIL:
 			pass
 		DISTRICT_TYPE.GOJAIL:
-			Khana.ToggleAgentFreedom(currentPlayer)
+			Khana.ToggleAgentFreedom(activePlayer)
 		DISTRICT_TYPE.PARKING:
 			pass
 		_:
@@ -134,9 +130,9 @@ func _tileInspector():
 #endregion
 	
 #region Bankruptcy check
-	if Khana.GetAgentCash(currentPlayer) < 0:
+	if Khana.GetAgentCash(activePlayer) < 0:
 		currentGame = GAME_STATES.BANKRUPT
-		emit_signal("Bankrupt", currentPlayer, debtor)
+		emit_signal("Bankrupt", activePlayer, debtor)
 		while currentGame == GAME_STATES.BANKRUPT:
 			pass
 #endregion
@@ -158,10 +154,10 @@ func _on_restructured():
 	currentGame = GAME_STATES.IDLE
 
 func _on_defaulted():
-	Khana.RemoveAgent(currentPlayer)
-	agentList.remove_at(currentPlayer)
+	Khana.RemoveAgent(activePlayer)
+	agentList.remove_at(activePlayer)
 	if agentList.size() == 1:
-		emit_signal("RequestWin", currentPlayer)
+		emit_signal("RequestWin", activePlayer)
 	currentGame = GAME_STATES.IDLE
 
 func _on_release_status_sent(released):
