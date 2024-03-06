@@ -6,7 +6,7 @@ using System.IO;
 
 public partial class Khana : Node
 {
-    private readonly List<Agent> Daftar = new();
+    private List<Agent> Daftar = new();
     
     struct Agent
     {
