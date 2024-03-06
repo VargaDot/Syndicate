@@ -23,6 +23,8 @@ func _process(_delta):
 	if Input.is_action_pressed("Quit"):
 		emit_signal("RequestPause")
 	match currentGame: 
+		GAME_STATES.PRISON:
+			pass
 		GAME_STATES.ROLL:
 			if Input.is_action_pressed("Confirm") or Input.is_action_just_pressed("Roll"):
 				_diceManager()
@@ -51,17 +53,19 @@ func _turnManager():
 			activePlayer = agentList[randomIndex]
 		else:
 			print("agentList is empty")
-	print(activePlayer, " is playing")
 	
-#region Prison Check
+	print(activePlayer, " is playing")
+	currentGame = GAME_STATES.PRISON
+	_prisonCheck()
+
+func _prisonCheck():
 	if Khana.GetAgentStatus(activePlayer) == true:
-		currentGame = GAME_STATES.PRISON
 		emit_signal("RequestPrison")
 		print(activePlayer, " is in prison")
-	print(activePlayer, " is not jailed")
+	else:
+		print(activePlayer, " is not jailed")
+		currentGame = GAME_STATES.ROLL
 	
-	currentGame = GAME_STATES.ROLL
-#endregion
 
 func _diceManager():
 	currentGame = GAME_STATES.IDLE
