@@ -10,7 +10,7 @@ func _musicSelector():
 	var x:int
 	
 	if musicList.size() == 0: print("No music exists")
-	while x == lastsong: randi_range(0, musicList.size())
+	while x == lastsong: randi_range(0, musicList.size() - 1)
 	
 	stream = musicList[x]
 	lastsong = x
