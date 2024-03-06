@@ -22,12 +22,17 @@ var currentGame = GAME_STATES.IDLE
 func _process(_delta):
 	if Input.is_action_pressed("Quit"):
 		emit_signal("RequestPause")
-	elif currentGame == GAME_STATES.ROLL:
-		if Input.is_action_pressed("Confirm") or Input.is_action_just_pressed("Roll"):
-			_diceManager()
-			print(activePlayer, " rolled")
-		else: pass
-	else: pass
+	match currentGame: 
+		GAME_STATES.ROLL:
+			if Input.is_action_pressed("Confirm") or Input.is_action_just_pressed("Roll"):
+				_diceManager()
+				print(activePlayer, " rolled")
+			else: pass
+		GAME_STATES.DONE:
+			if Input.is_action_pressed("Confirm"):
+				_on_next_turn_pressed()
+			else: pass
+		_: pass
 
 enum DISTRICT_TYPE {GO, PROPERTY, CHEST, CHANCE, ITAX, LTAX, JAIL, GOJAIL, PARKING}
 
@@ -138,19 +143,13 @@ func _tileInspector():
 		while currentGame == GAME_STATES.BANKRUPT:
 			pass
 #endregion
-	
 	currentGame = GAME_STATES.DONE
 	$UI/NextTurn.show()
-	while currentGame == GAME_STATES.DONE:
-		if Input.is_action_pressed("Confirm"):
-			_on_next_turn_pressed()
-		else:
-			pass
 
 func _on_next_turn_pressed():
+	$UI/NextTurn.hide()
 	currentGame = GAME_STATES.IDLE
 	_turnManager()
-	$UI/NextTurn.hide()
 
 func _on_restructured():
 	currentGame = GAME_STATES.IDLE
