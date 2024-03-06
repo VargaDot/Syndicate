@@ -33,4 +33,5 @@ func _onTimeout():
 		%Dice1.frame = die1
 		%Dice2.frame = die2
 		ranOnce = false
+		%Strike.play("")
 	
