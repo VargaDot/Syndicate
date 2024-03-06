@@ -101,6 +101,8 @@ func _tileInspector():
 			var propOwner:int = Khana.CheckForOwnership(activePlayerPos)
 			if propOwner == 69:
 				emit_signal("RequestCard", "PROP", activePlayerPos, activePlayer)
+			elif propOwner == activePlayer:
+				pass
 			else:
 				if Khana.GetMortgageStatus(propOwner, activePlayerPos) == true:
 					pass
