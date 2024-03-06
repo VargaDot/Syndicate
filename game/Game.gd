@@ -70,8 +70,10 @@ func _diceManager():
 	currentGame = GAME_STATES.IDLE
 	var dice1 = randi_range(1, 6)
 	var dice2 = randi_range(1, 6)
+	var flagged:bool = false
 	if dice1 != dice2: Khana.ModifyDoubleCount(currentPlayer, false)
 	else:
+		flagged = true
 		Khana.ModifyDoubleCount(currentPlayer, true)
 		if Khana.GetAgentDoublesCount(currentPlayer) == 3: 
 			Khana.ToggleAgentFreedom(currentPlayer)
@@ -83,7 +85,7 @@ func _diceManager():
 			pass
 	var roll = dice1 + dice2
 	print("dice rolled! ", roll)
-	emit_signal("RequestDice", roll)
+	emit_signal("RequestDice", dice1, dice2, flagged)
 	Khana.MoveAgent(currentPlayer, roll)
 	print(currentPlayer, " advanced to ", Khana.GetAgentPosition(currentPlayer))
 	
