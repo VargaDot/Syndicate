@@ -157,6 +157,7 @@ func _on_restructured():
 func _on_defaulted():
 	Khana.RemoveAgent(activePlayer)
 	agentList.remove_at(activePlayer)
+	
 	if agentList.size() == 1:
 		emit_signal("RequestWin", activePlayer)
 	currentGame = GAME_STATES.IDLE
