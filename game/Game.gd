@@ -50,11 +50,11 @@ func _turnManager():
 	if !firstRound:
 		activePlayer += 1 % (agentList.size() - 1)
 		activePlayer = agentList[activePlayer]
-		firstRound = false
 	else:
 		if agentList.size() > 0:
 			var randomIndex = randi_range(0, agentList.size() - 1)
 			activePlayer = agentList[randomIndex]
+			firstRound = false
 		else:
 			print("agentList is empty")
 	
@@ -139,9 +139,11 @@ func _tileInspector():
 		DISTRICT_TYPE.CHANCE:
 			emit_signal("RequestChance")
 		DISTRICT_TYPE.ITAX:
-			Khana.ConductTransaction(activePlayer, -roundi(Khana.GetAgentCash() * 0.1))
+			Khana.ConductTransaction(activePlayer, -200)
+			print("Income tax")
 		DISTRICT_TYPE.LTAX:
 			Khana.ConductTransaction(activePlayer, -100)
+			print("Luxury tax")
 		DISTRICT_TYPE.JAIL:
 			print("Landed on jail tile, not imprisoned tho")
 		DISTRICT_TYPE.GOJAIL:

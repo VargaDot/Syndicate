@@ -24,6 +24,7 @@ func _on_game_request_card(agentID, tileID):
 		tileColors.UTILITY2: %CardSprite.texture = "res://art/sprite/Cards/WaterCard.png"
 	if id <= 7:
 		$CardSprite/Title.text = EstateCourt._fetch_property_name(tileID)
+		print(EstateCourt._fetch_property_price(tileID))
 		$CardSprite/Price.text = EstateCourt._fetch_property_price(tileID)
 		$CardSprite/ValuesContainer/Mortgage.text = EstateCourt._fetch_property_mortgage(tileID)
 		$CardSprite/ValuesContainer/Build.text = EstateCourt._fetch_property_buildcost(tileID)
