@@ -6,23 +6,24 @@ using System.IO;
 
 public partial class Khana : Node
 {
-    private List<Agent> Daftar = new();
+    private static List<Agent> Daftar = new();
     
     struct Agent
     {
         public byte ID {get; set;}
         public List<Property> Portfolio {get; set;}
-        public int Cash = 2500;
+        public int Cash {get; set;} = 2500;
         public string Name {get; set;}
-        public byte Position = 0;
-        public bool inPrison = false;
-        public byte doublesCount = 0;
+        public byte Position {get; set;}
+        public bool InPrison {get; set;} = false;
+        public byte DoublesCount {get; set;} = 0;
 
         public Agent(byte id, string name)
         {
             ID = id;
             Name = name;
-            Portfolio = new ();
+            Portfolio = new();
+            Position = 0;
         }
     }
 
@@ -59,8 +60,9 @@ public partial class Khana : Node
     {
         Agent agent = FindAgent(AgentID);
         GD.Print($"MOVEAGENT, ID Received: {AgentID}, Position Received: {newPos}, Agent found: {agent.ID}, {agent.Name}");
-        agent.Position = (byte)((agent.Position += newPos) % 39);
-        EmitSignal(SignalName.AgentMoved, AgentID, newPos);
+        agent.Position = (byte)((agent.Position + newPos) % 39);
+        GD.Print(agent.Position);
+        EmitSignal(SignalName.AgentMoved);
     }
 
     [Signal]
@@ -68,8 +70,8 @@ public partial class Khana : Node
     public void ModifyDoubleCount(byte AgentID, bool is_even)
     {
         Agent agent = FindAgent(AgentID);
-        if (is_even) agent.doublesCount++;
-        else agent.doublesCount = 0;
+        if (is_even) agent.DoublesCount++;
+        else agent.DoublesCount = 0;
         EmitSignal(SignalName.DoubleCountModified, AgentID, is_even);
     }
 
@@ -78,7 +80,7 @@ public partial class Khana : Node
     public void ToggleAgentFreedom(byte AgentID)
     {
         Agent agent = FindAgent(AgentID);
-        agent.inPrison = !agent.inPrison;
+        agent.InPrison = !agent.InPrison;
         agent.Position = 10;
         EmitSignal(SignalName.AgentImprisoned, AgentID);
     }
@@ -115,6 +117,7 @@ public partial class Khana : Node
         return allAgentIDs.ToArray();
     }
 
+    // This section has a possible bug where if you don't use a local variable, it will return default values.
     public int GetAgentCash(byte AgentID)
     {
         return FindAgent(AgentID).Cash;
@@ -132,12 +135,12 @@ public partial class Khana : Node
 
     public byte GetAgentDoublesCount(byte AgentID)
     {
-        return FindAgent(AgentID).doublesCount; 
+        return FindAgent(AgentID).DoublesCount; 
     }
 
     public bool GetAgentStatus(byte AgentID)
     {
-        return FindAgent(AgentID).inPrison;
+        return FindAgent(AgentID).InPrison;
     }
 
     [Signal]

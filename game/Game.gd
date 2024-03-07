@@ -22,7 +22,8 @@ var currentGame = GAME_STATES.IDLE
 func _process(_delta):
 	if Input.is_action_pressed("Quit"):
 		emit_signal("RequestPause")
-	match currentGame: 
+	
+	match currentGame:
 		GAME_STATES.PRISON:
 			pass
 		GAME_STATES.ROLL:
@@ -91,9 +92,13 @@ func _diceManager():
 	emit_signal("RequestDice", dice1, dice2, flagged)
 	print("dice rolled! ", roll)
 	
+	Khana.AgentMoved.connect(PrintThisShit)
 	Khana.MoveAgent(activePlayer, roll)
+	#await Khana.AgentMoved
+
+func PrintThisShit():
 	print(activePlayer, " advanced to ", Khana.GetAgentPosition(activePlayer))
-	
+
 func _tileInspector():
 	var activePlayerPos:int = Khana.GetAgentPosition(activePlayer)
 	print(activePlayerPos)
