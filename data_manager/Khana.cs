@@ -153,6 +153,15 @@ public partial class Khana : Node
     }
 
     [Signal]
+    public delegate void PropertyBoughtEventHandler(byte AgentID, byte PropID, int amount);
+    public void BuyProperty(byte AgentID, byte PropID, int amount)
+    {
+        ConductTransaction(AgentID, amount);
+        AddProperty(AgentID, PropID);
+        EmitSignal(SignalName.PropertyBought, AgentID, PropID, amount);
+    }
+
+    [Signal]
     public delegate void PropertyRemovedEventHandler(byte AgentID, byte PropID);
     public void RemoveProperty(byte AgentID, byte PropertyID)
     {

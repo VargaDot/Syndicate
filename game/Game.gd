@@ -2,6 +2,8 @@ extends Node2D
 
 signal RequestDice()
 signal RequestCard()
+signal RequestChest()
+signal RequestChance()
 signal RequestPause()
 signal RequestTrade()
 signal RequestPrison()
@@ -11,6 +13,7 @@ signal Bankrupt()
 
 func _ready():
 	print("HI")
+	Khana.AgentMoved.connect(PrintThisShit)
 	$Timer.start()
 
 func _on_timer_timeout():
@@ -32,7 +35,7 @@ func _process(_delta):
 				print(activePlayer, " rolled")
 			else: pass
 		GAME_STATES.DONE:
-			if Input.is_action_pressed("Confirm"):
+			if Input.is_action_pressed("Confirm") or Input.is_action_pressed("Roll"):
 				_on_next_turn_pressed()
 			else: pass
 		_: pass
@@ -66,7 +69,6 @@ func _prisonCheck():
 	else:
 		print(activePlayer, " is not jailed")
 		currentGame = GAME_STATES.ROLL
-	
 
 func _diceManager():
 	currentGame = GAME_STATES.IDLE
@@ -91,8 +93,6 @@ func _diceManager():
 	
 	emit_signal("RequestDice", dice1, dice2, flagged)
 	print("dice rolled! ", roll)
-	
-	Khana.AgentMoved.connect(PrintThisShit)
 	Khana.MoveAgent(activePlayer, roll)
 
 var activePlayerPos:int
@@ -114,9 +114,9 @@ func _tileInspector():
 		DISTRICT_TYPE.PROPERTY:
 			var propOwner:int = Khana.CheckForOwnership(activePlayerPos)
 			if propOwner == 69:
-				emit_signal("RequestCard", "PROP", activePlayerPos, activePlayer)
+				emit_signal("RequestCard", activePlayer, activePlayerPos)
 			elif propOwner == activePlayer:
-				pass
+				print("You own the property!")
 			else:
 				if Khana.GetMortgageStatus(propOwner, activePlayerPos) == true:
 					pass
@@ -127,33 +127,34 @@ func _tileInspector():
 					Khana.ConductTransaction(activePlayer, -propPrice)
 					Khana.ConductTransaction(propOwner, propPrice)
 					debtor = propOwner
+			#region Bankruptcy check
+			if Khana.GetAgentCash(activePlayer) < 0:
+				currentGame = GAME_STATES.BANKRUPT
+				emit_signal("Bankrupt", activePlayer, debtor)
+				while currentGame == GAME_STATES.BANKRUPT:
+					pass
+			#endregion
 		DISTRICT_TYPE.CHEST:
-			emit_signal("RequestCard", "CHEST")
+			emit_signal("RequestChest")
 		DISTRICT_TYPE.CHANCE:
-			emit_signal("RequestCard", "CHANCE")
+			emit_signal("RequestChance")
 		DISTRICT_TYPE.ITAX:
 			Khana.ConductTransaction(activePlayer, -roundi(Khana.GetAgentCash() * 0.1))
 		DISTRICT_TYPE.LTAX:
 			Khana.ConductTransaction(activePlayer, -100)
 		DISTRICT_TYPE.JAIL:
-			pass
+			print("Landed on jail tile, not imprisoned tho")
 		DISTRICT_TYPE.GOJAIL:
 			Khana.ToggleAgentFreedom(activePlayer)
+			print("You're under arrest!")
 		DISTRICT_TYPE.PARKING:
-			pass
+			print("Parking!")
 		_:
-			print("not found")
-#endregion
-	
-#region Bankruptcy check
-	if Khana.GetAgentCash(activePlayer) < 0:
-		currentGame = GAME_STATES.BANKRUPT
-		emit_signal("Bankrupt", activePlayer, debtor)
-		while currentGame == GAME_STATES.BANKRUPT:
-			pass
+			print("Weird, this doesn't exist anywhere")
 #endregion
 	currentGame = GAME_STATES.DONE
 	$UI/NextTurn.show()
+	print("Turn concluded for ", activePlayer)
 
 func _on_next_turn_pressed():
 	$UI/NextTurn.hide()
