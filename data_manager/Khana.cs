@@ -117,7 +117,7 @@ public partial class Khana : Node
         return allAgentIDs.ToArray();
     }
 
-    // This section has a possible bug where if you don't use a local variable, it will return default values.
+    // This Getter section returns the default values without printing an error, no clue why.
     public int GetAgentCash(byte AgentID)
     {
         return FindAgent(AgentID).Cash;
