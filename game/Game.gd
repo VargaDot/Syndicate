@@ -94,14 +94,14 @@ func _diceManager():
 	
 	Khana.AgentMoved.connect(PrintThisShit)
 	Khana.MoveAgent(activePlayer, roll)
-	#await Khana.AgentMoved
 
-func PrintThisShit():
-	print(activePlayer, " advanced to ", Khana.GetAgentPosition(activePlayer))
+var activePlayerPos:int
+func PrintThisShit(_agentID, Pos):
+	activePlayerPos = Pos
+	print(activePlayer, " advanced to ", activePlayerPos)
+	_tileInspector()
 
 func _tileInspector():
-	var activePlayerPos:int = Khana.GetAgentPosition(activePlayer)
-	print(activePlayerPos)
 	var tileType:int = EstateCourt._fetch_tile_type(activePlayerPos)
 	print(tileType)
 	var debtor:int = 257
