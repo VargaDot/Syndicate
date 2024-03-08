@@ -48,7 +48,7 @@ var agentList:PackedByteArray = Khana.GetAgentIDs()
 
 func _turnManager():
 	if !firstRound:
-		activePlayer += 1 % (agentList.size() - 1)
+		activePlayer = ((activePlayer + 1) % agentList.size() - 1)
 		activePlayer = agentList[activePlayer]
 	else:
 		if agentList.size() > 0:
