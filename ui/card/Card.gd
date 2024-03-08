@@ -25,11 +25,11 @@ func _on_game_request_card(agentID, tileID):
 	if id <= 7:
 		$CardSprite/Title.text = EstateCourt._fetch_property_name(tileID)
 		print(EstateCourt._fetch_property_price(tileID))
-		$CardSprite/Price.text = EstateCourt._fetch_property_price(tileID)
-		$CardSprite/ValuesContainer/Mortgage.text = EstateCourt._fetch_property_mortgage(tileID)
-		$CardSprite/ValuesContainer/Build.text = EstateCourt._fetch_property_buildcost(tileID)
+		$CardSprite/Price.text = str(EstateCourt._fetch_property_price(tileID))
+		$CardSprite/ValuesContainer/Mortgage.text = str(EstateCourt._fetch_property_mortgage(tileID))
+		$CardSprite/ValuesContainer/Build.text = str(EstateCourt._fetch_property_buildcost(tileID))
 		for element in values:
-			element.text = EstateCourt._fetch_property_rent(tileID, element)
+			element.text = str(EstateCourt._fetch_property_rent(tileID, element))
 	else:
 		pass
 	show()
