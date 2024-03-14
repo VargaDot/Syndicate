@@ -32,7 +32,7 @@ namespace Registry
             Agent agent = FindAgent(AgentID);
             GD.Print($"MOVEAGENT, ID Received: {AgentID}, Position Received: {newPos}, Agent found: {agent.ID}, {agent.Name}");
 
-            agent.ChangePosition((byte)((agent.Position + newPos) % NumberofBoardTiles));
+            agent.UpdatePosition((byte)((agent.Position + newPos) % NumberofBoardTiles));
             
             GD.Print(agent.Position);
             EmitSignal(SignalName.AgentMoved, AgentID, agent.Position);
@@ -42,11 +42,7 @@ namespace Registry
         public delegate void DoubleCountModifiedEventHandler(byte AgentID, bool is_even);
         public void ModifyDoubleCount(byte AgentID, bool is_even)
         {
-            Agent agent = FindAgent(AgentID);
-
-            if (is_even) agent.DoublesCount++;
-            else agent.DoublesCount = 0;
-            
+            FindAgent(AgentID).UpdateDoublesCount(is_even);
             EmitSignal(SignalName.DoubleCountModified, AgentID, is_even);
         }
 
@@ -55,8 +51,11 @@ namespace Registry
         public void ToggleAgentFreedom(byte AgentID)
         {
             Agent agent = FindAgent(AgentID);
-            agent.InPrison = !agent.InPrison;
-            agent.Position = 10;
+
+            agent.UpdatePrisonStatus();
+            agent.UpdatePosition(10);
+            agent.UpdateDoublesCount(false);
+            
             EmitSignal(SignalName.AgentImprisoned, AgentID);
         }
 
@@ -65,7 +64,9 @@ namespace Registry
         public void ConductTransaction(byte AgentID, int amount)
         {
             Agent agent = FindAgent(AgentID);
-            agent.Cash += amount;
+            
+            agent.UpdateCash(amount);
+            
             EmitSignal(SignalName.TransactionConducted, AgentID, amount);
         }
 
@@ -211,8 +212,10 @@ namespace Registry
         private Property FindProperty(byte AgentID, byte PropertyID)
         {
             Agent agent = FindAgent(AgentID);
+            
             var x = agent.Portfolio.Find(property => property.ID == PropertyID);
             if (x.Equals(default(Property))) GD.PrintErr($"{x} is an invalid PropertyID");
+            
             return x;
         }
 
