@@ -6,7 +6,7 @@ namespace Registry
 {
     public partial class Khana : Node
     {
-        protected List<Agent> Daftar = new();
+        internal List<Agent> Daftar = new();
         private byte NumberofBoardTiles = 39;
 
         [Signal]
