@@ -72,8 +72,8 @@ namespace Registry
 
         public void ExchangeLand(byte BuyerID, byte SellerID, byte PropertyID)
         {
-            RemoveProperty(SellerID, PropertyID);
-            AddProperty(BuyerID, PropertyID);
+            CedeProperty(SellerID, PropertyID);
+            GrantProperty(BuyerID, PropertyID);
         }
 
         public byte AgentCount()
@@ -121,10 +121,9 @@ namespace Registry
 
         [Signal]
         public delegate void PropertyGrantedEventHandler(byte AgentID, byte PropID);
-        public void AddProperty(byte AgentID, byte PropertyID)
+        public void GrantProperty(byte AgentID, byte PropertyID)
         {
-            Agent agent = FindAgent(AgentID);
-            agent.Portfolio.Add(new Property(PropertyID));
+            FindAgent(AgentID).AddProperty(PropertyID);
             EmitSignal(SignalName.PropertyGranted, AgentID, PropertyID);
         }
 
@@ -133,16 +132,16 @@ namespace Registry
         public void BuyProperty(byte AgentID, byte PropID, int amount)
         {
             ConductTransaction(AgentID, amount);
-            AddProperty(AgentID, PropID);
+            GrantProperty(AgentID, PropID);
+            
             EmitSignal(SignalName.PropertyBought, AgentID, PropID, amount);
         }
 
         [Signal]
         public delegate void PropertyRemovedEventHandler(byte AgentID, byte PropID);
-        public void RemoveProperty(byte AgentID, byte PropertyID)
+        public void CedeProperty(byte AgentID, byte PropertyID)
         {
-            Agent agent = FindAgent(AgentID);
-            agent.Portfolio.RemoveAll(p => p.ID == PropertyID);
+            FindAgent(AgentID).RemoveProperty(PropertyID);
             EmitSignal(SignalName.PropertyRemoved, AgentID, PropertyID);
         }
 
@@ -150,20 +149,16 @@ namespace Registry
         public delegate void MortgageStatusChangedEventHandler(byte AgentID, byte PropID, bool MortgageStatus);
         public void MortgageProperty(byte AgentID, byte PropertyID)
         {
-            Property property = FindProperty(AgentID, PropertyID);
-            
-            property.UpdateMortgageStatus();
-            
-            EmitSignal(SignalName.MortgageStatusChanged, AgentID, PropertyID, property.IsMortgaged);
+            FindProperty(AgentID, PropertyID).UpdateMortgageStatus();
+            EmitSignal(SignalName.MortgageStatusChanged, AgentID, PropertyID, GetMortgageStatus(AgentID, PropertyID));
         }
 
         [Signal]
         public delegate void UpgradeLevelChangedEventHandler(byte AgentID, byte PropID, byte PropertyLevel);
         public void ModifyUpgradeLvl(byte AgentID, byte PropertyID, byte newLvl)
         {
-            Property property = FindProperty(AgentID, PropertyID);
-            property.UpgradeLevel = newLvl;
-            EmitSignal(SignalName.UpgradeLevelChanged, AgentID, PropertyID, property.UpgradeLevel);
+            FindProperty(AgentID, PropertyID).UpdateUpgradeLevel(newLvl);
+            EmitSignal(SignalName.UpgradeLevelChanged, AgentID, PropertyID, GetMortgageStatus(AgentID, PropertyID));
         }
 
         public byte CheckForOwnership(byte PropertyID)
