@@ -6,7 +6,7 @@ namespace Registry
 {
     public partial class Khana : Node
     {
-        public List<Agent> Daftar = new();
+        public static List<Agent> Daftar {get; set;} = new();
         private byte NumberofBoardTiles = 39;
 
         [Signal]
@@ -33,7 +33,7 @@ namespace Registry
             GD.Print($"MOVEAGENT, ID Received: {AgentID}, Position Received: {newPos}, Agent found: {agent.ID}, {agent.Name}");
 
             agent.UpdatePosition((byte)((agent.Position + newPos) % NumberofBoardTiles));
-            
+
             GD.Print(agent.Position);
             EmitSignal(SignalName.AgentMoved, AgentID, agent.Position);
         }
@@ -55,7 +55,7 @@ namespace Registry
             agent.UpdatePrisonStatus();
             agent.UpdatePosition(10);
             agent.UpdateDoublesCount(false);
-            
+
             EmitSignal(SignalName.AgentImprisoned, AgentID);
         }
 
@@ -64,9 +64,9 @@ namespace Registry
         public void ConductTransaction(byte AgentID, int amount)
         {
             Agent agent = FindAgent(AgentID);
-            
+
             agent.UpdateCash(amount);
-            
+
             EmitSignal(SignalName.TransactionConducted, AgentID, amount);
         }
 
@@ -77,7 +77,7 @@ namespace Registry
         }
 
         public byte AgentCount()
-        { 
+        {
             return (byte)Daftar.Count;
         }
 
@@ -85,11 +85,11 @@ namespace Registry
         {
             List<byte> allAgentIDs = new();
 
-            foreach (var agentEntry in Daftar) 
+            foreach (var agentEntry in Daftar)
             {
                 allAgentIDs.Add(agentEntry.ID);
             }
-            
+
             return allAgentIDs.ToArray();
         }
 
@@ -111,7 +111,7 @@ namespace Registry
 
         public byte GetAgentDoublesCount(byte AgentID)
         {
-            return FindAgent(AgentID).DoublesCount; 
+            return FindAgent(AgentID).DoublesCount;
         }
 
         public bool GetAgentStatus(byte AgentID)
@@ -133,7 +133,7 @@ namespace Registry
         {
             ConductTransaction(AgentID, amount);
             GrantProperty(AgentID, PropID);
-            
+
             EmitSignal(SignalName.PropertyBought, AgentID, PropID, amount);
         }
 
@@ -207,10 +207,10 @@ namespace Registry
         private Property FindProperty(byte AgentID, byte PropertyID)
         {
             Agent agent = FindAgent(AgentID);
-            
+
             var x = agent.Portfolio.Find(property => property.ID == PropertyID);
             if (x.Equals(default(Property))) GD.PrintErr($"{x} is an invalid PropertyID");
-            
+
             return x;
         }
 

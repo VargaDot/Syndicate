@@ -11,7 +11,7 @@ namespace Registry
         public delegate void DataSavedEventHandler();
         public void SaveGameData(string filename)
         {
-            string json = JsonSerializer.Serialize(Daftar);
+            string json = JsonSerializer.Serialize(Khana.Daftar);
             File.WriteAllText(filename, json);
             EmitSignal(SignalName.DataSaved);
         }
@@ -23,7 +23,7 @@ namespace Registry
             if (File.Exists(filename))
             {
                 string json = File.ReadAllText(filename);
-                Daftar = JsonSerializer.Deserialize<List<Agent>>(json);
+                Khana.Daftar = JsonSerializer.Deserialize<List<Agent>>(json);
                 EmitSignal(SignalName.DataLoaded);
             }
             else
