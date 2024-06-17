@@ -24,6 +24,9 @@ position = Vector2(1152, 768)
 sprite_frames = ExtResource("2_ihujc")
 animation = &"rolling"
 
+[node name="Strike" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true

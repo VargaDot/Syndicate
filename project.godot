@@ -20,12 +20,13 @@ config/icon="res://Icon.png"
 Composer="*res://composer/Composer.cs"
 ComposerGD="*res://composer/ComposerGD.cs"
 EstateCourt="*res://data_manager/EstateCourt.gd"
-Khana="*res://data_manager/Khana.cs"
+Khana="*res://data_manager/registry/Khana.cs"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 
 [dotnet]
 
